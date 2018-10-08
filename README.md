@@ -1,2 +1,2 @@
-# webapplication-mega
+# Web Ωmega
 In construction
