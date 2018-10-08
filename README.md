@@ -5,9 +5,9 @@
 - Erik Espuñes
 - José Oviedo
 
-###Description:
+### Description:
 Our project consist on develop a web tutorials which users can learn
-the basics of programming for code in it's favourite language.
+the basics of programming for code in it is favourite language.
 
 This web is open and free to login. Once a user is registered our
 tutorials are available and need to be completed for increase level
@@ -18,7 +18,7 @@ rest od the users
 At the moment our available tutorials are learning to code with
 Java, SQL and Phyton programming languages.
 
-###Features:
+### Features:
 - Create the a web for launch our application
 - Develop a database for maintain users, tutorials, forums and
 challenges data
