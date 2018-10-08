@@ -1,5 +1,5 @@
 # Web Ωmega
-###Team Ωmega:
+### Team Ωmega:
 - Sofian Ben Ayata
 - Javier de la Serna
 - Erik Espuñes
