@@ -1,9 +1,9 @@
 # Web Ωmega
 ### Team Ωmega:
-- Sofian Ben Ayata
-- Javier de la Serna
-- Erik Espuñes
-- José Oviedo
+- Sofian Ben Ayata [Scrum Manager]
+- Javier de la Serna 
+- Erik Espuñes 
+- José Oviedo 
 
 ### Description:
 Our project consist on develop a web tutorials which users can learn
