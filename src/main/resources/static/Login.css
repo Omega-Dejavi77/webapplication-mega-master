@@ -1,0 +1,50 @@
+html {
+    margin: 0;
+    padding: 0;
+}
+body {
+    font-family: 'Handle', cursive;
+    font-max-size: 13pt;
+    background-color: darkorange;
+    padding: 10px;
+}
+h1 {
+    font-size: 50px;
+    color: #20bcd5;
+    text-align: center;
+    padding: 25px 0 25px 0;
+    margin: 0 0 20px 0;
+}
+h1 span {
+    border: 4px dashed #20bcd5;
+    padding: 10px;
+}
+.section {
+    margin: auto;
+    width: 40%;
+    background-color: #fff;
+    padding: 15px;
+    border-radius: 10px;
+}
+textarea {
+    height: 10px;
+}
+input, textarea {
+    margin: 10px 0 10px 240px;
+    font-size: 15px;
+    padding: 15px 50px 10px 10px;
+    border: 1px solid #cecece;
+    background-color: #efefef;
+    color: #787575;
+    border-radius: 5px;
+    outline: none;
+}
+.submit {
+    margin: 15px 0 0 305px;
+    padding: 5px 40px;
+    background: #ccc;
+    border: 0 none;
+    cursor: pointer;
+    -webkit-border-radius: 5px;
+    border-radius: 5px;
+}
