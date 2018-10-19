@@ -23,3 +23,12 @@ Java, SQL and Phyton programming languages.
 - Develop a database for maintain users, tutorials, forums and
 challenges data
 - Security system to avoid "intruders"
+
+### Tutorial funtcionality:
+The tutorials consist on full field a piece of code (normally an 
+instruction) based on a given code by the tutorial<br/>
+For additional information enter on www.sololearn.com and check out
+some tutorials for see the style.
+
+### Challenges functionality:
+
