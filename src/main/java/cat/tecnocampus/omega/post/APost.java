@@ -1,22 +1,27 @@
 package cat.tecnocampus.omega.post;
 
 import java.util.Date;
+import java.util.UUID;
 
 public abstract class APost {
 
-    protected int postID;
+    protected String postID;
     protected String description;
     protected Date creationDay;
-    protected int likes = 0;
-    protected boolean enable=false;
+    protected int likes;
+    protected boolean enable;
     //protected Category category;
 
 
     protected APost (String description){
-
+        postID=UUID.randomUUID().toString();
+        this.description=description;
+        creationDay=new Date();
+        likes = 0;
+        enable=false;
     }
 
-    public int getPostID() {
+    public String getPostID() {
         return postID;
     }
 
