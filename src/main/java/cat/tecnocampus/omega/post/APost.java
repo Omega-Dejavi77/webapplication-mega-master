@@ -7,15 +7,17 @@ public abstract class APost {
 
     protected String postID;
     protected String description;
+    protected String title;
     protected Date creationDay;
     protected int likes;
     protected boolean enable;
     //protected Category category;
 
 
-    protected APost (String description){
+    protected APost (String description,String title){
         postID=UUID.randomUUID().toString();
         this.description=description;
+        this.title=title;
         creationDay=new Date();
         likes = 0;
         enable=false;
@@ -31,6 +33,13 @@ public abstract class APost {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
     }
 
     public Date getCreationDay() {

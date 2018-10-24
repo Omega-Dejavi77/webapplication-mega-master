@@ -13,7 +13,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import javax.validation.Valid;
 
 @Controller
-@RequestMapping("createClassroom")
+@RequestMapping("createTutorial")
 public class WebPOSTController {
     private ClassroomController classroomController;
 
