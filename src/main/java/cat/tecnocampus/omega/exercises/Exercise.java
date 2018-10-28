@@ -2,6 +2,7 @@ package cat.tecnocampus.omega.exercises;
 
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
+import java.util.List;
 
 public abstract class Exercise {
     @NotNull
@@ -15,10 +16,14 @@ public abstract class Exercise {
     @NotNull
     protected int difficulty;
     protected int experience_points;
+
+    private List<Question> questions;
+
     public Exercise(String description,int difficulty) {
+        //ID
         this.description = description;
         this.difficulty=difficulty;
-        //ID
+        questions= new ArrayList<Questions>();
     }
 
     public String getExercise_ID() {
@@ -51,5 +56,21 @@ public abstract class Exercise {
 
     public void setExperience_points(int experience_points) {
         this.experience_points = experience_points;
+    }
+    public List<Question> getQuestions() {
+        return questions;
+    }
+    public void addQuestion(Question question){
+        questions.add(question);
+    }
+    public boolean solve() {
+        List<Question> wrong=new ArrayList<Question>();
+        for (Question question:questions) {
+            if(!question.solve())
+                wrong.add(question);
+        }
+        if(wrong.isEmpty())
+            return true;
+        return false;
     }
 }
