@@ -1,9 +1,9 @@
 drop table Comments if EXISTS;
 create table Comments(
     comment_id varchar (36) constraint primary key,
-    comment varchar (2048),
-    creation_day DATE,
+    comment varchar (2048) constraint not null,
+    creation_day DATE collation_schema not null,
     like integer,
     best BIT,
-    enable BIT
+    enable BIT constraint not null
 );
