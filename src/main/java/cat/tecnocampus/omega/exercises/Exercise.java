@@ -18,7 +18,12 @@ public abstract class Exercise {
     protected int experience_points;
 
     private List<Question> questions;
-
+    public Exercise(String exercise_ID,String description,int difficulty) {
+        this.exercise_ID=exercise_ID;
+        this.description = description;
+        this.difficulty=difficulty;
+        questions= new ArrayList<Questions>();
+    }
     public Exercise(String description,int difficulty) {
         //ID
         this.description = description;
