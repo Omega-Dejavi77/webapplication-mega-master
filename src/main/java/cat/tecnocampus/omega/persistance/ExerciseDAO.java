@@ -20,4 +20,8 @@ public class ExerciseDAO {
     private final String SELECT_FILL_THE_GAP_BY_TUTORIAL="";
     private final String SELECT_QUESTION_BY_EXERCISE="";
     private final String SELECT_SOLUTION_BY_QUESTION="";
+
+
+    //
+
 }
