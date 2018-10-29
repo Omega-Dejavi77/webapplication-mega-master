@@ -24,7 +24,7 @@ public class TutorialDAO {
         return jdbcTemplate.query(FIND_ALL, new BeanPropertyRowMapper<>(Tutorial.class));
     }
 
-    public int insert(Tutorial tutorial) {
+    public int insertTutorial(Tutorial tutorial) {
         return jdbcTemplate.update(INSERT,tutorial.getPostID(),tutorial.getTitle(),tutorial.getDescription(),tutorial.getCreationDay(),tutorial.getLikes(),tutorial.isEnable());
     }
 

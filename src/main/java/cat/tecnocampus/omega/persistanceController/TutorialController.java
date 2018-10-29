@@ -24,11 +24,11 @@ public class TutorialController {
 
     @Transactional
     public int insert(Tutorial tutorial){
-        return  TutorialDAO.insert(tutorial);
+        return  tutorialDAO.insertTutorial(tutorial);
     }
 
     public List<Tutorial> findAll(){
-        return TutorialDAO.findAll();
+        return tutorialDAO.findAll();
     }
 
 }
