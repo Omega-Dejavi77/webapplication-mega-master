@@ -8,5 +8,5 @@ create TABLE Users (
     birthday DATE,
     experience_points integer,
     level integer,
-    enable BIT constraint no null
+    enable BIT constraint not null
 );

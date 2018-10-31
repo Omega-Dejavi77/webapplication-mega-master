@@ -5,5 +5,6 @@ create table Comments(
     creation_day DATE collation_schema not null,
     like integer,
     best BIT,
-    enable BIT constraint not null
+    enable BIT constraint not NULL ,
+    post_ID varchar (36) constraint foreign key references Posts(post_ID)
 );

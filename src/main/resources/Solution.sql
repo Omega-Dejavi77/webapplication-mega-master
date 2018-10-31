@@ -1,6 +1,6 @@
-drop table Responses if EXISTS;
-create table Responses(
-    response_ID varchar (36) constraint primary key,
+drop table if EXISTS Solutions ;
+create table Solutions(
+    solution_ID varchar (36) constraint primary key,
     order number,
     text varchar (36) constraint not null ,
     correct BIT,
