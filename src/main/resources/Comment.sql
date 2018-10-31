@@ -1,4 +1,4 @@
-drop table Comments if EXISTS;
+drop table if EXISTS Comments;
 create table Comments(
     comment_id varchar (36) constraint primary key,
     comment varchar (2048) constraint not null,

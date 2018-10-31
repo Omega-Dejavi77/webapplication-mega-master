@@ -1,4 +1,4 @@
-drop table Exercises if exists;
+drop table if exists Exercises;
 create table Exercises(
   exercise_ID varchar (36) constraint primary key,
   description varchar (1024) constraint not null,

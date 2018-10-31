@@ -1,4 +1,4 @@
-drop table  Questions IF EXISTS;
+drop table IF EXISTS  Questions;
 CREATE table Questions (
     question_ID varchar (36)constraint primary key,
     text varchar (36) constraint not null,

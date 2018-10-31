@@ -1,4 +1,4 @@
-drop table messages if exists;
+drop table if exists messages;
 create table messages(
     message_ID varchar (36) constraint primary key,
     content varchar (1024) constraint not null,
