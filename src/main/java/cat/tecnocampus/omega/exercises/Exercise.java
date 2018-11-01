@@ -4,6 +4,7 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 public abstract class Exercise {
     @NotNull
@@ -24,7 +25,7 @@ public abstract class Exercise {
         setUp(description,difficulty);
     }
     public Exercise(String description,int difficulty) {
-        //ID
+        this.exercise_ID= UUID.randomUUID().toString();
         setUp(description,difficulty);
     }
     private void setUp(String description,int difficulty){

@@ -2,6 +2,7 @@ package cat.tecnocampus.omega.exercises;
 
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
+import java.util.UUID;
 
 public class Solution {
     @NotNull
@@ -30,6 +31,7 @@ public class Solution {
     }
 
     public Solution(@NotNull @Size(max = 1024, message = "The text is too long") String text, int order, @NotNull boolean correct) {
+        this.solution_ID= UUID.randomUUID().toString();
         this.text = text;
         this.order = order;
         this.correct = correct;
@@ -37,6 +39,7 @@ public class Solution {
     }
 
     public Solution(@NotNull @Size(max = 1024, message = "The text is too long") String text, @NotNull boolean correct) {
+        this.solution_ID= UUID.randomUUID().toString();
         this.text = text;
         this.correct = correct;
         this.enable = true;
