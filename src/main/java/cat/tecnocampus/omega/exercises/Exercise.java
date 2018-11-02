@@ -10,12 +10,12 @@ public abstract class Exercise {
     @NotNull
     protected String exercise_ID;
 
-    @NotNull
+    @NotNull (message = "The Description can't be null")
     @Size(max = 1024,message = "Description too long")
     protected String description;
     @NotNull
     protected boolean enable;
-    @NotNull
+    @NotNull(message = "Difficulty can't be null")
     protected int difficulty;
     protected int experience_points;
 
@@ -28,9 +28,13 @@ public abstract class Exercise {
         this.exercise_ID= UUID.randomUUID().toString();
         setUp(description,difficulty);
     }
+    public Exercise(){
+
+    }
     private void setUp(String description,int difficulty){
         this.description = description;
         this.difficulty=difficulty;
+        enable=true;
         questions= new ArrayList<Question>();
     }
 
