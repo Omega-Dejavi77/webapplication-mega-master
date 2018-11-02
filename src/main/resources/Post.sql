@@ -8,5 +8,7 @@ CREATE TABLE Posts (
     enable integer constraint not NULL,
     son_TYPE varchar (36),
     startingDate date,
-    deadline date
+    deadline date,
+    post_ID_ref varchar (36) constraint foreign key references Posts(post_ID)
+
 );
