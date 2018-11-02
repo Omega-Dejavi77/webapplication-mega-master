@@ -14,10 +14,10 @@ import javax.validation.Valid;
 
 @Controller
 @RequestMapping("insertTutorial")
-public class TutorialWebController {
+public class TutorialPOSTWebController {
     private TutorialController tutorialController;
 
-    public TutorialWebController(TutorialController tutorialController) {
+    public TutorialPOSTWebController(TutorialController tutorialController) {
         this.tutorialController = tutorialController;
     }
 
@@ -38,15 +38,12 @@ public class TutorialWebController {
 
         tutorialController.insert(tutorial);
 
-        redirectAttributes.addAttribute("title", tutorial.getTitle());
-
+        //redirectAttributes.addAttribute("postID", tutorial.getPostID());
         return "redirect:/tutorials";
+
+        //return "redirect:/createExercise/[postID]";
     }
 
-    @GetMapping("tutorials")
-    public String listTutorials(Model model) {
-        model.addAttribute("tutorialList", tutorialController.findAll());
-        return "tutorials";
-    }
+
 
 }
