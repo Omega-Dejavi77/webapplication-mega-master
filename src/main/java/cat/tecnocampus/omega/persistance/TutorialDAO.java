@@ -12,8 +12,8 @@ import java.util.List;
 public class TutorialDAO {
 
     private JdbcTemplate jdbcTemplate;
-    private final String FIND_ALL = "select * from tutorial";
-    private final String INSERT = "insert into tutorial (post_ID, title, description, creationDay, like, enable) values(?, ?, ?, ?, ?,?)";
+    private final String FIND_ALL = "select * from Posts";
+    private final String INSERT = "insert into Posts (post_ID, Name, description, creationDay, like, enable, sonType) values(?, ?, ?, ?, ?,?,'Tutorial')";
 
 
     public TutorialDAO(JdbcTemplate jdbcTemplate) {
