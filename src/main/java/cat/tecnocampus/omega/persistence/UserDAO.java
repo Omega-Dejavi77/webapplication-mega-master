@@ -13,12 +13,14 @@ public class UserDAO {
 
     private JdbcTemplate jdbcTemplate;
 
-    private final String INSERT = "INSERT INTO Users(nickname, password, email) VALUES(?, ?, ?, ?)";
-    private final String FIND_ALL = "SELECT * FROM Users";
+    private final String INSERT = "insert into users (nickname, password, email) values(?, ?, ?)";
+    private final String FIND_ALL = "SELECT * FROM users";
+    private final String FIND_BY_NICKNAME = "SELECT * FROM users WHERE nickname = ?";
+    private final String DELETE_USER = "DELETE users WHERE nickname = ?";
 
     private final RowMapper<User> mapper = (resultSet, i) -> {
         return new User.UserBuilder()
-                .name(resultSet.getString("name"))
+                .nickName(resultSet.getString("nickname"))
                 .password(resultSet.getString("password"))
                 .email(resultSet.getString("email"))
                 .build();
@@ -34,5 +36,13 @@ public class UserDAO {
 
     public List<User> findAll() {
         return jdbcTemplate.query(FIND_ALL, new BeanPropertyRowMapper<>(User.class));
+    }
+
+    public User findByNickName(String nickname) {
+        return jdbcTemplate.queryForObject(FIND_BY_NICKNAME, new Object[]{nickname}, mapper);
+    }
+
+    public int deleteUser(User user) {
+        return jdbcTemplate.update(DELETE_USER, user.getNickname());
     }
 }

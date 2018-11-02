@@ -1,51 +1,59 @@
 package cat.tecnocampus.omega.webcontroller;
 
-import cat.tecnocampus.omega.persistence.UserDAO;
-import org.apache.tomcat.jni.User;
+import cat.tecnocampus.omega.controllers.UserController;
+import cat.tecnocampus.omega.domain.User;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.validation.Valid;
+import java.security.Principal;
 
 @Controller
 public class UserWebController {
 
-    private UserDAO userDAO;
+    private UserController userController;
 
-    public UserWebController(UserDAO userDAO) {
-        this.userDAO = userDAO;
+    public UserWebController(UserController userController) {
+        this.userController = userController;
     }
 
-    @GetMapping("/AllUsers")
+    @GetMapping("allUsers")
     public String allUsers(Model model) {
-        model.addAttribute("users", userDAO.findAll());
-        return "allUsers";
+        model.addAttribute("users", userController.findAll());
+        return "InitialPage";
     }
 
-    @GetMapping("/createUser")
+    @GetMapping("createUser")
     public String getCreateUser(Model model) {
-        model.addAttribute("createUser", new cat.tecnocampus.omega.domain.User());
+        model.addAttribute("createUser", new User());
         return "RegisterUser";
     }
 
-    @PostMapping("/createUser")
-    public String postCreateUser(@Valid cat.tecnocampus.omega.domain.User user, Errors errors, RedirectAttributes redirectAttributes) {
+    @PostMapping("createUser")
+    public String postCreateUser(@Valid User user, Errors errors, Model model, RedirectAttributes redirectAttributes) {
         if (errors.hasErrors())
             return "RegisterUser";
 
-        userDAO.insert(user);
-        redirectAttributes.addAttribute("name", user.getNickname());
-        return "RegisterUser";
+        model.addAttribute("nickname", user.getNickname());
+        userController.insert(user);
+        redirectAttributes.addAttribute("nickname", user.getNickname());
+        return "redirect:/users/{nickname}";
     }
 
-    @GetMapping("/signUser")
-    public String signIn(Model model) {
-        model.addAttribute("signUser", null);
-        return "Main page";
+
+    @GetMapping("users/{nickname}")
+    public String showUser(@PathVariable String nickname, Model model, Principal principal) {
+        /*if(principal.getName().equals("De la Serna")) {*/
+            model.addAttribute("user", userController.getUser(nickname));
+            return "showUser";
+        //}
+
+        //return null;
     }
 
 }

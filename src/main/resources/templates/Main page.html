@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8"/>
     <title>Omega main web</title>
-    <link href="MainPage.css" rel="stylesheet" type="text/css">
+    <link href="../static/MainPage.css" rel="stylesheet" type="text/css">
 </head>
 <body>
     <header>
@@ -21,7 +21,7 @@
         <div class="hero">
             <h1>Omega</h1>
             <div class="login">
-                <input name="name" type="text" class="lgn login-name" th:field="*{nickname}" /><br/>
+                <input name="name" type="text" class="lgn login-name" th:field="*{nickName}" /><br/>
                 <input password="password" type="password" class="lgn login-password" th:field="*{password}" /><br/>
                 <div class="button">
                     <a href="InitialPage.html" class="btn button-one">sign in</a>

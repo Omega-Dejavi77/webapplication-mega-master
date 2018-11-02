@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8"/>
     <title>Register User</title>
-    <link href="InitialPage.css" rel="stylesheet" type="text/css">
+    <link href="../static/InitialPage.css" rel="stylesheet" type="text/css">
 </head>
 <body>
     <header>
@@ -14,6 +14,19 @@
                 <li><a href="">OTHERS</a></li>
                 <li><a href="">OTHERS</a></li>
             </ul>
+
+            <table>
+                <tr>
+                    <th>NickName</th>
+                    <th>Password</th>
+                    <th>Email</th>
+                </tr>
+                <tr th:each="user : ${users}">
+                    <td th:text="${user.nickname}"></td>
+                    <td th:text="${user.password}"></td>
+                    <td th:text="${user.email}"></td>
+                </tr>
+            </table>
         </div>
     </header>
 </body>

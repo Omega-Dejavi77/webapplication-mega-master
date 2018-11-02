@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8"/>
     <title>RegisterUser</title>
-    <link href="RegisterUser.css" rel="stylesheet" type="text/css">
+    <link href="../static/RegisterUser.css" rel="stylesheet" type="text/css">
 </head>
 <body>
 <header>
@@ -11,11 +11,13 @@
         <div class="hero">
             <h1>Register</h1>
             <div class="login">
-                <input name="name" type="text" class="lgn login-name" th:field="*{nickname}" /><br/>
-                <input password="password" type="password" class="lgn login-password" th:field="*{password}" /><br/>
+                <input type="text" class="lgn login-name" th:field="*{nickname}" /><br/>
+                <input type="text" class="lgn login-name" th:field="*{email}" /><br/>
+                <input type="password" class="lgn login-password" th:field="*{password}" /><br/>
                 <div class="button">
                     <a href="InitialPage.html" class="btn button-one">sign in</a>
                     <a href="InitialPage.html" class="btn button-two">register</a>
+                    <input type="submit" class="btn button-two" value="createUser">
                 </div>
             </div>
         </div>
