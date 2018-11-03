@@ -4,7 +4,7 @@ CREATE TABLE Posts (
     Name varchar(64)  NOT NULL,
     description varchar (1024) not null,
     creationDay DATE not null,
-    like INTEGER,
+    likes INTEGER,
     enable integer not NULL,
     son_TYPE varchar (36),
     startingDate date,
