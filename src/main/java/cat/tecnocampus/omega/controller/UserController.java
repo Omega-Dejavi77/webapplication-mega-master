@@ -1,4 +1,4 @@
-package cat.tecnocampus.omega.controllers;
+package cat.tecnocampus.omega.controller;
 
 import cat.tecnocampus.omega.domain.User;
 import cat.tecnocampus.omega.persistence.UserDAO;

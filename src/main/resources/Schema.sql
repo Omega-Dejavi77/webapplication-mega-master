@@ -1,7 +1,7 @@
 drop table IF EXISTS Posts;
 CREATE TABLE Posts (
     post_id varchar(36) PRIMARY KEY,
-    name varchar(64)  NOT NULL,
+    title varchar(64)  NOT NULL,
     description varchar (1024) not null,
     creationDay DATE not null,
     likes INTEGER,

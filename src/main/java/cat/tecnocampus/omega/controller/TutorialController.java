@@ -1,6 +1,6 @@
-package cat.tecnocampus.omega.persistanceController;
+package cat.tecnocampus.omega.controller;
 
-import cat.tecnocampus.omega.persistance.TutorialDAO;
+import cat.tecnocampus.omega.persistence.TutorialDAO;
 import cat.tecnocampus.omega.post.*;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;

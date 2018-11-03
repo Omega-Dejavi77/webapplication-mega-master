@@ -1,4 +1,4 @@
-package cat.tecnocampus.omega.persistance;
+package cat.tecnocampus.omega.persistence;
 
 import cat.tecnocampus.omega.post.*;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
@@ -12,8 +12,8 @@ import java.util.List;
 public class TutorialDAO {
 
     private JdbcTemplate jdbcTemplate;
-    private final String FIND_ALL = "select * from posts";
-    private final String INSERT = "insert into posts (post_ID, title, description, creationDay, likes, enable, son_TYPE) values(?, ?, ?, ?, ?,?,'Tutorial')";
+    private final String FIND_ALL = "select * from Posts";
+    private final String INSERT = "insert into Posts (post_id, title, description, creationDay, likes, enable, son_type) values(?, ?, ?, ?, ?,?,'Tutorial')";
 
 
     public TutorialDAO(JdbcTemplate jdbcTemplate) {
