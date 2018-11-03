@@ -7,5 +7,5 @@ public class FillTheGapExercise extends Exercise {
     public FillTheGapExercise(String description, int difficulty) {
         super(description, difficulty);
     }
-    public FillTheGapExercise() {}
+    public FillTheGapExercise() {super();}
 }

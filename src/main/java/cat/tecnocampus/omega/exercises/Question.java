@@ -7,12 +7,14 @@ import java.util.List;
 import java.util.UUID;
 
 public class Question {
-    @NotNull
     private String question_ID;
     @NotNull
-    @Size(max = 1024,message = "The text is too long")
+    @Size(min=5,max = 1024,message = "The text is too long")
     private String text;
-    @NotNull
+
+    public Question() {
+    }
+
     private boolean enable;
     List<Solution> solutions;
 
@@ -46,9 +48,9 @@ public class Question {
         return solutions;
     }
     public void addSolution(Solution solution){
-        if(solution.solve())
+        if(solution.getCorrect())
         for (Solution solution1:solutions) {
-            if(solution1.solve())
+            if(solution1.getCorrect())
                 throw new IllegalArgumentException("ERROR: There are a Solution that is also correct, there's only can be one true.");
         }
         solutions.add(solution);
@@ -57,7 +59,7 @@ public class Question {
     public boolean solve(){
         List<Solution> wrong=new ArrayList<Solution>();
         for (Solution solution:solutions) {
-            if(!solution.solve())
+            if(!solution.getCorrect())
                 wrong.add(solution);
         }
         if(wrong.isEmpty())

@@ -13,6 +13,10 @@ public class Solution {
     private int order;
     @NotNull
     private boolean enable;
+
+    public Solution() {
+    }
+
     @NotNull
     private boolean correct;
 
@@ -76,8 +80,9 @@ public class Solution {
     public void setCorrect(boolean correct) {
         this.correct = correct;
     }
+    
 
-    public boolean solve(){
+    public boolean getCorrect(){
         return correct;
     }
 }

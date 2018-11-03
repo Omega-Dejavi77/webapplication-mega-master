@@ -1,5 +1,7 @@
 package cat.tecnocampus.omega.exercises;
 
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import java.util.ArrayList;
@@ -7,15 +9,15 @@ import java.util.List;
 import java.util.UUID;
 
 public abstract class Exercise {
-    @NotNull
+
     protected String exercise_ID;
 
     @NotNull (message = "The Description can't be null")
-    @Size(max = 1024,message = "Description too long")
+    @Size(min=5,max = 1024,message = "Description has to be between 5 and 1024 characters")
     protected String description;
-    @NotNull
+
     protected boolean enable;
-    @NotNull(message = "Difficulty can't be null")
+
     protected int difficulty;
     protected int experience_points;
 
@@ -29,7 +31,8 @@ public abstract class Exercise {
         setUp(description,difficulty);
     }
     public Exercise(){
-
+        this.exercise_ID= UUID.randomUUID().toString();
+        enable=true;
     }
     private void setUp(String description,int difficulty){
         this.description = description;
@@ -60,6 +63,9 @@ public abstract class Exercise {
 
     public int getDifficulty() {
         return difficulty;
+    }
+    public void  setDifficulty(int difficulty){
+        this.difficulty=difficulty;
     }
 
     public int getExperience_points() {
