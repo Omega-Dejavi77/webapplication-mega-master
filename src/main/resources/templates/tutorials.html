@@ -11,8 +11,8 @@
 <ul>
     <li th:each="tutorial : ${tutorialList}"
         th:id="'tutorial_' + ${tutorial.title}">
-        <div><span><b>Title: </b></span><span th:text="'Title: ' + ${tutorial.title}">title</span></div>
-        <div><span><b>Description: </b></span><span th:text="'Descriprion: ' + ${tutorial.description}">description</span></div>
+        <div><span><b>Title: </b></span><span th:text="' ' + ${tutorial.title}">title</span></div>
+        <div><span><b>Description: </b></span><span th:text="' ' + ${tutorial.description}">description</span></div>
     </li>
 </ul>
 </body>
