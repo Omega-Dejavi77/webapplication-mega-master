@@ -5,6 +5,7 @@ import cat.tecnocampus.omega.persistence.UserDAO;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.Date;
 import java.util.List;
 
 @Service("UserController")
@@ -16,11 +17,18 @@ public class UserController {
         this.userDAO = userDAO;
     }
 
-    public User createUser(String name, String password, String email) {
+    public User createUser(String name, String password, String firstName, String lastName, String email, Date birthday,
+                           int experiencePoints, int level, boolean enable) {
         User user = new User.UserBuilder()
-                .nickName(name)
+                .username(name)
                 .password(password)
+                .firstName(firstName)
+                .lastName(lastName)
                 .email(email)
+                .birthday(birthday)
+                .experiencePoints(experiencePoints)
+                .level(level)
+                .enable(enable)
                 .build();
         insert(user);
         return user;
@@ -35,8 +43,8 @@ public class UserController {
         return userDAO.findAll();
     }
 
-    public User getUser(String nickname) {
-        return userDAO.findByNickName(nickname);
+    public User getUser(String username) {
+        return userDAO.findByUsername(username);
     }
 
     public int deleteUser(User user) {

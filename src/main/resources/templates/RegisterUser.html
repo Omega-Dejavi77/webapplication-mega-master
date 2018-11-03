@@ -11,9 +11,13 @@
         <div class="hero">
             <h1>Register</h1>
             <div class="login">
-                <input type="text" class="lgn login-name" th:field="*{nickname}" /><br/>
-                <input type="text" class="lgn login-name" th:field="*{email}" /><br/>
-                <input type="password" class="lgn login-password" th:field="*{password}" /><br/>
+                <input type="text" class="lgn login-name" th:field="*{username}" />Username<br/>
+                <input type="text" class="lgn login-name" th:field="*{firstName}" />firstName<br/>
+                <input type="text" class="lgn login-name" th:field="*{lastName}" />lastName<br/>
+                <input type="text" class="lgn login-name" th:field="*{email}" />email<br/>
+                <input type="password" class="lgn login-password" th:field="*{password}" />password<br/>
+                <input type="text" class="lgn login-name" th:field="*{birthday}" />birthday must be follow dd/mm/yyyy format<br/>
+
                 <div class="button">
                     <a href="InitialPage.html" class="btn button-one">sign in</a>
                     <a href="InitialPage.html" class="btn button-two">register</a>

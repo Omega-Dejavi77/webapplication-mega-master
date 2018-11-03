@@ -36,20 +36,24 @@ public class UserWebController {
 
     @PostMapping("createUser")
     public String postCreateUser(@Valid User user, Errors errors, Model model, RedirectAttributes redirectAttributes) {
-        if (errors.hasErrors())
-            return "RegisterUser";
+        if (errors.hasErrors()) {
+            model.addAttribute("error", errors);
+            System.out.println(errors.getFieldError());
+            return "Errors";
+        }
 
-        model.addAttribute("nickname", user.getNickname());
+        model.addAttribute("username", user.getUsername());
         userController.insert(user);
-        redirectAttributes.addAttribute("nickname", user.getNickname());
-        return "redirect:/users/{nickname}";
+        redirectAttributes.addAttribute("username", user.getUsername());
+        return "redirect:/users/{username}";
     }
 
 
-    @GetMapping("users/{nickname}")
-    public String showUser(@PathVariable String nickname, Model model, Principal principal) {
+
+    @GetMapping("users/{username}")
+    public String showUser(@PathVariable String username, Model model, Principal principal) {
         /*if(principal.getName().equals("De la Serna")) {*/
-            model.addAttribute("user", userController.getUser(nickname));
+            model.addAttribute("user", userController.getUser(username));
             return "showUser";
         //}
 

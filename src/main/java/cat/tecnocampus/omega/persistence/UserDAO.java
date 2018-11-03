@@ -13,16 +13,23 @@ public class UserDAO {
 
     private JdbcTemplate jdbcTemplate;
 
-    private final String INSERT = "insert into users (nickname, password, email) values(?, ?, ?)";
-    private final String FIND_ALL = "SELECT * FROM users";
-    private final String FIND_BY_NICKNAME = "SELECT * FROM users WHERE nickname = ?";
-    private final String DELETE_USER = "DELETE users WHERE nickname = ?";
+    private final String INSERT = "insert into Users (username, password, first_name, last_name, email, birthday, experience_points, level, enable) " +
+            "values(?, ?, ?, ?, ?, ?, ?, ?, ?)";
+    private final String FIND_ALL = "SELECT * FROM Users";
+    private final String FIND_BY_USERNAME = "SELECT * FROM Users WHERE username = ?";
+    private final String DELETE_USER = "DELETE Users WHERE username = ?";
 
     private final RowMapper<User> mapper = (resultSet, i) -> {
         return new User.UserBuilder()
-                .nickName(resultSet.getString("nickname"))
+                .username(resultSet.getString("username"))
                 .password(resultSet.getString("password"))
+                .firstName(resultSet.getString("first_name"))
+                .lastName(resultSet.getString("last_name"))
                 .email(resultSet.getString("email"))
+                .birthday(resultSet.getDate("birthday"))
+                .experiencePoints(resultSet.getInt("experience_points"))
+                .level(resultSet.getInt("level"))
+                .enable(resultSet.getBoolean("enable"))
                 .build();
     };
 
@@ -31,18 +38,19 @@ public class UserDAO {
     }
 
     public int insert(User user) {
-        return jdbcTemplate.update(INSERT, user.getNickname(), user.getPassword(), user.getEmail());
+        return jdbcTemplate.update(INSERT, user.getUsername(), user.getPassword(), user.getFirstName(), user.getLastName()
+                , user.getEmail(), user.getBirthday(), 0, 0, false);
     }
 
     public List<User> findAll() {
         return jdbcTemplate.query(FIND_ALL, new BeanPropertyRowMapper<>(User.class));
     }
 
-    public User findByNickName(String nickname) {
-        return jdbcTemplate.queryForObject(FIND_BY_NICKNAME, new Object[]{nickname}, mapper);
+    public User findByUsername(String username) {
+        return jdbcTemplate.queryForObject(FIND_BY_USERNAME, new Object[]{username}, mapper);
     }
 
     public int deleteUser(User user) {
-        return jdbcTemplate.update(DELETE_USER, user.getNickname());
+        return jdbcTemplate.update(DELETE_USER, user.getUsername());
     }
 }

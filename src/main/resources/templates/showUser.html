@@ -6,8 +6,14 @@
     <link rel="stylesheet" type="text/css" th:href="@{../table.css}"/>
 </head>
 <body>
-<h1><span th:text="${user.nickname}"></span></h1>
+<h1><span th:text="${user.username}"></span></h1>
 <div><span th:text="${user.password}"></span></div>
+<div><span th:text="${user.firstName}"></span></div>
+<div><span th:text="${user.lastName}"></span></div>
 <div><span th:text="${user.email}"></span></div>
+<div><span th:text="${user.birthday}"></span></div>
+<div><span th:text="${user.experiencePoints}"></span></div>
+<div><span th:text="${user.level}"></span></div>
+<div><span th:text="${user.enable}"></span></div>
 </body>
 </html>
