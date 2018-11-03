@@ -13,7 +13,7 @@ public abstract class APost {
     @Size(max = 10000, message = "Description must be less than 10000 characters long")
     protected String description;
     @NotNull(message = "Title cannot be null")
-    @Size(min = 4, max = 15, message = "Title must be between 4 an 15 characters long")
+    @Size(min = 4, max = 150, message = "Title must be between 4 an 150 characters long")
     protected String title;
     protected Date creationDay;
     protected int likes;
