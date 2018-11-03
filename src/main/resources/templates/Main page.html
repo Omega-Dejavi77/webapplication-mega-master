@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:c="http://www.w3.org/1999/html">
 <head>
     <meta charset="UTF-8"/>
     <title>Omega main web</title>
-    <link href="Style.css" rel="stylesheet" type="text/css">
+    <link href="../static/MainPage.css" rel="stylesheet" type="text/css">
 </head>
 <body>
     <header>
@@ -17,17 +17,19 @@
             </ul>
         </div>
 
+    <form method="post" th:object="${signUser}">
         <div class="hero">
             <h1>Omega</h1>
             <div class="login">
-                <input name="name" type="text" class="lgn login-name" /><br/>
-                <input password="password" type="password" class="lgn login-password" /><br/>
+                <input name="name" type="text" class="lgn login-name" th:field="*{nickName}" /><br/>
+                <input password="password" type="password" class="lgn login-password" th:field="*{password}" /><br/>
                 <div class="button">
-                    <a href="" class="btn button-one">sign in</a>
-                    <a href="" class="btn button-two">register</a>
+                    <a href="InitialPage.html" class="btn button-one">sign in</a>
+                    <a href="RegisterUser.html" class="btn button-two">register</a>
                 </div>
             </div>
         </div>
+    </form>
     </header>
 </body>
 </html>
