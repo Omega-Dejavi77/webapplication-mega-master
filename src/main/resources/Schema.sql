@@ -70,8 +70,8 @@ create TABLE Users (
 drop table if EXISTS Roles;
 create table Roles(
     role varchar (32) primary key ,
-    user_name varchar (64),
-    foreign key (user_name) references Users(username)
+    username varchar (64),
+    foreign key (username) references Users(username)
 );
 drop table if exists Category;
 create table Category(
@@ -84,7 +84,7 @@ create table messages(
     user_sender varchar (64),
     user_receiver varchar (64),
   foreign key (user_sender) references Users(username),
-  foreign key (user_reciever) references Users(username)
+  foreign key (user_receiver) references Users(username)
 );
 drop table if exists Submissions;
 create table Submissions(
