@@ -9,8 +9,8 @@
 <h1>List of all Tutorials</h1>
 <h2>As HTML list</h2>
 <ul>
-    <li th:each="challenge:${challengeList}"
-        th:id="challenge_" + ${challenge.title}">
+    <li th:each="challenge : ${challengelList}"
+        th:id="'challenge_' + ${challenge.title}">
    <div><span><b>Title: </b></span><span th:text="'Title: ' + ${challenge.title}">title</span></div>
     <div><span><b>Description: </b></span><span th:text="'Descriprion: ' + ${challenge.description}">description</span></div>
 </ul>
