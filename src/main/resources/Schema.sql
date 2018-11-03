@@ -1,7 +1,7 @@
 drop table IF EXISTS Posts;
 CREATE TABLE Posts (
     post_id varchar(36) PRIMARY KEY,
-    name varchar(64)  NOT NULL,
+    title varchar(64)  NOT NULL,
     description varchar (1024) not null,
     creationDay DATE not null,
     likes INTEGER,
@@ -22,7 +22,7 @@ create table Exercises(
   experience_points integer,
   son_type varchar (36),
   post_id varchar (36),
-  foreign key (post_id) references Post(post_ID)
+  foreign key (post_id) references Posts(post_ID)
 );
 drop table IF EXISTS  Questions;
 CREATE table Questions (
@@ -30,8 +30,7 @@ CREATE table Questions (
     texts varchar (36) not null,
     exercise_id varchar (36),
     solution_id varchar (36),
-  foreign key (exercise_id) references Exercises(exercise_id),
-  foreign key (solution_id) references Solutions(solution_id)
+  foreign key (exercise_id) references Exercises(exercise_id)
 );
 drop table if EXISTS Solutions ;
 create table Solutions(

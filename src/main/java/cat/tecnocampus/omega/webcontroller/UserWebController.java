@@ -1,6 +1,6 @@
 package cat.tecnocampus.omega.webcontroller;
 
-import cat.tecnocampus.omega.controllers.UserController;
+import cat.tecnocampus.omega.controller.UserController;
 import cat.tecnocampus.omega.domain.User;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;

@@ -1,7 +1,7 @@
-package cat.tecnocampus.omega.webControllers;
+package cat.tecnocampus.omega.webcontroller;
 
 import cat.tecnocampus.omega.post.*;
-import cat.tecnocampus.omega.persistanceController.TutorialController;
+import cat.tecnocampus.omega.controller.TutorialController;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.Errors;
