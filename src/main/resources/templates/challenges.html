@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <title>Users</title>
+    <link rel="stylesheet" type="text/css" href="table.css"/>
+</head>
+<body>
+<h1>List of all Tutorials</h1>
+<h2>As HTML list</h2>
+<ul>
+    <li th:each="challenge:${challengeList}"
+        th:id="challenge_" + ${challenge.title}">
+   <div><span><b>Title: </b></span><span th:text="'Title: ' + ${challenge.title}">title</span></div>
+    <div><span><b>Description: </b></span><span th:text="'Descriprion: ' + ${challenge.description}">description</span></div>
+</ul>
+</body>
+</html>

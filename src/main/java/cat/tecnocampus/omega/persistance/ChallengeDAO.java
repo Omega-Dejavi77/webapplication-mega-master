@@ -22,7 +22,7 @@ public class ChallengeDAO {
         return jdbcTemplate.query(FIND_ALL,new BeanPropertyRowMapper<>(Challenge.class));
     }
 
-    public int insertTutorial(Challenge challenge) {
+    public int insertChallenge(Challenge challenge) {
         return jdbcTemplate.update(INSERT,challenge.getPostID(),challenge.getTitle(),challenge.getDescription(),challenge.getCreationDay(), challenge.getLikes(),challenge.isEnable());
     }
 
