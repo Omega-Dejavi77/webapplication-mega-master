@@ -78,8 +78,8 @@ public abstract class Exercise {
     public List<Question> getQuestions() {
         return questions;
     }
-    public void addQuestion(Question question){
-        questions.add(question);
+    public void addQuestion(List<Question> question){
+        questions.addAll(question);
     }
     public boolean solve() {
         List<Question> wrong=new ArrayList<Question>();

@@ -11,9 +11,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.validation.Valid;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
 
 
 @Controller
@@ -24,9 +21,15 @@ public class ExerciseWebController {
         this.exercisesDAO = exercisesDAO;
     }
 
+    /*@GetMapping("exercises/{id}")
+    public String showUser(@PathVariable String id, Model model) {
+        model.addAttribute("exercises", exercisesDAO.getExercises(id));
+        return "exercise/showExercises";
+    }*/
+
     @GetMapping("createExercise/{id}")
     public String createExercise() {
-        return "newExercise";
+        return "exercise/newExercise";
     }
 
     @PostMapping("createExercise/{id}")
@@ -44,32 +47,32 @@ public class ExerciseWebController {
         //model.addAttribute("testQuestions", new HashMap<Question,ArrayList<Solution>>());
         model.addAttribute("testQuestion", new Question());
         model.addAttribute("testSolution", new Solution());
-        return "newTestExercise";
+        return "exercise/newTestExercise";
     }
 
     @PostMapping("createTestExercise/{id}")
     public String createTestExercise(@Valid TestExercise testExercise, Errors errors, @PathVariable String id,String testText, RedirectAttributes redirectAttributes) {
         if (errors.hasErrors()) {
             redirectAttributes.addAttribute("id", id);
-            return "newTestExercise";
+            return "exercise/newTestExercise";
         }
-        ExerciseCreator.testCreator(testText,exercisesDAO,id);
+        QuestionsCreator.testCreator(testText,exercisesDAO,id);
         exercisesDAO.insertExercise(testExercise, id, "Test");
         return "redirect:/finish";
     }
     @GetMapping("createFillTheGapExercise/{id}")
     public String createFillTheGapExercise(Model model) {
         model.addAttribute("fillTheGapExercise", new FillTheGapExercise());
-        return "newFillTheGapExercise";
+        return "exercise/newFillTheGapExercise";
     }
 
     @PostMapping("createFillTheGapExercise/{id}")
     public String createFillTheGapExercise(@Valid FillTheGapExercise fillTheGapExercise, Errors errors, @PathVariable String id,String fillText, RedirectAttributes redirectAttributes) {
         if (errors.hasErrors()) {
             redirectAttributes.addAttribute("id", id);
-            return "newFillTheGapExercise";
+            return "exercise/newFillTheGapExercise";
         }
-        ExerciseCreator.fillTheGapCreator(fillText,exercisesDAO,id);
+        QuestionsCreator.fillTheGapCreator(fillText,exercisesDAO,id);
 
         //exercisesDAO.insertExercise(fillTheGapExercise,id,"Fill");
         return "redirect:/finish";

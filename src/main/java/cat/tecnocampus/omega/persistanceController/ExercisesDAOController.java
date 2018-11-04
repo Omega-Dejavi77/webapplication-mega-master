@@ -6,6 +6,8 @@ import cat.tecnocampus.omega.exercises.Solution;
 import cat.tecnocampus.omega.persistance.ExerciseDAO;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service("ExercisesDAOController")
 public class ExercisesDAOController {
     private final ExerciseDAO exerciseDAO;
@@ -24,4 +26,9 @@ public class ExercisesDAOController {
     public int insertSolution(Solution solution, String id) {
         return exerciseDAO.insertSolution(solution,id);
     }
+
+    public List<Exercise> getExercise(String id){
+        return exerciseDAO.findExercisesByTutorial(id);
+    }
+
 }

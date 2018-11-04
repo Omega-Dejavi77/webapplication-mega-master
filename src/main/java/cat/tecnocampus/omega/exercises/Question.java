@@ -52,13 +52,8 @@ public class Question {
     public List<Solution> getSolutions() {
         return solutions;
     }
-    public void addSolution(Solution solution){
-        if(solution.getCorrect())
-        for (Solution solution1:solutions) {
-            if(solution1.getCorrect())
-                throw new IllegalArgumentException("ERROR: There are a Solution that is also correct, there's only can be one true.");
-        }
-        solutions.add(solution);
+    public void addSolution(List<Solution> solution){
+        solutions.addAll(solution);
     }
 
     public boolean solve(){

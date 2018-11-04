@@ -5,7 +5,7 @@ import cat.tecnocampus.omega.persistanceController.ExercisesDAOController;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ExerciseCreator {
+public class QuestionsCreator {
 
     public static void fillTheGapCreator(String text, ExercisesDAOController exercisesDAOController, String exerciseID) {
         String[] beforeHashtag = text.split("#R");
