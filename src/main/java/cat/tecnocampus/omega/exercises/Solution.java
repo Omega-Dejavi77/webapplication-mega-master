@@ -8,7 +8,7 @@ public class Solution {
     @NotNull
     private String solution_ID;
     @NotNull
-    @Size(max = 1024,message = "The text is too long")
+    @Size(max = 36,message = "The text is too long")
     private String text;
     private int order;
     @NotNull
@@ -89,5 +89,7 @@ public class Solution {
     public void validation(){
         if(this.text.length()>1024)
             throw new IllegalArgumentException("SOMETHING WENT WRONG WHEN CREATING A Solution:\n\t\tThe text is too long, should be less than 1024 characters \n Text:"+this.text);
+        if(this.text.length()==0)
+            throw new IllegalArgumentException("SOMETHING WENT WRONG WHEN CREATING A Solution:\n\t\tThe text should have at least one character");
     }
 }

@@ -45,12 +45,18 @@
         </table>
         <table>
             <tr>
-                <th>In here you have to type the type test exercise:<br />
-                    When you want to do a new question, you have to type #Qthe question here#/Q<br />
-                    When you want to do a new Solution, you have to type #Rthe solution here#/R<br />
-                            if the solution is the correct type #C inside the solution like this #Rthe solution here#C#/R</th>
+                <th align="left">
+                    In order to create a Test exercise type, you should enter the question and the answers separated,<br /> the questions surrounded by a #Q #/Q block, and the answers by a #R #/R block, adding a #C to the correct solution.<br />
+                    Example:<br />
+                    #QIn Java, the variable type that only has two possible values is:#/Q<br />
+                    #R The boolean#C#/R<br />
+                    #R The int#/R<br />
+                    #R The String#/R<br />
+                    #R The double#/R<br />
+                    Being "boolean" the correct answer, we add the #C command to indicate it.<br />
+                    The </th>
             </tr>
-            <tr><td><textarea name="testText" rows="16" cols="128" minlength="5" maxlength="2048"></textarea></td></tr>
+            <tr><td><textarea name="testText" rows="20" cols="150" minlength="5" maxlength="9000"></textarea></td></tr>
         </table>
         <input type="submit" value="Create Test Exercise"/>
 

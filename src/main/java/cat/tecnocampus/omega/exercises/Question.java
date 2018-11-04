@@ -69,5 +69,6 @@ public class Question {
     public void validation(){
         if(this.text.length()>1024)
             throw new IllegalArgumentException("SOMETHING WENT WRONG WHEN CREATING A QUESTION:\n\t\tThe text is too long, should be less than 1024 characters \n Text:"+this.text);
+
     }
 }
