@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <title>Create Fill The Gap Exercise</title>
+</head>
+<body>
+
+<div align="center">
+
+    <h1>Register Fill The Gap Exercise</h1>
+
+    <form method="POST" th:object="${fillTheGapExercise}">
+        <div align="left" class="errors" th:if="${#fields.hasErrors('*')}">
+            <ul>
+                <li th:each="err : ${#fields.errors('*')}"
+                    th:text="${err}">Input is incorrect
+                </li>
+            </ul>
+        </div>
+
+        <table>
+            <tr>
+                <td align="center"><label th:class="${#fields.hasErrors('description')}? 'error'">Description</label>
+                </td>
+                <td align="center"><label th:class="${#fields.hasErrors('difficulty')}? 'error'">Difficulty</label></td>
+                <td align="center"><label th:class="${#fields.hasErrors('experience_points')}? 'error'">Experience
+                    Points</label></td>
+            </tr>
+            <tr>
+                <td><textarea name="description" rows="8" cols="64" minlength="5" maxlength="1024" th:field="*{description}"
+                              th:class="${#fields.hasErrors('description')}? 'error'"/>
+                    </textarea>
+                </td>
+                <td align="center" valign="top"><input type="number" min="1" max="9"
+                                                       th:field="*{difficulty}"
+                                                       th:class="${#fields.hasErrors('difficulty')}? 'error'"/>
+
+                <td align="center" valign="top"><input type="number" min="0" max="9999"
+                                                       th:field="*{experience_points}"
+                                                       th:class="${#fields.hasErrors('experience_points')}? 'error'"/>
+                </td>
+            </tr>
+        </table>
+        <table>
+            <tr>
+                <th align="left">In order to create a "Fill the gap" exercise type, you should enter all the text(with the solution included) and surround the solution by a #R #/R block.<br />
+                    Example: In Java, the variable type that only has two possible values is a #Rboolean#/R.<br />
+                    Being "boolean" the word that the users must put on the gap to complete the exercise.<br />
+                    </th>
+            </tr>
+            <tr><td><textarea name="fillText" rows="20" cols="150" minlength="5" maxlength="9000"></textarea></td></tr>
+        </table>
+        <input type="submit" value="Finish"/>
+
+
+    </form>
+</div>
+</body>
+</html>
