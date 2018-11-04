@@ -9,7 +9,7 @@ import java.util.UUID;
 public class Question {
     private String question_ID;
     @NotNull
-    @Size(min=5,max = 1024,message = "The text is too long")
+    @Size(max = 1024,message = "The text is too long")
     private String text;
 
     public Question() {
@@ -70,5 +70,9 @@ public class Question {
         if(wrong.isEmpty())
             return true;
         return false;
+    }
+    public void validation(){
+        if(this.text.length()>1024)
+            throw new IllegalArgumentException("SOMETHING WENT WRONG WHEN CREATING A QUESTION:\n\t\tThe text is too long, should be less than 1024 characters \n Text:"+this.text);
     }
 }

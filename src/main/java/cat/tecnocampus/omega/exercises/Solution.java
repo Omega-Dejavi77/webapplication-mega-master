@@ -85,4 +85,9 @@ public class Solution {
     public boolean getCorrect(){
         return correct;
     }
+
+    public void validation(){
+        if(this.text.length()>1024)
+            throw new IllegalArgumentException("SOMETHING WENT WRONG WHEN CREATING A Solution:\n\t\tThe text is too long, should be less than 1024 characters \n Text:"+this.text);
+    }
 }

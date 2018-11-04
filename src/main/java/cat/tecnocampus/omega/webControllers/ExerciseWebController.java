@@ -54,53 +54,9 @@ public class ExerciseWebController {
             return "newTestExercise";
         }
         ExerciseCreator.testCreator(testText,exercisesDAO,id);
-        //exercisesDAO.insertExercise(testExercise, id, "Test");
-        //redirectAttributes.addAttribute("id", testExercise.getExercise_ID());
+        exercisesDAO.insertExercise(testExercise, id, "Test");
         return "redirect:/finish";
-        //return "redirect:/createTestQuestion/{id}";
     }
-/*
-    @GetMapping("createTestQuestion/{id}")
-    public String createTestQuestion(Model model) {
-        model.addAttribute("testQuestion", new Question());
-        return "newTestQuestion";
-    }
-
-    @PostMapping("createTestQuestion/{id}")
-    public String createTestQuestion(@Valid Question testQuestion, Errors errors, @PathVariable String id, RedirectAttributes redirectAttributes) {
-        if (errors.hasErrors()) {
-            redirectAttributes.addAttribute("id", id);
-            return "newTestQuestion";
-        }
-        exercisesDAO.insertQuestion(testQuestion, id);
-        redirectAttributes.addAttribute("id", id);
-        redirectAttributes.addAttribute("id2", testQuestion.getQuestion_ID());
-        return "redirect:/createTestSolution/{id}/{id2}";
-    }
-
-    @GetMapping("createTestSolution/{id}/{id2}")
-    public String createTestSolution(Model model) {
-        model.addAttribute("testSolution", new Solution());
-        return "newTestSolution";
-    }
-
-    @PostMapping("createTestSolution/{id}/{id2}")
-    public String createTestSolution(@Valid Solution testSolution, Errors errors, String finish, @PathVariable String id, @PathVariable String id2, RedirectAttributes redirectAttributes) {
-        if (errors.hasErrors()) {
-            redirectAttributes.addAttribute("id", id);
-            redirectAttributes.addAttribute("id2", id2);
-            return "newTestSolution";
-        }
-        exercisesDAO.insertSolution(testSolution, id);
-        if (finish.equals("Add More Solutions")) {
-            redirectAttributes.addAttribute("id", id);
-            redirectAttributes.addAttribute("id2", id2);
-            return "redirect:/createTestSolution/{id}/{id2}";
-        } else if (finish.equals("Add More Questions")) {
-            redirectAttributes.addAttribute("id", id);
-            return "redirect:/createTestQuestion/{id}";
-        } else return "redirect:/finish";
-    }*/
     @GetMapping("createFillTheGapExercise/{id}")
     public String createFillTheGapExercise(Model model) {
         model.addAttribute("fillTheGapExercise", new FillTheGapExercise());
@@ -116,7 +72,6 @@ public class ExerciseWebController {
         ExerciseCreator.fillTheGapCreator(fillText,exercisesDAO,id);
 
         //exercisesDAO.insertExercise(fillTheGapExercise,id,"Fill");
-        redirectAttributes.addAttribute("id",fillTheGapExercise.getExercise_ID());
         return "redirect:/finish";
     }
 }

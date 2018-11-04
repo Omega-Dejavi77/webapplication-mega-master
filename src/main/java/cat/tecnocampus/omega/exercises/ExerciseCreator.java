@@ -2,6 +2,9 @@ package cat.tecnocampus.omega.exercises;
 
 import cat.tecnocampus.omega.persistanceController.ExercisesDAOController;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class ExerciseCreator {
 
     public static void fillTheGapCreator(String text, ExercisesDAOController exercisesDAOController, String exerciseID) {
@@ -17,8 +20,11 @@ public class ExerciseCreator {
                 }
                 String[] afterHastag = s.split("#/R");
                 Question question = new Question(questionText);
+                question.validation();
+                Solution solution = new Solution(afterHastag[0], true);
+                solution.validation();
                 exercisesDAOController.insertQuestion(question, exerciseID);
-                exercisesDAOController.insertSolution(new Solution(afterHastag[0], true), question.getQuestion_ID());
+                exercisesDAOController.insertSolution(solution, question.getQuestion_ID());
                 questionText = afterHastag[1];
                 counter++;
             }
@@ -36,10 +42,12 @@ public class ExerciseCreator {
                     continue;
                 }
                 String[] questionPlusSolutions = s.split("#/Q");
-                Question question = new Question((counter + 1) + ". " + questionPlusSolutions[0]);
+                Question question = new Question(counter + ". " + questionPlusSolutions[0]);
+                question.validation();
                 exercisesDAOController.insertQuestion(question, exerciseID);
                 String[] solutions = questionPlusSolutions[1].split("#R");
                 if (solutions.length > 2) {
+                    List<Solution> listSolution = new ArrayList<Solution>();
                     int counterSolutions = 0;
                     for (String c : solutions) {
                         if (counterSolutions == 0) {
@@ -47,16 +55,21 @@ public class ExerciseCreator {
                             continue;
                         }
                         String[] solution = c.split("#/R");
+                        Solution solutionobj;
                         if (solution[0].contains("#C")) {
-                            String last="";
-                            for (String end:solution[0].split("#C"))
-                                last+=end;
-                            exercisesDAOController.insertSolution(new Solution(intToABC(counterSolutions) + ") " +last, true), question.getQuestion_ID());
-                        }
-                        else
-                            exercisesDAOController.insertSolution(new Solution(intToABC(counterSolutions) + ") " + solution[0], false), question.getQuestion_ID());
+                            String last = "";
+                            for (String end : solution[0].split("#C"))
+                                last += end;
+                            solutionobj = new Solution(intToABC(counterSolutions) + ") " + last, true);
+                        } else
+                            solutionobj = new Solution(intToABC(counterSolutions) + ") " + solution[0], false);
+                        solutionobj.validation();
+                        listSolution.add(solutionobj);
                         counterSolutions++;
                     }
+                    solutionListValidation(listSolution,counter);
+                    for (Solution solution : listSolution)
+                        exercisesDAOController.insertSolution(solution, question.getQuestion_ID());
                 }
                 counter++;
             }
@@ -65,5 +78,15 @@ public class ExerciseCreator {
 
     private static String intToABC(int i) {
         return i > 0 && i < 27 ? String.valueOf((char) (i + 64)) : null;
+    }
+
+    private static void solutionListValidation(List<Solution> solutions,int i) {
+        int counter = 0;
+        for (Solution solution : solutions)
+            if (solution.getCorrect())
+                counter++;
+
+        if (counter == 0)
+            throw new IllegalArgumentException("SOMETHING WENT WRONG WHEN CREATING A SOLUTION:\n\t\tThere isn't any solution for the question number "+i);
     }
 }
