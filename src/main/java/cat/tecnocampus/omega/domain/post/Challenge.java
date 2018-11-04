@@ -1,4 +1,4 @@
-package cat.tecnocampus.omega.post;
+package cat.tecnocampus.omega.domain.post;
 
 import java.util.Date;
 

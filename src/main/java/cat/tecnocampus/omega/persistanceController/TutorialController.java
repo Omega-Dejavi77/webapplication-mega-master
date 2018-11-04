@@ -1,7 +1,7 @@
-package cat.tecnocampus.omega.controller;
+package cat.tecnocampus.omega.persistanceController;
 
-import cat.tecnocampus.omega.persistence.TutorialDAO;
-import cat.tecnocampus.omega.post.*;
+import cat.tecnocampus.omega.domain.post.Tutorial;
+import cat.tecnocampus.omega.persistance.TutorialDAO;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -16,7 +16,7 @@ public class TutorialController {
         this.tutorialDAO = tutorialDAO;
     }
 
-    public Tutorial insertTutorial(String description,String title){
+    public Tutorial insertTutorial(String description, String title){
         Tutorial tutorial = new Tutorial(description,title);
         insert(tutorial);
         return tutorial;

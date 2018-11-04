@@ -1,11 +1,13 @@
 package cat.tecnocampus.omega.persistance;
 
-import cat.tecnocampus.omega.post.Challenge;
+import cat.tecnocampus.omega.domain.post.Challenge;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
+@Repository
 public class ChallengeDAO {
 
     private JdbcTemplate jdbcTemplate;

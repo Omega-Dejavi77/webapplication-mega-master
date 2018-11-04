@@ -1,8 +1,8 @@
 package cat.tecnocampus.omega.persistanceController;
 
-import cat.tecnocampus.omega.exercises.Exercise;
-import cat.tecnocampus.omega.exercises.Question;
-import cat.tecnocampus.omega.exercises.Solution;
+import cat.tecnocampus.omega.domain.exercises.Exercise;
+import cat.tecnocampus.omega.domain.exercises.Question;
+import cat.tecnocampus.omega.domain.exercises.Solution;
 import cat.tecnocampus.omega.persistance.ExerciseDAO;
 import org.springframework.stereotype.Service;
 

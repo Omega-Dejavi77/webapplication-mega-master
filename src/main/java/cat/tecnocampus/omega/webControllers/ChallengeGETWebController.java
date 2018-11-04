@@ -13,6 +13,6 @@ public class ChallengeGETWebController {
     @GetMapping("challenges")
     public String listTutorials(Model model) {
         model.addAttribute("challengeList", challengeController.findAll());
-        return "challenges";
+        return "post/showChallanges";
     }
 }

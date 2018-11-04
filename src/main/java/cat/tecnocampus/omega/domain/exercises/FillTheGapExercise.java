@@ -1,4 +1,4 @@
-package cat.tecnocampus.omega.exercises;
+package cat.tecnocampus.omega.domain.exercises;
 
 public class FillTheGapExercise extends Exercise {
     public FillTheGapExercise(String exercise_ID,String description, int difficulty) {

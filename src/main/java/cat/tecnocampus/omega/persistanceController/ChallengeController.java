@@ -1,11 +1,13 @@
 package cat.tecnocampus.omega.persistanceController;
 
 import cat.tecnocampus.omega.persistance.ChallengeDAO;
-import cat.tecnocampus.omega.post.Challenge;
+import cat.tecnocampus.omega.domain.post.Challenge;
+import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
+@Service("ChallengeController")
 public class ChallengeController {
 
     private final ChallengeDAO challengeDAO;

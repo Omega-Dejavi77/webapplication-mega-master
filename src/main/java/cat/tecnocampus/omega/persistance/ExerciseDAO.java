@@ -1,22 +1,19 @@
 package cat.tecnocampus.omega.persistance;
 
-import cat.tecnocampus.omega.exercises.*;
+import cat.tecnocampus.omega.domain.exercises.*;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 @Repository
 public class ExerciseDAO {
     private JdbcTemplate jdbcTemplate;
 
-    private final String INSERT_TEST_EXERCISE = "INSERT INTO Exercises VALUES (?, ?, ?, ?,?,?,?);";
-    private final String INSERT_FILL_THE_GAP_EXERCISE = "INSERT INTO Exercises VALUES (?, ?, ?, ?,?,?,?);";
+    private final String INSERT_EXERCISE = "INSERT INTO Exercises VALUES (?, ?, ?, ?,?,?,?);";
     private final String INSERT_QUESTION = "INSERT INTO Questions VALUES (?, ?, ?);";
     private final String INSERT_SOLUTION = "INSERT INTO Solutions VALUES (?, ?, ?, ?,?,?);";
 
@@ -68,10 +65,7 @@ public class ExerciseDAO {
     }
 
     public int insertExercise(Exercise exercise, String id, String type) {
-        String insert;
-        if (type.equals("Test")) insert = INSERT_TEST_EXERCISE;
-        else insert = INSERT_FILL_THE_GAP_EXERCISE;
-        return jdbcTemplate.update(insert, exercise.getExercise_ID(), exercise.getDescription(), exercise.isEnable(), exercise.getDifficulty(), exercise.getExperience_points(), type, id);
+        return jdbcTemplate.update(INSERT_EXERCISE, exercise.getExercise_ID(), exercise.getDescription(), exercise.isEnable(), exercise.getDifficulty(), exercise.getExperience_points(), type, id);
     }
     public int insertQuestion(Question question, String id) {
         return jdbcTemplate.update(INSERT_QUESTION, question.getQuestion_ID(), question.getText() , id);

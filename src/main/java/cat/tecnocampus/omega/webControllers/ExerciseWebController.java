@@ -1,6 +1,6 @@
 package cat.tecnocampus.omega.webControllers;
 
-import cat.tecnocampus.omega.exercises.*;
+import cat.tecnocampus.omega.domain.exercises.*;
 import cat.tecnocampus.omega.persistanceController.ExercisesDAOController;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -21,19 +21,13 @@ public class ExerciseWebController {
         this.exercisesDAO = exercisesDAO;
     }
 
-    /*@GetMapping("exercises/{id}")
-    public String showUser(@PathVariable String id, Model model) {
-        model.addAttribute("exercises", exercisesDAO.getExercises(id));
-        return "exercise/showExercises";
-    }*/
-
     @GetMapping("createExercise/{id}")
     public String createExercise() {
         return "exercise/newExercise";
     }
 
     @PostMapping("createExercise/{id}")
-    public String createExercise(String exercise, @PathVariable int id, RedirectAttributes redirectAttributes) {
+    public String createExercise(String exercise, @PathVariable String id, RedirectAttributes redirectAttributes) {
         redirectAttributes.addAttribute("id", id);
         if (exercise.equals("Test"))
             return "redirect:/createTestExercise/{id}";
@@ -58,7 +52,7 @@ public class ExerciseWebController {
         }
         QuestionsCreator.testCreator(testText,exercisesDAO,id);
         exercisesDAO.insertExercise(testExercise, id, "Test");
-        return "redirect:/finish";
+        return "redirect:/tutorials";
     }
     @GetMapping("createFillTheGapExercise/{id}")
     public String createFillTheGapExercise(Model model) {
@@ -74,7 +68,7 @@ public class ExerciseWebController {
         }
         QuestionsCreator.fillTheGapCreator(fillText,exercisesDAO,id);
 
-        //exercisesDAO.insertExercise(fillTheGapExercise,id,"Fill");
-        return "redirect:/finish";
+        exercisesDAO.insertExercise(fillTheGapExercise,id,"Fill");
+        return "redirect:/tutorials";
     }
 }

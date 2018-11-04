@@ -1,4 +1,4 @@
-package cat.tecnocampus.omega.exercises;
+package cat.tecnocampus.omega.domain.exercises;
 
 import cat.tecnocampus.omega.persistanceController.ExercisesDAOController;
 

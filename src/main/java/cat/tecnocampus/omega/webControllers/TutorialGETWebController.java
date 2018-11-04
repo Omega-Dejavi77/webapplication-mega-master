@@ -1,6 +1,6 @@
-package cat.tecnocampus.omega.webcontroller;
+package cat.tecnocampus.omega.webControllers;
 
-import cat.tecnocampus.omega.controller.TutorialController;
+import cat.tecnocampus.omega.persistanceController.TutorialController;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -17,6 +17,6 @@ public class TutorialGETWebController {
     @GetMapping("tutorials")
     public String listTutorials(Model model) {
         model.addAttribute("tutorialList", tutorialController.findAll());
-        return "tutorials";
+        return "post/showTutorials";
     }
 }

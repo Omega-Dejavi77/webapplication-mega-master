@@ -1,4 +1,4 @@
-package cat.tecnocampus.omega.persistence;
+package cat.tecnocampus.omega.persistance;
 
 import cat.tecnocampus.omega.domain.User;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;

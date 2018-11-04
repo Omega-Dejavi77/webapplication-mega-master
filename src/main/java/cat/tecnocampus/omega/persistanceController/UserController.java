@@ -1,7 +1,7 @@
-package cat.tecnocampus.omega.controller;
+package cat.tecnocampus.omega.persistanceController;
 
 import cat.tecnocampus.omega.domain.User;
-import cat.tecnocampus.omega.persistence.UserDAO;
+import cat.tecnocampus.omega.persistance.UserDAO;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
