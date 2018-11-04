@@ -1,10 +1,12 @@
-package cat.tecnocampus.omega.post;
+package cat.tecnocampus.omega.domain.post;
 
 import java.util.Date;
 
 public class Tutorial extends APost {
 
-    //Exercice<List> exercices;
+    public Tutorial(String id,String description, String title) {
+        super(id,description,title);
+    }
 
     public Tutorial(String description, String title) {
         super(description,title);

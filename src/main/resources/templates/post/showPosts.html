@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <title>Users</title>
+    <link rel="stylesheet" type="text/css" href="table.css"/>
+</head>
+<body>
+<h1 align="center">Posts</h1>
+<div>
+    <h2>Tutorials</h2>
+    <table border="4">
+        <tr>
+            <th>TutorialID</th>
+            <th>Title</th>
+            <th>Description</th>
+            <th>Exercises</th>
+        </tr>
+        <tr th:each="tutorial : ${tutorialList}">
+            <td valign="top" th:text="${tutorial.postID}">TutorialID</td>
+            <td valign="top"th:text="${tutorial.title}">Title</td>
+            <td valign="top"th:text="${tutorial.description}">Description</td>
+            <td>
+                <table border="3">
+                    <tr>
+                        <th>Type</th>
+                        <th>ExerciseID</th>
+                        <th>Description</th>
+                        <th>Difficulty</th>
+                        <th>Experience Points</th>
+                        <th>Questions</th>
+                    </tr>
+                    <tr th:each="exercise : ${tutorial.getExerciseList()}">
+                        <th valign="top"th:text="${exercise.type}">Type</th>
+                        <td valign="top"th:text="${exercise.exercise_ID}">ExerciseID</td>
+                        <td valign="top"th:text="${exercise.description}">Description</td>
+                        <td valign="top"th:text="${exercise.difficulty}">Difficulty</td>
+                        <td valign="top"th:text="${exercise.experience_points}">Experience Points</td>
+                        <td>
+                            <table border="2">
+                                <tr>
+                                    <th>QuestionID</th>
+                                    <th>Text</th>
+                                    <th>Solutions</th>
+                                </tr>
+                                <tr th:each="question : ${exercise.getQuestions()}">
+                                    <th valign="top" th:text="${question.question_ID}">QuestionID</th>
+                                    <td valign="top" th:text="${question.text}">Text</td>
+                                    <td>
+                                        <table border="1">
+                                            <tr>
+                                                <th>SolutionID</th>
+                                                <th>Text</th>
+                                                <th>Correct</th>
+                                            </tr>
+                                            <tr th:each="solution : ${question.getSolutions()}">
+                                                <th valign="top" th:text="${solution.solution_ID}">SolutionID</th>
+                                                <td valign="top" th:text="${solution.text}">Text</td>
+                                                <td valign="top" th:text="${solution.correct}">Correct</td>
+                                            </tr>
+                                        </table>
+                                    </td>
+                                </tr>
+                            </table>
+                        </td>
+                    </tr>
+                </table>
+            </td>
+        </tr>
+    </table>
+</div>
+<div>
+    <h2>Challenges</h2>
+    <table border="4">
+        <tr>
+            <th>ChallengeID</th>
+            <th>Title</th>
+            <th>Description</th>
+            <th>Exercises</th>
+        </tr>
+        <tr th:each="challenge : ${challengeList}">
+            <td valign="top" th:text="${challenge.postID}">ChallengeID</td>
+            <td valign="top" th:text="${challenge.title}">Title</td>
+            <td valign="top" th:text="${challenge.description}">Description</td>
+            <td>
+                <table border="3">
+                    <tr>
+                        <th>Type</th>
+                        <th>ExerciseID</th>
+                        <th>Description</th>
+                        <th>Difficulty</th>
+                        <th>Experience Points</th>
+                        <th>Questions</th>
+                    </tr>
+                    <tr th:each="exercise : ${challenge.getExerciseList()}">
+                        <th valign="top" th:text="${exercise.type}">Type</th>
+                        <td valign="top" th:text="${exercise.exercise_ID}">ExerciseID</td>
+                        <td valign="top" th:text="${exercise.description}">Description</td>
+                        <td valign="top" th:text="${exercise.difficulty}">Difficulty</td>
+                        <td valign="top" th:text="${exercise.experience_points}">Experience Points</td>
+                        <td>
+                            <table border="2">
+                                <tr>
+                                    <th>QuestionID</th>
+                                    <th>Text</th>
+                                    <th>Solutions</th>
+                                </tr>
+                                <tr th:each="question : ${exercise.getQuestions()}">
+                                    <th valign="top" th:text="${question.question_ID}">QuestionID</th>
+                                    <td valign="top" th:text="${question.text}">Text</td>
+                                    <td>
+                                        <table border="1">
+                                            <tr>
+                                                <th>SolutionID</th>
+                                                <th>Text</th>
+                                                <th>Correct</th>
+                                            </tr>
+                                            <tr th:each="solution : ${question.getSolutions()}">
+                                                <th valign="top" th:text="${solution.solution_ID}">SolutionID</th>
+                                                <td valign="top" th:text="${solution.text}">Text</td>
+                                                <td valign="top" th:text="${solution.correct}">Correct</td>
+                                            </tr>
+                                        </table>
+                                    </td>
+                                </tr>
+                            </table>
+                        </td>
+                    </tr>
+                </table>
+            </td>
+        </tr>
+    </table>
+</div>
+</body>
+</html>

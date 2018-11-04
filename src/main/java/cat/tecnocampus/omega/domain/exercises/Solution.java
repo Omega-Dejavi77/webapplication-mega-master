@@ -1,4 +1,4 @@
-package cat.tecnocampus.omega.exercises;
+package cat.tecnocampus.omega.domain.exercises;
 
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
@@ -35,7 +35,7 @@ public class Solution {
     }
 
     public Solution(String text, int order, boolean correct) {
-        this.solution_ID= UUID.randomUUID().toString();
+        this.solution_ID = UUID.randomUUID().toString();
         this.text = text;
         this.order = order;
         this.correct = correct;
@@ -43,7 +43,7 @@ public class Solution {
     }
 
     public Solution(String text, boolean correct) {
-        this.solution_ID= UUID.randomUUID().toString();
+        this.solution_ID = UUID.randomUUID().toString();
         this.text = text;
         this.correct = correct;
         this.enable = true;

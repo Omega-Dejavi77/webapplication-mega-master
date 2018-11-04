@@ -1,6 +1,4 @@
-package cat.tecnocampus.omega.exercises;
-
-import java.util.List;
+package cat.tecnocampus.omega.domain.exercises;
 
 public class TestExercise extends Exercise {
 

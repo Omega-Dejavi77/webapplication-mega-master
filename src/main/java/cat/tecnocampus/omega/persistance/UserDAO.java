@@ -1,4 +1,4 @@
-package cat.tecnocampus.omega.persistence;
+package cat.tecnocampus.omega.persistance;
 
 import cat.tecnocampus.omega.domain.User;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
@@ -37,9 +37,9 @@ public class UserDAO {
         this.jdbcTemplate = jdbcTemplate;
     }
 
-    public int insert(User user) {
+    public int insertDAOUser(User user) {
         return jdbcTemplate.update(INSERT, user.getUsername(), user.getPassword(), user.getFirstName(), user.getLastName()
-                , user.getEmail(), user.getBirthday(), 0, 0, false);
+                , user.getEmail(), user.getBirthday(), 0, 0, 1);
     }
 
     public List<User> findAll() {

@@ -1,9 +1,13 @@
-package cat.tecnocampus.omega.post;
+package cat.tecnocampus.omega.domain.post;
+
+import cat.tecnocampus.omega.domain.exercises.Exercise;
 
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 import java.util.UUID;
 
 public abstract class APost {
@@ -18,6 +22,7 @@ public abstract class APost {
     protected Date creationDay;
     protected int likes;
     protected boolean enable;
+    protected List<Exercise> exerciseList;
 
 
     protected APost (String postID, String description, String title){
@@ -27,6 +32,7 @@ public abstract class APost {
         creationDay=new Date();
         likes = 0;
         enable=true;
+        exerciseList=new ArrayList<Exercise>();
     }
     protected APost (String description,String title){
         postID=UUID.randomUUID().toString();
@@ -35,6 +41,7 @@ public abstract class APost {
         creationDay=new Date();
         likes = 0;
         enable=true;
+        exerciseList=new ArrayList<Exercise>();
     }
 
     protected String getPostID() {
@@ -74,5 +81,13 @@ public abstract class APost {
 
     protected void setEnable(boolean enable) {
         this.enable = enable;
+    }
+
+    public List<Exercise> getExerciseList() {
+        return exerciseList;
+    }
+
+    public void addExercises(List<Exercise> exerciseList) {
+        this.exerciseList.addAll(exerciseList);
     }
 }
