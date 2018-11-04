@@ -41,12 +41,12 @@ public class ExerciseDAO {
     }
 
     private RowMapper<Question> questionMapper = (resultSet, i) -> {
-        Question question = new Question(resultSet.getString("question_id"), resultSet.getString("text"));
+        Question question = new Question(resultSet.getString("question_id"), resultSet.getString("texts"));
         return question;
     };
 
     private RowMapper<Solution> solutionMapper = (resultSet, i) -> {
-        Solution solution = new Solution(resultSet.getString("solution_id"), resultSet.getString("text"),resultSet.getBoolean("correct"));
+        Solution solution = new Solution(resultSet.getString("solution_id"), resultSet.getString("texts"),resultSet.getBoolean("correct"));
         return solution;
     };
 

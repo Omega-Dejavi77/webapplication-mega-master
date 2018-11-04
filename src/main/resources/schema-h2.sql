@@ -27,7 +27,7 @@ create table Exercises(
 drop table IF EXISTS  Questions;
 CREATE table Questions (
     question_id varchar (36) primary key,
-    texts varchar (36) not null,
+    texts varchar (1024) not null,
     exercise_id varchar (36),
   foreign key (exercise_id) references Exercises(exercise_id)
 );
@@ -35,7 +35,7 @@ drop table if EXISTS Solutions ;
 create table Solutions(
     solution_id varchar (36) primary key,
     position number,
-    texts varchar (36) not null ,
+    texts varchar (1024) not null ,
     correct BIT,
     enable integer not null,
     question_id varchar (36),

@@ -51,7 +51,7 @@ public class ExerciseWebController {
             return "exercise/newTestExercise";
         }
         exercisesDAO.insertExercise(testExercise, id, "Test");
-        QuestionsCreator.testCreator(testText,exercisesDAO,id);
+        QuestionsCreator.testCreator(testText,exercisesDAO,testExercise.getExercise_ID());
         if(end.equals("Finish"))
         return "redirect:/posts";
         else {
@@ -72,7 +72,7 @@ public class ExerciseWebController {
             return "exercise/newFillTheGapExercise";
         }
         exercisesDAO.insertExercise(fillTheGapExercise,id,"Fill");
-        QuestionsCreator.fillTheGapCreator(fillText,exercisesDAO,id);
+        QuestionsCreator.fillTheGapCreator(fillText,exercisesDAO,fillTheGapExercise.getExercise_ID());
 
         if(end.equals("Finish"))
             return "redirect:/posts";
