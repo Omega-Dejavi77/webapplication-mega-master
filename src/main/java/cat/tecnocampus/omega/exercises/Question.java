@@ -28,6 +28,11 @@ public class Question {
         this.text = text;
         solutions=new ArrayList<Solution>();
     }
+
+    public String getQuestion_ID() {
+        return question_ID;
+    }
+
     public String getText() {
         return text;
     }

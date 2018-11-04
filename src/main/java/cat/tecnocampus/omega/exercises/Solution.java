@@ -34,7 +34,7 @@ public class Solution {
         this.enable = true;
     }
 
-    public Solution(@NotNull @Size(max = 1024, message = "The text is too long") String text, int order, @NotNull boolean correct) {
+    public Solution(String text, int order, boolean correct) {
         this.solution_ID= UUID.randomUUID().toString();
         this.text = text;
         this.order = order;
@@ -42,7 +42,7 @@ public class Solution {
         this.enable = true;
     }
 
-    public Solution(@NotNull @Size(max = 1024, message = "The text is too long") String text, @NotNull boolean correct) {
+    public Solution(String text, boolean correct) {
         this.solution_ID= UUID.randomUUID().toString();
         this.text = text;
         this.correct = correct;

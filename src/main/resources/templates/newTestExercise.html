@@ -3,13 +3,13 @@
       xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8"/>
-    <title>Create Fill The Gap Exercise</title>
+    <title>Create Test Exercise</title>
 </head>
 <body>
 
 <div align="center">
 
-    <h1>Register Fill The Gap Exercise</h1>
+    <h1>Register Test Exercise</h1>
 
     <form method="POST" th:object="${testExercise}">
         <div align="left" class="errors" th:if="${#fields.hasErrors('*')}">
@@ -43,7 +43,15 @@
                 </td>
             </tr>
         </table>
-
+        <table>
+            <tr>
+                <th>In here you have to type the type test exercise:<br />
+                    When you want to do a new question, you have to type #Qthe question here#/Q<br />
+                    When you want to do a new Solution, you have to type #Rthe solution here#/R<br />
+                            if the solution is the correct type #C inside the solution like this #Rthe solution here#C#/R</th>
+            </tr>
+            <tr><td><textarea name="testText" rows="16" cols="128" minlength="5" maxlength="2048"></textarea></td></tr>
+        </table>
         <input type="submit" value="Create Test Exercise"/>
 
 
