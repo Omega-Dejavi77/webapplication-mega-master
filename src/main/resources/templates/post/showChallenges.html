@@ -6,20 +6,20 @@
     <link rel="stylesheet" type="text/css" href="table.css"/>
 </head>
 <body>
-<h2>Challanges</h2>
-<table border="1">
+<h2 align="center">Challenges</h2>
+<table border="4">
     <tr>
-        <th>ChallangeID</th>
+        <th>ChallengeID</th>
         <th>Title</th>
         <th>Description</th>
         <th>Exercises</th>
     </tr>
-    <tr th:each="challange : ${challangeList}">
-        <td th:text="${challange.postID}">ChallangeID</td>
-        <td th:text="${challange.title}">Title</td>
-        <td th:text="${challange.description}">Description</td>
+    <tr th:each="challenge : ${challengeList}">
+        <td valign="top" th:text="${challenge.postID}">ChallengeID</td>
+        <td valign="top" th:text="${challenge.title}">Title</td>
+        <td valign="top" th:text="${challenge.description}">Description</td>
         <td>
-            <table border="1">
+            <table border="3">
                 <tr>
                     <th>Type</th>
                     <th>ExerciseID</th>
@@ -28,22 +28,22 @@
                     <th>Experience Points</th>
                     <th>Questions</th>
                 </tr>
-                <tr th:each="exercise : ${challange.getExerciseList()}">
-                    <th th:text="${exercise.type}">Type</th>
-                    <td th:text="${exercise.exercise_ID}">ExerciseID</td>
-                    <td th:text="${exercise.description}">Description</td>
-                    <td th:text="${exercise.difficulty}">Difficulty</td>
-                    <td th:text="${exercise.experience_points}">Experience Points</td>
+                <tr th:each="exercise : ${challenge.getExerciseList()}">
+                    <th valign="top" th:text="${exercise.type}">Type</th>
+                    <td valign="top" th:text="${exercise.exercise_ID}">ExerciseID</td>
+                    <td valign="top" th:text="${exercise.description}">Description</td>
+                    <td valign="top" th:text="${exercise.difficulty}">Difficulty</td>
+                    <td valign="top" th:text="${exercise.experience_points}">Experience Points</td>
                     <td>
-                        <table border="1">
+                        <table border="2">
                             <tr>
                                 <th>QuestionID</th>
                                 <th>Text</th>
                                 <th>Solutions</th>
                             </tr>
                             <tr th:each="question : ${exercise.getQuestions()}">
-                                <th th:text="${question.question_ID}">QuestionID</th>
-                                <td th:text="${question.text}">Text</td>
+                                <th valign="top" th:text="${question.question_ID}">QuestionID</th>
+                                <td valign="top" th:text="${question.text}">Text</td>
                                 <td>
                                     <table border="1">
                                         <tr>
@@ -52,9 +52,9 @@
                                             <th>Correct</th>
                                         </tr>
                                         <tr th:each="solution : ${question.getSolutions()}">
-                                            <th th:text="${solution.solution_ID}">SolutionID</th>
-                                            <td th:text="${solution.text}">Text</td>
-                                            <td th:text="${solution.correct}">Correct</td>
+                                            <th valign="top" th:text="${solution.solution_ID}">SolutionID</th>
+                                            <td valign="top" th:text="${solution.text}">Text</td>
+                                            <td valign="top" th:text="${solution.correct}">Correct</td>
                                         </tr>
                                     </table>
                                 </td>

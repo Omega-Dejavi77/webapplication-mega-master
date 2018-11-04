@@ -6,8 +6,8 @@
     <link rel="stylesheet" type="text/css" href="table.css"/>
 </head>
 <body>
-<h2>Tutorials</h2>
-<table border="1">
+<h2 align="center">Tutorials</h2>
+<table border="4">
     <tr>
         <th>TutorialID</th>
         <th>Title</th>
@@ -19,7 +19,7 @@
         <td th:text="${tutorial.title}">Title</td>
         <td th:text="${tutorial.description}">Description</td>
         <td>
-            <table border="1">
+            <table border="3">
                 <tr>
                     <th>Type</th>
                     <th>ExerciseID</th>
@@ -35,7 +35,7 @@
                     <td th:text="${exercise.difficulty}">Difficulty</td>
                     <td th:text="${exercise.experience_points}">Experience Points</td>
                     <td>
-                        <table border="1">
+                        <table border="2">
                             <tr>
                                 <th>QuestionID</th>
                                 <th>Text</th>
@@ -45,7 +45,7 @@
                                 <th th:text="${question.question_ID}">QuestionID</th>
                                 <td th:text="${question.text}">Text</td>
                                 <td>
-                                    <table border="1">
+                                    <table border="2">
                                         <tr>
                                             <th>SolutionID</th>
                                             <th>Text</th>
