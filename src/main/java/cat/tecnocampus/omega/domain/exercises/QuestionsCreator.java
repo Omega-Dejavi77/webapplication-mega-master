@@ -9,7 +9,7 @@ public class QuestionsCreator {
 
     public static void fillTheGapCreator(String text, ExercisesDAOController exercisesDAOController, String exerciseID) {
         String[] beforeHashtag = text.split("#R");
-        if (beforeHashtag.length > 2) {
+        if (beforeHashtag.length > 1) {
             int counter = 0;
             String questionText = "";
             for (String s : beforeHashtag) {
@@ -23,10 +23,7 @@ public class QuestionsCreator {
                 question.validation();
                 Solution solution = new Solution(afterHastag[0], true);
                 solution.validation();
-                System.out.println(exerciseID);
-                System.out.println("**QUESTION**\n"+question.getText()+"**END**\n");
                 exercisesDAOController.insertQuestion(question, exerciseID);
-                System.out.println("**SOLUTION**\n"+solution.getText()+"**END**\n");
                 exercisesDAOController.insertSolution(solution, question.getQuestion_ID());
                 questionText = afterHastag[1];
                 counter++;
@@ -37,7 +34,7 @@ public class QuestionsCreator {
     public static void testCreator(String text, ExercisesDAOController exercisesDAOController, String exerciseID) {
         text.replace("/n", "");
         String[] questions = text.split("#Q");
-        if (questions.length > 2) {
+        if (questions.length > 1) {
             int counter = 0;
             for (String s : questions) {
                 if (counter == 0) {
@@ -47,9 +44,10 @@ public class QuestionsCreator {
                 String[] questionPlusSolutions = s.split("#/Q");
                 Question question = new Question(counter + ". " + questionPlusSolutions[0]);
                 question.validation();
+                System.out.println("**QUESTION**\n" + question.getText() + "\n**END**\n");
                 exercisesDAOController.insertQuestion(question, exerciseID);
                 String[] solutions = questionPlusSolutions[1].split("#R");
-                if (solutions.length > 2) {
+                if (solutions.length > 1) {
                     List<Solution> listSolution = new ArrayList<Solution>();
                     int counterSolutions = 0;
                     for (String c : solutions) {
@@ -70,9 +68,11 @@ public class QuestionsCreator {
                         listSolution.add(solutionobj);
                         counterSolutions++;
                     }
-                    solutionListValidation(listSolution,counter);
-                    for (Solution solution : listSolution)
+                    solutionListValidation(listSolution, counter);
+                    for (Solution solution : listSolution) {
+                        System.out.println("**SOLUTION**\n" + solution.getText() + "\n**END**\n");
                         exercisesDAOController.insertSolution(solution, question.getQuestion_ID());
+                    }
                 }
                 counter++;
             }
@@ -83,13 +83,13 @@ public class QuestionsCreator {
         return i > 0 && i < 27 ? String.valueOf((char) (i + 64)) : null;
     }
 
-    private static void solutionListValidation(List<Solution> solutions,int i) {
+    private static void solutionListValidation(List<Solution> solutions, int i) {
         int counter = 0;
         for (Solution solution : solutions)
             if (solution.getCorrect())
                 counter++;
 
         if (counter == 0)
-            throw new IllegalArgumentException("SOMETHING WENT WRONG WHEN CREATING A SOLUTION:\n\t\tThere isn't any solution for the question number "+i);
+            throw new IllegalArgumentException("SOMETHING WENT WRONG WHEN CREATING A SOLUTION:\n\t\tThere isn't any solution for the question number " + i);
     }
 }
