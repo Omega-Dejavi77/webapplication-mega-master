@@ -39,7 +39,7 @@ public class UserDAO {
 
     public int insertDAOUser(User user) {
         return jdbcTemplate.update(INSERT, user.getUsername(), user.getPassword(), user.getFirstName(), user.getLastName()
-                , user.getEmail(), user.getBirthday(), 0, 0, false);
+                , user.getEmail(), user.getBirthday(), 0, 0, 1);
     }
 
     public List<User> findAll() {

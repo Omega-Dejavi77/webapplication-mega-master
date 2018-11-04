@@ -17,7 +17,7 @@ public class TutorialDAO {
     private ExerciseDAO exerciseDAO;
 
     private final String FIND_ALL = "select * from Posts where son_type=?";
-    private final String INSERT = "insert into Posts (post_id, title, description, creationDay, likes, enable, son_type) values(?, ?, ?, ?, ?,?,'Tutorial')";
+    private final String INSERT = "insert into Posts (post_id, title, description, creationDay, likes, enable, son_type) values(?, ?, ?, ?, ?,?,?)";
 
 
     public TutorialDAO(JdbcTemplate jdbcTemplate, ExerciseDAO exerciseDAO) {
@@ -40,7 +40,7 @@ public class TutorialDAO {
     }
 
     public int insertDAOTutorial(Tutorial tutorial) {
-        return jdbcTemplate.update(INSERT, tutorial.getPostID(), tutorial.getTitle(), tutorial.getDescription(), tutorial.getCreationDay(), tutorial.getLikes(), tutorial.isEnable());
+        return jdbcTemplate.update(INSERT, tutorial.getPostID(), tutorial.getTitle(), tutorial.getDescription(), tutorial.getCreationDay(), tutorial.getLikes(), tutorial.isEnable(),"Tutorial");
     }
 
 }

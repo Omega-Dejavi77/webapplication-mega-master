@@ -17,7 +17,7 @@ public class ChallengeDAO {
     private JdbcTemplate jdbcTemplate;
     private ExerciseDAO exerciseDAO;
     private final String FIND_ALL = "select * from Posts where son_type=?";;
-    private final String INSERT = "insert into posts (post_ID, title, description, creationDay, likes, enable, son_TYPE) values(?, ?, ?, ?, ?,?,'Challenge')";
+    private final String INSERT = "insert into posts (post_ID, title, description, creationDay, likes, enable, son_TYPE) values(?, ?, ?, ?, ?,?,?)";
 
     public ChallengeDAO(JdbcTemplate jdbcTemplate,ExerciseDAO exerciseDAO) {
 
@@ -41,7 +41,7 @@ public class ChallengeDAO {
     }
 
     public int insertDAOChallenge(Challenge challenge) {
-        return jdbcTemplate.update(INSERT,challenge.getPostID(),challenge.getTitle(),challenge.getDescription(),challenge.getCreationDay(), challenge.getLikes(),challenge.isEnable());
+        return jdbcTemplate.update(INSERT,challenge.getPostID(),challenge.getTitle(),challenge.getDescription(),challenge.getCreationDay(), challenge.getLikes(),challenge.isEnable(),"Challenge");
     }
 
 }
