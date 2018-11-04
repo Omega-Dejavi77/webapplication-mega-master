@@ -6,14 +6,65 @@
     <link rel="stylesheet" type="text/css" href="table.css"/>
 </head>
 <body>
-<h1>List of all Tutorials</h1>
-<h2>As HTML list</h2>
-<ul>
-    <li th:each="tutorial : ${tutorialList}"
-        th:id="'tutorial_' + ${tutorial.title}">
-        <div><span><b>Title: </b></span><span th:text="' ' + ${tutorial.title}">title</span></div>
-        <div><span><b>Description: </b></span><span th:text="' ' + ${tutorial.description}">description</span></div>
-    </li>
-</ul>
+<h2>Tutorials</h2>
+<table border="1">
+    <tr>
+        <th>TutorialID</th>
+        <th>Title</th>
+        <th>Description</th>
+        <th>Exercises</th>
+    </tr>
+    <tr th:each="tutorial : ${tutorialList}">
+        <td th:text="${tutorial.postID}">ChallangeID</td>
+        <td th:text="${tutorial.title}">Title</td>
+        <td th:text="${tutorial.description}">Description</td>
+        <td>
+            <table border="1">
+                <tr>
+                    <th>Type</th>
+                    <th>ExerciseID</th>
+                    <th>Description</th>
+                    <th>Difficulty</th>
+                    <th>Experience Points</th>
+                    <th>Questions</th>
+                </tr>
+                <tr th:each="exercise : ${tutorial.getExerciseList()}">
+                    <th th:text="${exercise.type}">Type</th>
+                    <td th:text="${exercise.exerciseID}">ExerciseID</td>
+                    <td th:text="${exercise.description}">Description</td>
+                    <td th:text="${exercise.difficulty}">Difficulty</td>
+                    <td th:text="${exercise.experience_points}">Experience Points</td>
+                    <td>
+                        <table border="1">
+                            <tr>
+                                <th>QuestionID</th>
+                                <th>Text</th>
+                                <th>Solutions</th>
+                            </tr>
+                            <tr th:each="question : ${exercise.getQuestions()}">
+                                <th th:text="${question.questionID}">QuestionID</th>
+                                <td th:text="${question.text}">Text</td>
+                                <td>
+                                    <table border="1">
+                                        <tr>
+                                            <th>SolutionID</th>
+                                            <th>Text</th>
+                                            <th>Correct</th>
+                                        </tr>
+                                        <tr th:each="solution : ${question.getSolutions()}">
+                                            <th th:text="${solution.solutionID}">SolutionID</th>
+                                            <td th:text="${solution.text}">Text</td>
+                                            <td th:text="${solution.correct}">Correct</td>
+                                        </tr>
+                                    </table>
+                                </td>
+                            </tr>
+                        </table>
+                    </td>
+                </tr>
+            </table>
+        </td>
+    </tr>
+</table>
 </body>
 </html>

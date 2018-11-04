@@ -37,7 +37,7 @@ public class TutorialDAO {
         return tutorial;
     };
     public List<Tutorial> findAll() {
-        return jdbcTemplate.query(FIND_ALL, new BeanPropertyRowMapper<>(Tutorial.class));
+        return jdbcTemplate.query(FIND_ALL, mapperEager);
     }
 
     public int insertTutorial(Tutorial tutorial) {

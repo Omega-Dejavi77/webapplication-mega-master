@@ -45,14 +45,19 @@ public class ExerciseWebController {
     }
 
     @PostMapping("createTestExercise/{id}")
-    public String createTestExercise(@Valid TestExercise testExercise, Errors errors, @PathVariable String id,String testText, RedirectAttributes redirectAttributes) {
+    public String createTestExercise(@Valid TestExercise testExercise, Errors errors, @PathVariable String id,String testText,String end, RedirectAttributes redirectAttributes) {
         if (errors.hasErrors()) {
             redirectAttributes.addAttribute("id", id);
             return "exercise/newTestExercise";
         }
         QuestionsCreator.testCreator(testText,exercisesDAO,id);
         exercisesDAO.insertExercise(testExercise, id, "Test");
+        if(end.equals("Finish"))
         return "redirect:/tutorials";
+        else {
+            redirectAttributes.addAttribute("id",id);
+            return "redirect:/createExercise/{id}";
+        }
     }
     @GetMapping("createFillTheGapExercise/{id}")
     public String createFillTheGapExercise(Model model) {
@@ -61,14 +66,20 @@ public class ExerciseWebController {
     }
 
     @PostMapping("createFillTheGapExercise/{id}")
-    public String createFillTheGapExercise(@Valid FillTheGapExercise fillTheGapExercise, Errors errors, @PathVariable String id,String fillText, RedirectAttributes redirectAttributes) {
+    public String createFillTheGapExercise(@Valid FillTheGapExercise fillTheGapExercise, Errors errors, @PathVariable String id,String fillText,String end, RedirectAttributes redirectAttributes) {
         if (errors.hasErrors()) {
             redirectAttributes.addAttribute("id", id);
             return "exercise/newFillTheGapExercise";
         }
-        QuestionsCreator.fillTheGapCreator(fillText,exercisesDAO,id);
+        //QuestionsCreator.fillTheGapCreator(fillText,exercisesDAO,id);
 
         exercisesDAO.insertExercise(fillTheGapExercise,id,"Fill");
-        return "redirect:/tutorials";
+
+        if(end.equals("Finish"))
+            return "redirect:/tutorials";
+        else {
+            redirectAttributes.addAttribute("id",id);
+            return "redirect:/createExercise/{id}";
+        }
     }
 }
