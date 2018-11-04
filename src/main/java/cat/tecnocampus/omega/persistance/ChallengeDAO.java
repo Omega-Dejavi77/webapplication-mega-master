@@ -40,7 +40,7 @@ public class ChallengeDAO {
         return jdbcTemplate.query(FIND_ALL,new Object[]{"Challenge"}, mapperEager);
     }
 
-    public int insertChallenge(Challenge challenge) {
+    public int insertDAOChallenge(Challenge challenge) {
         return jdbcTemplate.update(INSERT,challenge.getPostID(),challenge.getTitle(),challenge.getDescription(),challenge.getCreationDay(), challenge.getLikes(),challenge.isEnable());
     }
 

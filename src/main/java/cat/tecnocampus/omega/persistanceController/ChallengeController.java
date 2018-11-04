@@ -25,7 +25,7 @@ public class ChallengeController {
 
     @Transactional
     public int insert(Challenge challenge){
-        return  challengeDAO.insertChallenge(challenge);
+        return  challengeDAO.insertDAOChallenge(challenge);
     }
 
     public List<Challenge> findAll(){

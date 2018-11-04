@@ -44,7 +44,6 @@ public class QuestionsCreator {
                 String[] questionPlusSolutions = s.split("#/Q");
                 Question question = new Question(counter + ". " + questionPlusSolutions[0]);
                 question.validation();
-                System.out.println("**QUESTION**\n" + question.getText() + "\n**END**\n");
                 exercisesDAOController.insertQuestion(question, exerciseID);
                 String[] solutions = questionPlusSolutions[1].split("#R");
                 if (solutions.length > 1) {
@@ -70,7 +69,6 @@ public class QuestionsCreator {
                     }
                     solutionListValidation(listSolution, counter);
                     for (Solution solution : listSolution) {
-                        System.out.println("**SOLUTION**\n" + solution.getText() + "\n**END**\n");
                         exercisesDAOController.insertSolution(solution, question.getQuestion_ID());
                     }
                 }

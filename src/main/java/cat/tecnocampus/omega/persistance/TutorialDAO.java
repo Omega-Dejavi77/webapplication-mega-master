@@ -39,7 +39,7 @@ public class TutorialDAO {
         return jdbcTemplate.query(FIND_ALL,new Object[]{"Tutorial"}, mapperEager);
     }
 
-    public int insertTutorial(Tutorial tutorial) {
+    public int insertDAOTutorial(Tutorial tutorial) {
         return jdbcTemplate.update(INSERT, tutorial.getPostID(), tutorial.getTitle(), tutorial.getDescription(), tutorial.getCreationDay(), tutorial.getLikes(), tutorial.isEnable());
     }
 

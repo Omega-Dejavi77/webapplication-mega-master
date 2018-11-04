@@ -24,7 +24,7 @@ public class TutorialController {
 
     @Transactional
     public int insert(Tutorial tutorial){
-        return  tutorialDAO.insertTutorial(tutorial);
+        return  tutorialDAO.insertDAOTutorial(tutorial);
     }
 
     public List<Tutorial> findAll(){

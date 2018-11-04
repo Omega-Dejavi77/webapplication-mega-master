@@ -36,7 +36,7 @@ public class UserController {
 
     @Transactional
     public int insert(User user) {
-        return userDAO.insert(user);
+        return userDAO.insertDAOUser(user);
     }
 
     public List<User> findAll() {

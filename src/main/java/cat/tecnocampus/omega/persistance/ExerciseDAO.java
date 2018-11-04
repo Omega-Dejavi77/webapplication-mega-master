@@ -66,13 +66,13 @@ public class ExerciseDAO {
         this.jdbcTemplate = jdbcTemplate;
     }
 
-    public int insertExercise(Exercise exercise, String id, String type) {
+    public int insertDAOExercise(Exercise exercise, String id, String type) {
         return jdbcTemplate.update(INSERT_EXERCISE, exercise.getExercise_ID(), exercise.getDescription(), exercise.isEnable(), exercise.getDifficulty(), exercise.getExperience_points(), type, id);
     }
-    public int insertQuestion(Question question, String id) {
+    public int insertDAOQuestion(Question question, String id) {
         return jdbcTemplate.update(INSERT_QUESTION, question.getQuestion_ID(), question.getText() , id);
     }
-    public int insertSolution(Solution solution, String id) {
+    public int insertDAOSolution(Solution solution, String id) {
         return jdbcTemplate.update(INSERT_SOLUTION, solution.getSolution_ID(),solution.getOrder(),solution.getText(),solution.getCorrect(),solution.isEnable() , id);
     }
 
