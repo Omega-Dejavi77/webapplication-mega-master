@@ -23,9 +23,10 @@ public class QuestionsCreator {
                 question.validation();
                 Solution solution = new Solution(afterHastag[0], true);
                 solution.validation();
+                if (afterHastag.length > 1)
+                    questionText = afterHastag[1];
                 exercisesDAOController.insertQuestion(question, exerciseID);
                 exercisesDAOController.insertSolution(solution, question.getQuestion_ID());
-                questionText = afterHastag[1];
                 counter++;
             }
         }
