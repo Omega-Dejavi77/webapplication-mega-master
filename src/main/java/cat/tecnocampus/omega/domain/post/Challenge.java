@@ -4,6 +4,9 @@ import java.util.Date;
 
 public class Challenge  extends APost {
 
+    public Challenge(String id,String description, String title) {
+        super(id,description,title);
+    }
     public Challenge(String description, String title) {
         super(description, title);
     }

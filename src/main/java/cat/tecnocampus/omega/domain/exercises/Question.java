@@ -18,13 +18,13 @@ public class Question {
     private boolean enable;
     List<Solution> solutions;
 
-    public Question(String question_ID,String text) {
+    public Question(String question_ID, String text) {
         this.question_ID = question_ID;
         this.text = text;
         solutions=new ArrayList<Solution>();
     }
     public Question(String text) {
-        this.question_ID= UUID.randomUUID().toString();
+        this.question_ID = UUID.randomUUID().toString();
         this.text = text;
         solutions=new ArrayList<Solution>();
     }

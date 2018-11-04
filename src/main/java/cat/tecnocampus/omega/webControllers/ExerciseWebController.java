@@ -50,10 +50,10 @@ public class ExerciseWebController {
             redirectAttributes.addAttribute("id", id);
             return "exercise/newTestExercise";
         }
-        QuestionsCreator.testCreator(testText,exercisesDAO,id);
         exercisesDAO.insertExercise(testExercise, id, "Test");
+        QuestionsCreator.testCreator(testText,exercisesDAO,id);
         if(end.equals("Finish"))
-        return "redirect:/tutorials";
+        return "redirect:/posts";
         else {
             redirectAttributes.addAttribute("id",id);
             return "redirect:/createExercise/{id}";
@@ -71,12 +71,11 @@ public class ExerciseWebController {
             redirectAttributes.addAttribute("id", id);
             return "exercise/newFillTheGapExercise";
         }
-        //QuestionsCreator.fillTheGapCreator(fillText,exercisesDAO,id);
-
         exercisesDAO.insertExercise(fillTheGapExercise,id,"Fill");
+        QuestionsCreator.fillTheGapCreator(fillText,exercisesDAO,id);
 
         if(end.equals("Finish"))
-            return "redirect:/tutorials";
+            return "redirect:/posts";
         else {
             redirectAttributes.addAttribute("id",id);
             return "redirect:/createExercise/{id}";

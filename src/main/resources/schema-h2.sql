@@ -5,7 +5,7 @@ CREATE TABLE Posts (
     description varchar (1024) not null,
     creationDay DATE not null,
     likes INTEGER,
-    enable integer not NULL,
+    enable BIT not NULL,
     son_type varchar (36),
     starting_date date,
     deadline date,
@@ -18,7 +18,7 @@ create table Exercises(
   exercise_id varchar (36)primary key,
   description varchar (1024) not null,
   enable integer not null,
-  dificullty integer not null,
+  difficulty integer not null,
   experience_points integer,
   son_type varchar (36),
   post_id varchar (36),
@@ -29,7 +29,6 @@ CREATE table Questions (
     question_id varchar (36) primary key,
     texts varchar (36) not null,
     exercise_id varchar (36),
-    solution_id varchar (36),
   foreign key (exercise_id) references Exercises(exercise_id)
 );
 drop table if EXISTS Solutions ;

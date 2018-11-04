@@ -1,0 +1,2 @@
+INSERT INTO Posts  (post_id, title, description, creationDay, likes, enable, son_type) VALUES('01293c0f-bf77-42d7-9fa3-8b101f33ee5b','Tutorial','Tutorial Description',current_timestamp,0,1,'Tutorial');
+INSERT INTO Posts  (post_id, title, description, creationDay, likes, enable, son_type) VALUES ('01293c0f-bf77-42d7-9fa3-8b101f33ee6b','Challenge','Challenge Description',current_timestamp,0,1,'Challenge');

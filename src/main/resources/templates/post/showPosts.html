@@ -32,7 +32,7 @@
                     </tr>
                     <tr th:each="exercise : ${tutorial.getExerciseList()}">
                         <th th:text="${exercise.type}">Type</th>
-                        <td th:text="${exercise.exerciseID}">ExerciseID</td>
+                        <td th:text="${exercise.exercise_ID}">ExerciseID</td>
                         <td th:text="${exercise.description}">Description</td>
                         <td th:text="${exercise.difficulty}">Difficulty</td>
                         <td th:text="${exercise.experience_points}">Experience Points</td>
@@ -44,7 +44,7 @@
                                     <th>Solutions</th>
                                 </tr>
                                 <tr th:each="question : ${exercise.getQuestions()}">
-                                    <th th:text="${question.questionID}">QuestionID</th>
+                                    <th th:text="${question.question_ID}">QuestionID</th>
                                     <td th:text="${question.text}">Text</td>
                                     <td>
                                         <table border="1">
@@ -54,7 +54,7 @@
                                                 <th>Correct</th>
                                             </tr>
                                             <tr th:each="solution : ${question.getSolutions()}">
-                                                <th th:text="${solution.solutionID}">SolutionID</th>
+                                                <th th:text="${solution.solution_ID}">SolutionID</th>
                                                 <td th:text="${solution.text}">Text</td>
                                                 <td th:text="${solution.correct}">Correct</td>
                                             </tr>
@@ -70,18 +70,18 @@
     </table>
 </div>
 <div>
-    <h2>Challanges</h2>
+    <h2>Challenges</h2>
     <table border="1">
         <tr>
-            <th>ChallangeID</th>
+            <th>ChallengeID</th>
             <th>Title</th>
             <th>Description</th>
             <th>Exercises</th>
         </tr>
-        <tr th:each="challange : ${challangeList}">
-            <td th:text="${challange.postID}">ChallangeID</td>
-            <td th:text="${challange.title}">Title</td>
-            <td th:text="${challange.description}">Description</td>
+        <tr th:each="challenge : ${challengeList}">
+            <td th:text="${challenge.postID}">ChallengeID</td>
+            <td th:text="${challenge.title}">Title</td>
+            <td th:text="${challenge.description}">Description</td>
             <td>
                 <table border="1">
                     <tr>
@@ -92,12 +92,12 @@
                         <th>Experience Points</th>
                         <th>Questions</th>
                     </tr>
-                    <tr th:each="exercise : ${challange.getExerciseList()}">
-                        <th th:text="${exercise.type}">Type</th>
-                        <td th:text="${exercise.exerciseID}">ExerciseID</td>
-                        <td th:text="${exercise.description}">Description</td>
-                        <td th:text="${exercise.difficulty}">Difficulty</td>
-                        <td th:text="${exercise.experience_points}">Experience Points</td>
+                    <tr th:each="exercise2 : ${challenge.getExerciseList()}">
+                        <th th:text="${exercise2.type}">Type</th>
+                        <td th:text="${exercise2.exercise_ID}">ExerciseID</td>
+                        <td th:text="${exercise2.description}">Description</td>
+                        <td th:text="${exercise2.difficulty}">Difficulty</td>
+                        <td th:text="${exercise2.experience_points}">Experience Points</td>
                         <td>
                             <table border="1">
                                 <tr>
@@ -105,9 +105,9 @@
                                     <th>Text</th>
                                     <th>Solutions</th>
                                 </tr>
-                                <tr th:each="question : ${exercise.getQuestions()}">
-                                    <th th:text="${question.questionID}">QuestionID</th>
-                                    <td th:text="${question.text}">Text</td>
+                                <tr th:each="question2 : ${exercise2.getQuestions()}">
+                                    <th th:text="${question2.question_ID}">QuestionID</th>
+                                    <td th:text="${question2.text}">Text</td>
                                     <td>
                                         <table border="1">
                                             <tr>
@@ -115,10 +115,10 @@
                                                 <th>Text</th>
                                                 <th>Correct</th>
                                             </tr>
-                                            <tr th:each="solution : ${question.getSolutions()}">
-                                                <th th:text="${solution.solutionID}">SolutionID</th>
-                                                <td th:text="${solution.text}">Text</td>
-                                                <td th:text="${solution.correct}">Correct</td>
+                                            <tr th:each="solution2 : ${question2.getSolutions()}">
+                                                <th th:text="${solution2.solution_ID}">SolutionID</th>
+                                                <td th:text="${solution2.text}">Text</td>
+                                                <td th:text="${solution2.correct}">Correct</td>
                                             </tr>
                                         </table>
                                     </td>

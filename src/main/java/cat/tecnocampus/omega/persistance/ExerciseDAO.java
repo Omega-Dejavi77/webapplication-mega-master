@@ -21,19 +21,21 @@ public class ExerciseDAO {
     private final String DELETE_QUESTION = "";
     private final String DELETE_SOLUTION = "";
 
-    private final String SELECT_EXERCISE_BY_TUTORIAL = "SELECT * FROM Exercises WHERE post_id = ?";
+    private final String SELECT_EXERCISE_BY_POST = "SELECT * FROM Exercises WHERE post_id = ?";
     private final String SELECT_QUESTION_BY_EXERCISE = "SELECT * FROM Questions WHERE exercise_id = ?";
     private final String SELECT_SOLUTION_BY_QUESTION = "SELECT * FROM Solutions WHERE question_id = ?";
 
     private Exercise exerciseMapper(ResultSet resultSet) throws SQLException {
         Exercise exercise;
-        if(resultSet.getString("type").equals("Test")) {
+        if(resultSet.getString("son_type").equals("Test")) {
             exercise = new TestExercise(resultSet.getString("exercise_id"), resultSet.getString("description"), resultSet.getInt("difficulty"));
             exercise.setExperience_points(resultSet.getInt("experience_points"));
+            exercise.setType(resultSet.getString("son_type"));
         }
         else{
             exercise = new FillTheGapExercise(resultSet.getString("exercise_id"), resultSet.getString("description"), resultSet.getInt("difficulty"));
             exercise.setExperience_points(resultSet.getInt("experience_points"));
+            exercise.setType(resultSet.getString("son_type"));
         }
         return exercise;
     }
@@ -74,8 +76,8 @@ public class ExerciseDAO {
         return jdbcTemplate.update(INSERT_SOLUTION, solution.getSolution_ID(),solution.getOrder(),solution.getText(),solution.getCorrect(),solution.isEnable() , id);
     }
 
-   public List<Exercise> findExercisesByTutorial(String id){
-       return  jdbcTemplate.query(SELECT_EXERCISE_BY_TUTORIAL, new Object[]{id}, mapperEager);
+   public List<Exercise> findExercisesByPost(String id){
+       return  jdbcTemplate.query(SELECT_EXERCISE_BY_POST, new Object[]{id}, mapperEager);
     }
 
     public List<Question> findQuestionByExercise(String id){

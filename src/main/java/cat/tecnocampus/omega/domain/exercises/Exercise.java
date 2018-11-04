@@ -18,18 +18,19 @@ public abstract class Exercise {
 
     protected int difficulty;
     protected int experience_points;
+    protected String type;
 
     private List<Question> questions;
-    public Exercise(String exercise_ID,String description,int difficulty) {
-        this.exercise_ID=exercise_ID;
+    public Exercise(String exercise_ID, String description, int difficulty) {
+        this.exercise_ID = exercise_ID;
         setUp(description,difficulty);
     }
     public Exercise(String description,int difficulty) {
-        this.exercise_ID= UUID.randomUUID().toString();
+        this.exercise_ID = UUID.randomUUID().toString();
         setUp(description,difficulty);
     }
     public Exercise(){
-        this.exercise_ID= UUID.randomUUID().toString();
+        this.exercise_ID = UUID.randomUUID().toString();
         enable=true;
     }
     private void setUp(String description,int difficulty){
@@ -88,5 +89,13 @@ public abstract class Exercise {
         if(wrong.isEmpty())
             return true;
         return false;
+    }
+
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
     }
 }

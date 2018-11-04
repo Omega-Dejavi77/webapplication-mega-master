@@ -30,7 +30,7 @@
                 </tr>
                 <tr th:each="exercise : ${tutorial.getExerciseList()}">
                     <th th:text="${exercise.type}">Type</th>
-                    <td th:text="${exercise.exerciseID}">ExerciseID</td>
+                    <td th:text="${exercise.exercise_ID}">ExerciseID</td>
                     <td th:text="${exercise.description}">Description</td>
                     <td th:text="${exercise.difficulty}">Difficulty</td>
                     <td th:text="${exercise.experience_points}">Experience Points</td>
@@ -42,7 +42,7 @@
                                 <th>Solutions</th>
                             </tr>
                             <tr th:each="question : ${exercise.getQuestions()}">
-                                <th th:text="${question.questionID}">QuestionID</th>
+                                <th th:text="${question.question_ID}">QuestionID</th>
                                 <td th:text="${question.text}">Text</td>
                                 <td>
                                     <table border="1">
@@ -52,7 +52,7 @@
                                             <th>Correct</th>
                                         </tr>
                                         <tr th:each="solution : ${question.getSolutions()}">
-                                            <th th:text="${solution.solutionID}">SolutionID</th>
+                                            <th th:text="${solution.solution_ID}">SolutionID</th>
                                             <td th:text="${solution.text}">Text</td>
                                             <td th:text="${solution.correct}">Correct</td>
                                         </tr>

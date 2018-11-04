@@ -23,7 +23,9 @@ public class QuestionsCreator {
                 question.validation();
                 Solution solution = new Solution(afterHastag[0], true);
                 solution.validation();
+                System.out.println("**QUESTION**\n"+question.getText()+"**END**\n");
                 exercisesDAOController.insertQuestion(question, exerciseID);
+                System.out.println("**SOLUTION**\n"+solution.getText()+"**END**\n");
                 exercisesDAOController.insertSolution(solution, question.getQuestion_ID());
                 questionText = afterHastag[1];
                 counter++;
