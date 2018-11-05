@@ -31,4 +31,6 @@ For additional information enter on www.sololearn.com and check out
 some tutorials for see the style.
 
 ### Challenges functionality:
-
+A challenge consists on a problem registered on the database where the
+user can make his solution of the problem, and if its correct, some points
+will be given to him.
