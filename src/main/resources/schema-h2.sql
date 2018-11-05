@@ -64,13 +64,13 @@ CREATE TABLE Users (
     birthday DATE,
     experience_points INTEGER,
     level INTEGER,
-    enable BIT NOT NULL
+    enable BIT NOT NULL,
+    role VARCHAR (32),
+    FOREIGN KEY (role) REFERENCES Roles(role)
 );
 DROP TABLE IF EXISTS Roles;
 CREATE TABLE Roles(
     role VARCHAR (32) PRIMARY KEY,
-    username VARCHAR (64),
-    FOREIGN KEY (username) REFERENCES Users(username)
 );
 DROP TABLE IF EXISTS Category;
 CREATE TABLE Category(
