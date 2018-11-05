@@ -14,7 +14,7 @@ public class ExerciseDAO {
     private JdbcTemplate jdbcTemplate;
 
     private final String INSERT_EXERCISE = "INSERT INTO Exercises VALUES (?, ?, ?, ?,?,?,?);";
-    private final String INSERT_QUESTION = "INSERT INTO Questions VALUES (?, ?, ?);";
+    private final String INSERT_QUESTION = "INSERT INTO Questions VALUES (?, ?, ?, ?);";
     private final String INSERT_SOLUTION = "INSERT INTO Solutions VALUES (?, ?, ?, ?,?,?);";
 
     private final String DELETE_EXERCISE = "";
@@ -27,12 +27,11 @@ public class ExerciseDAO {
 
     private Exercise exerciseMapper(ResultSet resultSet) throws SQLException {
         Exercise exercise;
-        if(resultSet.getString("son_type").equals("Test")) {
+        if (resultSet.getString("son_type").equals("Test")) {
             exercise = new TestExercise(resultSet.getString("exercise_id"), resultSet.getString("description"), resultSet.getInt("difficulty"));
             exercise.setExperience_points(resultSet.getInt("experience_points"));
             exercise.setType(resultSet.getString("son_type"));
-        }
-        else{
+        } else {
             exercise = new FillTheGapExercise(resultSet.getString("exercise_id"), resultSet.getString("description"), resultSet.getInt("difficulty"));
             exercise.setExperience_points(resultSet.getInt("experience_points"));
             exercise.setType(resultSet.getString("son_type"));
@@ -46,7 +45,7 @@ public class ExerciseDAO {
     };
 
     private RowMapper<Solution> solutionMapper = (resultSet, i) -> {
-        Solution solution = new Solution(resultSet.getString("solution_id"), resultSet.getString("texts"),resultSet.getBoolean("correct"));
+        Solution solution = new Solution(resultSet.getString("solution_id"), resultSet.getString("texts"), resultSet.getBoolean("correct"));
         return solution;
     };
 
@@ -54,7 +53,7 @@ public class ExerciseDAO {
         Exercise exercise = exerciseMapper(resultSet);
 
         List<Question> questions = findQuestionByExercise(exercise.getExercise_ID());
-        for (Question question:questions) {
+        for (Question question : questions) {
             List<Solution> solutions = findSolutionByQuestion(question.getQuestion_ID());
             question.addSolution(solutions);
         }
@@ -69,22 +68,25 @@ public class ExerciseDAO {
     public int insertDAOExercise(Exercise exercise, String id, String type) {
         return jdbcTemplate.update(INSERT_EXERCISE, exercise.getExercise_ID(), exercise.getDescription(), exercise.isEnable(), exercise.getDifficulty(), exercise.getExperience_points(), type, id);
     }
+
     public int insertDAOQuestion(Question question, String id) {
-        return jdbcTemplate.update(INSERT_QUESTION, question.getQuestion_ID(), question.getText() , id);
+        return jdbcTemplate.update(INSERT_QUESTION, question.getQuestion_ID(), question.getText(), question.isEnable(), id);
     }
+
     public int insertDAOSolution(Solution solution, String id) {
-        return jdbcTemplate.update(INSERT_SOLUTION, solution.getSolution_ID(),solution.getOrder(),solution.getText(),solution.getCorrect(),solution.isEnable() , id);
+        return jdbcTemplate.update(INSERT_SOLUTION, solution.getSolution_ID(), solution.getOrder(), solution.getText(), solution.getCorrect(), solution.isEnable(), id);
     }
 
-   public List<Exercise> findExercisesByPost(String id){
-       return  jdbcTemplate.query(SELECT_EXERCISE_BY_POST, new Object[]{id}, mapperEager);
+    public List<Exercise> findExercisesByPost(String id) {
+        return jdbcTemplate.query(SELECT_EXERCISE_BY_POST, new Object[]{id}, mapperEager);
     }
 
-    public List<Question> findQuestionByExercise(String id){
-        return  jdbcTemplate.query(SELECT_QUESTION_BY_EXERCISE, new Object[]{id}, questionMapper);
+    public List<Question> findQuestionByExercise(String id) {
+        return jdbcTemplate.query(SELECT_QUESTION_BY_EXERCISE, new Object[]{id}, questionMapper);
     }
-    public List<Solution> findSolutionByQuestion(String id){
-        return  jdbcTemplate.query(SELECT_SOLUTION_BY_QUESTION, new Object[]{id}, solutionMapper);
+
+    public List<Solution> findSolutionByQuestion(String id) {
+        return jdbcTemplate.query(SELECT_SOLUTION_BY_QUESTION, new Object[]{id}, solutionMapper);
     }
 
 }

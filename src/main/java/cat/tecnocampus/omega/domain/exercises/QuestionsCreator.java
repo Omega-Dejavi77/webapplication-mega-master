@@ -19,12 +19,12 @@ public class QuestionsCreator {
                     continue;
                 }
                 String[] afterHastag = s.split("#/R");
+                if (afterHastag.length > 1)
+                    questionText = afterHastag[1];
                 Question question = new Question(questionText);
                 question.validation();
                 Solution solution = new Solution(afterHastag[0], true);
                 solution.validation();
-                if (afterHastag.length > 1)
-                    questionText = afterHastag[1];
                 exercisesDAOController.insertQuestion(question, exerciseID);
                 exercisesDAOController.insertSolution(solution, question.getQuestion_ID());
                 counter++;

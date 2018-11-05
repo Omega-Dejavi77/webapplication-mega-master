@@ -22,7 +22,7 @@ public class UserWebController {
         this.userController = userController;
     }
 
-    @GetMapping("users")
+    @GetMapping("allUsers")
     public String allUsers(Model model) {
         model.addAttribute("users", userController.findAll());
         return "InitialPage";
