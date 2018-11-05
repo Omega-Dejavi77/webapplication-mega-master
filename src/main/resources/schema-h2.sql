@@ -1,94 +1,95 @@
-drop table IF EXISTS Posts;
+DROP TABLE IF EXISTS Posts;
 CREATE TABLE Posts (
-    post_id varchar(36) PRIMARY KEY,
-    title varchar(64)  NOT NULL,
-    description varchar (1024) not null,
-    creationDay DATE not null,
+    post_id VARCHAR(36) PRIMARY KEY,
+    title VARCHAR(64)  NOT NULL,
+    description VARCHAR (1024) NOT NULL,
+    creationDay DATE NOT NULL,
     likes INTEGER,
-    enable BIT not NULL,
-    son_type varchar (36),
-    starting_date date,
-    deadline date,
-    post_id_ref varchar (36),
-    foreign key (post_id_ref) references Posts(post_id)
+    enable BIT NOT NULL,
+    son_type VARCHAR (36),
+    starting_date DATE,
+    deadline DATE,
+    post_id_ref VARCHAR (36),
+    FOREIGN KEY (post_id_ref) REFERENCES Posts(post_id)
 );
 
-drop table if exists Exercises;
-create table Exercises(
-  exercise_id varchar (36)primary key,
-  description varchar (1024) not null,
-  enable integer not null,
-  difficulty integer not null,
-  experience_points integer,
-  son_type varchar (36),
-  post_id varchar (36),
-  foreign key (post_id) references Posts(post_ID)
+DROP TABLE IF EXISTS Exercises;
+CREATE TABLE Exercises(
+    exercise_id VARCHAR (36) PRIMARY KEY,
+    description VARCHAR (1024) NOT NULL,
+    enable BIT NOT NULL,
+    difficulty INTEGER NOT NULL,
+    experience_points INTEGER,
+    son_type VARCHAR (36),
+    post_id VARCHAR (36),
+    FOREIGN KEY (post_id) REFERENCES Posts(post_ID)
 );
-drop table IF EXISTS  Questions;
-CREATE table Questions (
-    question_id varchar (36) primary key,
-    texts varchar (1024) not null,
-    exercise_id varchar (36),
-  foreign key (exercise_id) references Exercises(exercise_id)
+DROP TABLE IF EXISTS  Questions;
+CREATE TABLE Questions (
+    question_id VARCHAR (36)  PRIMARY KEY,
+    texts VARCHAR (1024) NOT NULL,
+    enable BIT NOT NULL,
+    exercise_id VARCHAR (36),
+    FOREIGN KEY (exercise_id) REFERENCES Exercises(exercise_id)
 );
-drop table if EXISTS Solutions ;
-create table Solutions(
-    solution_id varchar (36) primary key,
-    position number,
-    texts varchar (1024) not null ,
+DROP TABLE IF EXISTS Solutions ;
+CREATE TABLE Solutions(
+    solution_id VARCHAR (36) PRIMARY KEY,
+    position INTEGER,
+    texts VARCHAR (1024) NOT NULL,
     correct BIT,
-    enable integer not null,
-    question_id varchar (36),
-  foreign key (question_id) references Questions(question_id)
+    enable BIT NOT NULL,
+    question_id VARCHAR (36),
+    FOREIGN KEY (question_id) REFERENCES Questions(question_id)
 );
-drop table if EXISTS Comments;
-create table Comments(
-    comment_id varchar (36) primary key,
-    comment varchar (2048) not null,
-    creation_day DATE not null,
-    likes integer,
+DROP TABLE IF EXISTS Comments;
+CREATE TABLE Comments(
+    comment_id VARCHAR (36) PRIMARY KEY,
+    comment VARCHAR (2048) NOT NULL,
+    creation_day DATE NOT NULL,
+    likes INTEGER,
     best BIT,
-    enable BIT  not NULL ,
-    post_id varchar (36),
-    foreign key (post_id) references Posts(post_id)
+    enable BIT  NOT NULL,
+    post_id VARCHAR (36),
+    FOREIGN KEY (post_id) REFERENCES Posts(post_id)
 );
 
-drop table if EXISTS Users;
-create TABLE Users (
-    username varchar (64) primary key,
-    password varchar (32) not null,
-    first_name varchar (128) not null,
-    last_name varchar (128) not null,
-    email varchar (256) not null,
+DROP TABLE IF EXISTS Users;
+CREATE TABLE Users (
+    username VARCHAR (64) PRIMARY KEY,
+    password VARCHAR (32) NOT NULL,
+    first_name VARCHAR (128) NOT NULL,
+    last_name VARCHAR (128) NOT NULL,
+    email VARCHAR (256) NOT NULL,
     birthday DATE,
-    experience_points integer,
-    level integer,
-    enable BIT not null
+    experience_points INTEGER,
+    level INTEGER,
+    enable BIT NOT NULL
 );
-drop table if EXISTS Roles;
-create table Roles(
-    role varchar (32) primary key ,
-    username varchar (64),
-    foreign key (username) references Users(username)
+DROP TABLE IF EXISTS Roles;
+CREATE TABLE Roles(
+    role VARCHAR (32) PRIMARY KEY,
+    username VARCHAR (64),
+    FOREIGN KEY (username) REFERENCES Users(username)
 );
-drop table if exists Category;
-create table Category(
-    category varchar (32) primary key,
+DROP TABLE IF EXISTS Category;
+CREATE TABLE Category(
+    category VARCHAR (32) PRIMARY KEY,
 );
-drop table if exists messages;
-create table messages(
-    message_id varchar (36)primary key,
-    content varchar (1024) not null,
-    user_sender varchar (64),
-    user_receiver varchar (64),
-  foreign key (user_sender) references Users(username),
-  foreign key (user_receiver) references Users(username)
+DROP TABLE IF EXISTS messages;
+CREATE TABLE messages(
+    message_id VARCHAR (36) PRIMARY KEY,
+    content VARCHAR (1024) NOT NULL,
+    user_sender VARCHAR (64),
+    user_receiver VARCHAR (64),
+    FOREIGN KEY (user_sender) REFERENCES Users(username),
+    FOREIGN KEY (user_receiver) REFERENCES Users(username)
 );
-drop table if exists Submissions;
-create table Submissions(
-    mark float not null,
-    username varchar (36),
-    exercise varchar (36),
-  foreign key (username) references Users(username),
-  foreign key (exercise) references Exercises(exercise_ID)
+DROP TABLE IF EXISTS Submissions;
+CREATE TABLE Submissions(
+    mark FLOAT NOT NULL,
+    username VARCHAR (36),
+    exercise VARCHAR (36),
+    FOREIGN KEY (username) REFERENCES Users(username),
+    FOREIGN KEY (exercise) REFERENCES Exercises(exercise_ID)
 );
