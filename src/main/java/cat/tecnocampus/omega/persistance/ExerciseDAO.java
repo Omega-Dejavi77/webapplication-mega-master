@@ -63,6 +63,9 @@ public class ExerciseDAO {
 
     public ExerciseDAO(JdbcTemplate jdbcTemplate) {
         this.jdbcTemplate = jdbcTemplate;
+//        ClassToText.addInsert("Exercise",INSERT_EXERCISE);
+//        ClassToText.addInsert("Question",INSERT_QUESTION);
+//        ClassToText.addInsert("Solution",INSERT_SOLUTION);
     }
 
     public int insertDAOExercise(String exercise_ID,String description,boolean enable,int difficulty,int experience_points, String id, String type) {

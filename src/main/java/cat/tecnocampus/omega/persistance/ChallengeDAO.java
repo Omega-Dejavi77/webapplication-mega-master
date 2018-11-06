@@ -2,7 +2,6 @@ package cat.tecnocampus.omega.persistance;
 
 import cat.tecnocampus.omega.domain.exercises.Exercise;
 import cat.tecnocampus.omega.domain.post.Challenge;
-import cat.tecnocampus.omega.domain.post.Tutorial;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
@@ -21,9 +20,9 @@ public class ChallengeDAO {
     private final String INSERT_CHALLENGE = "INSERT INTO posts (post_ID, title, description, creationDay, likes, enable, son_TYPE) VALUES(?, ?, ?, ?, ?,?,?)";
 
     public ChallengeDAO(JdbcTemplate jdbcTemplate, ExerciseDAO exerciseDAO) {
-
         this.jdbcTemplate = jdbcTemplate;
         this.exerciseDAO = exerciseDAO;
+        //ClassToText.addInsert("Challenge",INSERT_CHALLENGE);
     }
 
     private Challenge challengeMapper(ResultSet resultSet) throws SQLException {

@@ -35,6 +35,7 @@ public class UserDAO {
 
     public UserDAO(JdbcTemplate jdbcTemplate) {
         this.jdbcTemplate = jdbcTemplate;
+        //ClassToText.addInsert("User", INSERT_USER);
     }
 
     public int insertDAOUser(String username, String password, String firstName, String lastName, String email, Date birthday,int experience_points,int level,int enable ) {
