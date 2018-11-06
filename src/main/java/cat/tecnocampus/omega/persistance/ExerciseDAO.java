@@ -63,21 +63,18 @@ public class ExerciseDAO {
 
     public ExerciseDAO(JdbcTemplate jdbcTemplate) {
         this.jdbcTemplate = jdbcTemplate;
-//        ClassToText.addInsert("Exercise",INSERT_EXERCISE);
-//        ClassToText.addInsert("Question",INSERT_QUESTION);
-//        ClassToText.addInsert("Solution",INSERT_SOLUTION);
     }
 
-    public int insertDAOExercise(String exercise_ID,String description,boolean enable,int difficulty,int experience_points, String id, String type) {
-        return jdbcTemplate.update(INSERT_EXERCISE, exercise_ID, description, enable, difficulty, experience_points, type, id);
+    public int insertDAOExercise(Exercise exercise, String id, String type) {
+        return jdbcTemplate.update(INSERT_EXERCISE, exercise.getExercise_ID(), exercise.getDescription(), exercise.isEnable(), exercise.getDifficulty(), exercise.getExperience_points(), type, id);
     }
 
-    public int insertDAOQuestion(String question_ID,String text,boolean enable, String id) {
-        return jdbcTemplate.update(INSERT_QUESTION, question_ID, text, enable, id);
+    public int insertDAOQuestion(Question question, String id) {
+        return jdbcTemplate.update(INSERT_QUESTION, question.getQuestion_ID(), question.getText(), question.isEnable(), id);
     }
 
-    public int insertDAOSolution(String solution_ID,String text,boolean correct,boolean enable, String id) {
-        return jdbcTemplate.update(INSERT_SOLUTION, solution_ID, text, correct, enable, id);
+    public int insertDAOSolution(Solution solution, String id) {
+        return jdbcTemplate.update(INSERT_SOLUTION, solution.getSolution_ID(), solution.getText(), solution.getCorrect(), solution.isEnable(), id);
     }
 
     public List<Exercise> findExercisesByPost(String id) {

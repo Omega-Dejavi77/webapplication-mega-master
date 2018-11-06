@@ -36,7 +36,7 @@ public class UserController {
 
     @Transactional
     public int insert(User user) {
-        return userDAO.insertDAOUser(user.getUsername(), user.getPassword(), user.getFirstName(), user.getLastName(), user.getEmail(), user.getBirthday(), 0, 0, 1);
+        return userDAO.insertDAOUser(user);
     }
 
     public List<User> findAll() {

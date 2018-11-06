@@ -25,7 +25,7 @@ public class ChallengeController {
 
     @Transactional
     public int insert(Challenge challenge) {
-        return challengeDAO.insertDAOChallenge(challenge.getPostID(), challenge.getTitle(), challenge.getDescription(), challenge.getCreationDay(), challenge.getLikes(), challenge.isEnable(), "Challenge");
+        return challengeDAO.insertDAOChallenge(challenge);
     }
 
     public List<Challenge> findAll() {

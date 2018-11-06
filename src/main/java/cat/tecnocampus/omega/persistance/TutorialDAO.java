@@ -24,7 +24,6 @@ public class TutorialDAO {
     public TutorialDAO(JdbcTemplate jdbcTemplate, ExerciseDAO exerciseDAO) {
         this.jdbcTemplate = jdbcTemplate;
         this.exerciseDAO = exerciseDAO;
-        //ClassToText.addInsert("Tutorial", INSERT_TUTORIAL);
     }
 
     private Tutorial tutorialMapper(ResultSet resultSet) throws SQLException {
@@ -43,8 +42,8 @@ public class TutorialDAO {
         return jdbcTemplate.query(FIND_ALL, new Object[]{"Tutorial"}, mapperEager);
     }
 
-    public int insertDAOTutorial(String postID, String title, String description, Date creationDay, int likes, boolean enable, String type) {
-        return jdbcTemplate.update(INSERT_TUTORIAL, postID, title, description, creationDay, likes, enable, type);
+    public int insertDAOTutorial(Tutorial tutorial) {
+        return jdbcTemplate.update(INSERT_TUTORIAL, tutorial.getPostID(),tutorial.getTitle(),tutorial.getDescription(),tutorial.getCreationDay(), tutorial.getLikes(),tutorial.isEnable(),"Tutorial");
     }
 
 }

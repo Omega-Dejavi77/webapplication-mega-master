@@ -22,7 +22,6 @@ public class ChallengeDAO {
     public ChallengeDAO(JdbcTemplate jdbcTemplate, ExerciseDAO exerciseDAO) {
         this.jdbcTemplate = jdbcTemplate;
         this.exerciseDAO = exerciseDAO;
-        //ClassToText.addInsert("Challenge",INSERT_CHALLENGE);
     }
 
     private Challenge challengeMapper(ResultSet resultSet) throws SQLException {
@@ -41,8 +40,7 @@ public class ChallengeDAO {
         return jdbcTemplate.query(FIND_ALL, new Object[]{"Challenge"}, mapperEager);
     }
 
-    public int insertDAOChallenge(String postID, String title, String description, Date creationDay, int likes, boolean enable, String type) {
-        return jdbcTemplate.update(INSERT_CHALLENGE, postID, title, description, creationDay, likes, enable, type);
+    public int insertDAOChallenge(Challenge challenge) {
+        return jdbcTemplate.update(INSERT_CHALLENGE, challenge.getPostID(), challenge.getTitle(), challenge.getDescription(), challenge.getCreationDay(), challenge.getLikes(), challenge.isEnable(), "Challenge");
     }
-
 }
