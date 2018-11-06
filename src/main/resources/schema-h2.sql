@@ -1,3 +1,7 @@
+DROP TABLE IF EXISTS Category;
+CREATE TABLE Category(
+  category VARCHAR (32) PRIMARY KEY,
+);
 DROP TABLE IF EXISTS Posts;
 CREATE TABLE Posts (
     post_id VARCHAR(36) PRIMARY KEY,
@@ -10,6 +14,8 @@ CREATE TABLE Posts (
     starting_date DATE,
     deadline DATE,
     post_id_ref VARCHAR (36),
+    category VARCHAR(36),
+    FOREIGN KEY (category) REFERENCES Category(category),
     FOREIGN KEY (post_id_ref) REFERENCES Posts(post_id)
 );
 
@@ -70,9 +76,13 @@ DROP TABLE IF EXISTS Roles;
 CREATE TABLE Roles(
     role VARCHAR (32) PRIMARY KEY,
 );
-DROP TABLE IF EXISTS Category;
-CREATE TABLE Category(
-    category VARCHAR (32) PRIMARY KEY,
+DROP TABLE IF EXISTS UserCategory;
+CREATE TABLE UserCategory(
+  category VARCHAR (32),
+  user VARCHAR(32),
+  PRIMARY KEY (category,user),
+  FOREIGN KEY (category) REFERENCES Category(category),
+  FOREIGN KEY (user)REFERENCES Users(username)
 );
 DROP TABLE IF EXISTS messages;
 CREATE TABLE messages(
