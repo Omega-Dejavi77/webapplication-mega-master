@@ -19,17 +19,17 @@ public class ExercisesDAOController {
 
     @Transactional
     public int insertExercise(Exercise exercise, String id, String type) {
-        return exerciseDAO.insertDAOExercise(exercise, id, type);
+        return exerciseDAO.insertDAOExercise(exercise.getExercise_ID(), exercise.getDescription(), exercise.isEnable(), exercise.getDifficulty(), exercise.getExperience_points(), id, type);
     }
 
     @Transactional
     public int insertQuestion(Question question, String id) {
-        return exerciseDAO.insertDAOQuestion(question, id);
+        return exerciseDAO.insertDAOQuestion(question.getQuestion_ID(), question.getText(), question.isEnable(), id);
     }
 
     @Transactional
     public int insertSolution(Solution solution, String id) {
-        return exerciseDAO.insertDAOSolution(solution, id);
+        return exerciseDAO.insertDAOSolution(solution.getSolution_ID(), solution.getText(), solution.getCorrect(), solution.isEnable(), id);
     }
 
     public List<Exercise> getExercise(String id) {

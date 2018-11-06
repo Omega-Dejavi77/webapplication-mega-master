@@ -9,6 +9,7 @@ import org.springframework.stereotype.Repository;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.Date;
 import java.util.List;
 
 @Repository
@@ -16,14 +17,15 @@ public class ChallengeDAO {
 
     private JdbcTemplate jdbcTemplate;
     private ExerciseDAO exerciseDAO;
-    private final String FIND_ALL = "select * from Posts where son_type=?";;
-    private final String INSERT = "insert into posts (post_ID, title, description, creationDay, likes, enable, son_TYPE) values(?, ?, ?, ?, ?,?,?)";
+    private final String FIND_ALL = "select * from Posts where son_type=?";
+    private final String INSERT_CHALLENGE = "INSERT INTO posts (post_ID, title, description, creationDay, likes, enable, son_TYPE) VALUES(?, ?, ?, ?, ?,?,?)";
 
-    public ChallengeDAO(JdbcTemplate jdbcTemplate,ExerciseDAO exerciseDAO) {
+    public ChallengeDAO(JdbcTemplate jdbcTemplate, ExerciseDAO exerciseDAO) {
 
         this.jdbcTemplate = jdbcTemplate;
-        this.exerciseDAO=exerciseDAO;
+        this.exerciseDAO = exerciseDAO;
     }
+
     private Challenge challengeMapper(ResultSet resultSet) throws SQLException {
         Challenge challenge = new Challenge(resultSet.getString("post_id"), resultSet.getString("description"), resultSet.getString("title"));
         return challenge;
@@ -37,11 +39,11 @@ public class ChallengeDAO {
     };
 
     public List<Challenge> findAll() {
-        return jdbcTemplate.query(FIND_ALL,new Object[]{"Challenge"}, mapperEager);
+        return jdbcTemplate.query(FIND_ALL, new Object[]{"Challenge"}, mapperEager);
     }
 
-    public int insertDAOChallenge(Challenge challenge) {
-        return jdbcTemplate.update(INSERT,challenge.getPostID(),challenge.getTitle(),challenge.getDescription(),challenge.getCreationDay(), challenge.getLikes(),challenge.isEnable(),"Challenge");
+    public int insertDAOChallenge(String postID, String title, String description, Date creationDay, int likes, boolean enable, String type) {
+        return jdbcTemplate.update(INSERT_CHALLENGE, postID, title, description, creationDay, likes, enable, type);
     }
 
 }

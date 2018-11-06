@@ -65,8 +65,6 @@ CREATE TABLE Users (
     experience_points INTEGER,
     level INTEGER,
     enable BIT NOT NULL,
-    role VARCHAR (32),
-    FOREIGN KEY (role) REFERENCES Roles(role)
 );
 DROP TABLE IF EXISTS Roles;
 CREATE TABLE Roles(

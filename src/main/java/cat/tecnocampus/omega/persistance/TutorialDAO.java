@@ -8,6 +8,7 @@ import org.springframework.stereotype.Repository;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.Date;
 import java.util.List;
 
 @Repository
@@ -17,7 +18,7 @@ public class TutorialDAO {
     private ExerciseDAO exerciseDAO;
 
     private final String FIND_ALL = "select * from Posts where son_type=?";
-    private final String INSERT = "insert into Posts (post_id, title, description, creationDay, likes, enable, son_type) values(?, ?, ?, ?, ?,?,?)";
+    private final String INSERT_TUTORIAL = "INSERT INTO Posts (post_id, title, description, creationDay, likes, enable, son_type) VALUES (?, ?, ?, ?, ?,?,?)";
 
 
     public TutorialDAO(JdbcTemplate jdbcTemplate, ExerciseDAO exerciseDAO) {
@@ -39,8 +40,8 @@ public class TutorialDAO {
         return jdbcTemplate.query(FIND_ALL,new Object[]{"Tutorial"}, mapperEager);
     }
 
-    public int insertDAOTutorial(Tutorial tutorial) {
-        return jdbcTemplate.update(INSERT, tutorial.getPostID(), tutorial.getTitle(), tutorial.getDescription(), tutorial.getCreationDay(), tutorial.getLikes(), tutorial.isEnable(),"Tutorial");
+    public int insertDAOTutorial(String postID, String title, String description, Date creationDay, int likes, boolean enable,String type) {
+        return jdbcTemplate.update(INSERT_TUTORIAL,postID,title,description,creationDay, likes,enable,type);
     }
 
 }
