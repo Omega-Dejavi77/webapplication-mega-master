@@ -11,6 +11,10 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.validation.Valid;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 
 @Controller
@@ -80,5 +84,22 @@ public class ExerciseWebController {
             redirectAttributes.addAttribute("id",id);
             return "redirect:/createExercise/{id}";
         }
+    }
+
+    @GetMapping("doTest/{id}")
+    public String doTest(Model model,@PathVariable String id) {
+        model.addAttribute("solutions", new HashMap<String,String>());
+        model.addAttribute("exercise", exercisesDAO.getExercise(id));
+        return "exercise/doTestExercise";
+    }
+    @PostMapping("doTest/{id}")
+    public String doTest(Map<String,String> solutions,Exercise exercise, @PathVariable String id, RedirectAttributes redirectAttributes) {
+//        if (errors.hasErrors()) {
+//            redirectAttributes.addAttribute("id", id);
+//            return "exercise/newFillTheGapExercise";
+//        }
+        //exercisesDAO.insertExercise(fillTheGapExercise, id, "Fill");
+
+        return "redirect:/Test";
     }
 }

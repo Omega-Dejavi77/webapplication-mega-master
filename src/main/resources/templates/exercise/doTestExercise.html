@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Do Test Excercise</title>
+</head>
+<body>
+<div align="center">
+
+    <h1>Do Test Exercise</h1>
+
+    <form method="POST" th:object="${exercise}">
+
+        <tr th:each="question : ${exercise.getQuestions()}">
+            <td valign="top" th:text="${question.text}">Text</td>
+            <td>
+                <select name="a">
+                    <tr th:each="solution : ${question.getSolutions()}">
+                        <option th:text="${solution.text}">Heey</option>
+                    </tr>
+                </select>
+            </td>
+        </tr>
+        <input type="submit"value="Submit"/>
+    </form>
+</div>
+</body>
+</html>
