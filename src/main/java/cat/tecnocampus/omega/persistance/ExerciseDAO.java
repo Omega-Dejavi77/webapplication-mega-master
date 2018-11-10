@@ -16,7 +16,7 @@ public class ExerciseDAO {
     private final String INSERT_EXERCISE = "INSERT INTO Exercises VALUES (?, ?, ?, ?,?,?,?);";
     private final String INSERT_QUESTION = "INSERT INTO Questions VALUES (?, ?, ?, ?);";
     private final String INSERT_SOLUTION = "INSERT INTO Solutions (solution_id,texts, correct, enable, question_id) VALUES (?, ?, ?, ?,?);";
-    private final String INSERT_MARK
+    private final String INSERT_MARK = "INSERT INTO Submissions VALUES (?,?,?,?);";
 
     private final String DELETE_EXERCISE = "";
     private final String DELETE_QUESTION = "";
@@ -65,24 +65,28 @@ public class ExerciseDAO {
         this.jdbcTemplate = jdbcTemplate;
     }
 
-    public int insertDAOExercise(Exercise exercise, String id, String type) {
+    public int insertExercise(Exercise exercise, String id, String type) {
         return jdbcTemplate.update(INSERT_EXERCISE, exercise.getExercise_ID(), exercise.getDescription(), exercise.isEnable(), exercise.getDifficulty(), exercise.getExperience_points(), type, id);
     }
 
-    public int insertDAOQuestion(Question question, String id) {
+    public int insertQuestion(Question question, String id) {
         return jdbcTemplate.update(INSERT_QUESTION, question.getQuestion_ID(), question.getText(), question.isEnable(), id);
     }
 
-    public int insertDAOSolution(Solution solution, String id) {
+    public int insertSolution(Solution solution, String id) {
         return jdbcTemplate.update(INSERT_SOLUTION, solution.getSolution_ID(), solution.getText(), solution.getCorrect(), solution.isEnable(), id);
+    }
+
+    public int insertSubmission(Submission submission){
+        return jdbcTemplate.update(INSERT_SOLUTION, submission.getMark(),submission.getUser().getUsername(),submission.getExercise().getExercise_ID(),submission.getCreationDate());
     }
 
     public List<Exercise> findExercisesByPost(String id) {
         return jdbcTemplate.query(SELECT_EXERCISE_BY_POST, new Object[]{id}, mapperEager);
     }
 
-    public Exercise findExercisesByIDAndType(String id,String type) {
-        return jdbcTemplate.queryForObject(SELECT_EXERCISE_BY_ID_AND_TYPE, new Object[]{id,type}, mapperEager);
+    public Exercise findExercisesByIDAndType(String id, String type) {
+        return jdbcTemplate.queryForObject(SELECT_EXERCISE_BY_ID_AND_TYPE, new Object[]{id, type}, mapperEager);
     }
 
     public List<Question> findQuestionByExercise(String id) {

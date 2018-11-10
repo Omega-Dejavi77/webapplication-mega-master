@@ -20,7 +20,7 @@ public abstract class Exercise {
     protected int experience_points;
     protected String type;
 
-    protected Mark mark;
+    protected Submission submission;
     protected List<Question> questions;
     public Exercise(String exercise_ID, String description, int difficulty) {
         this.exercise_ID = exercise_ID;
@@ -86,11 +86,11 @@ public abstract class Exercise {
         return type;
     }
 
-    public Mark getMark() {
-        return mark;
+    public Submission getSubmission() {
+        return submission;
     }
 
-    public void setMark(Mark mark) {
-        this.mark = mark;
+    public void setSubmission(Submission submission) {
+        this.submission = submission;
     }
 }

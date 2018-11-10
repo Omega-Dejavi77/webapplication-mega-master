@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.validation.Valid;
+import java.security.Principal;
 
 
 @Controller
@@ -46,20 +47,21 @@ public class ExerciseWebController {
     }
 
     @PostMapping("createTestExercise/{id}")
-    public String createTestExercise(@Valid TestExercise testExercise, Errors errors, @PathVariable String id,String testText,String end, RedirectAttributes redirectAttributes) {
+    public String createTestExercise(@Valid TestExercise testExercise, Errors errors, @PathVariable String id, String testText, String end, RedirectAttributes redirectAttributes) {
         if (errors.hasErrors()) {
             redirectAttributes.addAttribute("id", id);
             return "exercise/newTestExercise";
         }
         exercisesDAO.insertExercise(testExercise, id, "Test");
-        QuestionsCreator.testCreator(testText,exercisesDAO,testExercise.getExercise_ID());
-        if(end.equals("Finish"))
-        return "redirect:/posts";
+        QuestionsCreator.testCreator(testText, exercisesDAO, testExercise.getExercise_ID());
+        if (end.equals("Finish"))
+            return "redirect:/posts";
         else {
-            redirectAttributes.addAttribute("id",id);
+            redirectAttributes.addAttribute("id", id);
             return "redirect:/createExercise/{id}";
         }
     }
+
     @GetMapping("createFillTheGapExercise/{id}")
     public String createFillTheGapExercise(Model model) {
         model.addAttribute("fillTheGapExercise", new FillTheGapExercise());
@@ -67,29 +69,30 @@ public class ExerciseWebController {
     }
 
     @PostMapping("createFillTheGapExercise/{id}")
-    public String createFillTheGapExercise(@Valid FillTheGapExercise fillTheGapExercise, Errors errors, @PathVariable String id,String fillText,String end, RedirectAttributes redirectAttributes) {
+    public String createFillTheGapExercise(@Valid FillTheGapExercise fillTheGapExercise, Errors errors, @PathVariable String id, String fillText, String end, RedirectAttributes redirectAttributes) {
         if (errors.hasErrors()) {
             redirectAttributes.addAttribute("id", id);
             return "exercise/newFillTheGapExercise";
         }
-        exercisesDAO.insertExercise(fillTheGapExercise,id,"Fill");
-        QuestionsCreator.fillTheGapCreator(fillText,exercisesDAO,fillTheGapExercise.getExercise_ID());
+        exercisesDAO.insertExercise(fillTheGapExercise, id, "Fill");
+        QuestionsCreator.fillTheGapCreator(fillText, exercisesDAO, fillTheGapExercise.getExercise_ID());
 
-        if(end.equals("Finish"))
+        if (end.equals("Finish"))
             return "redirect:/posts";
         else {
-            redirectAttributes.addAttribute("id",id);
+            redirectAttributes.addAttribute("id", id);
             return "redirect:/createExercise/{id}";
         }
     }
 
     @GetMapping("doTest/{id}")
-    public String doTest(Model model,@PathVariable String id) {
-        model.addAttribute("exercise", exercisesDAO.getExercise(id,"Test"));
+    public String doTest(Model model, @PathVariable String id) {
+        model.addAttribute("exercise", exercisesDAO.getExercise(id, "Test"));
         return "exercise/doTestExercise";
     }
+
     @PostMapping("doTest/{id}")
-    public String doTest(String ex1,Exercise exercise, @PathVariable String id, RedirectAttributes redirectAttributes) {
+    public String doTest(String ex1, Exercise exercise, @PathVariable String id, RedirectAttributes redirectAttributes) {
 //        if (errors.hasErrors()) {
 //            redirectAttributes.addAttribute("id", id);
 //            return "exercise/newFillTheGapExercise";
@@ -99,18 +102,20 @@ public class ExerciseWebController {
 
         return "redirect:/Test";
     }
+
     @GetMapping("doFill/{id}")
-    public String doFill(Model model,@PathVariable String id) {
-        model.addAttribute("exercise", exercisesDAO.getExercise(id,"Fill"));
+    public String doFill(Model model, @PathVariable String id) {
+        model.addAttribute("exercise", exercisesDAO.getExercise(id, "Fill"));
         return "exercise/doFillTheGapExercise";
     }
+
     @PostMapping("doFill/{id}")
-    public String doFill(@RequestParam(value = "solution") String[] solution,@PathVariable String id, RedirectAttributes redirectAttributes) {
+    public String doFill(@RequestParam(value = "solution") String[] solution, @PathVariable String id, RedirectAttributes redirectAttributes, Principal principal) {
 //        if (errors.hasErrors()) {
 //            redirectAttributes.addAttribute("id", id);
 //            return "exercise/newFillTheGapExercise";
 //        }
-        exercisesDAO.solve(id,solution);
+        exercisesDAO.solve(id, solution, principal.getName());
         return "redirect:/InitialPage";
     }
 }
