@@ -60,9 +60,8 @@ public class Question {
 
     public int solve(String srtSolution) {
         for (Solution solution : solutions) {
-            System.out.println(solution.getText()+"=="+srtSolution+"="+solution.getText().equals(srtSolution));
             if(solution.getCorrect())
-                return (solution.getText().equals("The boolean")) ? 1 : 0;
+                return (solution.getText().equals(srtSolution)) ? 1 : 0;
         }
         return 0;
     }

@@ -111,11 +111,14 @@ public class ExerciseWebController {
 
     @PostMapping("doFill/{id}")
     public String doFill(@RequestParam(value = "solution") String[] solution, @PathVariable String id, RedirectAttributes redirectAttributes, Principal principal) {
-//        if (errors.hasErrors()) {
-//            redirectAttributes.addAttribute("id", id);
-//            return "exercise/newFillTheGapExercise";
-//        }
-        exercisesDAO.solve(id, solution, principal.getName());
-        return "redirect:/InitialPage";
+        exercisesDAO.solve(id, solution, "admin");
+        redirectAttributes.addAttribute("id",id);
+        return "redirect:/showMark/{id}";
+    }
+
+    @GetMapping("showMark/{id}")
+    public String showMark(Model model,@PathVariable String id){
+        model.addAttribute("submission",exercisesDAO.getSubmission(id,"admin"));
+        return "exercise/showMark";
     }
 }

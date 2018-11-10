@@ -95,10 +95,11 @@ CREATE TABLE messages(
 );
 DROP TABLE IF EXISTS Submissions;
 CREATE TABLE Submissions(
-    submission FLOAT NOT NULL,
-    username VARCHAR (36),
+    mark FLOAT NOT NULL,
+    username VARCHAR (64),
     exercise VARCHAR (36),
-    creation_date DATE,
+    creation_date TIMESTAMP,
+    pass BIT,
     PRIMARY KEY (username,exercise,creation_date),
     FOREIGN KEY (username) REFERENCES Users(username),
     FOREIGN KEY (exercise) REFERENCES Exercises(exercise_ID)

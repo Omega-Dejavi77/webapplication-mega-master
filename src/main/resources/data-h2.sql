@@ -1,3 +1,5 @@
+INSERT INTO Users (username, password, first_name, last_name, email, birthday, experience_points, level, enable) VALUES('admin', 'admin', 'admin', 'admin', 'admin', current_timestamp, 0, 0, 1);
+
 INSERT INTO Posts  (post_id, title, description, creationDay, likes, enable, son_type) VALUES('01293c0f-bf77-42d7-9fa3-8b101f33ee5b','Tutorial','Tutorial Description',current_timestamp,0,1,'Tutorial');
 INSERT INTO Posts  (post_id, title, description, creationDay, likes, enable, son_type) VALUES ('01293c0f-bf77-42d7-9fa3-8b101f33ee6b','Challenge','Challenge Description',current_timestamp,0,1,'Challenge');
 

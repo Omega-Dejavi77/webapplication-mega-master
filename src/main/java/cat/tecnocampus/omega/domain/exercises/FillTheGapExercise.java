@@ -12,8 +12,8 @@ public class FillTheGapExercise extends Exercise {
     }
 
     public float solve(String[] solutions) {
-        int numSol = 0;
-        int numCorr = 0;
+        float numSol = 0;
+        float numCorr = 0;
         for (int counter = 0; counter < solutions.length; counter++) {
             numCorr += super.questions.get(counter).solve(solutions[counter]);
             numSol++;

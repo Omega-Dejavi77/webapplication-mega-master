@@ -1,5 +1,6 @@
 package cat.tecnocampus.omega.persistance;
 
+import cat.tecnocampus.omega.domain.User;
 import cat.tecnocampus.omega.domain.exercises.*;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
@@ -12,11 +13,12 @@ import java.util.List;
 @Repository
 public class ExerciseDAO {
     private JdbcTemplate jdbcTemplate;
+    private UserDAO userDAO;
 
     private final String INSERT_EXERCISE = "INSERT INTO Exercises VALUES (?, ?, ?, ?,?,?,?);";
     private final String INSERT_QUESTION = "INSERT INTO Questions VALUES (?, ?, ?, ?);";
     private final String INSERT_SOLUTION = "INSERT INTO Solutions (solution_id,texts, correct, enable, question_id) VALUES (?, ?, ?, ?,?);";
-    private final String INSERT_MARK = "INSERT INTO Submissions VALUES (?,?,?,?);";
+    private final String INSERT_SUBMISSION = "INSERT INTO Submissions VALUES (?,?,?,?,?);";
 
     private final String DELETE_EXERCISE = "";
     private final String DELETE_QUESTION = "";
@@ -24,8 +26,15 @@ public class ExerciseDAO {
 
     private final String SELECT_EXERCISE_BY_POST = "SELECT * FROM Exercises WHERE post_id = ?";
     private final String SELECT_EXERCISE_BY_ID_AND_TYPE = "SELECT * FROM Exercises WHERE exercise_id = ? AND son_type = ?";
+    private final String SELECT_EXERCISE_BY_ID = "SELECT * FROM Exercises WHERE exercise_id = ?";
     private final String SELECT_QUESTION_BY_EXERCISE = "SELECT * FROM Questions WHERE exercise_id = ?";
     private final String SELECT_SOLUTION_BY_QUESTION = "SELECT * FROM Solutions WHERE question_id = ?";
+    private final String SELECT_SUBMISSION_BY_EXERCISE_AND_USERNAME = "SELECT * FROM Submissions WHERE exercise = ? AND username = ?";
+
+    public ExerciseDAO(JdbcTemplate jdbcTemplate, UserDAO userDAO) {
+        this.jdbcTemplate = jdbcTemplate;
+        this.userDAO = userDAO;
+    }
 
     private Exercise exerciseMapper(ResultSet resultSet) throws SQLException {
         if (resultSet.getString("son_type").equals("Test")) {
@@ -61,9 +70,10 @@ public class ExerciseDAO {
         return exercise;
     };
 
-    public ExerciseDAO(JdbcTemplate jdbcTemplate) {
-        this.jdbcTemplate = jdbcTemplate;
-    }
+    private RowMapper<Submission> submissionMapper = (resultSet, i) -> {
+        Submission submission = new Submission(resultSet.getFloat("mark"), userDAO.findByUsername(resultSet.getString("username")), jdbcTemplate.queryForObject(SELECT_EXERCISE_BY_ID, new Object[]{resultSet.getString("exercise")}, mapperEager), resultSet.getDate("creation_date"));
+        return submission;
+    };
 
     public int insertExercise(Exercise exercise, String id, String type) {
         return jdbcTemplate.update(INSERT_EXERCISE, exercise.getExercise_ID(), exercise.getDescription(), exercise.isEnable(), exercise.getDifficulty(), exercise.getExperience_points(), type, id);
@@ -77,8 +87,8 @@ public class ExerciseDAO {
         return jdbcTemplate.update(INSERT_SOLUTION, solution.getSolution_ID(), solution.getText(), solution.getCorrect(), solution.isEnable(), id);
     }
 
-    public int insertSubmission(Submission submission){
-        return jdbcTemplate.update(INSERT_SOLUTION, submission.getMark(),submission.getUser().getUsername(),submission.getExercise().getExercise_ID(),submission.getCreationDate());
+    public int insertSubmission(Submission submission) {
+        return jdbcTemplate.update(INSERT_SUBMISSION, submission.getMark(), submission.getUser().getUsername(), submission.getExercise().getExercise_ID(), submission.getCreationDate(), submission.isPass());
     }
 
     public List<Exercise> findExercisesByPost(String id) {
@@ -97,4 +107,7 @@ public class ExerciseDAO {
         return jdbcTemplate.query(SELECT_SOLUTION_BY_QUESTION, new Object[]{id}, solutionMapper);
     }
 
+    public List<Submission> findAllSubmissions(String id, String username) {
+        return jdbcTemplate.query(SELECT_SUBMISSION_BY_EXERCISE_AND_USERNAME, new Object[]{id, username}, submissionMapper);
+    }
 }

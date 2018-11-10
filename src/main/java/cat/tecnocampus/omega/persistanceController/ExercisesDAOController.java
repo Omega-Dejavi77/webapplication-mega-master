@@ -33,18 +33,19 @@ public class ExercisesDAOController {
         return exerciseDAO.insertSolution(solution, id);
     }
 
-    public List<Exercise> getExercises(String id) {
-        return exerciseDAO.findExercisesByPost(id);
-    }
-
     public Exercise getExercise(String id, String type) {
         return exerciseDAO.findExercisesByIDAndType(id, type);
+    }
+
+    public Submission getSubmission(String id,String username){
+        List<Submission> list=exerciseDAO.findAllSubmissions(id,username);
+        return list.get(list.size()-1);
     }
 
     public void solve(String id, String[] solutions, String username) {
         FillTheGapExercise fillTheGapExercise = (FillTheGapExercise) exerciseDAO.findExercisesByIDAndType(id, "Fill");
         float mark = fillTheGapExercise.solve(solutions);
         Submission submission=new Submission(mark, userController.getUser(username), fillTheGapExercise);
-        //exerciseDAO.insertSubmission(submission);
+        exerciseDAO.insertSubmission(submission);
     }
 }
