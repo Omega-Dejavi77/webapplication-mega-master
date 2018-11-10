@@ -1,6 +1,7 @@
 package cat.tecnocampus.omega.persistanceController;
 
 import cat.tecnocampus.omega.domain.exercises.Exercise;
+import cat.tecnocampus.omega.domain.exercises.FillTheGapExercise;
 import cat.tecnocampus.omega.domain.exercises.Question;
 import cat.tecnocampus.omega.domain.exercises.Solution;
 import cat.tecnocampus.omega.persistance.ExerciseDAO;
@@ -32,8 +33,18 @@ public class ExercisesDAOController {
         return exerciseDAO.insertDAOSolution(solution, id);
     }
 
-    public List<Exercise> getExercise(String id) {
+    public List<Exercise> getExercises(String id) {
         return exerciseDAO.findExercisesByPost(id);
+    }
+
+    public Exercise getExercise(String id,String type) {
+        return exerciseDAO.findExercisesByIDAndType(id,type);
+    }
+
+    public void solve(String id,String[]solutions){
+        FillTheGapExercise fillTheGapExercise=(FillTheGapExercise)exerciseDAO.findExercisesByIDAndType(id,"Fill");
+        float mark = fillTheGapExercise.solve(solutions);
+        System.out.println(mark);
     }
 
 }

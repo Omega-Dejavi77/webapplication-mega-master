@@ -7,8 +7,10 @@ INSERT INTO Exercises VALUES ('2', 'Fill the gap excercise for Tutorial', 1, 1,0
 INSERT INTO Exercises VALUES ('3', 'Test excercise for Challenge', 1, 1,0,'Test','01293c0f-bf77-42d7-9fa3-8b101f33ee6b');
 INSERT INTO Exercises VALUES ('4', 'Fill the gap excercise for Challenge', 1, 1,0,'Fill','01293c0f-bf77-42d7-9fa3-8b101f33ee6b');
 
-INSERT INTO Questions VALUES ('1', 'In Java, the variable type that only has two possible values is:',1, '1');
+INSERT INTO Questions VALUES ('1', '1 - In Java, the variable type that only has two possible values is:',1, '1');
+INSERT INTO Questions VALUES ('5', '2 - In Java, the variable type that only has two possible values is:',1, '1');
 INSERT INTO Questions VALUES ('2', 'In Java, the variable type that only has two possible values is:',1, '2');
+INSERT INTO Questions VALUES ('6', 'In Java, the variable type that only has two possible values is:',1, '2');
 INSERT INTO Questions VALUES ('3', 'In Java, the variable type that only has two possible values is:',1, '3');
 INSERT INTO Questions VALUES ('4', 'In Java, the variable type that only has two possible values is:',1, '4');
 
@@ -22,3 +24,8 @@ INSERT INTO Solutions (solution_id,texts, correct, enable, question_id) VALUES (
 INSERT INTO Solutions (solution_id,texts, correct, enable, question_id) VALUES ('8', 'The String', 0, 1,'3');
 INSERT INTO Solutions (solution_id,texts, correct, enable, question_id) VALUES ('9', 'The double', 0, 1,'3');
 INSERT INTO Solutions (solution_id,texts, correct, enable, question_id) VALUES ('10', 'The boolean', 1, 1,'4');
+INSERT INTO Solutions (solution_id,texts, correct, enable, question_id) VALUES ('11', 'The boolean', 1, 1,'5');
+INSERT INTO Solutions (solution_id,texts, correct, enable, question_id) VALUES ('12', 'The int', 0, 1,'5');
+INSERT INTO Solutions (solution_id,texts, correct, enable, question_id) VALUES ('13', 'The String', 0, 1,'5');
+INSERT INTO Solutions (solution_id,texts, correct, enable, question_id) VALUES ('14', 'The double', 0, 1,'5');
+INSERT INTO Solutions (solution_id,texts, correct, enable, question_id) VALUES ('15', 'The boolean', 1, 1,'6');

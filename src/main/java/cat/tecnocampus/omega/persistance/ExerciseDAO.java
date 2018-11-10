@@ -16,27 +16,27 @@ public class ExerciseDAO {
     private final String INSERT_EXERCISE = "INSERT INTO Exercises VALUES (?, ?, ?, ?,?,?,?);";
     private final String INSERT_QUESTION = "INSERT INTO Questions VALUES (?, ?, ?, ?);";
     private final String INSERT_SOLUTION = "INSERT INTO Solutions (solution_id,texts, correct, enable, question_id) VALUES (?, ?, ?, ?,?);";
+    private final String INSERT_MARK
 
     private final String DELETE_EXERCISE = "";
     private final String DELETE_QUESTION = "";
     private final String DELETE_SOLUTION = "";
 
     private final String SELECT_EXERCISE_BY_POST = "SELECT * FROM Exercises WHERE post_id = ?";
+    private final String SELECT_EXERCISE_BY_ID_AND_TYPE = "SELECT * FROM Exercises WHERE exercise_id = ? AND son_type = ?";
     private final String SELECT_QUESTION_BY_EXERCISE = "SELECT * FROM Questions WHERE exercise_id = ?";
     private final String SELECT_SOLUTION_BY_QUESTION = "SELECT * FROM Solutions WHERE question_id = ?";
 
     private Exercise exerciseMapper(ResultSet resultSet) throws SQLException {
-        Exercise exercise;
         if (resultSet.getString("son_type").equals("Test")) {
-            exercise = new TestExercise(resultSet.getString("exercise_id"), resultSet.getString("description"), resultSet.getInt("difficulty"));
+            TestExercise exercise = new TestExercise(resultSet.getString("exercise_id"), resultSet.getString("description"), resultSet.getInt("difficulty"));
             exercise.setExperience_points(resultSet.getInt("experience_points"));
-            exercise.setType(resultSet.getString("son_type"));
+            return exercise;
         } else {
-            exercise = new FillTheGapExercise(resultSet.getString("exercise_id"), resultSet.getString("description"), resultSet.getInt("difficulty"));
+            FillTheGapExercise exercise = new FillTheGapExercise(resultSet.getString("exercise_id"), resultSet.getString("description"), resultSet.getInt("difficulty"));
             exercise.setExperience_points(resultSet.getInt("experience_points"));
-            exercise.setType(resultSet.getString("son_type"));
+            return exercise;
         }
-        return exercise;
     }
 
     private RowMapper<Question> questionMapper = (resultSet, i) -> {
@@ -79,6 +79,10 @@ public class ExerciseDAO {
 
     public List<Exercise> findExercisesByPost(String id) {
         return jdbcTemplate.query(SELECT_EXERCISE_BY_POST, new Object[]{id}, mapperEager);
+    }
+
+    public Exercise findExercisesByIDAndType(String id,String type) {
+        return jdbcTemplate.queryForObject(SELECT_EXERCISE_BY_ID_AND_TYPE, new Object[]{id,type}, mapperEager);
     }
 
     public List<Question> findQuestionByExercise(String id) {

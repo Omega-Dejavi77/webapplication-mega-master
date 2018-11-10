@@ -8,13 +8,10 @@ import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.validation.Valid;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
 
 
 @Controller
@@ -88,18 +85,32 @@ public class ExerciseWebController {
 
     @GetMapping("doTest/{id}")
     public String doTest(Model model,@PathVariable String id) {
-        model.addAttribute("solutions", new HashMap<String,String>());
-        model.addAttribute("exercise", exercisesDAO.getExercise(id));
+        model.addAttribute("exercise", exercisesDAO.getExercise(id,"Test"));
         return "exercise/doTestExercise";
     }
     @PostMapping("doTest/{id}")
-    public String doTest(Map<String,String> solutions,Exercise exercise, @PathVariable String id, RedirectAttributes redirectAttributes) {
+    public String doTest(String ex1,Exercise exercise, @PathVariable String id, RedirectAttributes redirectAttributes) {
 //        if (errors.hasErrors()) {
 //            redirectAttributes.addAttribute("id", id);
 //            return "exercise/newFillTheGapExercise";
 //        }
+        System.out.println(exercise.getDescription());
         //exercisesDAO.insertExercise(fillTheGapExercise, id, "Fill");
 
         return "redirect:/Test";
+    }
+    @GetMapping("doFill/{id}")
+    public String doFill(Model model,@PathVariable String id) {
+        model.addAttribute("exercise", exercisesDAO.getExercise(id,"Fill"));
+        return "exercise/doFillTheGapExercise";
+    }
+    @PostMapping("doFill/{id}")
+    public String doFill(@RequestParam(value = "solution") String[] solution,@PathVariable String id, RedirectAttributes redirectAttributes) {
+//        if (errors.hasErrors()) {
+//            redirectAttributes.addAttribute("id", id);
+//            return "exercise/newFillTheGapExercise";
+//        }
+        exercisesDAO.solve(id,solution);
+        return "redirect:/InitialPage";
     }
 }

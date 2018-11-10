@@ -20,7 +20,8 @@ public abstract class Exercise {
     protected int experience_points;
     protected String type;
 
-    private List<Question> questions;
+    protected Mark mark;
+    protected List<Question> questions;
     public Exercise(String exercise_ID, String description, int difficulty) {
         this.exercise_ID = exercise_ID;
         setUp(description,difficulty);
@@ -80,22 +81,16 @@ public abstract class Exercise {
     public void addQuestion(List<Question> question){
         questions.addAll(question);
     }
-    public boolean solve() {
-        List<Question> wrong=new ArrayList<Question>();
-        for (Question question:questions) {
-            if(!question.solve())
-                wrong.add(question);
-        }
-        if(wrong.isEmpty())
-            return true;
-        return false;
-    }
 
     public String getType() {
         return type;
     }
 
-    public void setType(String type) {
-        this.type = type;
+    public Mark getMark() {
+        return mark;
+    }
+
+    public void setMark(Mark mark) {
+        this.mark = mark;
     }
 }
