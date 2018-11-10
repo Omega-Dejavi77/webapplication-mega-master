@@ -30,5 +30,8 @@ public class TutorialController {
     public List<Tutorial> findAll(){
         return tutorialDAO.findAll();
     }
+    public Tutorial findById(String id){
+        return tutorialDAO.findById(id);
+    }
 
 }

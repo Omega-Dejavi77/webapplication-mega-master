@@ -1,6 +1,5 @@
 package cat.tecnocampus.omega.persistance;
 
-import cat.tecnocampus.omega.domain.User;
 import cat.tecnocampus.omega.domain.exercises.*;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
@@ -97,6 +96,9 @@ public class ExerciseDAO {
 
     public Exercise findExercisesByIDAndType(String id, String type) {
         return jdbcTemplate.queryForObject(SELECT_EXERCISE_BY_ID_AND_TYPE, new Object[]{id, type}, mapperEager);
+    }
+    public Exercise findExercisesByID(String id) {
+        return jdbcTemplate.queryForObject(SELECT_EXERCISE_BY_ID, new Object[]{id}, mapperEager);
     }
 
     public List<Question> findQuestionByExercise(String id) {

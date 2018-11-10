@@ -22,6 +22,7 @@ public abstract class Exercise {
 
     protected Submission submission;
     protected List<Question> questions;
+
     public Exercise(String exercise_ID, String description, int difficulty) {
         this.exercise_ID = exercise_ID;
         setUp(description,difficulty);

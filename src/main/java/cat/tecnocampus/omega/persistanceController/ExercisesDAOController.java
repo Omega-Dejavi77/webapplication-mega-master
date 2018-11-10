@@ -33,7 +33,10 @@ public class ExercisesDAOController {
         return exerciseDAO.insertSolution(solution, id);
     }
 
-    public Exercise getExercise(String id, String type) {
+    public Exercise getExercise(String id) {
+        return exerciseDAO.findExercisesByID(id);
+    }
+    public Exercise getExerciseByType(String id, String type) {
         return exerciseDAO.findExercisesByIDAndType(id, type);
     }
 
