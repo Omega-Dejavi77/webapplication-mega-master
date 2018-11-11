@@ -8,19 +8,16 @@
     </script>
 </head>
 <body>
-<div align="center">
-
-    <h1>Do Test Exercise</h1>
-    <form method="POST">
-        <div align="left" th:each="question : ${exercise.getQuestions()}">
+<h1>Do Test Exercise</h1>
+<form method="POST">
+        <span align="left" th:each="question : ${exercise.getQuestions()}">
             <p valign="top" th:text="${question.text}">Text</p>
             <tr align="left" th:each="solution : ${question.getSolutions()}">
-                <input width="5%" type="radio" th:name="${question.text}" th:text="${solution.text}"
-                       th:value="${solution.text}"></input><BR>
+                <input width="5%" type="radio" th:name="${question.question_ID}" th:text="${solution.text}"
+                       th:value="${solution.text}"/><BR>
             </tr>
-        </div>
-        <input type="submit" value="Submit">
-    </form>
-</div>
+        </span>
+    <input type="submit" value="Submit">
+</form>
 </body>
 </html>

@@ -10,14 +10,4 @@ public class FillTheGapExercise extends Exercise {
         super();
         this.type = "Fill";
     }
-
-    public float solve(String[] solutions) {
-        float numSol = 0;
-        float numCorr = 0;
-        for (int counter = 0; counter < solutions.length; counter++) {
-            numCorr += super.questions.get(counter).solve(solutions[counter]);
-            numSol++;
-        }
-        return (numCorr / numSol) * 10;
-    }
 }

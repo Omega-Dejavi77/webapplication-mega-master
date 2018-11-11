@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 import java.security.Principal;
 
@@ -91,18 +92,18 @@ public class ExerciseWebController {
     }
 
     @PostMapping("doTest/{post}/{exercise}")
-    public String doTest(@RequestParam() String[] solution,@PathVariable String exercise, RedirectAttributes redirectAttributes) {
-//        if (errors.hasErrors()) {
-//            redirectAttributes.addAttribute("id", id);
-//            return "exercise/newFillTheGapExercise";
-//        }
-        for (String s:solution
-             ) {
-            System.out.println(s);
+    public String doTest(HttpServletRequest request, @PathVariable String post, @PathVariable String exercise, RedirectAttributes redirectAttributes) {
+        Exercise ex=exercisesDAO.getExercise(exercise);
+        String[] solution=new String[ex.getQuestions().size()];
+        int i=0;
+        for (Question question:ex.getQuestions()) {
+            solution[i]=request.getParameter(question.getQuestion_ID());
+            i++;
         }
-        //exercisesDAO.insertExercise(fillTheGapExercise, id, "Fill");
-
-        return "redirect:/Test";
+        exercisesDAO.solve(exercise, solution, "admin", "Test");
+        redirectAttributes.addAttribute("post", post);
+        redirectAttributes.addAttribute("exercise", exercise);
+        return "redirect:/showMark/{post}/{exercise}";
     }
 
     @GetMapping("doFill/{post}/{exercise}")
@@ -112,22 +113,22 @@ public class ExerciseWebController {
     }
 
     @PostMapping("doFill/{post}/{exercise}")
-    public String doFill(@RequestParam(value = "solution") String[] solution, @PathVariable String post,@PathVariable String exercise, RedirectAttributes redirectAttributes, Principal principal) {
-        exercisesDAO.solve(exercise, solution, "admin");
-        redirectAttributes.addAttribute("post",post);
-        redirectAttributes.addAttribute("exercise",exercise);
+    public String doFill(@RequestParam(value = "solution") String[] solution, @PathVariable String post, @PathVariable String exercise, RedirectAttributes redirectAttributes, Principal principal) {
+        exercisesDAO.solve(exercise, solution, "admin", "Fill");
+        redirectAttributes.addAttribute("post", post);
+        redirectAttributes.addAttribute("exercise", exercise);
         return "redirect:/showMark/{post}/{exercise}";
     }
 
     @GetMapping("showMark/{post}/{exercise}")
-    public String showMark(Model model,@PathVariable String exercise){
-        model.addAttribute("submission",exercisesDAO.getSubmission(exercise,"admin"));
+    public String showMark(Model model, @PathVariable String exercise) {
+        model.addAttribute("submission", exercisesDAO.getSubmission(exercise, "admin"));
         return "exercise/showMark";
     }
 
     @PostMapping("showMark/{post}/{exercise}")
-    public String showMark(@PathVariable String post, RedirectAttributes redirectAttributes){
-        redirectAttributes.addAttribute("id",post);
+    public String showMark(@PathVariable String post, RedirectAttributes redirectAttributes) {
+        redirectAttributes.addAttribute("id", post);
         return "redirect:/tutorial/{id}";
     }
 }

@@ -36,19 +36,20 @@ public class ExercisesDAOController {
     public Exercise getExercise(String id) {
         return exerciseDAO.findExercisesByID(id);
     }
+
     public Exercise getExerciseByType(String id, String type) {
         return exerciseDAO.findExercisesByIDAndType(id, type);
     }
 
-    public Submission getSubmission(String id,String username){
-        List<Submission> list=exerciseDAO.findAllSubmissions(id,username);
-        return list.get(list.size()-1);
+    public Submission getSubmission(String id, String username) {
+        List<Submission> list = exerciseDAO.findAllSubmissions(id, username);
+        return list.get(list.size() - 1);
     }
 
-    public void solve(String id, String[] solutions, String username) {
-        FillTheGapExercise fillTheGapExercise = (FillTheGapExercise) exerciseDAO.findExercisesByIDAndType(id, "Fill");
-        float mark = fillTheGapExercise.solve(solutions);
-        Submission submission=new Submission(mark, userController.getUser(username), fillTheGapExercise);
+    public void solve(String id, String[] solutions, String username, String type) {
+        Exercise exercise = exerciseDAO.findExercisesByIDAndType(id, type);
+        float mark = exercise.solve(solutions);
+        Submission submission = new Submission(mark, userController.getUser(username), exercise);
         exerciseDAO.insertSubmission(submission);
     }
 }
