@@ -5,10 +5,7 @@ import cat.tecnocampus.omega.persistanceController.ExercisesDAOController;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.Errors;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.servlet.http.HttpServletRequest;
@@ -106,14 +103,28 @@ public class ExerciseWebController {
         return "redirect:/showMark/{post}/{exercise}";
     }
 
-    @GetMapping("doFill/{post}/{exercise}")
-    public String doFill(Model model, @PathVariable String exercise) {
+    @GetMapping("doFill1/{post}/{exercise}")
+    public String doFill1(Model model, @PathVariable String exercise) {
         model.addAttribute("exercise", exercisesDAO.getExerciseByType(exercise, "Fill"));
-        return "exercise/doFillTheGapExercise";
+        return "doFillTheGapExercise1";
     }
 
-    @PostMapping("doFill/{post}/{exercise}")
-    public String doFill(@RequestParam(value = "solution") String[] solution, @PathVariable String post, @PathVariable String exercise, RedirectAttributes redirectAttributes, Principal principal) {
+    @PostMapping("doFill1/{post}/{exercise}")
+    public String doFill1(@RequestParam(value = "solution") String[] solution, @PathVariable String post, @PathVariable String exercise, RedirectAttributes redirectAttributes, Principal principal) {
+        exercisesDAO.solve(exercise, solution, "admin", "Fill");
+        redirectAttributes.addAttribute("post", post);
+        redirectAttributes.addAttribute("exercise", exercise);
+        return "redirect:/showMark/{post}/{exercise}";
+    }
+
+    @GetMapping("doFill2/{post}/{exercise}")
+    public String doFill2(Model model, @PathVariable String exercise) {
+        model.addAttribute("exercise", exercisesDAO.getExerciseByType(exercise, "Fill"));
+        return "exercise/doFillTheGapExercise2";
+    }
+
+    @PostMapping("doFill2/{post}/{exercise}")
+    public String doFill2(@RequestParam(value = "solution") String[] solution, @PathVariable String post, @PathVariable String exercise, RedirectAttributes redirectAttributes, Principal principal) {
         exercisesDAO.solve(exercise, solution, "admin", "Fill");
         redirectAttributes.addAttribute("post", post);
         redirectAttributes.addAttribute("exercise", exercise);

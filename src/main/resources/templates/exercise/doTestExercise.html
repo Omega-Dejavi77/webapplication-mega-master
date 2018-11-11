@@ -13,7 +13,7 @@
         <span align="left" th:each="question : ${exercise.getQuestions()}">
             <p valign="top" th:text="${question.text}">Text</p>
             <tr align="left" th:each="solution : ${question.getSolutions()}">
-                <input width="5%" type="radio" th:name="${question.question_ID}" th:text="${solution.text}"
+                <input type="radio" th:name="${question.question_ID}" th:text="${solution.text}"
                        th:value="${solution.text}"/><BR>
             </tr>
         </span>

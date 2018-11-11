@@ -26,6 +26,11 @@ public class TutorialWebController {
         model.addAttribute("tutorialList", tutorialController.findAll());
         return "post/showTutorials";
     }
+    @PostMapping("tutorials")
+    public String listTutorials(String chosen,RedirectAttributes redirectAttributes) {
+        redirectAttributes.addAttribute("id",chosen);
+        return "redirect:/tutorial/{id}";
+    }
 
     @GetMapping("tutorial/{id}")
     public String showTutorial(Model model, @PathVariable String id) {

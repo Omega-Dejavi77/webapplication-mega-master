@@ -26,6 +26,7 @@ CREATE TABLE Exercises(
     enable BIT NOT NULL,
     difficulty INTEGER NOT NULL,
     experience_points INTEGER,
+    drag BIT,
     son_type VARCHAR (36),
     post_id VARCHAR (36),
     FOREIGN KEY (post_id) REFERENCES Posts(post_ID)
