@@ -26,6 +26,7 @@ CREATE TABLE Exercises(
     enable BIT NOT NULL,
     difficulty INTEGER NOT NULL,
     experience_points INTEGER,
+    drag BIT,
     son_type VARCHAR (36),
     post_id VARCHAR (36),
     FOREIGN KEY (post_id) REFERENCES Posts(post_ID)
@@ -96,8 +97,11 @@ CREATE TABLE messages(
 DROP TABLE IF EXISTS Submissions;
 CREATE TABLE Submissions(
     mark FLOAT NOT NULL,
-    username VARCHAR (36),
+    username VARCHAR (64),
     exercise VARCHAR (36),
+    creation_date TIMESTAMP,
+    pass BIT,
+    PRIMARY KEY (username,exercise,creation_date),
     FOREIGN KEY (username) REFERENCES Users(username),
     FOREIGN KEY (exercise) REFERENCES Exercises(exercise_ID)
 );

@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Mark</title>
+</head>
+<body>
+<div align="center">
+    <h4>Your mark is:</h4><br>
+    <h1 valign="top" th:text="${mark}">A+</h1>
+    <h2 valign="top" th:text="${submission.mark}">Mark</h2>
+    <form method="POST">
+        <input type="submit">
+    </form>
+</div>
+</body>
+</html>

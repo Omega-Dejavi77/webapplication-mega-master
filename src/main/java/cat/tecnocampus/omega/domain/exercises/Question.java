@@ -9,7 +9,7 @@ import java.util.UUID;
 public class Question {
     private String question_ID;
     @NotNull
-    @Size(max = 1024,message = "The text is too long")
+    @Size(max = 1024, message = "The text is too long")
     private String text;
 
     public Question() {
@@ -21,12 +21,13 @@ public class Question {
     public Question(String question_ID, String text) {
         this.question_ID = question_ID;
         this.text = text;
-        solutions=new ArrayList<Solution>();
+        solutions = new ArrayList<Solution>();
     }
+
     public Question(String text) {
         this.question_ID = UUID.randomUUID().toString();
         this.text = text;
-        solutions=new ArrayList<Solution>();
+        solutions = new ArrayList<Solution>();
     }
 
     public String getQuestion_ID() {
@@ -52,23 +53,22 @@ public class Question {
     public List<Solution> getSolutions() {
         return solutions;
     }
-    public void addSolution(List<Solution> solution){
+
+    public void addSolution(List<Solution> solution) {
         solutions.addAll(solution);
     }
 
-    public boolean solve(){
-        List<Solution> wrong=new ArrayList<Solution>();
-        for (Solution solution:solutions) {
-            if(!solution.getCorrect())
-                wrong.add(solution);
+    public int solve(String srtSolution) {
+        for (Solution solution : solutions) {
+            if(solution.getCorrect())
+                return (solution.getText().equals(srtSolution)) ? 1 : 0;
         }
-        if(wrong.isEmpty())
-            return true;
-        return false;
+        return 0;
     }
-    public void validation(){
-        if(this.text.length()>1024)
-            throw new IllegalArgumentException("SOMETHING WENT WRONG WHEN CREATING A QUESTION:\n\t\tThe text is too long, should be less than 1024 characters \n Text:"+this.text);
+
+    public void validation() {
+        if (this.text.length() > 1024)
+            throw new IllegalArgumentException("SOMETHING WENT WRONG WHEN CREATING A QUESTION:\n\t\tThe text is too long, should be less than 1024 characters \n Text:" + this.text);
 
     }
 }

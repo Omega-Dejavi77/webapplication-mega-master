@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Do Test Excercise</title>
+    <script language="javascript">
+    </script>
+</head>
+<body>
+<h1>Do Test Exercise</h1>
+<form method="POST">
+        <span align="left" th:each="question : ${exercise.getQuestions()}">
+            <p valign="top" th:text="${question.text}">Text</p>
+            <tr align="left" th:each="solution : ${question.getSolutions()}">
+                <input type="radio" th:name="${question.question_ID}" th:text="${solution.text}"
+                       th:value="${solution.text}"/><BR>
+            </tr>
+        </span>
+    <input type="submit" value="Submit">
+</form>
+</body>
+</html>
