@@ -106,7 +106,7 @@ public class ExerciseWebController {
     @GetMapping("doFill1/{post}/{exercise}")
     public String doFill1(Model model, @PathVariable String exercise) {
         model.addAttribute("exercise", exercisesDAO.getExerciseByType(exercise, "Fill"));
-        return "doFillTheGapExercise1";
+        return "exercise/doFillTheGapExercise1";
     }
 
     @PostMapping("doFill1/{post}/{exercise}")
@@ -133,7 +133,9 @@ public class ExerciseWebController {
 
     @GetMapping("showMark/{post}/{exercise}")
     public String showMark(Model model, @PathVariable String exercise) {
-        model.addAttribute("submission", exercisesDAO.getSubmission(exercise, "admin"));
+        Submission submission=exercisesDAO.getSubmission(exercise, "admin");
+        model.addAttribute("submission", submission);
+        model.addAttribute("mark", exercisesDAO.getMark(submission.getMark()));
         return "exercise/showMark";
     }
 

@@ -6,12 +6,16 @@ import cat.tecnocampus.omega.persistance.ExerciseDAO;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.TreeMap;
 
 @Service("ExercisesDAOController")
 public class ExercisesDAOController {
     private final ExerciseDAO exerciseDAO;
     private final UserController userController;
+    private Map<Float,String> marks;
 
     public ExercisesDAOController(ExerciseDAO exerciseDAO, UserController userController) {
         this.exerciseDAO = exerciseDAO;
@@ -51,5 +55,30 @@ public class ExercisesDAOController {
         float mark = exercise.solve(solutions);
         Submission submission = new Submission(mark, userController.getUser(username), exercise);
         exerciseDAO.insertSubmission(submission);
+    }
+    public String getMark(float mark){
+        if(marks ==null){
+            initializeMarks();
+        }
+        for (float f:marks.keySet()) {
+            if(mark<=f)
+                return marks.get(f);
+        }
+        return "";
+    }
+    private void initializeMarks(){
+        marks=new TreeMap<Float,String>();
+        marks.put(10f,"A+");
+        marks.put(9f,"A");
+        marks.put(8f,"B+");
+        marks.put(7.5f,"B");
+        marks.put(7f,"B-");
+        marks.put(6f,"C+");
+        marks.put(5f,"C");
+        marks.put(4f,"C-");
+        marks.put(3f,"D+");
+        marks.put(2f,"D");
+        marks.put(1f,"D-");
+        marks.put(0f,"F");
     }
 }

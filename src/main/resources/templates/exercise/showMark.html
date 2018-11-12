@@ -8,18 +8,7 @@
 <body>
 <div align="center">
     <h4>Your mark is:</h4><br>
-    <h1 valign="top" th:text="A+"th:unless="${submission.mark <10}">A+</h1>
-    <h1 valign="top" th:text="A"th:unless="${submission.mark <9}">A</h1>
-    <h1 valign="top" th:text="B+"th:unless="${submission.mark <8}">B+</h1>
-    <h1 valign="top" th:text="B"th:unless="${submission.mark <7.5}">B</h1>
-    <h1 valign="top" th:text="B-"th:unless="${submission.mark <7}">B-</h1>
-    <h1 valign="top" th:text="C+"th:unless="${submission.mark <6}">C+</h1>
-    <h1 valign="top" th:text="C"th:unless="${submission.mark <5}">C</h1>
-    <h1 valign="top" th:text="C-"th:unless="${submission.mark <4}">C-</h1>
-    <h1 valign="top" th:text="D+"th:unless="${submission.mark <3}">D+</h1>
-    <h1 valign="top" th:text="D"th:unless="${submission.mark <2}">D</h1>
-    <h1 valign="top" th:text="D-"th:unless="${submission.mark <1}">D-</h1>
-    <h1 valign="top" th:text="F"th:unless="${submission.mark <0}">F</h1>
+    <h1 valign="top" th:text="${mark}">A+</h1>
     <h2 valign="top" th:text="${submission.mark}">Mark</h2>
     <form method="POST">
         <input type="submit">
