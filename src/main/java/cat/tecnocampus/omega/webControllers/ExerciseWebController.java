@@ -11,6 +11,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 import java.security.Principal;
+import java.util.Map;
 
 
 @Controller
@@ -90,11 +91,11 @@ public class ExerciseWebController {
 
     @PostMapping("doTest/{post}/{exercise}")
     public String doTest(HttpServletRequest request, @PathVariable String post, @PathVariable String exercise, RedirectAttributes redirectAttributes) {
-        Exercise ex=exercisesDAO.getExercise(exercise);
-        String[] solution=new String[ex.getQuestions().size()];
+        Map<String,String[]> mp=request.getParameterMap();
+        String[] solution=new String[mp.size()];
         int i=0;
-        for (Question question:ex.getQuestions()) {
-            solution[i]=request.getParameter(question.getQuestion_ID());
+        for (String s:mp.keySet()) {
+            solution[i]=mp.get(s)[0];
             i++;
         }
         exercisesDAO.solve(exercise, solution, "admin", "Test");
