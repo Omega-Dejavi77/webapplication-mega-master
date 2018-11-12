@@ -44,18 +44,18 @@ public abstract class APost {
         exerciseList=new ArrayList<Exercise>();
     }
 
-    protected String getPostID() {
+    public String getPostID() {
         return postID;
     }
 
-    protected String getDescription() {
+    public String getDescription() {
         return description;
     }
 
     protected void setDescription(String description) {
         this.description = description;
     }
-    protected String getTitle() {
+    public String getTitle() {
         return title;
     }
 
@@ -63,11 +63,11 @@ public abstract class APost {
         this.title = title;
     }
 
-    protected Date getCreationDay() {
+    public Date getCreationDay() {
         return creationDay;
     }
 
-    protected int getLikes() {
+    public int getLikes() {
         return likes;
     }
 
@@ -75,7 +75,7 @@ public abstract class APost {
         likes++;
     }
 
-    protected boolean isEnable() {
+    public boolean isEnable() {
         return enable;
     }
 

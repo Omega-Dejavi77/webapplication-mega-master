@@ -7,7 +7,6 @@ import cat.tecnocampus.omega.domain.*;
 public class Discussion extends APost {
 
     private boolean hasBestComment;
-    private Comment bestComment;
     private User user;
 
     private List<Comment> comments= new ArrayList<Comment>();
@@ -30,10 +29,12 @@ public class Discussion extends APost {
 
     void setHasBestComment(boolean stat,Comment comment){
         hasBestComment=stat;
-        bestComment=comment;
     }
 
-    User getUser(){
+    public User getUser(){
         return user;
+    }
+    public boolean hasBest(){
+        return hasBestComment;
     }
 }
