@@ -2,6 +2,18 @@ DROP TABLE IF EXISTS Category;
 CREATE TABLE Category(
   category VARCHAR (32) PRIMARY KEY,
 );
+DROP TABLE IF EXISTS Users;
+CREATE TABLE Users (
+    username VARCHAR (64) PRIMARY KEY,
+    password VARCHAR (32) NOT NULL,
+    first_name VARCHAR (128) NOT NULL,
+    last_name VARCHAR (128) NOT NULL,
+    email VARCHAR (256) NOT NULL UNIQUE,
+    birthday DATE,
+    experience_points INTEGER,
+    level INTEGER,
+    enable BIT NOT NULL
+);
 DROP TABLE IF EXISTS Posts;
 CREATE TABLE Posts (
     post_id VARCHAR(36) PRIMARY KEY,
@@ -14,11 +26,13 @@ CREATE TABLE Posts (
     starting_date DATE,
     deadline DATE,
     post_id_ref VARCHAR (36),
+    hasBest BIT,
     category VARCHAR(36),
+    username VARCHAR(64),
+    FOREIGN KEY (username) REFERENCES Users(username),
     FOREIGN KEY (category) REFERENCES Category(category),
     FOREIGN KEY (post_id_ref) REFERENCES Posts(post_id)
 );
-
 DROP TABLE IF EXISTS Exercises;
 CREATE TABLE Exercises(
     exercise_id VARCHAR (36) PRIMARY KEY,
@@ -58,20 +72,9 @@ CREATE TABLE Comments(
     best BIT,
     enable BIT  NOT NULL,
     post_id VARCHAR (36),
+    username VARCHAR(64) NOT NULL,
+    FOREIGN KEY (username) REFERENCES Users(username),
     FOREIGN KEY (post_id) REFERENCES Posts(post_id)
-);
-
-DROP TABLE IF EXISTS Users;
-CREATE TABLE Users (
-    username VARCHAR (64) PRIMARY KEY,
-    password VARCHAR (32) NOT NULL,
-    first_name VARCHAR (128) NOT NULL,
-    last_name VARCHAR (128) NOT NULL,
-    email VARCHAR (256) NOT NULL,
-    birthday DATE,
-    experience_points INTEGER,
-    level INTEGER,
-    enable BIT NOT NULL,
 );
 DROP TABLE IF EXISTS Roles;
 CREATE TABLE Roles(
