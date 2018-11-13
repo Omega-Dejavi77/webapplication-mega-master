@@ -91,17 +91,18 @@ public class ExerciseWebController {
 
     @PostMapping("doTest/{post}/{exercise}")
     public String doTest(HttpServletRequest request, @PathVariable String post, @PathVariable String exercise, RedirectAttributes redirectAttributes) {
-        Map<String,String[]> mp=request.getParameterMap();
-        String[] solution=new String[mp.size()];
-        int i=0;
-        for (String s:mp.keySet()) {
-            solution[i]=mp.get(s)[0];
+        Map<String, String[]> mp = request.getParameterMap();
+        String[] solution = new String[mp.size()];
+        int i = 0;
+        for (String s : mp.keySet()) {
+            solution[i] = mp.get(s)[0];
             i++;
         }
         exercisesDAO.solve(exercise, solution, "admin", "Test");
         redirectAttributes.addAttribute("post", post);
         redirectAttributes.addAttribute("exercise", exercise);
-        return "redirect:/showMark/{post}/{exercise}";
+        redirectAttributes.addAttribute("type", "doTest");
+        return "redirect:/showMark/{post}/{exercise}/{type}";
     }
 
     @GetMapping("doFill1/{post}/{exercise}")
@@ -115,7 +116,8 @@ public class ExerciseWebController {
         exercisesDAO.solve(exercise, solution, "admin", "Fill");
         redirectAttributes.addAttribute("post", post);
         redirectAttributes.addAttribute("exercise", exercise);
-        return "redirect:/showMark/{post}/{exercise}";
+        redirectAttributes.addAttribute("type", "doFill1");
+        return "redirect:/showMark/{post}/{exercise}/{type}";
     }
 
     @GetMapping("doFill2/{post}/{exercise}")
@@ -129,20 +131,28 @@ public class ExerciseWebController {
         exercisesDAO.solve(exercise, solution, "admin", "Fill");
         redirectAttributes.addAttribute("post", post);
         redirectAttributes.addAttribute("exercise", exercise);
-        return "redirect:/showMark/{post}/{exercise}";
+        redirectAttributes.addAttribute("type", "doFill2");
+        return "redirect:/showMark/{post}/{exercise}/{type}";
     }
 
-    @GetMapping("showMark/{post}/{exercise}")
+    @GetMapping("showMark/{post}/{exercise}/{type}")
     public String showMark(Model model, @PathVariable String exercise) {
-        Submission submission=exercisesDAO.getSubmission(exercise, "admin");
+        Submission submission = exercisesDAO.getSubmission(exercise, "admin");
         model.addAttribute("submission", submission);
         model.addAttribute("mark", exercisesDAO.getMark(submission.getMark()));
         return "exercise/showMark";
     }
 
-    @PostMapping("showMark/{post}/{exercise}")
-    public String showMark(@PathVariable String post, RedirectAttributes redirectAttributes) {
+    @PostMapping("showMark/{post}/{exercise}/{type}")
+    public String showMark(String chosen, @PathVariable String post,@PathVariable String exercise,@PathVariable String type, RedirectAttributes redirectAttributes) {
         redirectAttributes.addAttribute("id", post);
-        return "redirect:/tutorial/{id}";
+        if (chosen.equals("Return"))
+            return "redirect:/tutorial/{id}";
+        redirectAttributes.addAttribute("post", post);
+        redirectAttributes.addAttribute("exercise", exercise);
+        if (chosen.equals("See Result")) {
+
+        }
+        return "redirect:/"+type+"/{post}/{exercise}";
     }
 }
