@@ -27,6 +27,12 @@ public class Discussion extends APost {
         comments.add(comment);
     }
 
+    public void addComment(List<Comment> comment){
+        for (Comment c:comments) {
+            comments.add(c);
+        }
+    }
+
     void setHasBestComment(boolean stat,Comment comment){
         hasBestComment=stat;
     }

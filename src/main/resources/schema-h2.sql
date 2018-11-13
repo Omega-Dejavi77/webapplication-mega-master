@@ -12,7 +12,7 @@ CREATE TABLE Users (
     birthday DATE,
     experience_points INTEGER,
     level INTEGER,
-    enable BIT NOT NULL,
+    enable BIT NOT NULL
 );
 DROP TABLE IF EXISTS Posts;
 CREATE TABLE Posts (
@@ -26,9 +26,9 @@ CREATE TABLE Posts (
     starting_date DATE,
     deadline DATE,
     post_id_ref VARCHAR (36),
-    hasBest BIT NOT NULL,
+    hasBest BIT,
     category VARCHAR(36),
-    username VARCHAR(64) NOT NULL,
+    username VARCHAR(64),
     FOREIGN KEY (username) REFERENCES Users(username),
     FOREIGN KEY (category) REFERENCES Category(category),
     FOREIGN KEY (post_id_ref) REFERENCES Posts(post_id)
