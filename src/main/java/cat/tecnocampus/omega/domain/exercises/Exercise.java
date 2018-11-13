@@ -22,6 +22,7 @@ public abstract class Exercise {
 
     protected Submission submission;
     protected List<Question> questions;
+    protected boolean drag;
 
     public Exercise(String exercise_ID, String description, int difficulty) {
         this.exercise_ID = exercise_ID;
@@ -99,6 +100,14 @@ public abstract class Exercise {
 
     public void setSubmission(Submission submission) {
         this.submission = submission;
+    }
+
+    public boolean isDrag() {
+        return drag;
+    }
+
+    public void setDrag(boolean drag) {
+        this.drag = drag;
     }
 
     public float solve(String[] solutions) {

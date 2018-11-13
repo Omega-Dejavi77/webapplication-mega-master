@@ -41,6 +41,10 @@
                                                        th:field="*{experience_points}"
                                                        th:class="${#fields.hasErrors('experience_points')}? 'error'"/>
                 </td>
+                <td align="center" valign="top"><input type="checkbox"
+                                                       th:field="*{drag}"
+                                                       th:class="${#fields.hasErrors('drag')}? 'error'"/>
+                </td>
             </tr>
         </table>
         <table>

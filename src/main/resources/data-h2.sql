@@ -14,6 +14,8 @@ INSERT INTO Questions VALUES ('1', '1 - In Java, the variable type that only has
 INSERT INTO Questions VALUES ('5', '2 - In Java, the variable type that only has two possible values is:',1, '1');
 INSERT INTO Questions VALUES ('2', 'In Java, the variable type that only has two possible values is:',1, '2');
 INSERT INTO Questions VALUES ('6', 'In Java, the variable type that only has two possible values is:',1, '2');
+INSERT INTO Questions VALUES ('7', 'In Java, the variable type that only has two possible values is:',1, '5');
+INSERT INTO Questions VALUES ('8', 'In Java, the variable type that only has two possible values is:',1, '5');
 INSERT INTO Questions VALUES ('3', 'In Java, the variable type that only has two possible values is:',1, '3');
 INSERT INTO Questions VALUES ('4', 'In Java, the variable type that only has two possible values is:',1, '4');
 
@@ -32,3 +34,5 @@ INSERT INTO Solutions (solution_id,texts, correct, enable, question_id) VALUES (
 INSERT INTO Solutions (solution_id,texts, correct, enable, question_id) VALUES ('13', 'The String', 0, 1,'5');
 INSERT INTO Solutions (solution_id,texts, correct, enable, question_id) VALUES ('14', 'The double', 0, 1,'5');
 INSERT INTO Solutions (solution_id,texts, correct, enable, question_id) VALUES ('15', 'The boolean', 1, 1,'6');
+INSERT INTO Solutions (solution_id,texts, correct, enable, question_id) VALUES ('16', 'The boolean', 1, 1,'7');
+INSERT INTO Solutions (solution_id,texts, correct, enable, question_id) VALUES ('17', 'The boolean', 1, 1,'8');
