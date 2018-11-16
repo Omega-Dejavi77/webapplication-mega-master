@@ -33,7 +33,7 @@ public class TutorialDAO {
         return tutorial;
     }
 
-    private List<Tutorial> findByCategory(String category){
+    public List<Tutorial> findByCategory(String category){
         return jdbcTemplate.query(FIND_BY_CATEGORY,new Object[]{category,"Tutorial"}, mapperEager);
     }
 
