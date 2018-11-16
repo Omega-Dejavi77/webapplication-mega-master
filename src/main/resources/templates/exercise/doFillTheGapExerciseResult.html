@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Do Fill The Gap Excercise</title>
+
+</head>
+<body>
+<div align="center">
+
+    <h1 th:text="${exercise.description}"></h1>
+    <form method="POST">
+        <span align="left" th:each="question : ${exercise.getQuestions()}">
+            <td valign="top" th:text="${question.text}">Text</td>
+            <td align="left" th:each="solution : ${question.getSolutions()}">
+                <input type="text" th:name="solution" th:value="${solution.text}" readonly></input>
+            </td>
+        </span>
+        <br><input type="submit" value="Return">
+    </form>
+</div>
+</body>
+</html>

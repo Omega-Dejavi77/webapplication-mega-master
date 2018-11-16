@@ -14,10 +14,10 @@
             <p valign="top" th:text="${question.text}">Text</p>
             <tr align="left" th:each="solution : ${question.getSolutions()}">
                 <input type="radio" th:name="${question.question_ID}" th:text="${solution.text}"
-                       th:value="${solution.text}" th:checked="${solution.correct}" readonly/><BR>
+                       th:value="${solution.text}" th:checked="${solution.correct}" disabled/><BR>
             </tr>
         </span>
-    <input type="submit" value="Submit">
+    <input type="submit" value="Return">
 </form>
 </body>
 </html>

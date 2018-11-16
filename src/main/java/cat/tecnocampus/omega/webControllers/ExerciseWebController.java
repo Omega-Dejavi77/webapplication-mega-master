@@ -97,18 +97,19 @@ public class ExerciseWebController {
             int i = 0;
             for (String s : mp.keySet()) {
                 if (!s.equals("id")) {
-                    System.out.println(s);
+                    //System.out.println(s);
                     solution[i] = mp.get(s)[0];
-                    System.out.println("\t" + solution[i]);
+                    //System.out.println("\t" + solution[i]);
                     i++;
                 }
             }
             exercisesDAO.solve(exercise, solution, "admin", "Test");
-            redirectAttributes.addAttribute("post", post);
-            redirectAttributes.addAttribute("exercise", exercise);
-            redirectAttributes.addAttribute("type", "doTest");
         }
-        return "redirect:/showMark/{post}/{exercise}/{type}";
+        redirectAttributes.addAttribute("post", post);
+        redirectAttributes.addAttribute("exercise", exercise);
+        redirectAttributes.addAttribute("type", "doTest");
+        redirectAttributes.addAttribute("drag", "0");
+        return "redirect:/showMark/{post}/{exercise}/{type}/{drag}";
     }
 
     @GetMapping("doFill/{type}/{post}/{exercise}/{drag}")
@@ -126,6 +127,8 @@ public class ExerciseWebController {
                 html = "";
                 break;
         }
+        if (type.equals("Result"))
+            html = html.substring(0, html.length() - 1);
         return "exercise/" + html + exercisesDAO.type(type);
     }
 
@@ -133,14 +136,14 @@ public class ExerciseWebController {
     public String doFill(@RequestParam(value = "solution") String[] solution, @PathVariable String type, @PathVariable String post, @PathVariable String exercise, RedirectAttributes redirectAttributes, Principal principal) {
         if (type.equals("do")) {
             exercisesDAO.solve(exercise, solution, "admin", "Fill");
-            redirectAttributes.addAttribute("post", post);
-            redirectAttributes.addAttribute("exercise", exercise);
-            redirectAttributes.addAttribute("type", "doFill");
         }
+        redirectAttributes.addAttribute("post", post);
+        redirectAttributes.addAttribute("exercise", exercise);
+        redirectAttributes.addAttribute("type", "doFill");
         return "redirect:/showMark/{post}/{exercise}/{type}";
     }
 
-    @GetMapping("showMark/{post}/{exercise}/{type}")
+    @GetMapping("showMark/{post}/{exercise}/{type}/{drag}")
     public String showMark(Model model, @PathVariable String exercise) {
         Submission submission = exercisesDAO.getSubmission(exercise, "admin");
         model.addAttribute("submission", submission);
@@ -162,13 +165,15 @@ public class ExerciseWebController {
         redirectAttributes.addAttribute("post", post);
         redirectAttributes.addAttribute("exercise", exercise);
         redirectAttributes.addAttribute("type", "do");
-        if (chosen.equals("See Results"))
-            type += "Result";
         if (type.equals("doFill")) {
             redirectAttributes.addAttribute("drag", drag);
             type += "/{type}/{post}/{exercise}/{drag}";
         } else
             type += "/{type}/{post}/{exercise}";
+        if (chosen.equals("See Results"))
+            redirectAttributes.addAttribute("type", "Result");
+        else
+            redirectAttributes.addAttribute("type", "do");
         return "redirect:/" + type;
     }
 }
