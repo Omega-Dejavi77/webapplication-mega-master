@@ -1,7 +1,14 @@
 INSERT INTO Users (username, password, first_name, last_name, email, birthday, experience_points, level, enable) VALUES('admin', 'admin', 'admin', 'admin', 'admin', current_timestamp, 0, 0, 1);
 
-INSERT INTO Posts  (post_id, title, description, creationDay, likes, enable, son_type) VALUES('01293c0f-bf77-42d7-9fa3-8b101f33ee5b','Tutorial','Tutorial Description',current_timestamp,0,1,'Tutorial');
-INSERT INTO Posts  (post_id, title, description, creationDay, likes, enable, son_type) VALUES ('01293c0f-bf77-42d7-9fa3-8b101f33ee6b','Challenge','Challenge Description',current_timestamp,0,1,'Challenge');
+
+INSERT INTO Category(category) VALUES('Java');
+INSERT INTO Category(category) VALUES('C++');
+INSERT INTO Category(category) VALUES('Python');
+INSERT INTO Category(category) VALUES('C#');
+INSERT INTO Category(category) VALUES('SQL');
+
+INSERT INTO Posts  (post_id, title, description, creationDay, likes, enable, son_type, category) VALUES('01293c0f-bf77-42d7-9fa3-8b101f33ee5b','Tutorial','Tutorial Description',current_timestamp,0,1,'Tutorial','Java');
+INSERT INTO Posts  (post_id, title, description, creationDay, likes, enable, son_type, category) VALUES ('01293c0f-bf77-42d7-9fa3-8b101f33ee6b','Challenge','Challenge Description',current_timestamp,0,1,'Challenge','C++');
 
 
 INSERT INTO Exercises VALUES ('1', 'Test excercise for Tutorial', 1, 1,0,0,'Test','01293c0f-bf77-42d7-9fa3-8b101f33ee5b');
@@ -33,8 +40,3 @@ INSERT INTO Solutions (solution_id,texts, correct, enable, question_id) VALUES (
 INSERT INTO Solutions (solution_id,texts, correct, enable, question_id) VALUES ('14', 'The double', 0, 1,'5');
 INSERT INTO Solutions (solution_id,texts, correct, enable, question_id) VALUES ('15', 'The boolean', 1, 1,'6');
 
-INSERT INTO Category(category) VALUES('Java');
-INSERT INTO Category(category) VALUES('C++');
-INSERT INTO Category(category) VALUES('Python');
-INSERT INTO Category(category) VALUES('C#');
-INSERT INTO Category(category) VALUES('SQL');

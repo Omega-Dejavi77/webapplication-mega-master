@@ -20,7 +20,7 @@ public class TutorialDAO {
     private final String FIND_ALL = "select * from Posts where son_type=?";
     private final String FIND_BY_ID = "select * from Posts where post_id = ? AND son_type = ?";
     private final String INSERT_TUTORIAL = "INSERT INTO Posts (post_id, title, description, creationDay, likes, enable, son_type, category) VALUES (?, ?, ?, ?, ?,?,?,?)";
-    private final String FIND_BY_CATEGORY= "select * from Post where category=?";
+    private final String FIND_BY_CATEGORY= "select * from Posts where category=? AND son_type=?";
 
 
     public TutorialDAO(JdbcTemplate jdbcTemplate, ExerciseDAO exerciseDAO) {

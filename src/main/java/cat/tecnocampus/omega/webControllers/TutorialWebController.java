@@ -21,8 +21,8 @@ public class TutorialWebController {
         this.tutorialController = tutorialController;
     }
 
-    @GetMapping("tutorials")
-    public String listTutorials(String category, Model model){
+    @GetMapping("tutorials/{category}")
+    public String listTutorials(@PathVariable String category, Model model){
         model.addAttribute("tutorialList",tutorialController.findByCategory(category));
         return "post/showTutorials";
     }

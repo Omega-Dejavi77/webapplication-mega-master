@@ -18,7 +18,7 @@ public class ChallengeDAO {
     private ExerciseDAO exerciseDAO;
     private final String FIND_ALL = "select * from Posts where son_type=?";
     private final String INSERT_CHALLENGE = "INSERT INTO posts (post_ID, title, description, creationDay, likes, enable, son_TYPE,category) VALUES(?, ?, ?, ?, ?,?,?,?)";
-    private final String FIND_BY_CATEGORY= "select * from Post where category=?";
+    private final String FIND_BY_CATEGORY= "select * from Posts where category=? AND son_type=?";
 
 
     public ChallengeDAO(JdbcTemplate jdbcTemplate, ExerciseDAO exerciseDAO) {
