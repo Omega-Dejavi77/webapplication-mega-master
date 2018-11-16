@@ -25,7 +25,7 @@ public abstract class APost {
     protected List<Exercise> exerciseList;
 
 
-    protected APost (String postID, String description, String title){
+    public APost (String postID, String description, String title){
         this.postID=postID;
         this.description=description;
         this.title=title;
@@ -34,7 +34,7 @@ public abstract class APost {
         enable=true;
         exerciseList=new ArrayList<Exercise>();
     }
-    protected APost (String description,String title){
+    public APost (String description,String title){
         postID=UUID.randomUUID().toString();
         this.description=description;
         this.title=title;
@@ -44,42 +44,42 @@ public abstract class APost {
         exerciseList=new ArrayList<Exercise>();
     }
 
-    protected String getPostID() {
+    public String getPostID() {
         return postID;
     }
 
-    protected String getDescription() {
+    public String getDescription() {
         return description;
     }
 
-    protected void setDescription(String description) {
+    public void setDescription(String description) {
         this.description = description;
     }
-    protected String getTitle() {
+    public String getTitle() {
         return title;
     }
 
-    protected void setTitle(String title) {
+    public void setTitle(String title) {
         this.title = title;
     }
 
-    protected Date getCreationDay() {
+    public Date getCreationDay() {
         return creationDay;
     }
 
-    protected int getLikes() {
+    public int getLikes() {
         return likes;
     }
 
-    protected void addLike() {
+    public void addLike() {
         likes++;
     }
 
-    protected boolean isEnable() {
+    public boolean isEnable() {
         return enable;
     }
 
-    protected void setEnable(boolean enable) {
+    public void setEnable(boolean enable) {
         this.enable = enable;
     }
 
