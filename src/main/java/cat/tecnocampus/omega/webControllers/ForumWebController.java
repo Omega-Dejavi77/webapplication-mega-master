@@ -45,13 +45,13 @@ public class ForumWebController {
     @GetMapping("showForum")
     public String showForum(Model model){
         model.addAttribute("discussions",forumController.getDiscussions());
-        return "showForum";
+        return "post/showForum";
     }
 
     @GetMapping("showDiscussion/{id}")
     public String showDiscussion(Model model, @PathVariable String id){
         model.addAttribute("discussion",forumController.getDiscussion(id));
-        return "";
+        return "post/showDiscussion";
     }
 
 }
