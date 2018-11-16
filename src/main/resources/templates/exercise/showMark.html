@@ -7,11 +7,11 @@
 </head>
 <body>
 <div align="center">
-    <h4>Your mark is:</h4><br>
-    <h2 valign="top" th:text="${pass}"></h2>
-    <h1 valign="top" th:text="${mark}">A+</h1>
-    <h2 valign="top" th:text="${submission.mark}">Mark</h2>
-    <form method="POST">
+    <form method="post">
+        <h4>Your mark is:</h4><br>
+        <h2 valign="top" th:text="${pass}"></h2>
+        <h1 valign="top" th:text="${mark}">A+</h1>
+        <h2 valign="top" th:text="${submission.mark}">Mark</h2>
         <input type="submit" name="chosen" value="See Results">
         <input type="submit" name="chosen" value="Retry">
         <input type="submit" name="chosen" value="Return">

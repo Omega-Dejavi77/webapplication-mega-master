@@ -16,7 +16,7 @@
                 <br>
                 <td>Difficulty:</td>
                 <td th:text="${exercise.difficulty}">Difficulty</td>
-                <td th:text="'Completed'" th:unless="${exercise.submission.pass==false}">Difficulty</td>
+                <!--<td th:text="'Completed'" th:unless="${exercise.submission.pass==false}">Difficulty</td>-->
                 <br>
                 <input type="submit" name="chosen" th:value="${exercise.exercise_ID}"><br>
             </tr>
