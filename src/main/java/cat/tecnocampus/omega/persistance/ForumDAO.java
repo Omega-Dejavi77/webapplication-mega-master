@@ -4,11 +4,13 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import cat.tecnocampus.omega.domain.post.Discussion;
 import cat.tecnocampus.omega.domain.post.Comment;
 import org.springframework.jdbc.core.RowMapper;
+import org.springframework.stereotype.Repository;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
 
+@Repository
 public class ForumDAO {
 
     private JdbcTemplate jdbcTemplate;
@@ -35,14 +37,12 @@ public class ForumDAO {
         return comment;
     };
 
-
     private RowMapper<Discussion> mapperEager = (resultSet, i) -> {
         Discussion discussion = discussionMapper(resultSet);
         List<Comment> comments = findCommentByDiscussion(discussion.getPostID());
         discussion.addComment(comments);
         return discussion;
     };
-
 
     public int insertDAODiscussion(Discussion discussion) {
         return jdbcTemplate.update(INSERT_DISCUSSION,discussion.getPostID(),discussion.getTitle(),discussion.getCreationDay(),discussion.getLikes(),discussion.isEnable(),discussion.getUser(),discussion.hasBest(),"Discussion");
