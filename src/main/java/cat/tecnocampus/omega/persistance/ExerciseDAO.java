@@ -87,7 +87,7 @@ public class ExerciseDAO {
     }
 
     public int insertSubmission(Submission submission) {
-        return jdbcTemplate.update(INSERT_SUBMISSION, submission.getMark(), submission.getUser().getUsername(), submission.getExercise().getExercise_ID(), submission.getCreationDate(), submission.isPass());
+        return jdbcTemplate.update(INSERT_SUBMISSION, submission.getMark(), submission.getUser().getUsername(), submission.getExercise().getExercise_ID(), submission.getCreationDate(), submission.getPass());
     }
 
     public List<Exercise> findExercisesByPost(String id) {

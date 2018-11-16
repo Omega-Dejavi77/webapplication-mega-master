@@ -16,6 +16,7 @@ public class ExercisesDAOController {
     private final ExerciseDAO exerciseDAO;
     private final UserController userController;
     private Map<Float,String> marks;
+    private String[] solutions;
 
     public ExercisesDAOController(ExerciseDAO exerciseDAO, UserController userController) {
         this.exerciseDAO = exerciseDAO;
@@ -52,6 +53,7 @@ public class ExercisesDAOController {
 
     public void solve(String id, String[] solutions, String username, String type) {
         Exercise exercise = exerciseDAO.findExercisesByIDAndType(id, type);
+        this.solutions=solutions;
         float mark = exercise.solve(solutions);
         Submission submission = new Submission(mark, userController.getUser(username), exercise);
         exerciseDAO.insertSubmission(submission);

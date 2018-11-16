@@ -53,7 +53,7 @@ public class Submission {
         return creationDate;
     }
 
-    public boolean isPass() {
+    public boolean getPass() {
         return pass;
     }
 }
