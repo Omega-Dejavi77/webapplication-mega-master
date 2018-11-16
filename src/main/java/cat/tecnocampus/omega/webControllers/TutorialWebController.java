@@ -22,6 +22,12 @@ public class TutorialWebController {
     }
 
     @GetMapping("tutorials")
+    public String listTutorials(String category, Model model){
+        model.addAttribute("tutorialList",tutorialController.findByCategory(category));
+        return "post/showTutorials";
+    }
+
+    @GetMapping("tutorials")
     public String listTutorials(Model model) {
         model.addAttribute("tutorialList", tutorialController.findAll());
         return "post/showTutorials";
