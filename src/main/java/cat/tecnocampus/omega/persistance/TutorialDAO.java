@@ -19,7 +19,7 @@ public class TutorialDAO {
 
     private final String FIND_ALL = "select * from Posts where son_type=?";
     private final String FIND_BY_ID = "select * from Posts where post_id = ? AND son_type = ?";
-    private final String INSERT_TUTORIAL = "INSERT INTO Posts (post_id, title, description, creationDay, likes, enable, son_type) VALUES (?, ?, ?, ?, ?,?,?)";
+    private final String INSERT_TUTORIAL = "INSERT INTO Posts (post_id, title, description, creationDay, likes, enable, son_type, category) VALUES (?, ?, ?, ?, ?,?,?,?)";
 
 
     public TutorialDAO(JdbcTemplate jdbcTemplate, ExerciseDAO exerciseDAO) {
@@ -28,7 +28,7 @@ public class TutorialDAO {
     }
 
     private Tutorial tutorialMapper(ResultSet resultSet) throws SQLException {
-        Tutorial tutorial = new Tutorial(resultSet.getString("post_id"), resultSet.getString("description"), resultSet.getString("title"));
+        Tutorial tutorial = new Tutorial(resultSet.getString("post_id"), resultSet.getString("description"), resultSet.getString("title"), resultSet.getString("category"));
         return tutorial;
     }
 
