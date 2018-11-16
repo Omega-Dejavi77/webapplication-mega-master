@@ -18,6 +18,8 @@ public class ChallengeDAO {
     private ExerciseDAO exerciseDAO;
     private final String FIND_ALL = "select * from Posts where son_type=?";
     private final String INSERT_CHALLENGE = "INSERT INTO posts (post_ID, title, description, creationDay, likes, enable, son_TYPE,category) VALUES(?, ?, ?, ?, ?,?,?,?)";
+    private final String FIND_BY_CATEGORY= "select * from Post where category=?";
+
 
     public ChallengeDAO(JdbcTemplate jdbcTemplate, ExerciseDAO exerciseDAO) {
         this.jdbcTemplate = jdbcTemplate;
@@ -27,6 +29,10 @@ public class ChallengeDAO {
     private Challenge challengeMapper(ResultSet resultSet) throws SQLException {
         Challenge challenge = new Challenge(resultSet.getString("post_id"), resultSet.getString("description"), resultSet.getString("title"), resultSet.getString("category"));
         return challenge;
+    }
+
+    private List<Challenge> findByCategory(String category){
+        return jdbcTemplate.query(FIND_BY_CATEGORY,new Object[]{category,"Challenge"}, mapperEager);
     }
 
     private RowMapper<Challenge> mapperEager = (resultSet, i) -> {

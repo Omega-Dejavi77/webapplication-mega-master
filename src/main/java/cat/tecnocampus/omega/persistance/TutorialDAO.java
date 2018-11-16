@@ -20,6 +20,7 @@ public class TutorialDAO {
     private final String FIND_ALL = "select * from Posts where son_type=?";
     private final String FIND_BY_ID = "select * from Posts where post_id = ? AND son_type = ?";
     private final String INSERT_TUTORIAL = "INSERT INTO Posts (post_id, title, description, creationDay, likes, enable, son_type, category) VALUES (?, ?, ?, ?, ?,?,?,?)";
+    private final String FIND_BY_CATEGORY= "select * from Post where category=?";
 
 
     public TutorialDAO(JdbcTemplate jdbcTemplate, ExerciseDAO exerciseDAO) {
@@ -32,6 +33,10 @@ public class TutorialDAO {
         return tutorial;
     }
 
+    private List<Tutorial> findByCategory(String category){
+        return jdbcTemplate.query(FIND_BY_CATEGORY,new Object[]{category,"Tutorial"}, mapperEager);
+    }
+
     private RowMapper<Tutorial> mapperEager = (resultSet, i) -> {
         Tutorial tutorial = tutorialMapper(resultSet);
         List<Exercise> exercises = exerciseDAO.findExercisesByPost(tutorial.getPostID());
@@ -42,6 +47,7 @@ public class TutorialDAO {
     public List<Tutorial> findAll() {
         return jdbcTemplate.query(FIND_ALL, new Object[]{"Tutorial"}, mapperEager);
     }
+
     public Tutorial findById(String id) {
         return jdbcTemplate.queryForObject(FIND_BY_ID, new Object[]{id,"Tutorial"}, mapperEager);
     }
