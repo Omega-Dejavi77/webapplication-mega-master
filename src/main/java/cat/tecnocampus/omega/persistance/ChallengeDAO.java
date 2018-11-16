@@ -31,7 +31,7 @@ public class ChallengeDAO {
         return challenge;
     }
 
-    private List<Challenge> findByCategory(String category){
+    public List<Challenge> findByCategory(String category){
         return jdbcTemplate.query(FIND_BY_CATEGORY,new Object[]{category,"Challenge"}, mapperEager);
     }
 

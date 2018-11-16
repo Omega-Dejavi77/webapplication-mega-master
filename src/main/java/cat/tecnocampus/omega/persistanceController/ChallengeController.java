@@ -16,8 +16,8 @@ public class ChallengeController {
         this.challengeDAO = challengeDAO;
     }
 
-    public Challenge insertChallenge(String description, String title) {
-        Challenge challenge = new Challenge(description, title);
+    public Challenge insertChallenge(String description, String title, String category) {
+        Challenge challenge = new Challenge(description, title,category);
         insert(challenge);
         return challenge;
 
@@ -32,4 +32,9 @@ public class ChallengeController {
 
         return challengeDAO.findAll();
     }
+
+    public List<Challenge> findByategory(String category){
+        return challengeDAO.findByCategory(category);
+    }
+
 }
