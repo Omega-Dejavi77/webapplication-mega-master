@@ -19,6 +19,7 @@ public class ForumDAO {
     private final String INSERT_DISCUSSION = "INSERT INTO Posts (post_id, title, description, creationDay, likes, enable, user, hasBest, category,son_type) VALUES (?, ?, ?, ?, ?,?,?,?,?)";
     private final String INSERT_COMMENT = "INSERT INTO Comments (comment_id, best, comment, creation_day, likes, enable, post_id, username,son_type) VALUES (?, ?, ?, ?, ?,?,?,?,?)";
     private final String SELECT_DISCUSSION = "SELECT * FROM Posts WHERE post_id = ?";
+    private final String SELECT_DISCUSSIONS = "SELECT * FROM Posts WHERE son_type = 'Discussion'";
     private final String SELECT_COMMENTS = "SELECT * FROM Comments WHERE post_id = ?";
 
 
@@ -53,6 +54,10 @@ public class ForumDAO {
     }
     public List<Comment> findCommentByDiscussion(String id){
         return jdbcTemplate.query(SELECT_COMMENTS,new Object[]{id},commentMapper);
+    }
+
+    public List<Discussion> getAllDiscussions(){
+        return jdbcTemplate.query(SELECT_DISCUSSIONS,mapperEager);
     }
 
     public Discussion getDiscussion(String id){

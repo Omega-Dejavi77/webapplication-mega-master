@@ -34,4 +34,7 @@ public class ForumController {
         return forumDAO.getDiscussion(id);
     }
 
+    public List<Discussion> getDiscussions (){
+        return forumDAO.getAllDiscussions();
+    }
 }

@@ -23,6 +23,10 @@ public class Discussion extends APost {
         this.user=user;
     }
 
+    public Discussion(){
+        super(null,null);
+    }
+
     public void addComment(Comment comment){
         comments.add(comment);
     }
