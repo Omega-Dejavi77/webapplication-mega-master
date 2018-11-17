@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <title>Title</title>
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <link href="../../fragment/header.css" rel="stylesheet">
+    <script src="http://code.jquery.com/jquery-latest.js">
+        $(document).ready(function () {
+            $(window).scroll(function () {
+                if ($(this).scrollTop() > 0) {
+                    $('header').addClass('header2');
+                } else {
+                    $('header').removeClass('header2');
+                }
+            });
+
+        });
+    </script>
+</head>
+<body>
+<header class="header">
+    <div class="wrapper" th:fragment="header">
+        <div class="logo"></div>
+        <nav>
+            <a href="/tutorials">Tutorials</a>
+            <a href="/challenges">Challenges</a>
+            <a href="#">Forum</a>
+        </nav>
+    </div>
+</header>
+</body>
+</html>
