@@ -52,7 +52,7 @@ public class HandlingExceptionController {
 
         logger.error("Request: " + url + " raised " + ex);
 
-        model.addAttribute("where",url.substring(url.lastIndexOf("/") + 1));
+        model.addAttribute("where",ex.getMessage());
         return "error/exceptionAll";
 
     }
