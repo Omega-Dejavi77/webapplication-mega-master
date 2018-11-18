@@ -6,7 +6,6 @@ import java.util.UUID;
 
 public class Comment {
 
-    private Discussion discussion;
     private User user;
     private String commentID;
     private String comment;
@@ -16,22 +15,36 @@ public class Comment {
     private boolean bestComment;
 
 
-    public Comment (String ID, String comment, User user, Discussion discussion){
+    public Comment (String ID, String comment, User user){
         commentID=ID;
         this.comment=comment;
         this.user=user;
-        this.discussion=discussion;
         creationDay=new Date();
         likes=0;
         enable=true;
         bestComment=false;
     }
 
-    public Comment (String comment, User user, Discussion discussion){
+    public Comment (String comment, User user){
         commentID=UUID.randomUUID().toString();
         this.comment=comment;
         this.user=user;
-        this.discussion=discussion;
+        creationDay=new Date();
+        likes=0;
+        enable=true;
+        bestComment=false;
+    }
+    public Comment (String comment){
+        commentID=UUID.randomUUID().toString();
+        this.comment=comment;
+        this.user=null;
+        creationDay=new Date();
+        likes=0;
+        enable=true;
+        bestComment=false;
+    }
+    public Comment (){
+        commentID=UUID.randomUUID().toString();
         creationDay=new Date();
         likes=0;
         enable=true;
@@ -48,11 +61,6 @@ public class Comment {
 
     void setBestComment(boolean stat){
         bestComment=stat;
-        discussion.setHasBestComment(stat,this);
-    }
-
-    public Discussion getDiscussion() {
-        return discussion;
     }
 
     public User getUser() {

@@ -17,13 +17,13 @@ public class ForumController {
     }
 
     @Transactional
-    public int insertDiscussion(Discussion discussion){
-        return forumDAO.insertDAODiscussion(discussion);
+    public int insertDiscussion(Discussion discussion,String username){
+        return forumDAO.insertDAODiscussion(discussion,username);
     }
 
     @Transactional
-    public int insertComment(Comment comment){
-        return forumDAO.insertDAOComment(comment);
+    public int insertComment(Comment comment,String username,String id){
+        return forumDAO.insertDAOComment(comment, username,id);
     }
 
     public List<Comment> getComment (String id){

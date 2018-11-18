@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" type="text/css" th:href="@{style.css}"/>
+    <title th:text="${discussion.title}"></title>
+</head>
+<body>
+<form method="post">
+    <h2 align="center" th:text="${discussion.title}"></h2>
+    <table border="1">
+    <tr><td th:text="${discussion.description}"></td></tr>
+        <td><textarea name="comment" rows="8" cols="64" minlength="2" maxlength="2048"/>
+            </textarea>
+            <input type="submit" value="Send comment"/>
+        </td>
+    </table>
+    <BR>
+</form>
+</body>
+</html>
