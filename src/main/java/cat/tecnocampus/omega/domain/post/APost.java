@@ -25,8 +25,10 @@ public abstract class APost {
     protected List<Exercise> exerciseList;
     protected String category;
 
+    public APost() {
+    }
 
-    public APost (String postID, String description, String title,String category){
+    public APost (String postID, String description, String title, String category){
         this.postID=postID;
         this.description=description;
         this.title=title;

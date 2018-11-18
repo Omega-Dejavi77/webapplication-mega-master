@@ -18,13 +18,13 @@ public class Discussion extends APost {
     }
 
     public Discussion(String body, String title,User user) {
-        super(body, title);
+        super(body, title,"");
         hasBestComment=false;
         this.user=user;
     }
 
     public Discussion(){
-        super(null,null);
+        super();
     }
 
     public void addComment(Comment comment){

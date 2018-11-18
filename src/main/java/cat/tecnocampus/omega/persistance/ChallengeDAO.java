@@ -46,7 +46,7 @@ public class ChallengeDAO {
         return jdbcTemplate.query(FIND_ALL, new Object[]{"Challenge"}, mapperEager);
     }
 
-    public int insertDAOChallenge(Challenge challenge) {
-        return jdbcTemplate.update(INSERT_CHALLENGE, challenge.getPostID(), challenge.getTitle(), challenge.getDescription(), challenge.getCreationDay(), challenge.getLikes(), challenge.isEnable(), "Challenge");
+    public int insertDAOChallenge(Challenge challenge,String category) {
+        return jdbcTemplate.update(INSERT_CHALLENGE, challenge.getPostID(), challenge.getTitle(), challenge.getDescription(), challenge.getCreationDay(), challenge.getLikes(), challenge.isEnable(), "Challenge",category);
     }
 }
