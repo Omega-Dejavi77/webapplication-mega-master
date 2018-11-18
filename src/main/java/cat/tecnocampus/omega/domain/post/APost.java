@@ -23,9 +23,10 @@ public abstract class APost {
     protected int likes;
     protected boolean enable;
     protected List<Exercise> exerciseList;
+    protected String category;
 
 
-    public APost (String postID, String description, String title){
+    public APost (String postID, String description, String title,String category){
         this.postID=postID;
         this.description=description;
         this.title=title;
@@ -33,8 +34,9 @@ public abstract class APost {
         likes = 0;
         enable=true;
         exerciseList=new ArrayList<Exercise>();
+        this.category=category;
     }
-    public APost (String description,String title){
+    public APost (String description,String title, String category){
         postID=UUID.randomUUID().toString();
         this.description=description;
         this.title=title;
@@ -42,8 +44,12 @@ public abstract class APost {
         likes = 0;
         enable=true;
         exerciseList=new ArrayList<Exercise>();
+        this.category=category;
     }
 
+    public String getCategory(){
+        return category;
+    }
     public String getPostID() {
         return postID;
     }

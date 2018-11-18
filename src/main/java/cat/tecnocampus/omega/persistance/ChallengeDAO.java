@@ -17,8 +17,8 @@ public class ChallengeDAO {
     private JdbcTemplate jdbcTemplate;
     private ExerciseDAO exerciseDAO;
     private final String FIND_ALL = "select * from Posts where son_type=?";
-
-     private final String INSERT_CHALLENGE = "INSERT INTO posts (post_ID, title, description, creationDay, likes, enable, son_TYPE) VALUES(?, ?, ?, ?, ?,?,?)";
+    private final String INSERT_CHALLENGE = "INSERT INTO posts (post_ID, title, description, creationDay, likes, enable, son_TYPE,category) VALUES(?, ?, ?, ?, ?,?,?,?)";
+    private final String FIND_BY_CATEGORY= "select * from Posts where category=? AND son_type=?";
 
 
     public ChallengeDAO(JdbcTemplate jdbcTemplate, ExerciseDAO exerciseDAO) {
@@ -27,8 +27,12 @@ public class ChallengeDAO {
     }
 
     private Challenge challengeMapper(ResultSet resultSet) throws SQLException {
-        Challenge challenge = new Challenge(resultSet.getString("post_id"), resultSet.getString("description"), resultSet.getString("title"));
+        Challenge challenge = new Challenge(resultSet.getString("post_id"), resultSet.getString("description"), resultSet.getString("title"), resultSet.getString("category"));
         return challenge;
+    }
+
+    public List<Challenge> findByCategory(String category){
+        return jdbcTemplate.query(FIND_BY_CATEGORY,new Object[]{category,"Challenge"}, mapperEager);
     }
 
     private RowMapper<Challenge> mapperEager = (resultSet, i) -> {

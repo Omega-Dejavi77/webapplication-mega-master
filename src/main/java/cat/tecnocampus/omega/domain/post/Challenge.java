@@ -4,14 +4,14 @@ import java.util.Date;
 
 public class Challenge  extends APost {
 
-    public Challenge(String id,String description, String title) {
-        super(id,description,title);
+    public Challenge(String id,String description, String title, String category) {
+        super(id,description,title, category);
     }
-    public Challenge(String description, String title) {
-        super(description, title);
+    public Challenge(String description, String title, String category) {
+        super(description, title, category);
     }
     public  Challenge(){
-        super(null,null);
+        super(null,null,null);
     }
     @Override
     public void setDescription(String description) {

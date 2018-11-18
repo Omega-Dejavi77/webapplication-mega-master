@@ -16,8 +16,8 @@ public class TutorialController {
         this.tutorialDAO = tutorialDAO;
     }
 
-    public Tutorial insertTutorial(String description, String title){
-        Tutorial tutorial = new Tutorial(description,title);
+    public Tutorial insertTutorial(String description, String title, String category){
+        Tutorial tutorial = new Tutorial(description,title,category);
         insert(tutorial);
         return tutorial;
     }
@@ -33,5 +33,6 @@ public class TutorialController {
     public Tutorial findById(String id){
         return tutorialDAO.findById(id);
     }
+    public  List<Tutorial> findByCategory(String category){ return tutorialDAO.findByCategory(category);}
 
 }

@@ -4,16 +4,16 @@ import java.util.Date;
 
 public class Tutorial extends APost {
 
-    public Tutorial(String id,String description, String title) {
-        super(id,description,title);
+    public Tutorial(String id,String description, String title, String category) {
+        super(id,description,title, category);
     }
 
-    public Tutorial(String description, String title) {
-        super(description,title);
+    public Tutorial(String description, String title, String category) {
+        super(description,title, category);
     }
 
     public Tutorial() {
-        super(null,null);
+        super(null,null, null);
     }
 
 
