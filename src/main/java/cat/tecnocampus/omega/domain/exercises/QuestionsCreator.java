@@ -1,13 +1,13 @@
 package cat.tecnocampus.omega.domain.exercises;
 
-import cat.tecnocampus.omega.persistanceController.ExercisesDAOController;
+import cat.tecnocampus.omega.persistanceController.ExerciseController;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class QuestionsCreator {
 
-    public static void fillTheGapCreator(String text, ExercisesDAOController exercisesDAOController, String exerciseID) {
+    public static void fillTheGapCreator(String text, ExerciseController exerciseController, String exerciseID) {
         String[] beforeHashtag = text.split("#R");
         if (beforeHashtag.length > 1) {
             int counter = 0;
@@ -25,14 +25,14 @@ public class QuestionsCreator {
                 question.validation();
                 Solution solution = new Solution(afterHastag[0], true);
                 solution.validation();
-                exercisesDAOController.insertQuestion(question, exerciseID);
-                exercisesDAOController.insertSolution(solution, question.getQuestion_ID());
+                exerciseController.insertQuestion(question, exerciseID);
+                exerciseController.insertSolution(solution, question.getQuestion_ID());
                 counter++;
             }
         }
     }
 
-    public static void testCreator(String text, ExercisesDAOController exercisesDAOController, String exerciseID) {
+    public static void testCreator(String text, ExerciseController exerciseController, String exerciseID) {
         text.replace("/n", "");
         String[] questions = text.split("#Q");
         if (questions.length > 1) {
@@ -45,7 +45,7 @@ public class QuestionsCreator {
                 String[] questionPlusSolutions = s.split("#/Q");
                 Question question = new Question(counter + ". " + questionPlusSolutions[0]);
                 question.validation();
-                exercisesDAOController.insertQuestion(question, exerciseID);
+                exerciseController.insertQuestion(question, exerciseID);
                 String[] solutions = questionPlusSolutions[1].split("#R");
                 if (solutions.length > 1) {
                     List<Solution> listSolution = new ArrayList<Solution>();
@@ -70,7 +70,7 @@ public class QuestionsCreator {
                     }
                     solutionListValidation(listSolution, counter);
                     for (Solution solution : listSolution) {
-                        exercisesDAOController.insertSolution(solution, question.getQuestion_ID());
+                        exerciseController.insertSolution(solution, question.getQuestion_ID());
                     }
                 }
                 counter++;

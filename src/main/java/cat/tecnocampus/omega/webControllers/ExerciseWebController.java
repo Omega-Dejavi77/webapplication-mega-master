@@ -1,7 +1,7 @@
 package cat.tecnocampus.omega.webControllers;
 
 import cat.tecnocampus.omega.domain.exercises.*;
-import cat.tecnocampus.omega.persistanceController.ExercisesDAOController;
+import cat.tecnocampus.omega.persistanceController.ExerciseController;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.Errors;
@@ -16,9 +16,9 @@ import java.util.Map;
 
 @Controller
 public class ExerciseWebController {
-    private final ExercisesDAOController exercisesDAO;
+    private final ExerciseController exercisesDAO;
 
-    public ExerciseWebController(ExercisesDAOController exercisesDAO) {
+    public ExerciseWebController(ExerciseController exercisesDAO) {
         this.exercisesDAO = exercisesDAO;
     }
 

@@ -38,13 +38,11 @@ public class ForumDAO {
     }
 
     private Discussion discussionMapper(ResultSet resultSet) throws SQLException {
-        System.out.println();
         Discussion discussion = new Discussion(resultSet.getString("post_id"),resultSet.getString("description"), resultSet.getString("title"), userDAO.findByUsername(resultSet.getString("username")));
         return discussion;
     }
 
     private RowMapper<Comment> commentMapper = (resultSet, i) -> {
-        System.out.println(resultSet.getString("post_id")+"-"+resultSet.getString("comment")+"-"+userDAO.findByUsername(resultSet.getString("username")).getUsername());
         Comment comment = new Comment(resultSet.getString("post_id"),resultSet.getString("comment"), userDAO.findByUsername(resultSet.getString("username")));
         return comment;
     };

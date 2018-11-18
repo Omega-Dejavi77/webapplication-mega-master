@@ -2,7 +2,7 @@ package cat.tecnocampus.omega.webControllers;
 
 import cat.tecnocampus.omega.domain.exercises.Exercise;
 import cat.tecnocampus.omega.domain.post.Tutorial;
-import cat.tecnocampus.omega.persistanceController.ExercisesDAOController;
+import cat.tecnocampus.omega.persistanceController.ExerciseController;
 import cat.tecnocampus.omega.persistanceController.TutorialController;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -18,11 +18,11 @@ import javax.validation.Valid;
 public class TutorialWebController {
 
     private TutorialController tutorialController;
-    private ExercisesDAOController exerciseController;
+    private ExerciseController exerciseController;
 
-    public TutorialWebController(TutorialController tutorialController, ExercisesDAOController exercisesController) {
+    public TutorialWebController(TutorialController tutorialController, ExerciseController exerciseController) {
         this.tutorialController = tutorialController;
-        this.exerciseController = exercisesController;
+        this.exerciseController = exerciseController;
     }
 
     @GetMapping("tutorials/{category}")

@@ -1,23 +1,21 @@
 package cat.tecnocampus.omega.persistanceController;
 
-import cat.tecnocampus.omega.domain.User;
 import cat.tecnocampus.omega.domain.exercises.*;
 import cat.tecnocampus.omega.persistance.ExerciseDAO;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
 
-@Service("ExercisesDAOController")
-public class ExercisesDAOController {
+@Service("ExerciseController")
+public class ExerciseController {
     private final ExerciseDAO exerciseDAO;
     private final UserController userController;
     private Map<Float,String> marks;
 
-    public ExercisesDAOController(ExerciseDAO exerciseDAO, UserController userController) {
+    public ExerciseController(ExerciseDAO exerciseDAO, UserController userController) {
         this.exerciseDAO = exerciseDAO;
         this.userController = userController;
     }
