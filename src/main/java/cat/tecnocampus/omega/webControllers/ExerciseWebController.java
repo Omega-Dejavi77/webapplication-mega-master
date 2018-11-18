@@ -57,7 +57,7 @@ public class ExerciseWebController {
             if (type.equals("Tut"))
                 return "redirect:/tutorial/{id}";
             else
-                return "redirect:/tutorial/{id}";
+                return "redirect:/challenge/{id}";
         else {
             redirectAttributes.addAttribute("id", id);
             redirectAttributes.addAttribute("type", type);
@@ -85,7 +85,7 @@ public class ExerciseWebController {
             if (type.equals("Tut"))
                 return "redirect:/tutorial/{id}";
             else
-                return "redirect:/tutorial/{id}";
+                return "redirect:/challenge/{id}";
         else {
             redirectAttributes.addAttribute("id", id);
             redirectAttributes.addAttribute("type", type);
