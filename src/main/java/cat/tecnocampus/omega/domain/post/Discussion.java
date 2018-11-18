@@ -37,6 +37,9 @@ public class Discussion extends APost {
         }
     }
 
+    public List<Comment> getComments(){
+        return comments;
+    }
     void setHasBestComment(boolean stat,Comment comment){
         hasBestComment=stat;
     }

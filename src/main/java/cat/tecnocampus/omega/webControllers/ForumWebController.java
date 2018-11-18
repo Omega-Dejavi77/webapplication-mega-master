@@ -9,7 +9,7 @@ import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.validation.Valid;
@@ -42,7 +42,7 @@ public class ForumWebController {
     }
 
     @PostMapping("showDiscussion/{id}")
-    public String createComment(@PathVariable String id,@RequestParam(value = "comment") String comment, Errors errors, RedirectAttributes redirectAttributes){
+    public String createComment(@PathVariable String id,@RequestBody String comment, Errors errors, RedirectAttributes redirectAttributes){
         if (errors.hasErrors()) {
             return "post/showDiscussion/{id}";
         }

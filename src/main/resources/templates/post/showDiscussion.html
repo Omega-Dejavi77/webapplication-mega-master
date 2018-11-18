@@ -9,8 +9,15 @@
 <form method="post">
     <h2 align="center" th:text="${discussion.title}"></h2>
     <table border="1">
-    <tr><td th:text="${discussion.description}"></td></tr>
-        <td><textarea name="comment" rows="8" cols="64" minlength="2" maxlength="2048"/>
+        <tr>
+            <td valign="top" th:text="${discussion.description}">Description</td>
+            <table border="1">
+                <tr th:each="comment : ${discussion.getComments()}">
+                    <th valign="top"th:text="${comment.comment}">Comment</th>
+                </tr>
+            </table>
+        </tr>
+        <td><textarea input type="text" name="comment" rows="8" cols="64" minlength="2" maxlength="2048"/>
             </textarea>
             <input type="submit" value="Send comment"/>
         </td>
