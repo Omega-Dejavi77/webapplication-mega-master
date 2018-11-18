@@ -17,7 +17,7 @@ public class ChallengeController {
     }
 
     public Challenge insertChallenge(String description, String title, String category) {
-        Challenge challenge = new Challenge(description, title,category);
+        Challenge challenge = new Challenge(description, title, category);
         insert(challenge);
         return challenge;
 
@@ -25,7 +25,7 @@ public class ChallengeController {
 
     @Transactional
     public int insert(Challenge challenge) {
-        return challengeDAO.insertDAOChallenge(challenge);
+        return challengeDAO.insertDAOChallenge(challenge, "Java");
     }
 
     public List<Challenge> findAll() {
@@ -33,7 +33,7 @@ public class ChallengeController {
         return challengeDAO.findAll();
     }
 
-    public List<Challenge> findByategory(String category){
+    public List<Challenge> findByategory(String category) {
         return challengeDAO.findByCategory(category);
     }
 

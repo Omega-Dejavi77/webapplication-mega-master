@@ -4,8 +4,10 @@
 <head>
     <meta charset="UTF-8">
     <title>Error: Database failed</title>
+    <link href="../../fragment/header2.css" rel="stylesheet" type="text/css">
 </head>
 <body>
+<div th:replace="fragment/header :: header"></div>
 <h1>Error: SQL ocurred on: <span th:text="${where}">wehre</span></h1>
 </body>
 </html>

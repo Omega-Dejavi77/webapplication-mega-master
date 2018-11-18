@@ -4,10 +4,10 @@
 <head>
     <meta charset="UTF-8">
     <title>Do Test Excercise</title>
-    <script language="javascript">
-    </script>
+    <link href="../../fragment/header2.css" rel="stylesheet" type="text/css">
 </head>
 <body>
+<div th:replace="fragment/header :: header"></div>
 <h1>Do Test Exercise</h1>
 <form method="POST">
         <span align="left" th:each="question : ${exercise.getQuestions()}">

@@ -11,7 +11,7 @@
             padding: 3px;
         }
 
-        div {
+        div .solutions{
             display: inline-block;
             min-width: 25px;
             min-height: 10px;
@@ -36,13 +36,15 @@
             document.getElementById(data).className = "";
         }
     </script>
+    <link href="../../fragment/header2.css" rel="stylesheet" type="text/css">
 </head>
 <body>
+<div th:replace="fragment/header :: header"></div>
 <h1 align="center" th:text="${exercise.description}"></h1>
 <form method="POST">
         <span align="left" th:each="question : ${exercise.getQuestions()}">
             <td valign="top" th:text="${question.text}">Text</td>
-            <div align="left" th:each="solution : ${question.getSolutions()}" ondrop="drop(event)"
+            <div align="left" class="solutions" th:each="solution : ${question.getSolutions()}" ondrop="drop(event)"
                  ondragover="allowDrop(event)">
             </div>
         </span>
