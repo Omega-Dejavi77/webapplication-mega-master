@@ -67,8 +67,12 @@ public class UserWebController {
         //}
         //return "error/principalError";
     }
-
-    @GetMapping("/profile/users/{username}")
+    @GetMapping("profile")
+    public String profileUser(Principal principal, RedirectAttributes redirectAttributes) {
+        redirectAttributes.addAttribute("username", principal.getName());
+        return "redirect:/profile/users/{username}";
+    }
+    @GetMapping("profile/users/{username}")
     public String profileUser(@PathVariable String username, Model model) {
         model.addAttribute("user", userController.getUser(username));
         return "userProfile";

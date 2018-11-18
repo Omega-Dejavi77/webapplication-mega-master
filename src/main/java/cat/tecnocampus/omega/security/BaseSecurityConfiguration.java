@@ -16,6 +16,9 @@ public class BaseSecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .antMatchers("/profile/users/*").permitAll()
                 .antMatchers("/user").authenticated()
                 .antMatchers("/users/{username}").authenticated()
+//                .antMatchers("/forum").permitAll()
+//                .antMatchers("/tutorials").permitAll()
+//                .antMatchers("/challenges").permitAll()
                 .antMatchers("/*").authenticated()
                 .and()
                 .formLogin()
@@ -23,11 +26,11 @@ public class BaseSecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .httpBasic()
                 .and()
                 .rememberMe()
-                    .tokenValiditySeconds(241920)
-                    .and()
+                .tokenValiditySeconds(241920)
+                .and()
                 .logout()
-                    .logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
-                    .logoutSuccessUrl("/Errors.html");
+                .logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
+                .logoutSuccessUrl("/Errors.html");
         http
                 .csrf().disable()
                 .headers()

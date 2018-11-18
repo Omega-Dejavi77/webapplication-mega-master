@@ -2,7 +2,7 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8"/>
-    <title>Users</title>
+    <title>Tutorials</title>
     <link href="../../fragment/header2.css" rel="stylesheet" type="text/css">
 </head>
 <body>
@@ -12,10 +12,10 @@
     <table>
         <tr th:each="tutorial : ${tutorialList}">
             <td th:text="${tutorial.title}">Title</td>
-            <br>
-            <input type="Submit" name="chosen" th:value="${tutorial.postID}"><br>
+            <td><input type="Submit" name="chosen" th:value="${tutorial.postID}"></td>
         </tr>
     </table>
 </form>
+<input type="button" value="Create New Tutorial" onclick="window.location.href='/createTutorial' ">
 </body>
 </html>

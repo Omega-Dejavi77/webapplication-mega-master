@@ -3,13 +3,12 @@
       xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Do Fill The Gap Excercise</title>
+    <title>Results Fill The Gap Excercise</title>
     <link href="../../fragment/header2.css" rel="stylesheet" type="text/css">
 </head>
 <body>
 <div th:replace="fragment/header :: header"></div>
 <div align="center">
-
     <h1 th:text="${exercise.description}"></h1>
     <form method="POST">
         <span align="left" th:each="question : ${exercise.getQuestions()}">

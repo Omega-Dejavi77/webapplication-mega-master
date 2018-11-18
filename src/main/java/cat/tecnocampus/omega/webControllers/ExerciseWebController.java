@@ -174,7 +174,6 @@ public class ExerciseWebController {
     public String showMark(String chosen, @PathVariable String post, @PathVariable String exercise, @PathVariable String type, @PathVariable String drag, RedirectAttributes redirectAttributes) {
         redirectAttributes.addAttribute("id", post);
         if (chosen.equals("Return")) {
-
             return "redirect:/tutorial/{id}";
         }
         redirectAttributes.addAttribute("post", post);

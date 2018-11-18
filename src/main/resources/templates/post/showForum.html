@@ -8,16 +8,16 @@
 <body>
 <div th:replace="fragment/header :: header"></div>
 <div>
-<h2 align="center">Forum</h2>
-<form method="post">
-    <table>
-        <tr th:each="discussion : ${discussions}">
-            <td th:text="${discussion.title}">Discussion Title</td>
-            <br>
-            <input type="Submit" name="chosen" th:value="${discussion.postID}"><br>
-        </tr>
-    </table>
-</form>
+    <h2 align="center">Forum</h2>
+    <form method="post">
+        <table>
+            <tr th:each="discussion : ${discussions}">
+                <td th:text="${discussion.title}">Discussion Title</td>
+                <td><input type="Submit" name="chosen" th:value="${discussion.postID}"></td>
+            </tr>
+        </table>
+        <input type="button" value="Create New Discussion" onclick="window.location.href='/createDiscussion' ">
+    </form>
 </div>
 </body>
 </html>

@@ -12,10 +12,10 @@
     <table>
         <tr th:each="challenge : ${challengesList}">
             <td th:text="${challenge.title}">Title</td>
-            <br>
-            <input type="Submit" name="chosen" th:value="${challenge.postID}"><br>
+            <td><input type="Submit" name="chosen" th:value="${challenge.postID}"></td>
         </tr>
     </table>
 </form>
+<input type="button" value="Create New Challenge" onclick="window.location.href='/createChallenge' ">
 </body>
 </html>
