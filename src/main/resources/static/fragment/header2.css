@@ -1,0 +1,82 @@
+@font-face {
+    font-family: 'quicksandbold';
+    src: url('quicksand_bold-webfont.woff2') format('woff2'),
+    url('quicksand_bold-webfont.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+
+}
+
+body {
+    margin: 0;
+    padding: 0;
+}
+
+#header_container {
+    background: #41d6f2;
+    height: 60px;
+    left: 0;
+    position: fixed;
+    width: 100%;
+    top: 0;
+}
+
+#header {
+    line-height: 60px;
+    margin: 0 auto;
+    width: 940px;
+    text-align: left;
+}
+
+div .logo {
+    content: url(winter.png);
+    width: 206px;
+    margin-top: 2px;
+    margin-left: -200px;
+    float: left;
+}
+
+div .logo:hover {
+    background: #0a79f2;
+}
+
+div .user {
+    float: right;
+    margin-right: -700px;
+    display: inline-block;
+    color: #fff;
+    text-decoration: none;
+    padding: 10px 20px;
+    line-height: normal;
+    font-family: "quicksandbold";
+    margin-top: 15px;
+    font-size: 10px;
+    font-weight: bold;
+}
+div .user:hover {
+    color: #0a79f2;
+}
+
+div nav {
+    float: right;
+    line-height: 60px;
+}
+
+div nav a {
+    display: inline-block;
+    color: #fff;
+    text-decoration: none;
+    padding: 10px 20px;
+    line-height: normal;
+    font-family: "quicksandbold";
+    margin-top: 5px;
+    font-size: 25px;
+    font-weight: bold;
+    -webkit-transition: all 500ms ease;
+    -o-transition: all 500ms ease;
+    transition: all 500ms ease;
+}
+
+div nav a:hover {
+    color: #0a79f2;
+}

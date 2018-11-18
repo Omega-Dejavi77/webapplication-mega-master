@@ -64,6 +64,7 @@ CREATE TABLE Comments(
     FOREIGN KEY (username) REFERENCES Users(username),
     FOREIGN KEY (post_id) REFERENCES Posts(post_id)
 );
+
 DROP TABLE IF EXISTS UserCategory;
 CREATE TABLE UserCategory(
   category VARCHAR (32),

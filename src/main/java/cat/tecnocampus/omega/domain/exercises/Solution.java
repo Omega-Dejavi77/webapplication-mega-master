@@ -14,11 +14,11 @@ public class Solution {
     @NotNull
     private boolean enable;
 
-    public Solution() {
-    }
-
     @NotNull
     private boolean correct;
+
+    public Solution() {
+    }
 
     public Solution(@NotNull String solution_ID, @NotNull @Size(max = 1024, message = "The text is too long") String text, int order, @NotNull boolean correct) {
         this.solution_ID = solution_ID;
@@ -80,7 +80,6 @@ public class Solution {
     public void setCorrect(boolean correct) {
         this.correct = correct;
     }
-    
 
     public boolean getCorrect(){
         return correct;

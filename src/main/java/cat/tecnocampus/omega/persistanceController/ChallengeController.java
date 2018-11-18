@@ -12,23 +12,23 @@ public class ChallengeController {
 
     private final ChallengeDAO challengeDAO;
 
-    public ChallengeController(ChallengeDAO challengeDAO){
-        this.challengeDAO=challengeDAO;
+    public ChallengeController(ChallengeDAO challengeDAO) {
+        this.challengeDAO = challengeDAO;
     }
 
-    public Challenge insertChallenge(String description,String title){
-        Challenge challenge= new Challenge(description,title);
+    public Challenge insertChallenge(String description, String title) {
+        Challenge challenge = new Challenge(description, title);
         insert(challenge);
         return challenge;
 
     }
 
     @Transactional
-    public int insert(Challenge challenge){
-        return  challengeDAO.insertDAOChallenge(challenge);
+    public int insert(Challenge challenge) {
+        return challengeDAO.insertDAOChallenge(challenge);
     }
 
-    public List<Challenge> findAll(){
+    public List<Challenge> findAll() {
 
         return challengeDAO.findAll();
     }

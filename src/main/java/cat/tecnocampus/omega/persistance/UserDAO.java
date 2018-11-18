@@ -6,6 +6,7 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
 
+import java.util.Date;
 import java.util.List;
 
 @Repository
@@ -13,8 +14,7 @@ public class UserDAO {
 
     private JdbcTemplate jdbcTemplate;
 
-    private final String INSERT = "insert into Users (username, password, first_name, last_name, email, birthday, experience_points, level, enable) " +
-            "values(?, ?, ?, ?, ?, ?, ?, ?, ?)";
+    private final String INSERT_USER = "INSERT INTO Users (username, password, first_name, last_name, email, birthday, experience_points, level, enable) VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?)";
     private final String FIND_ALL = "SELECT * FROM Users";
     private final String FIND_BY_USERNAME = "SELECT * FROM Users WHERE username = ?";
     private final String DELETE_USER = "update Users set enable=false where username=?";
@@ -38,8 +38,7 @@ public class UserDAO {
     }
 
     public int insertDAOUser(User user) {
-        return jdbcTemplate.update(INSERT, user.getUsername(), user.getPassword(), user.getFirstName(), user.getLastName()
-                , user.getEmail(), user.getBirthday(), 0, 0, 1);
+        return jdbcTemplate.update(INSERT_USER, user.getUsername(), user.getPassword(), user.getFirstName(), user.getLastName(), user.getEmail(), user.getBirthday(), 0, 0, 1);
     }
 
     public List<User> findAll() {
