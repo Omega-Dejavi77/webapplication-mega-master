@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:c="http://www.w3.org/1999/html">
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/html">
 <head>
     <meta charset="UTF-8"/>
     <title>RegisterUser</title>
@@ -8,19 +8,36 @@
 <body>
 <header>
     <form method="post" th:object="${createUser}">
+        <div align="left" class="error" th:if="${#fields.hasErrors('*')}">
+            <ul>
+                <li th:each="err : ${#fields.errors('*')}"
+                    th:text="${err}">Input is invalid
+                </li>
+            </ul>
+        </div>
         <div class="hero">
             <h1>Register</h1>
             <div class="login">
-                <input type="text" class="lgn login-name" th:field="*{username}" />Username<br/>
-                <input type="text" class="lgn login-name" th:field="*{firstName}" />firstName<br/>
-                <input type="text" class="lgn login-name" th:field="*{lastName}" />lastName<br/>
-                <input type="text" class="lgn login-name" th:field="*{email}" />email<br/>
-                <input type="password" class="lgn login-password" th:field="*{password}" />password<br/>
-                <input type="text" class="lgn login-name" th:field="*{birthday}" />birthday must be follow dd/mm/yyyy format<br/>
+                <div>Username <input type="text" class="lgn login-name" th:field="*{username}"
+                       th:class="${#fields.hasErrors('username')}?'error'"/></div><br/>
+
+                <div>First name <input type="text" class="lgn login-name" th:field="*{firstName}"
+                       th:class="${#fields.hasErrors('firstName')}?'error'"/></div><br/>
+
+                <div>Last name <input type="text" class="lgn login-name" th:field="*{lastName}"
+                       th:class="${#fields.hasErrors('lastName')}?'error'"/></div><br/>
+
+                <div>Email <input type="text" class="lgn login-name" th:field="*{email}"
+                       th:class="${#fields.hasErrors('email')}?'error'"/></div><br/>
+
+                <div>Password <input type="password" class="lgn login-password" th:field="*{password}"
+                       th:class="${#fields.hasErrors('password')}?'error'"/></div><br/>
+
+                <div>Birthday (dd/mm/yyyy)<input type="text" class="lgn login-name" th:field="*{birthday}"
+                       th:class="${#fields.hasErrors('birthday')}?'error'"/></div><br/>
 
                 <div class="button">
-                    <a href="InitialPage.html" class="btn button-one">sign in</a>
-                    <a href="InitialPage.html" class="btn button-two">register</a>
+                    <a href="MainPage.html" class="btn button-one">sign in</a>
                     <input type="submit" class="btn button-one" value="createUser">
                 </div>
             </div>

@@ -1,7 +1,6 @@
 INSERT INTO Posts  (post_id, title, description, creationDay, likes, enable, son_type) VALUES('01293c0f-bf77-42d7-9fa3-8b101f33ee5b','Tutorial','Tutorial Description',current_timestamp,0,1,'Tutorial');
 INSERT INTO Posts  (post_id, title, description, creationDay, likes, enable, son_type) VALUES ('01293c0f-bf77-42d7-9fa3-8b101f33ee6b','Challenge','Challenge Description',current_timestamp,0,1,'Challenge');
 
-
 INSERT INTO Exercises VALUES ('1', 'Test excercise for Tutorial', 1, 1,0,'Test','01293c0f-bf77-42d7-9fa3-8b101f33ee5b');
 INSERT INTO Exercises VALUES ('2', 'Fill the gap excercise for Tutorial', 1, 1,0,'Fill','01293c0f-bf77-42d7-9fa3-8b101f33ee5b');
 INSERT INTO Exercises VALUES ('3', 'Test excercise for Challenge', 1, 1,0,'Test','01293c0f-bf77-42d7-9fa3-8b101f33ee6b');
@@ -22,4 +21,3 @@ INSERT INTO Solutions (solution_id,texts, correct, enable, question_id) VALUES (
 INSERT INTO Solutions (solution_id,texts, correct, enable, question_id) VALUES ('8', 'The String', 0, 1,'3');
 INSERT INTO Solutions (solution_id,texts, correct, enable, question_id) VALUES ('9', 'The double', 0, 1,'3');
 INSERT INTO Solutions (solution_id,texts, correct, enable, question_id) VALUES ('10', 'The boolean', 1, 1,'4');
-

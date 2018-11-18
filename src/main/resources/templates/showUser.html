@@ -6,14 +6,30 @@
     <link rel="stylesheet" type="text/css" th:href="@{../table.css}"/>
 </head>
 <body>
-<h1><span th:text="${user.username}"></span></h1>
-<div><span th:text="${user.password}"></span></div>
-<div><span th:text="${user.firstName}"></span></div>
-<div><span th:text="${user.lastName}"></span></div>
-<div><span th:text="${user.email}"></span></div>
-<div><span th:text="${user.birthday}"></span></div>
-<div><span th:text="${user.experiencePoints}"></span></div>
-<div><span th:text="${user.level}"></span></div>
-<div><span th:text="${user.enable}"></span></div>
+    <h1><span th:text="${user.username}"></span></h1>
+    <table border=3>
+        <tr>
+            <th>USERNAME</th>
+            <th>PASSWORD</th>
+            <th>FIRST NAME</th>
+            <th>LAST NAME</th>
+            <th>EMAIL</th>
+            <th>BIRTHDAY</th>
+            <th>EXPERIENCE POINTS</th>
+            <th>LEVEL</th>
+            <th>ENABLE</th>
+        </tr>
+        <tr>
+           <th><span th:text="${user.username}"></span></th>
+           <th><span th:text="${user.password}"></span></th>
+           <th><span th:text="${user.firstName}"></span></th>
+           <th><span th:text="${user.lastName}"></span></th>
+           <th><span th:text="${user.email}"></span></th>
+           <th><span th:text="${user.birthday}"></span></th>
+           <th><span th:text="${user.experiencePoints}"></span></th>
+           <th><span th:text="${user.level}"></span></th>
+           <th><span th:text="${user.enable}"></span></th>
+        </tr>
+    </table>
 </body>
 </html>
