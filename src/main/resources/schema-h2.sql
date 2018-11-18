@@ -1,6 +1,6 @@
 DROP TABLE IF EXISTS Category;
 CREATE TABLE Category(
-  category VARCHAR (32) PRIMARY KEY,
+    category VARCHAR (32) PRIMARY KEY,
 );
 DROP TABLE IF EXISTS Users;
 CREATE TABLE Users (
