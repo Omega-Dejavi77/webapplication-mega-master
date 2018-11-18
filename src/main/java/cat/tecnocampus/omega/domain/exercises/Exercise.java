@@ -86,8 +86,14 @@ public abstract class Exercise {
         return questions;
     }
 
-    public void addQuestion(List<Question> question) {
+    public void addQuestions(List<Question> question) {
         questions.addAll(question);
+    }
+
+    public void addQuestion(Question question) {
+        if(questions==null)
+            questions=new ArrayList<Question>();
+        questions.add(question);
     }
 
     public String getType() {
@@ -118,5 +124,9 @@ public abstract class Exercise {
             numSol++;
         }
         return (numCorr / numSol) * 10;
+    }
+
+    protected void setQuestions(String questions) {
+
     }
 }

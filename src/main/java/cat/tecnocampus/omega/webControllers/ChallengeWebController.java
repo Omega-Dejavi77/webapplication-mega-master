@@ -72,7 +72,7 @@ public class ChallengeWebController {
     @GetMapping("createChallenge")
     public String createChallenge(Model model) {
         model.addAttribute(new Challenge());
-        return "post/newTutorial";
+        return "post/newChallenge";
     }
 
     @PostMapping("createChallenge")

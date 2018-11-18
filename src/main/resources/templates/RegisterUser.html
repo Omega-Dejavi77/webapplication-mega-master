@@ -4,8 +4,10 @@
     <meta charset="UTF-8"/>
     <title>RegisterUser</title>
     <link href="RegisterUser.css" rel="stylesheet" type="text/css">
+    <link href="../../fragment/header2.css" rel="stylesheet" type="text/css">
 </head>
 <body>
+<div th:replace="fragment/header :: header"></div>
 <header>
     <form method="post" th:object="${createUser}">
         <div align="left" class="error" th:if="${#fields.hasErrors('*')}">

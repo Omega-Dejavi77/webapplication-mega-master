@@ -63,9 +63,9 @@ public class ExerciseDAO {
         List<Question> questions = findQuestionByExercise(exercise.getExercise_ID());
         for (Question question : questions) {
             List<Solution> solutions = findSolutionByQuestion(question.getQuestion_ID());
-            question.addSolution(solutions);
+            question.addSolutions(solutions);
         }
-        exercise.addQuestion(questions);
+        exercise.addQuestions(questions);
         return exercise;
     };
 
