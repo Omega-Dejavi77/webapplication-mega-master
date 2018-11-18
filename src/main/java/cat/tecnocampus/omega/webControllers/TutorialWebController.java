@@ -1,6 +1,8 @@
 package cat.tecnocampus.omega.webControllers;
 
+import cat.tecnocampus.omega.domain.exercises.Exercise;
 import cat.tecnocampus.omega.domain.post.Tutorial;
+import cat.tecnocampus.omega.persistanceController.ExercisesDAOController;
 import cat.tecnocampus.omega.persistanceController.TutorialController;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -16,9 +18,11 @@ import javax.validation.Valid;
 public class TutorialWebController {
 
     private TutorialController tutorialController;
+    private ExercisesDAOController exerciseController;
 
-    public TutorialWebController(TutorialController tutorialController) {
+    public TutorialWebController(TutorialController tutorialController, ExercisesDAOController exercisesController) {
         this.tutorialController = tutorialController;
+        this.exerciseController = exercisesController;
     }
 
     @GetMapping("tutorials")
@@ -26,9 +30,11 @@ public class TutorialWebController {
         model.addAttribute("tutorialList", tutorialController.findAll());
         return "post/showTutorials";
     }
+
     @PostMapping("tutorials")
-    public String listTutorials(String chosen,RedirectAttributes redirectAttributes) {
-        redirectAttributes.addAttribute("id",chosen);
+    public String listTutorials(String chosen, RedirectAttributes redirectAttributes) {
+        System.out.println(chosen);
+        redirectAttributes.addAttribute("id", chosen);
         return "redirect:/tutorial/{id}";
     }
 
@@ -37,16 +43,23 @@ public class TutorialWebController {
         model.addAttribute("tutorial", tutorialController.findById(id));
         return "post/showTutorial";
     }
+
     @PostMapping("tutorial/{id}")
-    public String showTutorial(@Valid Tutorial tutorial, Errors errors, Model model, RedirectAttributes redirectAttributes) {
+    public String showTutorial(String chosen, @PathVariable String id, RedirectAttributes redirectAttributes) {
+        if (chosen.equals("Return"))
+            return "redirect:/tutorials";
 
-        model.addAttribute("title", tutorial.getTitle());
-
-        tutorialController.insert(tutorial);
-
-        redirectAttributes.addAttribute("id",tutorial.getPostID());
-        return "redirect:/createExercise/{id}";
+        Exercise exercise = exerciseController.getExercise(chosen);
+        redirectAttributes.addAttribute("post", id);
+        redirectAttributes.addAttribute("exercise", exercise.getExercise_ID());
+        redirectAttributes.addAttribute("type", "do");
+        if (exercise.getType().equals("Test"))
+            return "redirect:/doTest/{type}/{post}/{exercise}";
+        if (exercise.isDrag())
+            return "redirect:/doFill/{type}/{post}/{exercise}/{drag}";
+        return "redirect:/doFill/{type}/{post}/{exercise}/{drag}";
     }
+
     @GetMapping("createTutorial")
     public String createTutorial(Model model) {
         model.addAttribute(new Tutorial());
@@ -64,7 +77,7 @@ public class TutorialWebController {
 
         tutorialController.insert(tutorial);
 
-        redirectAttributes.addAttribute("id",tutorial.getPostID());
+        redirectAttributes.addAttribute("id", tutorial.getPostID());
         return "redirect:/createExercise/{id}";
     }
 }
