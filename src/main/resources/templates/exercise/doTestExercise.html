@@ -8,8 +8,9 @@
 </head>
 <body>
 <div th:replace="fragment/header :: header"></div>
-<h1>Do Test Exercise</h1>
-<form method="POST">
+<div>
+    <h1>Do Test Exercise</h1>
+    <form method="POST">
         <span align="left" th:each="question : ${exercise.getQuestions()}">
             <p valign="top" th:text="${question.text}">Text</p>
             <tr align="left" th:each="solution : ${question.getSolutions()}">
@@ -17,7 +18,8 @@
                        th:value="${solution.text}"/><BR>
             </tr>
         </span>
-    <input type="submit" value="Submit">
-</form>
+        <input type="submit" value="Submit">
+    </form>
+</div>
 </body>
 </html>

@@ -22,21 +22,22 @@ public class ExerciseWebController {
         this.exercisesDAO = exercisesDAO;
     }
 
-    @GetMapping("createExercise/{id}")
+    @GetMapping("createExercise/{id}/{type}")
     public String createExercise() {
         return "exercise/newExercise";
     }
 
-    @PostMapping("createExercise/{id}")
-    public String createExercise(String exercise, @PathVariable String id, RedirectAttributes redirectAttributes) {
+    @PostMapping("createExercise/{id}/{type}")
+    public String createExercise(String exercise, @PathVariable String id,@PathVariable String type, RedirectAttributes redirectAttributes) {
         redirectAttributes.addAttribute("id", id);
+        redirectAttributes.addAttribute("type",type);
         if (exercise.equals("Test"))
-            return "redirect:/createTestExercise/{id}";
+            return "redirect:/createTestExercise/{id}/{type}";
         else
-            return "redirect:/createFillTheGapExercise/{id}";
+            return "redirect:/createFillTheGapExercise/{id}/{type}";
     }
 
-    @GetMapping("createTestExercise/{id}")
+    @GetMapping("createTestExercise/{id}/{type}")
     public String createTestExercise(Model model) {
         model.addAttribute(new TestExercise());
         model.addAttribute("testQuestion", new Question());
@@ -44,30 +45,35 @@ public class ExerciseWebController {
         return "exercise/newTestExercise";
     }
 
-    @PostMapping("createTestExercise/{id}")
-    public String createTestExercise(@Valid TestExercise testExercise, Errors errors, @PathVariable String id, String testText, String end, RedirectAttributes redirectAttributes) {
+    @PostMapping("createTestExercise/{id}/{type}")
+    public String createTestExercise(@Valid TestExercise testExercise, Errors errors, @PathVariable String id,@PathVariable String type, String testText, String end, RedirectAttributes redirectAttributes) {
         if (errors.hasErrors()) {
             redirectAttributes.addAttribute("id", id);
             return "exercise/newTestExercise";
         }
         exercisesDAO.insertExercise(testExercise, id, "Test");
         QuestionsCreator.testCreator(testText, exercisesDAO, testExercise.getExercise_ID());
+        redirectAttributes.addAttribute("id", id);
         if (end.equals("Finish"))
-            return "redirect:/posts";
+            if(type.equals("Tut"))
+            return "redirect:/tutorial/{id}";
+            else
+                return "redirect:/tutorial/{id}";
         else {
             redirectAttributes.addAttribute("id", id);
+            redirectAttributes.addAttribute("type",type);
             return "redirect:/createExercise/{id}";
         }
     }
 
-    @GetMapping("createFillTheGapExercise/{id}")
+    @GetMapping("createFillTheGapExercise/{id}/{type}")
     public String createFillTheGapExercise(Model model) {
         model.addAttribute("fillTheGapExercise", new FillTheGapExercise());
         return "exercise/newFillTheGapExercise";
     }
 
-    @PostMapping("createFillTheGapExercise/{id}")
-    public String createFillTheGapExercise(@Valid FillTheGapExercise fillTheGapExercise, Errors errors, @PathVariable String id, String fillText, String end, RedirectAttributes redirectAttributes) {
+    @PostMapping("createFillTheGapExercise/{id}/{type}")
+    public String createFillTheGapExercise(@Valid FillTheGapExercise fillTheGapExercise, Errors errors, @PathVariable String id,@PathVariable String type, String fillText, String end, RedirectAttributes redirectAttributes) {
         if (errors.hasErrors()) {
             redirectAttributes.addAttribute("id", id);
             return "exercise/newFillTheGapExercise";
@@ -76,10 +82,14 @@ public class ExerciseWebController {
         QuestionsCreator.fillTheGapCreator(fillText, exercisesDAO, fillTheGapExercise.getExercise_ID());
 
         if (end.equals("Finish"))
-            return "redirect:/posts";
+            if(type.equals("Tut"))
+                return "redirect:/tutorial/{id}";
+            else
+                return "redirect:/tutorial/{id}";
         else {
             redirectAttributes.addAttribute("id", id);
-            return "redirect:/createExercise/{id}";
+            redirectAttributes.addAttribute("type",type);
+            return "redirect:/createExercise/{id}/{type}";
         }
     }
 

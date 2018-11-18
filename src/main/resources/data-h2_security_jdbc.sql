@@ -48,4 +48,9 @@ INSERT INTO Solutions (solution_id,texts, correct, enable, question_id) VALUES (
 INSERT INTO Solutions (solution_id,texts, correct, enable, question_id) VALUES ('8', 'The String', 0, 1,'3');
 INSERT INTO Solutions (solution_id,texts, correct, enable, question_id) VALUES ('9', 'The double', 0, 1,'3');
 INSERT INTO Solutions (solution_id,texts, correct, enable, question_id) VALUES ('10', 'The boolean', 1, 1,'4');
+INSERT INTO Solutions (solution_id,texts, correct, enable, question_id) VALUES ('11', 'The boolean', 1, 1,'5');
+INSERT INTO Solutions (solution_id,texts, correct, enable, question_id) VALUES ('12', 'The int', 0, 1,'5');
+INSERT INTO Solutions (solution_id,texts, correct, enable, question_id) VALUES ('13', 'The String', 0, 1,'5');
+INSERT INTO Solutions (solution_id,texts, correct, enable, question_id) VALUES ('14', 'The double', 0, 1,'5');
+INSERT INTO Solutions (solution_id,texts, correct, enable, question_id) VALUES ('15', 'The boolean', 1, 1,'6');
 

@@ -11,7 +11,7 @@
             padding: 3px;
         }
 
-        div .solutions{
+        div .solutions {
             display: inline-block;
             min-width: 25px;
             min-height: 10px;
@@ -40,20 +40,22 @@
 </head>
 <body>
 <div th:replace="fragment/header :: header"></div>
-<h1 align="center" th:text="${exercise.description}"></h1>
-<form method="POST">
+<div>
+    <h1 align="center" th:text="${exercise.description}"></h1>
+    <form method="POST">
         <span align="left" th:each="question : ${exercise.getQuestions()}">
             <td valign="top" th:text="${question.text}">Text</td>
             <div align="left" class="solutions" th:each="solution : ${question.getSolutions()}" ondrop="drop(event)"
                  ondragover="allowDrop(event)">
             </div>
         </span>
-    <br><span align="center" th:each="question : ${exercise.getQuestions()}">
+        <br><span align="center" th:each="question : ${exercise.getQuestions()}">
             <input align="left" th:each="solution : ${question.getSolutions()}" class="draggable"
-                  th:id="${solution.solution_ID}" name="solution" draggable="true"
-                  ondragstart="drag(event)" th:value="${solution.text}"readonly/>
+                   th:id="${solution.solution_ID}" name="solution" draggable="true"
+                   ondragstart="drag(event)" th:value="${solution.text}" readonly/>
     </span>
-    <br><input align="center" type="submit" value="Submit">
-</form>
+        <br><input align="center" type="submit" value="Submit">
+    </form>
+</div>
 </body>
 </html>

@@ -51,7 +51,7 @@ public class ForumWebController {
         return "redirect:/showDiscussion/{id}";
     }
 
-    @GetMapping("showForum")
+    @GetMapping("forum")
     public String showForum(Model model){
         model.addAttribute("discussions",forumController.getDiscussions());
         return "post/showForum";

@@ -26,8 +26,8 @@ public class TutorialWebController {
     }
 
     @GetMapping("tutorials/{category}")
-    public String listTutorials(@PathVariable String category, Model model){
-        model.addAttribute("tutorialList",tutorialController.findByCategory(category));
+    public String listTutorials(@PathVariable String category, Model model) {
+        model.addAttribute("tutorialList", tutorialController.findByCategory(category));
         return "post/showTutorials";
     }
 
@@ -62,7 +62,8 @@ public class TutorialWebController {
         if (exercise.getType().equals("Test"))
             return "redirect:/doTest/{type}/{post}/{exercise}";
         if (exercise.isDrag())
-            return "redirect:/doFill/{type}/{post}/{exercise}/{drag}";
+            redirectAttributes.addAttribute("drag", "2");
+        else redirectAttributes.addAttribute("drag", "1");
         return "redirect:/doFill/{type}/{post}/{exercise}/{drag}";
     }
 
@@ -84,6 +85,7 @@ public class TutorialWebController {
         tutorialController.insert(tutorial);
 
         redirectAttributes.addAttribute("id", tutorial.getPostID());
-        return "redirect:/createExercise/{id}";
+        redirectAttributes.addAttribute("type", "Tut");
+        return "redirect:/createExercise/{id}/{type}";
     }
 }
