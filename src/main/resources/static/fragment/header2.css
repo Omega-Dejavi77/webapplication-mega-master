@@ -36,10 +36,6 @@ div .logo {
     float: left;
 }
 
-div .logo:hover {
-    background: #0a79f2;
-}
-
 div .user {
     float: right;
     margin-right: -700px;

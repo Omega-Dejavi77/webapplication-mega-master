@@ -31,7 +31,7 @@ public class ForumController {
     }
 
     public Discussion getDiscussion (String id){
-        return forumDAO.getDiscussion(id);
+        return forumDAO.findDiscussion(id);
     }
 
     public List<Discussion> getDiscussions (){

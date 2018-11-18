@@ -7,6 +7,7 @@
 </head>
 <body>
 <div th:replace="fragment/header :: header"></div>
+<div>
 <form method="post">
     <h2 align="center" th:text="${discussion.title}"></h2>
     <table border="1">
@@ -18,11 +19,11 @@
                 </tr>
             </table>
         </tr>
-        <td><textarea name="comment" rows="8" cols="64" minlength="2" maxlength="2048"/>
-            </textarea>
+        <td><textarea name="comment" rows="8" cols="64" minlength="2" maxlength="2048"/></textarea>
             <input type="submit" value="Send comment"/>
         </td>
     </table>
 </form>
+</div>
 </body>
 </html>

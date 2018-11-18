@@ -33,15 +33,18 @@ public class ForumDAO {
     }
 
     public int insertDAOComment(Comment comment,String username,String id) {
+        System.out.println(comment.getComment());
         return jdbcTemplate.update(INSERT_COMMENT,comment.getCommentID(),comment.isBestComment(),comment.getComment(),comment.getCreationDay(),comment.getLikes(),comment.isEnable(),id,username);
     }
 
     private Discussion discussionMapper(ResultSet resultSet) throws SQLException {
+        System.out.println();
         Discussion discussion = new Discussion(resultSet.getString("post_id"),resultSet.getString("description"), resultSet.getString("title"), userDAO.findByUsername(resultSet.getString("username")));
         return discussion;
     }
 
     private RowMapper<Comment> commentMapper = (resultSet, i) -> {
+        System.out.println(resultSet.getString("post_id")+"-"+resultSet.getString("comment")+"-"+userDAO.findByUsername(resultSet.getString("username")).getUsername());
         Comment comment = new Comment(resultSet.getString("post_id"),resultSet.getString("comment"), userDAO.findByUsername(resultSet.getString("username")));
         return comment;
     };
@@ -63,7 +66,7 @@ public class ForumDAO {
         return jdbcTemplate.query(SELECT_DISCUSSIONS,mapperEager);
     }
 
-    public Discussion getDiscussion(String id){
+    public Discussion findDiscussion(String id){
         return jdbcTemplate.queryForObject(SELECT_DISCUSSION,new Object[]{id},mapperEager);
     }
 

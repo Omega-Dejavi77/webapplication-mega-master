@@ -26,6 +26,11 @@ public abstract class APost {
     protected String category;
 
     public APost() {
+        postID=UUID.randomUUID().toString();
+        creationDay=new Date();
+        likes = 0;
+        enable=true;
+        exerciseList=new ArrayList<Exercise>();
     }
 
     public APost (String postID, String description, String title, String category){

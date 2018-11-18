@@ -23,6 +23,13 @@ INSERT INTO Category(category) VALUES('SQL');
 
 INSERT INTO Posts  (post_id, title, description, creationDay, likes, enable, son_type, category) VALUES('01293c0f-bf77-42d7-9fa3-8b101f33ee5b','Tutorial','Tutorial Description',current_timestamp,0,1,'Tutorial','Java');
 INSERT INTO Posts  (post_id, title, description, creationDay, likes, enable, son_type, category) VALUES ('01293c0f-bf77-42d7-9fa3-8b101f33ee6b','Challenge','Challenge Description',current_timestamp,0,1,'Challenge','C++');
+INSERT INTO Posts (post_id, title, description, creationDay, likes, enable, hasBest,son_type,username) VALUES ('a', 'C++', 'Help for c++', current_timestamp ,0,1,0,'Discussion','erik');
+INSERT INTO Posts (post_id, title, description, creationDay, likes, enable, hasBest,son_type,username) VALUES ('b', 'Java', 'Help for Java', current_timestamp ,0,1,0,'Discussion','erik');
+
+INSERT INTO Comments (comment_id, best, comment, creation_day, likes, enable, post_id,username) VALUES (1, 0, '1Search it on the Internet', current_timestamp , 0,1,'a','erik');
+INSERT INTO Comments (comment_id, best, comment, creation_day, likes, enable, post_id,username) VALUES (2, 0, '2Search it on the Internet', current_timestamp , 0,1,'a','erik');
+INSERT INTO Comments (comment_id, best, comment, creation_day, likes, enable, post_id,username) VALUES (3, 0, '3Search it on the Internet', current_timestamp , 0,1,'b','erik');
+INSERT INTO Comments (comment_id, best, comment, creation_day, likes, enable, post_id,username) VALUES (4, 0, '4Search it on the Internet', current_timestamp , 0,1,'b','erik');
 
 
 INSERT INTO Exercises VALUES ('1', 'Test excercise for Tutorial', 1, 1,0,0,'Test','01293c0f-bf77-42d7-9fa3-8b101f33ee5b');
@@ -54,5 +61,4 @@ INSERT INTO Solutions (solution_id,texts, correct, enable, question_id) VALUES (
 INSERT INTO Solutions (solution_id,texts, correct, enable, question_id) VALUES ('14', 'The double', 0, 1,'5');
 INSERT INTO Solutions (solution_id,texts, correct, enable, question_id) VALUES ('15', 'The boolean', 1, 1,'6');
 
-INSERT INTO Posts
 
