@@ -21,17 +21,17 @@ public class ExerciseController {
     }
 
     @Transactional
-    public int insertExercise(Exercise exercise, String id, String type) {
+    public int addExercise(Exercise exercise, String id, String type) {
         return exerciseDAO.insertExercise(exercise, id, type);
     }
 
     @Transactional
-    public int insertQuestion(Question question, String id) {
+    public int addQuestion(Question question, String id) {
         return exerciseDAO.insertQuestion(question, id);
     }
 
     @Transactional
-    public int insertSolution(Solution solution, String id) {
+    public int addSolution(Solution solution, String id) {
         return exerciseDAO.insertSolution(solution, id);
     }
 

@@ -34,7 +34,7 @@ public class ForumWebController {
             return "post/newDiscussion";
         }
         model.addAttribute("title", discussion.getTitle());
-        forumController.insertDiscussion(discussion,principal.getName());
+        forumController.addDiscussion(discussion,principal.getName());
         redirectAttributes.addAttribute("id",discussion.getPostID());
         return "redirect:/showDiscussion/{id}";
     }
@@ -42,7 +42,7 @@ public class ForumWebController {
     @PostMapping("showDiscussion/{id}")
     public String createComment(@PathVariable String id,String comment, RedirectAttributes redirectAttributes, Principal principal){
         System.out.println(comment);
-        forumController.insertComment(new Comment(comment),principal.getName(),id);
+        forumController.addComment(new Comment(comment),principal.getName(),id);
         redirectAttributes.addAttribute("id",id);
         return "redirect:/showDiscussion/{id}";
     }

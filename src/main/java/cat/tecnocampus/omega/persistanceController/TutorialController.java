@@ -16,15 +16,9 @@ public class TutorialController {
         this.tutorialDAO = tutorialDAO;
     }
 
-    public Tutorial insertTutorial(String description, String title, String category){
-        Tutorial tutorial = new Tutorial(description,title,category);
-        insert(tutorial);
-        return tutorial;
-    }
-
     @Transactional
-    public int insert(Tutorial tutorial){
-        return  tutorialDAO.insertDAOTutorial(tutorial,"Java");
+    public int addTutorial(Tutorial tutorial){
+        return  tutorialDAO.insertTutorial(tutorial,"Java");
     }
 
     public List<Tutorial> findAll(){

@@ -51,7 +51,7 @@ public class ExerciseWebController {
             redirectAttributes.addAttribute("id", id);
             return "exercise/newTestExercise";
         }
-        exercisesDAO.insertExercise(testExercise, id, "Test");
+        exercisesDAO.addExercise(testExercise, id, "Test");
         QuestionsCreator.testCreator(testText, exercisesDAO, testExercise.getExercise_ID());
         redirectAttributes.addAttribute("id", id);
         if (end.equals("Finish"))
@@ -78,7 +78,7 @@ public class ExerciseWebController {
             redirectAttributes.addAttribute("id", id);
             return "exercise/newFillTheGapExercise";
         }
-        exercisesDAO.insertExercise(fillTheGapExercise, id, "Fill");
+        exercisesDAO.addExercise(fillTheGapExercise, id, "Fill");
         QuestionsCreator.fillTheGapCreator(fillText, exercisesDAO, fillTheGapExercise.getExercise_ID());
 
         if (end.equals("Finish"))
@@ -169,8 +169,10 @@ public class ExerciseWebController {
     @PostMapping("showMark/{post}/{exercise}/{type}/{drag}")
     public String showMark(String chosen, @PathVariable String post, @PathVariable String exercise, @PathVariable String type, @PathVariable String drag, RedirectAttributes redirectAttributes) {
         redirectAttributes.addAttribute("id", post);
-        if (chosen.equals("Return"))
+        if (chosen.equals("Return")) {
+
             return "redirect:/tutorial/{id}";
+        }
         redirectAttributes.addAttribute("post", post);
         redirectAttributes.addAttribute("exercise", exercise);
         redirectAttributes.addAttribute("type", "do");

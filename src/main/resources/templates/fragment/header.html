@@ -1,18 +1,18 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
-    <title>Sticky Header and Footer</title>
+    <title>Header</title>
 </head>
 <body>
 <div id="header_container" th:fragment="header">
     <div id="header">
-        <div class="logo"></div>
+        <div class="logo" href="/"></div>
         <nav>
             <a href="/tutorials">Tutorials</a>
             <a href="/challenges">Challenges</a>
             <a href="/forum">Forum</a>
         </nav>
-        <div class="user" href="#">Username</div>
+        <div class="user" href="/user">Username</div>
     </div>
 </div>
 </body>

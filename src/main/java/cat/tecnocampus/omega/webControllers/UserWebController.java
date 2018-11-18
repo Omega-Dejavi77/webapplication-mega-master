@@ -48,7 +48,7 @@ public class UserWebController {
         }
 
         model.addAttribute("username", user.getUsername());
-        userController.insert(user);
+        userController.addUser(user);
         redirectAttributes.addAttribute("username", user.getUsername());
         return "redirect:/users/{username}";
     }

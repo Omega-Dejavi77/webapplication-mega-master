@@ -17,6 +17,7 @@ public class ChallengeDAO {
     private JdbcTemplate jdbcTemplate;
     private ExerciseDAO exerciseDAO;
     private final String FIND_ALL = "select * from Posts where son_type=?";
+    private final String FIND_BY_ID = "select * from Posts where post_id = ? AND son_type = ?";
     private final String INSERT_CHALLENGE = "INSERT INTO posts (post_ID, title, description, creationDay, likes, enable, son_TYPE,category) VALUES(?, ?, ?, ?, ?,?,?,?)";
     private final String FIND_BY_CATEGORY= "select * from Posts where category=? AND son_type=?";
 
@@ -45,8 +46,10 @@ public class ChallengeDAO {
     public List<Challenge> findAll() {
         return jdbcTemplate.query(FIND_ALL, new Object[]{"Challenge"}, mapperEager);
     }
-
-    public int insertDAOChallenge(Challenge challenge,String category) {
+    public Challenge findById(String id) {
+        return jdbcTemplate.queryForObject(FIND_BY_ID, new Object[]{id,"Challenge"}, mapperEager);
+    }
+    public int insertChallenge(Challenge challenge, String category) {
         return jdbcTemplate.update(INSERT_CHALLENGE, challenge.getPostID(), challenge.getTitle(), challenge.getDescription(), challenge.getCreationDay(), challenge.getLikes(), challenge.isEnable(), "Challenge",category);
     }
 }

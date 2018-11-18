@@ -37,7 +37,7 @@ public class UserDAO {
         this.jdbcTemplate = jdbcTemplate;
     }
 
-    public int insertDAOUser(User user) {
+    public int insertUser(User user) {
         return jdbcTemplate.update(INSERT_USER, user.getUsername(), user.getPassword(), user.getFirstName(), user.getLastName(), user.getEmail(), user.getBirthday(), 0, 0, 1);
     }
 

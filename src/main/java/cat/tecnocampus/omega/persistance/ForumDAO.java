@@ -28,15 +28,6 @@ public class ForumDAO {
         this.userDAO=userDAO;
     }
 
-    public int insertDAODiscussion(Discussion discussion,String username) {
-        return jdbcTemplate.update(INSERT_DISCUSSION,discussion.getPostID(),discussion.getTitle(),discussion.getDescription(),discussion.getCreationDay(),discussion.getLikes(),discussion.isEnable(),discussion.hasBest(),"Discussion",username);
-    }
-
-    public int insertDAOComment(Comment comment,String username,String id) {
-        System.out.println(comment.getComment());
-        return jdbcTemplate.update(INSERT_COMMENT,comment.getCommentID(),comment.isBestComment(),comment.getComment(),comment.getCreationDay(),comment.getLikes(),comment.isEnable(),id,username);
-    }
-
     private Discussion discussionMapper(ResultSet resultSet) throws SQLException {
         Discussion discussion = new Discussion(resultSet.getString("post_id"),resultSet.getString("description"), resultSet.getString("title"), userDAO.findByUsername(resultSet.getString("username")));
         return discussion;
@@ -55,6 +46,13 @@ public class ForumDAO {
         return discussion;
     };
 
+    public int insertDiscussion(Discussion discussion, String username) {
+        return jdbcTemplate.update(INSERT_DISCUSSION,discussion.getPostID(),discussion.getTitle(),discussion.getDescription(),discussion.getCreationDay(),discussion.getLikes(),discussion.isEnable(),discussion.hasBest(),"Discussion",username);
+    }
+
+    public int insertComment(Comment comment, String username, String id) {
+        return jdbcTemplate.update(INSERT_COMMENT,comment.getCommentID(),comment.isBestComment(),comment.getComment(),comment.getCreationDay(),comment.getLikes(),comment.isEnable(),id,username);
+    }
 
     public List<Comment> findCommentByDiscussion(String id){
         return jdbcTemplate.query(SELECT_COMMENTS,new Object[]{id},commentMapper);

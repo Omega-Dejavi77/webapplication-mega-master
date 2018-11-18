@@ -10,6 +10,7 @@ public class BaseSecurityConfiguration extends WebSecurityConfigurerAdapter {
     @Override
     public void configure(HttpSecurity http) throws Exception {
         http.authorizeRequests()
+                .antMatchers("/").permitAll()
                 .antMatchers("/createUser").permitAll()
                 .antMatchers("/allUsers").hasRole("ADMIN")
                 .antMatchers("/profile/users/*").permitAll()

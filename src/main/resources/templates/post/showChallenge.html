@@ -2,17 +2,17 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8"/>
-    <title th:text="${tutorial.title}"></title>
+    <title th:text="${challenge.title}"></title>
     <link href="../../fragment/header2.css" rel="stylesheet" type="text/css">
 </head>
 <body>
 <div th:replace="fragment/header :: header"></div>
 <form method="post">
     <div>
-        <h1 align="center" th:text="${tutorial.title}">Title</h1>
-        <p th:text="${tutorial.description}">Description</p>
+        <h1 align="center" th:text="${challenge.title}">Title</h1>
+        <p th:text="${challenge.description}">Description</p>
         <td>
-            <tr th:each="exercise : ${tutorial.getExerciseList()}">
+            <tr th:each="exercise : ${challenge.getExerciseList()}">
                 <td th:text="${exercise.description}">Description</td>
                 <br>
                 <td>Difficulty:</td>

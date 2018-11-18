@@ -25,8 +25,8 @@ public class QuestionsCreator {
                 question.validation();
                 Solution solution = new Solution(afterHastag[0], true);
                 solution.validation();
-                exerciseController.insertQuestion(question, exerciseID);
-                exerciseController.insertSolution(solution, question.getQuestion_ID());
+                exerciseController.addQuestion(question, exerciseID);
+                exerciseController.addSolution(solution, question.getQuestion_ID());
                 counter++;
             }
         }
@@ -45,7 +45,7 @@ public class QuestionsCreator {
                 String[] questionPlusSolutions = s.split("#/Q");
                 Question question = new Question(counter + ". " + questionPlusSolutions[0]);
                 question.validation();
-                exerciseController.insertQuestion(question, exerciseID);
+                exerciseController.addQuestion(question, exerciseID);
                 String[] solutions = questionPlusSolutions[1].split("#R");
                 if (solutions.length > 1) {
                     List<Solution> listSolution = new ArrayList<Solution>();
@@ -70,7 +70,7 @@ public class QuestionsCreator {
                     }
                     solutionListValidation(listSolution, counter);
                     for (Solution solution : listSolution) {
-                        exerciseController.insertSolution(solution, question.getQuestion_ID());
+                        exerciseController.addSolution(solution, question.getQuestion_ID());
                     }
                 }
                 counter++;

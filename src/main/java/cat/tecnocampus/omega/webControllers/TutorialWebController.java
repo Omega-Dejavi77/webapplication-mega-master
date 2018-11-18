@@ -82,7 +82,7 @@ public class TutorialWebController {
 
         model.addAttribute("title", tutorial.getTitle());
 
-        tutorialController.insert(tutorial);
+        tutorialController.addTutorial(tutorial);
 
         redirectAttributes.addAttribute("id", tutorial.getPostID());
         redirectAttributes.addAttribute("type", "Tut");

@@ -52,7 +52,7 @@ public class TutorialDAO {
         return jdbcTemplate.queryForObject(FIND_BY_ID, new Object[]{id,"Tutorial"}, mapperEager);
     }
 
-    public int insertDAOTutorial(Tutorial tutorial,String category) {
+    public int insertTutorial(Tutorial tutorial, String category) {
         return jdbcTemplate.update(INSERT_TUTORIAL, tutorial.getPostID(),tutorial.getTitle(),tutorial.getDescription(),tutorial.getCreationDay(), tutorial.getLikes(),tutorial.isEnable(),"Tutorial",category);
     }
 
