@@ -14,7 +14,7 @@ public class ExerciseDAO {
     private JdbcTemplate jdbcTemplate;
     private UserDAO userDAO;
 
-    private final String INSERT_EXERCISE = "INSERT INTO Exercises VALUES (?, ?, ?, ?,?,?,?);";
+    private final String INSERT_EXERCISE = "INSERT INTO Exercises VALUES (?, ?, ?, ?,?,?,?,?);";
     private final String INSERT_QUESTION = "INSERT INTO Questions VALUES (?, ?, ?, ?);";
     private final String INSERT_SOLUTION = "INSERT INTO Solutions (solution_id,texts, correct, enable, question_id) VALUES (?, ?, ?, ?,?);";
     private final String INSERT_SUBMISSION = "INSERT INTO Submissions VALUES (?,?,?,?,?);";
@@ -41,7 +41,7 @@ public class ExerciseDAO {
             exercise.setExperience_points(resultSet.getInt("experience_points"));
             return exercise;
         } else {
-            FillTheGapExercise exercise = new FillTheGapExercise(resultSet.getString("exercise_id"), resultSet.getString("description"), resultSet.getInt("difficulty"));
+            FillTheGapExercise exercise = new FillTheGapExercise(resultSet.getString("exercise_id"), resultSet.getString("description"), resultSet.getInt("difficulty"),resultSet.getBoolean("drag"));
             exercise.setExperience_points(resultSet.getInt("experience_points"));
             return exercise;
         }
@@ -75,7 +75,7 @@ public class ExerciseDAO {
     };
 
     public int insertExercise(Exercise exercise, String id, String type) {
-        return jdbcTemplate.update(INSERT_EXERCISE, exercise.getExercise_ID(), exercise.getDescription(), exercise.isEnable(), exercise.getDifficulty(), exercise.getExperience_points(), type, id);
+        return jdbcTemplate.update(INSERT_EXERCISE, exercise.getExercise_ID(), exercise.getDescription(), exercise.isEnable(), exercise.getDifficulty(), exercise.getExperience_points(),exercise.isDrag(), type, id);
     }
 
     public int insertQuestion(Question question, String id) {
@@ -87,7 +87,7 @@ public class ExerciseDAO {
     }
 
     public int insertSubmission(Submission submission) {
-        return jdbcTemplate.update(INSERT_SUBMISSION, submission.getMark(), submission.getUser().getUsername(), submission.getExercise().getExercise_ID(), submission.getCreationDate(), submission.isPass());
+        return jdbcTemplate.update(INSERT_SUBMISSION, submission.getMark(), submission.getUser().getUsername(), submission.getExercise().getExercise_ID(), submission.getCreationDate(), submission.getPass());
     }
 
     public List<Exercise> findExercisesByPost(String id) {

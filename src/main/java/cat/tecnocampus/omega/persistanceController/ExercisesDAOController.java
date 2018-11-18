@@ -66,6 +66,7 @@ public class ExercisesDAOController {
         }
         return "";
     }
+
     private void initializeMarks(){
         marks=new TreeMap<Float,String>();
         marks.put(10f,"A+");
@@ -80,5 +81,11 @@ public class ExercisesDAOController {
         marks.put(2f,"D");
         marks.put(1f,"D-");
         marks.put(0f,"F");
+    }
+
+    public String type(String type) {
+        if (!type.equals("do"))
+            return "Result";
+        else return "";
     }
 }

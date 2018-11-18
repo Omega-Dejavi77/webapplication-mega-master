@@ -83,66 +83,97 @@ public class ExerciseWebController {
         }
     }
 
-    @GetMapping("doTest/{post}/{exercise}")
-    public String doTest(Model model, @PathVariable String exercise) {
+    @GetMapping("doTest/{type}/{post}/{exercise}")
+    public String doTest(Model model, @PathVariable String type, @PathVariable String exercise) {
         model.addAttribute("exercise", exercisesDAO.getExerciseByType(exercise, "Test"));
-        return "exercise/doTestExercise";
+        return "exercise/doTestExercise" + exercisesDAO.type(type);
     }
 
-    @PostMapping("doTest/{post}/{exercise}")
-    public String doTest(HttpServletRequest request, @PathVariable String post, @PathVariable String exercise, RedirectAttributes redirectAttributes) {
-        Map<String,String[]> mp=request.getParameterMap();
-        String[] solution=new String[mp.size()];
-        int i=0;
-        for (String s:mp.keySet()) {
-            solution[i]=mp.get(s)[0];
-            i++;
+    @PostMapping("doTest/{type}/{post}/{exercise}")
+    public String doTest(HttpServletRequest request, @PathVariable String type, @PathVariable String post, @PathVariable String exercise, RedirectAttributes redirectAttributes) {
+        if (type.equals("do")) {
+            Map<String, String[]> mp = request.getParameterMap();
+            String[] solution = new String[mp.size()];
+            int i = 0;
+            for (String s : mp.keySet()) {
+                if (!s.equals("id")) {
+                    //System.out.println(s);
+                    solution[i] = mp.get(s)[0];
+                    //System.out.println("\t" + solution[i]);
+                    i++;
+                }
+            }
+            exercisesDAO.solve(exercise, solution, "admin", "Test");
         }
-        exercisesDAO.solve(exercise, solution, "admin", "Test");
         redirectAttributes.addAttribute("post", post);
         redirectAttributes.addAttribute("exercise", exercise);
-        return "redirect:/showMark/{post}/{exercise}";
+        redirectAttributes.addAttribute("type", "doTest");
+        redirectAttributes.addAttribute("drag", "0");
+        return "redirect:/showMark/{post}/{exercise}/{type}/{drag}";
     }
 
-    @GetMapping("doFill1/{post}/{exercise}")
-    public String doFill1(Model model, @PathVariable String exercise) {
+    @GetMapping("doFill/{type}/{post}/{exercise}/{drag}")
+    public String doFill(Model model, @PathVariable String type, @PathVariable String drag, @PathVariable String exercise) {
         model.addAttribute("exercise", exercisesDAO.getExerciseByType(exercise, "Fill"));
-        return "exercise/doFillTheGapExercise1";
+        String html;
+        switch (drag) {
+            case "1":
+                html = "doFillTheGapExercise1";
+                break;
+            case "2":
+                html = "doFillTheGapExercise2";
+                break;
+            default:
+                html = "";
+                break;
+        }
+        if (type.equals("Result"))
+            html = html.substring(0, html.length() - 1);
+        return "exercise/" + html + exercisesDAO.type(type);
     }
 
-    @PostMapping("doFill1/{post}/{exercise}")
-    public String doFill1(@RequestParam(value = "solution") String[] solution, @PathVariable String post, @PathVariable String exercise, RedirectAttributes redirectAttributes, Principal principal) {
-        exercisesDAO.solve(exercise, solution, "admin", "Fill");
+    @PostMapping("doFill/{type}/{post}/{exercise}/{drag}")
+    public String doFill(@RequestParam(value = "solution") String[] solution, @PathVariable String type, @PathVariable String post, @PathVariable String exercise, RedirectAttributes redirectAttributes, Principal principal) {
+        if (type.equals("do")) {
+            exercisesDAO.solve(exercise, solution, "admin", "Fill");
+        }
         redirectAttributes.addAttribute("post", post);
         redirectAttributes.addAttribute("exercise", exercise);
-        return "redirect:/showMark/{post}/{exercise}";
+        redirectAttributes.addAttribute("type", "doFill");
+        return "redirect:/showMark/{post}/{exercise}/{type}";
     }
 
-    @GetMapping("doFill2/{post}/{exercise}")
-    public String doFill2(Model model, @PathVariable String exercise) {
-        model.addAttribute("exercise", exercisesDAO.getExerciseByType(exercise, "Fill"));
-        return "exercise/doFillTheGapExercise2";
-    }
-
-    @PostMapping("doFill2/{post}/{exercise}")
-    public String doFill2(@RequestParam(value = "solution") String[] solution, @PathVariable String post, @PathVariable String exercise, RedirectAttributes redirectAttributes, Principal principal) {
-        exercisesDAO.solve(exercise, solution, "admin", "Fill");
-        redirectAttributes.addAttribute("post", post);
-        redirectAttributes.addAttribute("exercise", exercise);
-        return "redirect:/showMark/{post}/{exercise}";
-    }
-
-    @GetMapping("showMark/{post}/{exercise}")
+    @GetMapping("showMark/{post}/{exercise}/{type}/{drag}")
     public String showMark(Model model, @PathVariable String exercise) {
-        Submission submission=exercisesDAO.getSubmission(exercise, "admin");
+        Submission submission = exercisesDAO.getSubmission(exercise, "admin");
         model.addAttribute("submission", submission);
         model.addAttribute("mark", exercisesDAO.getMark(submission.getMark()));
+        String pass = "YOU ";
+        if (submission.getPass())
+            pass += "PASS";
+        else
+            pass += "FAILED";
+        model.addAttribute("pass", pass);
         return "exercise/showMark";
     }
 
-    @PostMapping("showMark/{post}/{exercise}")
-    public String showMark(@PathVariable String post, RedirectAttributes redirectAttributes) {
+    @PostMapping("showMark/{post}/{exercise}/{type}/{drag}")
+    public String showMark(String chosen, @PathVariable String post, @PathVariable String exercise, @PathVariable String type, @PathVariable String drag, RedirectAttributes redirectAttributes) {
         redirectAttributes.addAttribute("id", post);
-        return "redirect:/tutorial/{id}";
+        if (chosen.equals("Return"))
+            return "redirect:/tutorial/{id}";
+        redirectAttributes.addAttribute("post", post);
+        redirectAttributes.addAttribute("exercise", exercise);
+        redirectAttributes.addAttribute("type", "do");
+        if (type.equals("doFill")) {
+            redirectAttributes.addAttribute("drag", drag);
+            type += "/{type}/{post}/{exercise}/{drag}";
+        } else
+            type += "/{type}/{post}/{exercise}";
+        if (chosen.equals("See Results"))
+            redirectAttributes.addAttribute("type", "Result");
+        else
+            redirectAttributes.addAttribute("type", "do");
+        return "redirect:/" + type;
     }
 }

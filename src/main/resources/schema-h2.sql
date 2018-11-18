@@ -1,6 +1,6 @@
 DROP TABLE IF EXISTS Category;
 CREATE TABLE Category(
-  category VARCHAR (32) PRIMARY KEY,
+    category VARCHAR (32) PRIMARY KEY,
 );
 DROP TABLE IF EXISTS Users;
 CREATE TABLE Users (
@@ -75,10 +75,6 @@ CREATE TABLE Comments(
     username VARCHAR(64) NOT NULL,
     FOREIGN KEY (username) REFERENCES Users(username),
     FOREIGN KEY (post_id) REFERENCES Posts(post_id)
-);
-DROP TABLE IF EXISTS Roles;
-CREATE TABLE Roles(
-    role VARCHAR (32) PRIMARY KEY,
 );
 DROP TABLE IF EXISTS UserCategory;
 CREATE TABLE UserCategory(
