@@ -54,3 +54,5 @@ INSERT INTO Solutions (solution_id,texts, correct, enable, question_id) VALUES (
 INSERT INTO Solutions (solution_id,texts, correct, enable, question_id) VALUES ('14', 'The double', 0, 1,'5');
 INSERT INTO Solutions (solution_id,texts, correct, enable, question_id) VALUES ('15', 'The boolean', 1, 1,'6');
 
+INSERT INTO Posts
+

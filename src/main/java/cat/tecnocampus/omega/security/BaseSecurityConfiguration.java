@@ -15,6 +15,7 @@ public class BaseSecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .antMatchers("/profile/users/*").permitAll()
                 .antMatchers("/user").authenticated()
                 .antMatchers("/users/{username}").authenticated()
+                .antMatchers("/*").authenticated()
                 .and()
                 .formLogin()
                 .and()

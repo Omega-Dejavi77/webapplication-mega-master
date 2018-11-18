@@ -60,11 +60,11 @@ public class TutorialWebController {
         redirectAttributes.addAttribute("exercise", exercise.getExercise_ID());
         redirectAttributes.addAttribute("type", "do");
         if (exercise.getType().equals("Test"))
-            return "redirect:/doTest/{type}/{post}/{exercise}";
+            return "redirect:/exercise/doTest/{type}/{post}/{exercise}";
         if (exercise.isDrag())
             redirectAttributes.addAttribute("drag", "2");
         else redirectAttributes.addAttribute("drag", "1");
-        return "redirect:/doFill/{type}/{post}/{exercise}/{drag}";
+        return "redirect:/exercise/doFill/{type}/{post}/{exercise}/{drag}";
     }
 
     @GetMapping("createTutorial")

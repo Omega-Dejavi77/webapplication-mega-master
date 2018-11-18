@@ -93,27 +93,25 @@ public class ExerciseWebController {
         }
     }
 
-    @GetMapping("doTest/{type}/{post}/{exercise}")
+    @GetMapping("exercise/doTest/{type}/{post}/{exercise}")
     public String doTest(Model model, @PathVariable String type, @PathVariable String exercise) {
         model.addAttribute("exercise", exercisesDAO.getExerciseByType(exercise, "Test"));
         return "exercise/doTestExercise" + exercisesDAO.type(type);
     }
 
-    @PostMapping("doTest/{type}/{post}/{exercise}")
-    public String doTest(HttpServletRequest request, @PathVariable String type, @PathVariable String post, @PathVariable String exercise, RedirectAttributes redirectAttributes) {
+    @PostMapping("exercise/doTest/{type}/{post}/{exercise}")
+    public String doTest(HttpServletRequest request, @PathVariable String type, @PathVariable String post, @PathVariable String exercise, RedirectAttributes redirectAttributes,Principal principal) {
         if (type.equals("do")) {
             Map<String, String[]> mp = request.getParameterMap();
             String[] solution = new String[mp.size()];
             int i = 0;
             for (String s : mp.keySet()) {
                 if (!s.equals("id")) {
-                    //System.out.println(s);
                     solution[i] = mp.get(s)[0];
-                    //System.out.println("\t" + solution[i]);
                     i++;
                 }
             }
-            exercisesDAO.solve(exercise, solution, "admin", "Test");
+            exercisesDAO.solve(exercise, solution, principal.getName(), "Test");
         }
         redirectAttributes.addAttribute("post", post);
         redirectAttributes.addAttribute("exercise", exercise);
@@ -122,7 +120,7 @@ public class ExerciseWebController {
         return "redirect:/showMark/{post}/{exercise}/{type}/{drag}";
     }
 
-    @GetMapping("doFill/{type}/{post}/{exercise}/{drag}")
+    @GetMapping("exercise/doFill/{type}/{post}/{exercise}/{drag}")
     public String doFill(Model model, @PathVariable String type, @PathVariable String drag, @PathVariable String exercise) {
         model.addAttribute("exercise", exercisesDAO.getExerciseByType(exercise, "Fill"));
         String html;
@@ -142,20 +140,21 @@ public class ExerciseWebController {
         return "exercise/" + html + exercisesDAO.type(type);
     }
 
-    @PostMapping("doFill/{type}/{post}/{exercise}/{drag}")
-    public String doFill(@RequestParam(value = "solution") String[] solution, @PathVariable String type, @PathVariable String post, @PathVariable String exercise, RedirectAttributes redirectAttributes, Principal principal) {
+    @PostMapping("exercise/doFill/{type}/{post}/{exercise}/{drag}")
+    public String doFill(@RequestParam(value = "solution") String[] solution, @PathVariable String type, @PathVariable String post, @PathVariable String exercise, @PathVariable String drag, RedirectAttributes redirectAttributes, Principal principal) {
         if (type.equals("do")) {
-            exercisesDAO.solve(exercise, solution, "admin", "Fill");
+            exercisesDAO.solve(exercise, solution, principal.getName(), "Fill");
         }
         redirectAttributes.addAttribute("post", post);
         redirectAttributes.addAttribute("exercise", exercise);
         redirectAttributes.addAttribute("type", "doFill");
-        return "redirect:/showMark/{post}/{exercise}/{type}";
+        redirectAttributes.addAttribute("drag", drag);
+        return "redirect:/showMark/{post}/{exercise}/{type}/{drag}";
     }
 
     @GetMapping("showMark/{post}/{exercise}/{type}/{drag}")
-    public String showMark(Model model, @PathVariable String exercise) {
-        Submission submission = exercisesDAO.getSubmission(exercise, "admin");
+    public String showMark(Model model, @PathVariable String exercise,Principal principal) {
+        Submission submission = exercisesDAO.getSubmission(exercise, principal.getName());
         model.addAttribute("submission", submission);
         model.addAttribute("mark", exercisesDAO.getMark(submission.getMark()));
         String pass = "YOU ";
@@ -184,6 +183,6 @@ public class ExerciseWebController {
             redirectAttributes.addAttribute("type", "Result");
         else
             redirectAttributes.addAttribute("type", "do");
-        return "redirect:/" + type;
+        return "redirect:/exercise/" + type;
     }
 }
