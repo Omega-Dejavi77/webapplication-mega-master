@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Do Fill The Gap Excercise</title>
+    <style>
+        .draggable {
+            background-color: #00ff00;
+            margin: 5px;
+            padding: 3px;
+        }
+
+        div {
+            display: inline-block;
+            min-width: 25px;
+            min-height: 10px;
+            border-style: solid;
+            border-width: 0px;
+            border-bottom-width: 2px;
+        }
+    </style>
+    <script>
+        function allowDrop(ev) {
+            ev.preventDefault();
+        }
+
+        function drag(ev) {
+            ev.dataTransfer.setData("Text", ev.target.id);
+        }
+
+        function drop(ev) {
+            ev.preventDefault();
+            var data = ev.dataTransfer.getData("Text");
+            ev.target.parentNode.replaceChild(document.getElementById(data), ev.target);
+            document.getElementById(data).className = "";
+        }
+    </script>
+</head>
+<body>
+<h1 align="center" th:text="${exercise.description}"></h1>
+<form method="POST">
+        <span align="left" th:each="question : ${exercise.getQuestions()}">
+            <td valign="top" th:text="${question.text}">Text</td>
+            <div align="left" th:each="solution : ${question.getSolutions()}" ondrop="drop(event)"
+                 ondragover="allowDrop(event)">
+            </div>
+        </span>
+    <br><span align="center" th:each="question : ${exercise.getQuestions()}">
+            <input align="left" th:each="solution : ${question.getSolutions()}" class="draggable"
+                  th:id="${solution.solution_ID}" name="solution" draggable="true"
+                  ondragstart="drag(event)" th:value="${solution.text}"readonly/>
+    </span>
+    <br><input align="center" type="submit" value="Submit">
+</form>
+</body>
+</html>

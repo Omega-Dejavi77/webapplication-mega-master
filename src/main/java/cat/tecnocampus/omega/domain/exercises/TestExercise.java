@@ -4,11 +4,10 @@ public class TestExercise extends Exercise {
 
     public TestExercise(String exercise_ID,String description, int difficulty) {
         super(exercise_ID,description, difficulty);
+        this.type = "Test";
+        this.drag=false;
     }
-//    public TestExercise(String description, int difficulty) {
-//        super(title,description, difficulty);
-//    }
     public TestExercise(){
-
+        this.type = "Test";
     }
 }

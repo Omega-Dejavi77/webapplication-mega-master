@@ -1,63 +1,11 @@
 <!DOCTYPE html>
-<HTML lang="en" xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:th="http://www.thymeleaf.org">
-<HEAD>
-
-    <TITLE>Register Test Exercise</TITLE>
-    <SCRIPT language="javascript">
-        function addSolution() {
-            document.getElementById("SolutionsTable").insertRow(-1).innerHTML = '<th><textarea name="description" rows="2" cols="64" maxlength="1024"\n' +
-                '                          th:field="*{text}"\n' +
-                '                          th:class="${#fields.hasErrors(\'text\')}? \'error\'"/>\n' +
-                '                </textarea></th>\n' +
-                '            <th align="center" valign="top"><input type="checkbox"\n' +
-                '                                                   th:field="*{correct}"\n' +
-                '                                                   th:class="${#fields.hasErrors(\'correct\')}? \'error\'"/>\n' +
-                '            </th>';
-        }
-    </SCRIPT>
-</HEAD>
-<BODY>
-<div align="center">
-    <table id="Table" border="1">
-        <tr>
-            <th>Questions</th>
-            <th>Solutions</th>
-        </tr>
-        <td>
-            <table class="table table-striped" id="QuestionTable">
-                <tr>
-                    <th>Text</th>
-                </tr>
-                <tr th:each="risk, status : ${riskWrapper.riskList}">
-                    <td><textarea name="description" rows="2" cols="64" maxlength="1024"
-                                  th:field="*{text}"
-                                  th:class="${#fields.hasErrors('text')}? 'error'"/>
-                        </textarea></td>
-                </tr>
-            </table>
-        </td>
-        <td>
-            <table class="table table-striped" id="SolutionTable">
-                <tr>
-                    <th>Text</th>
-                    <th>Correct</th>
-                </tr>
-                <tr th:each="solution, status : ${list.testSolutions}">
-                    <td><textarea name="description" rows="2" cols="64" maxlength="1024"
-                                  th:field="*{getSolutions[__${status.index}__].text}"
-                                  th:class="${#fields.hasErrors('text')}? 'error'"/>
-                        </textarea></td>
-                    <td align="center" valign="top"><input type="checkbox"
-                                                           th:field="*{correct}"
-                                                           th:class="${#fields.hasErrors('correct')}? 'error'"/>
-                    </td>
-                </tr>
-            </table>
-            <button type="button" onclick="addSolution()">Insert new row</button>
-            <button type="button" onclick="deleteSolution()">Insert new row</button>
-        </td>
-    </table>
-</div>
-</BODY>
-</HTML>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <title>Users</title>
+    <link href="../../fragment/header2.css" rel="stylesheet" type="text/css">
+</head>
+<body>
+<div th:replace="fragment/header :: header"></div>
+</body>
+</html>

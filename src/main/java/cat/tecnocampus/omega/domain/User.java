@@ -2,23 +2,25 @@ package cat.tecnocampus.omega.domain;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 import java.util.Date;
 
 public class User {
 
-    /*@NotNull(message = "username cannot be null")
-    @Size(min = 4, max = 20,message = "username must be between 4 and 15 characters long")*/
+    @NotNull(message = "username cannot be null")
+    @Size(min = 4, max = 20,message = "username must be between 4 and 15 characters long")
     private String username;
 
-    /*@NotNull(message = "password cannot be null")
-    @Size(min = 4, max = 20,message = "password must be between 4 and 15 characters long")*/
+    @NotNull(message = "password cannot be null")
+    @Size(min = 4, max = 20,message = "password must be between 4 and 15 characters long")
     private String password;
 
     private String firstName;
     private String lastName;
 
-    /*@NotNull(message = "email cannot be null")
-    @Size(min = 4, max = 60,message = "email must be between 4 and 15 characters long")*/
+    @NotNull(message = "email cannot be null")
+    @Size(min = 4, max = 60,message = "email must be between 4 and 15 characters long")
     private String email;
 
     @DateTimeFormat(pattern = "dd/mm/yyyy")
@@ -26,6 +28,8 @@ public class User {
 
     private int experiencePoints;
     private int level;
+
+    @NotNull(message = "enable cannot be null")
     private boolean enable;
 
     public User() {}
@@ -55,7 +59,10 @@ public class User {
     }
 
     public void setPassword(String password) {
-        this.password = password;
+        if (password.contains("{noop}"))
+            this.password = password;
+        else
+            this.password = "{noop}" + password;
     }
 
     public String getEmail() {
