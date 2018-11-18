@@ -22,8 +22,14 @@ public class UserWebController {
         this.userController = userController;
     }
 
+    @GetMapping("mainPage")
+    public String mainPage() {
+        return "MainPage";
+    }
+
     @GetMapping("allUsers")
-    public String allUsers(Model model) {
+    public String allUsers(Model model, Principal principal) {
+
         model.addAttribute("users", userController.findAll());
         return "InitialPage";
     }
@@ -38,7 +44,6 @@ public class UserWebController {
     public String postCreateUser(@Valid User user, Errors errors, Model model, RedirectAttributes redirectAttributes) {
         if (errors.hasErrors()) {
             model.addAttribute("error", errors);
-            System.out.println(errors.getFieldError());
             return "Errors";
         }
 
@@ -48,16 +53,24 @@ public class UserWebController {
         return "redirect:/users/{username}";
     }
 
-
+    @GetMapping("user")
+    public String showUser(Principal principal, RedirectAttributes redirectAttributes) {
+        redirectAttributes.addAttribute("username", principal.getName());
+        return "redirect:/users/{username}";
+    }
 
     @GetMapping("users/{username}")
     public String showUser(@PathVariable String username, Model model, Principal principal) {
-        /*if(principal.getName().equals("De la Serna")) {*/
+        //if (principal.getName().equals(username)) {
             model.addAttribute("user", userController.getUser(username));
             return "showUser";
         //}
-
-        //return null;
+        //return "error/principalError";
     }
 
+    @GetMapping("/profile/users/{username}")
+    public String profileUser(@PathVariable String username, Model model) {
+        model.addAttribute("user", userController.getUser(username));
+        return "userProfile";
+    }
 }

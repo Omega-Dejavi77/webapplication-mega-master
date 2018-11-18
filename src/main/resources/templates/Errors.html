@@ -6,6 +6,8 @@
     <link rel="stylesheet" type="text/css" th:href="@{../table.css}"/>
 </head>
 <body>
-<h1>Error</h1>
+    <h1>
+        <span th:text="${error.getFieldError()}"></span>
+    </h1>
 </body>
 </html>
