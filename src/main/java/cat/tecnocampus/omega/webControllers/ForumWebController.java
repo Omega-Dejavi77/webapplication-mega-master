@@ -62,5 +62,4 @@ public class ForumWebController {
         model.addAttribute("discussion",forumController.getDiscussion(id));
         return "post/showDiscussion";
     }
-
 }
