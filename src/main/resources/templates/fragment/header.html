@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
 <head>
     <title>Header</title>
 </head>
@@ -11,8 +12,8 @@
             <a href="/tutorials">Tutorials</a>
             <a href="/challenges">Challenges</a>
             <a href="/forum">Forum</a>
+            <a href="/profile"sec:authentication="name">Username</a>
         </nav>
-        <div class="user" onclick="window.location.href='/profile' ">Username</div>
     </div>
 </div>
 </body>
