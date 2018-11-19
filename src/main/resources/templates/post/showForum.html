@@ -12,8 +12,7 @@
     <form method="post">
         <table>
             <tr th:each="discussion : ${discussions}">
-                <td th:text="${discussion.title}">Discussion Title</td>
-                <td><input type="Submit" name="chosen" th:value="${discussion.postID}"></td>
+                <td><a  th:href="@{'/discussion/' + ${discussion.postID}}" th:text="${discussion.title}">Title</a></td>
             </tr>
         </table>
         <input type="button" value="Create New Discussion" onclick="window.location.href='/createDiscussion' ">

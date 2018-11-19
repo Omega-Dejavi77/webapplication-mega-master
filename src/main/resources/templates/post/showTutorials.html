@@ -11,8 +11,7 @@
 <form method="post">
     <table>
         <tr th:each="tutorial : ${tutorialList}">
-            <td th:text="${tutorial.title}">Title</td>
-            <td><input type="Submit" name="chosen" th:value="${tutorial.postID}"></td>
+            <td><a  th:href="@{'/tutorial/' + ${tutorial.postID}}" th:text="${tutorial.title}">Title</a></td>
         </tr>
     </table>
 </form>

@@ -38,15 +38,6 @@ public class ForumWebController {
         redirectAttributes.addAttribute("id",discussion.getPostID());
         return "redirect:/showDiscussion/{id}";
     }
-
-    @PostMapping("showDiscussion/{id}")
-    public String createComment(@PathVariable String id,String comment, RedirectAttributes redirectAttributes, Principal principal){
-        System.out.println(comment);
-        forumController.addComment(new Comment(comment),principal.getName(),id);
-        redirectAttributes.addAttribute("id",id);
-        return "redirect:/showDiscussion/{id}";
-    }
-
     @GetMapping("forum")
     public String showForum(Model model){
         model.addAttribute("discussions",forumController.getDiscussions());
@@ -57,9 +48,16 @@ public class ForumWebController {
         redirectAttributes.addAttribute("id",chosen);
         return "redirect:/showDiscussion/{id}";
     }
-    @GetMapping("showDiscussion/{id}")
+    @GetMapping("discussion/{id}")
     public String showDiscussion(Model model, @PathVariable String id){
         model.addAttribute("discussion",forumController.getDiscussion(id));
         return "post/showDiscussion";
+    }
+    @PostMapping("discussion/{id}")
+    public String createComment(@PathVariable String id,String comment, RedirectAttributes redirectAttributes, Principal principal){
+        System.out.println(comment);
+        forumController.addComment(new Comment(comment),principal.getName(),id);
+        redirectAttributes.addAttribute("id",id);
+        return "redirect:/showDiscussion/{id}";
     }
 }
