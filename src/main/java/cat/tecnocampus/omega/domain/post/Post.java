@@ -10,7 +10,7 @@ import java.util.Date;
 import java.util.List;
 import java.util.UUID;
 
-public abstract class APost {
+public abstract class Post {
 
     protected String postID;
     @NotNull(message = "Description cannot be null")
@@ -25,10 +25,7 @@ public abstract class APost {
     protected List<Exercise> exerciseList;
     protected String category;
 
-    public APost() {
-    }
-
-    public APost (String postID, String description, String title, String category){
+    public Post(String postID, String description, String title, String category){
         this.postID=postID;
         this.description=description;
         this.title=title;
@@ -38,7 +35,7 @@ public abstract class APost {
         exerciseList=new ArrayList<Exercise>();
         this.category=category;
     }
-    public APost (String description,String title, String category){
+    public Post(String description, String title, String category){
         postID=UUID.randomUUID().toString();
         this.description=description;
         this.title=title;
@@ -48,7 +45,13 @@ public abstract class APost {
         exerciseList=new ArrayList<Exercise>();
         this.category=category;
     }
-
+    public Post() {
+        postID=UUID.randomUUID().toString();
+        creationDay=new Date();
+        likes = 0;
+        enable=true;
+        exerciseList=new ArrayList<Exercise>();
+    }
     public String getCategory(){
         return category;
     }

@@ -2,16 +2,22 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <link rel="stylesheet" type="text/css" th:href="@{style.css}"/>
     <title>Forum</title>
+    <link href="../../fragment/header2.css" rel="stylesheet" type="text/css">
 </head>
 <body>
-<h2 align="center">Forum</h2>
-<tr th:each="discussion : ${discussions}">
-    <td th:text="${discussion.title}">Discussion Title</td>
-    <BR>
-    <td th:text="${discussion.description}">Description</td>
-    <BR>
-    <td>
+<div th:replace="fragment/header :: header"></div>
+<div>
+    <h2 align="center">Forum</h2>
+    <form method="post">
+        <table>
+            <tr th:each="discussion : ${discussions}">
+                <td th:text="${discussion.title}">Discussion Title</td>
+                <td><input type="Submit" name="chosen" th:value="${discussion.postID}"></td>
+            </tr>
+        </table>
+        <input type="button" value="Create New Discussion" onclick="window.location.href='/createDiscussion' ">
+    </form>
+</div>
 </body>
 </html>

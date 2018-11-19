@@ -4,40 +4,42 @@
     <meta charset="UTF-8"/>
     <title>Register User</title>
     <link href="../static/InitialPage.css" rel="stylesheet" type="text/css">
+    <link href="../../fragment/header2.css" rel="stylesheet" type="text/css">
 </head>
 <body>
-    <header>
-        <div class="row">
-            <ul class="main-nav">
-                <li class="active"><a href="">TUTORIALS</a></li>
-                <li><a href="">OTHERS</a></li>
-                <li><a href="">OTHERS</a></li>
-                <li><a href="">OTHERS</a></li>
-            </ul>
+<div th:replace="fragment/header :: header"></div>
+<header>
+    <div class="row">
+        <ul class="main-nav">
+            <li class="active"><a href="">TUTORIALS</a></li>
+            <li><a href="">OTHERS</a></li>
+            <li><a href="">OTHERS</a></li>
+            <li><a href="">OTHERS</a></li>
+        </ul>
 
-            <table>
-                <tr>
-                    <th>Username</th>
-                    <th>Password</th>
-                    <th>First Name</th>
-                    <th>Last Name</th>
-                    <th>Email</th>
-                    <th>Birthday</th>
-                    <th>Experience points</th>
-                    <th>Enable</th>
-                </tr>
-                <tr th:each="user : ${users}">
-                    <td th:text="${user.username}"></td>
-                    <td th:text="${user.password}"></td>
-                    <td th:text="${user.firstName}"></td>
-                    <td th:text="${user.lastName}"></td>
-                    <td th:text="${user.email}"></td>
-                    <td th:text="${user.birthday}"></td>
-                    <td th:text="${user.experiencePoints}"></td>
-                    <td th:text="${user.enable}"></td>
-                </tr>
-            </table>
-        </div>
-    </header>
+        <table>
+            <tr>
+                <th>Username</th>
+                <th>Password</th>
+                <th>First Name</th>
+                <th>Last Name</th>
+                <th>Email</th>
+                <th>Birthday</th>
+                <th>Experience points</th>
+                <th>Enable</th>
+            </tr>
+            <tr th:each="user : ${users}">
+                <td th:text="${user.username}"></td>
+                <td th:text="${user.password}"></td>
+                <td th:text="${user.firstName}"></td>
+                <td th:text="${user.lastName}"></td>
+                <td th:text="${user.email}"></td>
+                <td th:text="${user.birthday}"></td>
+                <td th:text="${user.experiencePoints}"></td>
+                <td th:text="${user.enable}"></td>
+            </tr>
+        </table>
+    </div>
+</header>
 </body>
 </html>

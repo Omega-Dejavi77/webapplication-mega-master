@@ -2,7 +2,7 @@ package cat.tecnocampus.omega.domain.post;
 
 import java.util.Date;
 
-public class Tutorial extends APost {
+public class Tutorial extends Post {
 
     public Tutorial(String id,String description, String title, String category) {
         super(id,description,title, category);

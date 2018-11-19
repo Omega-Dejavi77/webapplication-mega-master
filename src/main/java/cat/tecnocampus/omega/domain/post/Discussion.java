@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import cat.tecnocampus.omega.domain.*;
 
-public class Discussion extends APost {
+public class Discussion extends Post {
 
     private boolean hasBestComment;
     private User user;
@@ -12,13 +12,13 @@ public class Discussion extends APost {
     private List<Comment> comments= new ArrayList<Comment>();
 
     public Discussion(String postID, String description, String title,User user) {
-        super(postID, description, title);
+        super(postID, description, title,"Java");
         hasBestComment=false;
         this.user=user;
     }
 
     public Discussion(String body, String title,User user) {
-        super(body, title,"");
+        super(body, title,"Java");
         hasBestComment=false;
         this.user=user;
     }

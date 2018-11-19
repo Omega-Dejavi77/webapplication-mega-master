@@ -4,8 +4,10 @@
     <meta charset="UTF-8"/>
     <title>User</title>
     <link rel="stylesheet" type="text/css" th:href="@{../table.css}"/>
+    <link href="../../fragment/header2.css" rel="stylesheet" type="text/css">
 </head>
 <body>
+<div th:replace="fragment/header :: header"></div>
     <h1><span th:text="${user.username}"></span></h1>
     <table border=3>
         <tr>

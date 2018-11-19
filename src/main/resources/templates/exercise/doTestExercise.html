@@ -3,13 +3,14 @@
       xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Do Test Excercise</title>
-    <script language="javascript">
-    </script>
+    <title >Do Test Excercise</title>
+    <link href="../../fragment/header2.css" rel="stylesheet" type="text/css">
 </head>
 <body>
-<h1>Do Test Exercise</h1>
-<form method="POST">
+<div th:replace="fragment/header :: header"></div>
+<div>
+    <h1>Do Test Exercise</h1>
+    <form method="POST">
         <span align="left" th:each="question : ${exercise.getQuestions()}">
             <p valign="top" th:text="${question.text}">Text</p>
             <tr align="left" th:each="solution : ${question.getSolutions()}">
@@ -17,7 +18,8 @@
                        th:value="${solution.text}"/><BR>
             </tr>
         </span>
-    <input type="submit" value="Submit">
-</form>
+        <input type="submit" value="Submit">
+    </form>
+</div>
 </body>
 </html>

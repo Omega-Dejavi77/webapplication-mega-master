@@ -4,9 +4,10 @@
 <head>
     <meta charset="UTF-8"/>
     <title>Create Fill The Gap Exercise</title>
+    <link href="../../fragment/header2.css" rel="stylesheet" type="text/css">
 </head>
 <body>
-
+<div th:replace="fragment/header :: header"></div>
 <div align="center">
 
     <h1>Register Fill The Gap Exercise</h1>
@@ -54,7 +55,7 @@
                     Being "boolean" the word that the users must put on the gap to complete the exercise.<br />
                     </th>
             </tr>
-            <tr><td><textarea name="fillText" rows="20" cols="150" minlength="5" maxlength="9000"></textarea></td></tr>
+            <tr><td><textarea th:name="questions" rows="20" cols="150" minlength="5" maxlength="9000"></textarea></td></tr>
         </table>
         <input type="submit" name="end" value="Add More Exercises"/>
         <input type="submit" name="end" value="Finish"/>

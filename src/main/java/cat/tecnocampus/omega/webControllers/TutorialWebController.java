@@ -2,7 +2,7 @@ package cat.tecnocampus.omega.webControllers;
 
 import cat.tecnocampus.omega.domain.exercises.Exercise;
 import cat.tecnocampus.omega.domain.post.Tutorial;
-import cat.tecnocampus.omega.persistanceController.ExercisesDAOController;
+import cat.tecnocampus.omega.persistanceController.ExerciseController;
 import cat.tecnocampus.omega.persistanceController.TutorialController;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -18,16 +18,16 @@ import javax.validation.Valid;
 public class TutorialWebController {
 
     private TutorialController tutorialController;
-    private ExercisesDAOController exerciseController;
+    private ExerciseController exerciseController;
 
-    public TutorialWebController(TutorialController tutorialController, ExercisesDAOController exercisesController) {
+    public TutorialWebController(TutorialController tutorialController, ExerciseController exerciseController) {
         this.tutorialController = tutorialController;
-        this.exerciseController = exercisesController;
+        this.exerciseController = exerciseController;
     }
 
     @GetMapping("tutorials/{category}")
-    public String listTutorials(@PathVariable String category, Model model){
-        model.addAttribute("tutorialList",tutorialController.findByCategory(category));
+    public String listTutorials(@PathVariable String category, Model model) {
+        model.addAttribute("tutorialList", tutorialController.findByCategory(category));
         return "post/showTutorials";
     }
 
@@ -60,10 +60,11 @@ public class TutorialWebController {
         redirectAttributes.addAttribute("exercise", exercise.getExercise_ID());
         redirectAttributes.addAttribute("type", "do");
         if (exercise.getType().equals("Test"))
-            return "redirect:/doTest/{type}/{post}/{exercise}";
+            return "redirect:/exercise/doTest/{type}/{post}/{exercise}";
         if (exercise.isDrag())
-            return "redirect:/doFill/{type}/{post}/{exercise}/{drag}";
-        return "redirect:/doFill/{type}/{post}/{exercise}/{drag}";
+            redirectAttributes.addAttribute("drag", "2");
+        else redirectAttributes.addAttribute("drag", "1");
+        return "redirect:/exercise/doFill/{type}/{post}/{exercise}/{drag}";
     }
 
     @GetMapping("createTutorial")
@@ -81,9 +82,10 @@ public class TutorialWebController {
 
         model.addAttribute("title", tutorial.getTitle());
 
-        tutorialController.insert(tutorial);
+        tutorialController.addTutorial(tutorial);
 
         redirectAttributes.addAttribute("id", tutorial.getPostID());
-        return "redirect:/createExercise/{id}";
+        redirectAttributes.addAttribute("type", "Tut");
+        return "redirect:/createExercise/{id}/{type}";
     }
 }

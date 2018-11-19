@@ -25,7 +25,6 @@ public class HandlingExceptionController {
 
     private static final org.slf4j.Logger logger = LoggerFactory.getLogger(publicLoggerAdvice.class);
 
-
     @ExceptionHandler(EmptyResultDataAccessException.class)
     public String handleUsernameDoesNotExist(Model model, HttpServletRequest request, Exception ex) {
         String url = request.getRequestURL().toString();
@@ -56,8 +55,6 @@ public class HandlingExceptionController {
         return "error/exceptionAll";
 
     }
-
-
 }
 
 

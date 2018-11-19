@@ -2,18 +2,6 @@ DROP TABLE IF EXISTS Category;
 CREATE TABLE Category(
     category VARCHAR (32) PRIMARY KEY,
 );
-DROP TABLE IF EXISTS Users;
-CREATE TABLE Users (
-    username VARCHAR (64) PRIMARY KEY,
-    password VARCHAR (32) NOT NULL,
-    first_name VARCHAR (128) NOT NULL,
-    last_name VARCHAR (128) NOT NULL,
-    email VARCHAR (256) NOT NULL UNIQUE,
-    birthday DATE,
-    experience_points INTEGER,
-    level INTEGER,
-    enable BIT NOT NULL
-);
 DROP TABLE IF EXISTS Posts;
 CREATE TABLE Posts (
     post_id VARCHAR(36) PRIMARY KEY,

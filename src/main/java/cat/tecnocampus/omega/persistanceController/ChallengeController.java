@@ -1,5 +1,6 @@
 package cat.tecnocampus.omega.persistanceController;
 
+import cat.tecnocampus.omega.domain.post.Tutorial;
 import cat.tecnocampus.omega.persistance.ChallengeDAO;
 import cat.tecnocampus.omega.domain.post.Challenge;
 import org.springframework.stereotype.Service;
@@ -16,24 +17,20 @@ public class ChallengeController {
         this.challengeDAO = challengeDAO;
     }
 
-    public Challenge insertChallenge(String description, String title, String category) {
-        Challenge challenge = new Challenge(description, title,category);
-        insert(challenge);
-        return challenge;
-
-    }
-
     @Transactional
-    public int insert(Challenge challenge) {
-        return challengeDAO.insertDAOChallenge(challenge);
+    public int addChallenge(Challenge challenge) {
+        return challengeDAO.insertChallenge(challenge, "Java");
     }
 
     public List<Challenge> findAll() {
 
         return challengeDAO.findAll();
     }
+    public Challenge findById(String id){
+        return challengeDAO.findById(id);
+    }
 
-    public List<Challenge> findByategory(String category){
+    public List<Challenge> findByCategory(String category) {
         return challengeDAO.findByCategory(category);
     }
 

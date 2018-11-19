@@ -2,26 +2,33 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <link rel="stylesheet" type="text/css" th:href="@{style.css}"/>
     <title th:text="${discussion.title}"></title>
+    <style>table {
+        width: 100%;
+    }</style>
+    <link href="../../fragment/header2.css" rel="stylesheet" type="text/css">
 </head>
 <body>
-<form method="post">
-    <h2 align="center" th:text="${discussion.title}"></h2>
-    <table border="1">
-        <tr>
-            <td valign="top" th:text="${discussion.description}">Description</td>
-            <table border="1">
-                <tr th:each="comment : ${discussion.getComments()}">
-                    <th valign="top"th:text="${comment.comment}">Comment</th>
-                </tr>
-            </table>
-        </tr>
-        <td><textarea name="comment" rows="8" cols="64" minlength="2" maxlength="2048"/>
-            </textarea>
-            <input type="submit" value="Send comment"/>
-        </td>
-    </table>
-</form>
+<div th:replace="fragment/header :: header">HEADER</div>
+<div align= "center">
+    <form method="post">
+        <h2 align="center" th:text="${discussion.title}"></h2>
+        <table border="1">
+            <tr>
+                <td valign="top" th:text="${discussion.user.username}">Username</td>
+                <th valign="top" th:text="${discussion.description}">Description</th>
+                <table border="1">
+                    <tr th:each="comment : ${discussion.getComments()}">
+                        <td valign="top" th:text="${comment.user.username}">Username</td>
+                        <th valign="top" th:text="${comment.comment}">Comment</th>
+                    </tr>
+                </table>
+            </tr>
+            <td align="center"><textarea name="comment" rows="8" cols="64" minlength="2" maxlength="2048"/></textarea>
+                <input type="submit" value="Send comment"/>
+            </td>
+        </table>
+    </form>
+</div>
 </body>
 </html>

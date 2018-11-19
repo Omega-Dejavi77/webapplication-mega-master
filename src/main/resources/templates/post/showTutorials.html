@@ -2,18 +2,20 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8"/>
-    <title>Users</title>
-    <link rel="stylesheet" type="text/css" href="table.css"/>
+    <title>Tutorials</title>
+    <link href="../../fragment/header2.css" rel="stylesheet" type="text/css">
 </head>
 <body>
+<div th:replace="fragment/header :: header"></div>
 <h2 align="center">All Tutorials</h2>
 <form method="post">
     <table>
         <tr th:each="tutorial : ${tutorialList}">
             <td th:text="${tutorial.title}">Title</td>
-            <br>
-            <input type="Submit" name="chosen" th:value="${tutorial.postID}"><br>
+            <td><input type="Submit" name="chosen" th:value="${tutorial.postID}"></td>
+        </tr>
     </table>
 </form>
+<input type="button" value="Create New Tutorial" onclick="window.location.href='/createTutorial' ">
 </body>
 </html>

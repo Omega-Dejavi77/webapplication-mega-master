@@ -54,13 +54,17 @@ public class Question {
         return solutions;
     }
 
-    public void addSolution(List<Solution> solution) {
+    public void addSolutions(List<Solution> solution) {
         solutions.addAll(solution);
+    }
+
+    public void addSolution(Solution solution) {
+        solutions.add(solution);
     }
 
     public int solve(String srtSolution) {
         for (Solution solution : solutions) {
-            if(solution.getCorrect())
+            if (solution.getCorrect())
                 return (solution.getText().equals(srtSolution)) ? 1 : 0;
         }
         return 0;

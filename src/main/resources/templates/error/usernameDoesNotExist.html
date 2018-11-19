@@ -4,8 +4,12 @@
 <head>
     <meta charset="UTF-8">
     <title>Error: The username already exists</title>
+    <link href="../../fragment/header2.css" rel="stylesheet" type="text/css">
 </head>
 <body>
-<h1>Error: Username <span th:text="${username}">username</span> does NOT exist</h1>
+<div th:replace="fragment/header :: header"></div>
+<div>
+    <h1>Error: Username <span th:text="${username}">username</span> does NOT exist</h1>
+</div>
 </body>
 </html>
