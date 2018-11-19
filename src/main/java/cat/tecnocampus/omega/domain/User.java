@@ -59,7 +59,8 @@ public class User {
     }
 
     public void setPassword(String password) {
-        if (password.contains("{noop}"))
+        String noop = password.substring(0, 5);
+        if (noop.equals("{noop}"))
             this.password = password;
         else
             this.password = "{noop}" + password;
