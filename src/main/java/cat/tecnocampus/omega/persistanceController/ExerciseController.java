@@ -93,6 +93,15 @@ public class ExerciseController {
         marks.put(0f, "F");
     }
 
+    public String pass(boolean pass) {
+        String srtPass = "YOU ";
+        if (pass)
+            srtPass += "PASS";
+        else
+            srtPass += "FAILED";
+        return srtPass;
+    }
+
     public String type(String type) {
         if (!type.equals("do"))
             return "Result";
