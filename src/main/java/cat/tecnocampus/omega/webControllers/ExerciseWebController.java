@@ -156,6 +156,11 @@ public class ExerciseWebController {
         return "redirect:/showMark/{post}/{exercise}/{type}/{drag}";
     }
 
+    @GetMapping("exercise/doCompiler")
+    public String doCompiler(Model model) {
+        return "exercise/doCompilerExercise";
+    }
+
     @GetMapping("showMark/{post}/{exercise}/{type}/{drag}")
     public String showMark(Model model, @PathVariable String exercise, Principal principal) {
         Submission submission = exerciseController.getSubmission(exercise, principal.getName());
