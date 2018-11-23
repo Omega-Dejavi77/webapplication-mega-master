@@ -33,13 +33,13 @@ public class ChallengeWebController {
         return "post/showChallenges";
     }
 
-    @GetMapping("challenges")
+    @GetMapping("challenge/all")
     public String listChallenges(Model model) {
         model.addAttribute("challengesList", challengeController.findAll());
         return "post/showChallenges";
     }
 
-    @PostMapping("challenges")
+    @PostMapping("challenge/all")
     public String listChallenges(String chosen, RedirectAttributes redirectAttributes) {
         System.out.println(chosen);
         redirectAttributes.addAttribute("id", chosen);

@@ -21,13 +21,13 @@ public class ForumWebController {
         this.forumController=forumController;
     }
 
-    @GetMapping("createDiscussion")
+    @GetMapping("forum/create/discussion")
     public String createDiscussion (Model model){
         model.addAttribute(new Discussion());
         return "post/newDiscussion";
     }
 
-    @PostMapping("createDiscussion")
+    @PostMapping("forum/create/discussion")
     public String createDiscussion(@Valid Discussion discussion, Errors errors, Model model, RedirectAttributes redirectAttributes, Principal principal) {
 
         if (errors.hasErrors()) {
@@ -38,26 +38,25 @@ public class ForumWebController {
         redirectAttributes.addAttribute("id",discussion.getPostID());
         return "redirect:/showDiscussion/{id}";
     }
-    @GetMapping("forum")
+    @GetMapping("forum/all")
     public String showForum(Model model){
         model.addAttribute("discussions",forumController.getDiscussions());
         return "post/showForum";
     }
-    @PostMapping("forum")
+    @PostMapping("forum/all")
     public String showForum(String chosen,RedirectAttributes redirectAttributes){
         redirectAttributes.addAttribute("id",chosen);
-        return "redirect:/showDiscussion/{id}";
+        return "redirect:/forum/discussion/{id}";
     }
-    @GetMapping("discussion/{id}")
+    @GetMapping("forum/discussion/{id}")
     public String showDiscussion(Model model, @PathVariable String id){
         model.addAttribute("discussion",forumController.getDiscussion(id));
         return "post/showDiscussion";
     }
-    @PostMapping("discussion/{id}")
+    @PostMapping("forum/discussion/{id}")
     public String createComment(@PathVariable String id,String comment, RedirectAttributes redirectAttributes, Principal principal){
-        System.out.println(comment);
         forumController.addComment(new Comment(comment),principal.getName(),id);
         redirectAttributes.addAttribute("id",id);
-        return "redirect:/showDiscussion/{id}";
+        return "redirect:/forum/discussion/{id}";
     }
 }
