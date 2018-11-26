@@ -12,10 +12,10 @@
     <form method="post">
         <table>
             <tr th:each="discussion : ${discussions}">
-                <td><a  th:href="@{'/discussion/' + ${discussion.postID}}" th:text="${discussion.title}">Title</a></td>
+                <td><a  th:href="@{'/forum/discussion/' + ${discussion.postID}}" th:text="${discussion.title}">Title</a></td>
             </tr>
         </table>
-        <input type="button" value="Create New Discussion" onclick="window.location.href='/createDiscussion' ">
+        <input type="button" value="Create New Discussion" onclick="window.location.href='/forum/create/discussion' ">
     </form>
 </div>
 </body>

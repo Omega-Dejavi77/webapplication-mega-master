@@ -30,13 +30,17 @@ public class ExerciseWebController {
     @PostMapping("exercise/create/{id}")
     public String createExercise(String exercise, @PathVariable String id, RedirectAttributes redirectAttributes) {
         redirectAttributes.addAttribute("id", id);
+        System.out.println(exercise);
         if (exercise.equals("Test"))
-            return "exercise/quiz/create/{id}";
+            return "redirect:/exercise/test/create/{id}";
+        if(exercise.equals("Fill the Gap (Drag)"))
+            redirectAttributes.addAttribute("drag",1);
         else
-            return "exercise/fillTheBlank/create/{id}";
+            redirectAttributes.addAttribute("drag",0);
+        return "redirect:/exercise/fillTheGap/create/{id}/{drag}";
     }
 
-    @GetMapping("exercise/quiz/create/{id}")
+    @GetMapping("exercise/test/create/{id}")
     public String createTestExercise(Model model) {
         model.addAttribute(new TestExercise());
         model.addAttribute("testQuestion", new Question());
@@ -44,7 +48,7 @@ public class ExerciseWebController {
         return "exercise/newTestExercise";
     }
 
-    @PostMapping("exercise/quiz/create/{id}")
+    @PostMapping("exercise/test/create/{id}")
     public String createTestExercise(@Valid TestExercise testExercise, Errors errors, @PathVariable String id, String end, RedirectAttributes redirectAttributes) {
         if (errors.hasErrors()) {
             redirectAttributes.addAttribute("id", id);
@@ -59,18 +63,19 @@ public class ExerciseWebController {
         }
     }
 
-    @GetMapping("exercise/fillTheBlank/create/{id}")
+    @GetMapping("exercise/fillTheGap/create/{id}/{drag}")
     public String createFillTheGapExercise(Model model) {
         model.addAttribute("fillTheGapExercise", new FillTheGapExercise());
         return "exercise/newFillTheGapExercise";
     }
 
-    @PostMapping("exercise/fillTheBlank/create/{id}")
-    public String createFillTheGapExercise(@Valid FillTheGapExercise fillTheGapExercise, Errors errors, @PathVariable String id, String end, RedirectAttributes redirectAttributes) {
+    @PostMapping("exercise/fillTheGap/create/{id}/{drag}")
+    public String createFillTheGapExercise(@Valid FillTheGapExercise fillTheGapExercise, Errors errors, @PathVariable String id,@PathVariable String drag, String end, RedirectAttributes redirectAttributes) {
         if (errors.hasErrors()) {
             redirectAttributes.addAttribute("id", id);
             return "exercise/newFillTheGapExercise";
         }
+        fillTheGapExercise.setDrag(drag.equals(1));
         exerciseController.addExercise(fillTheGapExercise, id, "Fill");
         redirectAttributes.addAttribute("id", id);
         if (end.equals("Finish"))
@@ -80,13 +85,13 @@ public class ExerciseWebController {
         }
     }
 
-    @GetMapping("exercise/quiz/{type}/{post}/{exercise}")
+    @GetMapping("exercise/test/{type}/{post}/{exercise}")
     public String doTest(Model model, @PathVariable String type, @PathVariable String exercise) {
         model.addAttribute("exercise", exerciseController.getExerciseByType(exercise, "Test"));
         return "exercise/doTestExercise" + exerciseController.type(type);
     }
 
-    @PostMapping("exercise/quiz/{type}/{post}/{exercise}")
+    @PostMapping("exercise/test/{type}/{post}/{exercise}")
     public String doTest(HttpServletRequest request, @PathVariable String type, @PathVariable String post, @PathVariable String exercise, RedirectAttributes redirectAttributes, Principal principal) {
         if (type.equals("do")) {
             Map<String, String[]> mp = request.getParameterMap();
@@ -102,10 +107,10 @@ public class ExerciseWebController {
         }
         redirectAttributes.addAttribute("post", post);
         redirectAttributes.addAttribute("exercise", exercise);
-        return "redirect:/exercise/mark/quiz/{post}/{exercise}";
+        return "redirect:/exercise/mark/test/{post}/{exercise}";
     }
 
-    @GetMapping("exercise/fillTheBlank/{type}/{post}/{exercise}")
+    @GetMapping("exercise/fillTheGap/{type}/{post}/{exercise}")
     public String doFill(Model model, @PathVariable String type, @PathVariable String exercise) {
         Exercise fillTheGapExercise = exerciseController.getExerciseByType(exercise, "Fill");
         model.addAttribute("exercise", fillTheGapExercise);
@@ -119,7 +124,7 @@ public class ExerciseWebController {
         return "exercise/" + html + exerciseController.type(type);
     }
 
-    @PostMapping("exercise/fillTheBlank/{type}/{post}/{exercise}")
+    @PostMapping("exercise/fillTheGap/{type}/{post}/{exercise}")
     public String doFill(@RequestParam(value = "solution") String[] solution, @PathVariable String
             type, @PathVariable String post, @PathVariable String exercise, RedirectAttributes
                                  redirectAttributes, Principal principal) {
@@ -131,12 +136,7 @@ public class ExerciseWebController {
         return "redirect:/exercise/mark/fillTheBlank/{post}/{exercise}";
     }
 
-    @GetMapping("exercise/doCompiler")
-    public String doCompiler(Model model) {
-        return "exercise/doCompilerExercise";
-    }
-
-    @GetMapping("exercise/mark/quiz/{post}/{exercise}")
+    @GetMapping("exercise/mark/test/{post}/{exercise}")
     public String showMarkQuiz(Model model, @PathVariable String exercise, Principal principal) {
         Submission submission = exerciseController.getSubmission(exercise, principal.getName());
         model.addAttribute("submission", submission);
@@ -145,7 +145,7 @@ public class ExerciseWebController {
         return "exercise/showMark";
     }
 
-    @PostMapping("exercise/mark/quiz/{post}/{exercise}")
+    @PostMapping("exercise/mark/test/{post}/{exercise}")
     public String showMarkQuiz(String chosen, @PathVariable String post, @PathVariable String
             exercise, RedirectAttributes redirectAttributes) {
         redirectAttributes.addAttribute("id", post);
@@ -158,10 +158,10 @@ public class ExerciseWebController {
             redirectAttributes.addAttribute("type", "result");
         else
             redirectAttributes.addAttribute("type", "do");
-        return "redirect:/exercise/quiz/{type}/{post}/{exercise}";
+        return "redirect:/exercise/test/{type}/{post}/{exercise}";
     }
 
-    @GetMapping("exercise/mark/fillTheBlank/{post}/{exercise}")
+    @GetMapping("exercise/mark/fillTheGap/{post}/{exercise}")
     public String showMarkFillTheBlank(Model model, @PathVariable String exercise, Principal principal) {
         Submission submission = exerciseController.getSubmission(exercise, principal.getName());
         model.addAttribute("submission", submission);
@@ -170,7 +170,7 @@ public class ExerciseWebController {
         return "exercise/showMark";
     }
 
-    @PostMapping("exercise/mark/fillTheBlank/{post}/{exercise}")
+    @PostMapping("exercise/mark/fillTheGap/{post}/{exercise}")
     public String showMarkFillTheBlank(String chosen, @PathVariable String post, @PathVariable String
             exercise, RedirectAttributes redirectAttributes) {
         redirectAttributes.addAttribute("id", post);
@@ -183,6 +183,6 @@ public class ExerciseWebController {
             redirectAttributes.addAttribute("type", "result");
         else
             redirectAttributes.addAttribute("type", "do");
-        return "redirect:/exercise/fillTheBlank/{type}/{post}/{exercise}";
+        return "redirect:/exercise/fillTheGap/{type}/{post}/{exercise}";
     }
 }

@@ -36,7 +36,7 @@ public class ForumWebController {
         model.addAttribute("title", discussion.getTitle());
         forumController.addDiscussion(discussion,principal.getName());
         redirectAttributes.addAttribute("id",discussion.getPostID());
-        return "redirect:/showDiscussion/{id}";
+        return "redirect:/forum/discussion/{id}";
     }
     @GetMapping("forum/all")
     public String showForum(Model model){

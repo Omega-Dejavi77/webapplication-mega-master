@@ -3,18 +3,16 @@
 <head>
     <meta charset="UTF-8"/>
     <title>Tutorials</title>
-    <link href="../../fragment/header2.css" rel="stylesheet" type="text/css">
 </head>
 <body>
 <div th:replace="fragment/header :: header"></div>
+<div th:replace="fragment/search :: search"></div>
 <h2 align="center">All Tutorials</h2>
-<form method="post">
-    <table>
-        <tr th:each="tutorial : ${tutorialList}">
-            <td><a  th:href="@{'/tutorial/' + ${tutorial.postID}}" th:text="${tutorial.title}">Title</a></td>
-        </tr>
-    </table>
-</form>
+    <ul id="id01">
+        <li th:each="tutorial : ${tutorialList}">
+            <a  th:href="@{'/tutorial/' + ${tutorial.postID}}" th:text="${tutorial.title}">Title</a>
+        </li>
+    </ul>
 <input type="button" value="Create New Tutorial" onclick="window.location.href='/tutorial/create' ">
 </body>
 </html>

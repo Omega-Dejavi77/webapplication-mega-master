@@ -52,6 +52,7 @@ public class TutorialWebController {
     @GetMapping("tutorial/all")
     public String listTutorials(Model model) {
         model.addAttribute("tutorialList", tutorialController.findAll());
+        model.addAttribute("categoryList", tutorialController);
         return "post/showTutorials";
     }
 
@@ -70,14 +71,14 @@ public class TutorialWebController {
     @PostMapping("tutorial/{id}")
     public String showTutorial(String chosen, @PathVariable String id, RedirectAttributes redirectAttributes) {
         if (chosen.equals("Return"))
-            return "redirect:/tutorials";
+            return "redirect:/tutorial/all";
 
         Exercise exercise = exerciseController.getExercise(chosen);
         redirectAttributes.addAttribute("post", id);
         redirectAttributes.addAttribute("exercise", exercise.getExercise_ID());
         redirectAttributes.addAttribute("type", "do");
         if (exercise.getType().equals("Test"))
-            return "redirect:/exercise/quiz/{type}/{post}/{exercise}";
-        return "redirect:/exercise/fillTheBlank/{type}/{post}/{exercise}";
+            return "redirect:/exercise/test/{type}/{post}/{exercise}";
+        return "redirect:/exercise/fillTheGap/{type}/{post}/{exercise}";
     }
 }

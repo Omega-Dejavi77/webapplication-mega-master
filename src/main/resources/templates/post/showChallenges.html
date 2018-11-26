@@ -12,6 +12,7 @@
     <table>
         <tr th:each="challenge : ${challengesList}">
             <td><a  th:href="@{'/challenge/' + ${challenge.postID}}" th:text="${challenge.title}">Title</a></td>
+            <td><th th:value="'Difficulty: '+${challenge.description}"></td>
         </tr>
     </table>
 </form>

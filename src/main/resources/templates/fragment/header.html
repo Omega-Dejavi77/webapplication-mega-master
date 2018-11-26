@@ -3,6 +3,7 @@
       xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
 <head>
     <title>Header</title>
+    <link href="../../fragment/header2.css" rel="stylesheet" type="text/css" th:fragment="header">
 </head>
 <body>
 <div id="header_container" th:fragment="header">
@@ -10,7 +11,7 @@
         <div class="logo" onclick="window.location.href='/' "></div>
         <nav>
             <a href="/tutorial/all">Tutorials</a>
-            <a href="/challenges/all">Challenges</a>
+            <a href="/challenge/all">Challenges</a>
             <a href="/forum/all">Forum</a>
             <a href="/profile"sec:authentication="name">Username</a>
         </nav>
