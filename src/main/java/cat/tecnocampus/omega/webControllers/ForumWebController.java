@@ -8,6 +8,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+import com.github.rjeschke.txtmark.*;
 
 import javax.validation.Valid;
 import java.security.Principal;
@@ -42,7 +43,7 @@ public class ForumWebController {
     @PostMapping("showDiscussion/{id}")
     public String createComment(@PathVariable String id,String comment, RedirectAttributes redirectAttributes, Principal principal){
         System.out.println(comment);
-        forumController.addComment(new Comment(comment),principal.getName(),id);
+        forumController.addComment(new Comment(Processor.process(comment)),principal.getName(),id);
         redirectAttributes.addAttribute("id",id);
         return "redirect:/showDiscussion/{id}";
     }
