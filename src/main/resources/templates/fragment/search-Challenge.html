@@ -3,7 +3,7 @@
       xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
 <head>
     <title>Header</title>
-    <script th:fragment="search">
+    <script th:fragment="search-Challenge">
         function myFunction() {
             // Declare variables
             var input, filter, ul, li, a, i;
@@ -75,13 +75,11 @@
     </script>
 </head>
 <body>
-<div id="search_container" th:fragment="search">
-    <div id="search_div">
+<div id="search_container" th:fragment="search-Challenge">
+        <div id="search_div">
             <table>
                 <td><input type="text" id="search" onkeyup="myFunction()" placeholder="Search for names.."></td>
                 <td><button onclick="sortListDir()">Sort</button></td>
-                <td><button class="btn" onclick="window.location.href='/tutorial/all'"> Show all</button></td>
-                <td th:each="tutorial : ${tutorialList}"><a class="btn" th:href="@{'/tutorial/all/' + ${tutorial.category}}"th:text="${tutorial.category}">Category</a></td>
             </table>
         </div>
 </div>

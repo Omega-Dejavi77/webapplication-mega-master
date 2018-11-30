@@ -20,7 +20,7 @@ public class BaseSecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .antMatchers("/challenge/all").permitAll()
                 .antMatchers("/challenge/**").authenticated()
                 .antMatchers("/tutorial/**").permitAll()
-                .antMatchers("/**").authenticated()
+                .antMatchers("/css/**").permitAll()
                 .and()
                 .formLogin()
                 .and()

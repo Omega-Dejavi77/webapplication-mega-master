@@ -5,9 +5,11 @@
     <title>Tutorials</title>
 </head>
 <body>
+<br>
+<br>
 <div th:replace="fragment/header :: header"></div>
-<div th:replace="fragment/search :: search"></div>
 <h2 align="center">All Tutorials</h2>
+<div th:replace="fragment/search-Tutorial :: search-Tutorial"></div>
     <ul id="id01">
         <li th:each="tutorial : ${tutorialList}">
             <a  th:href="@{'/tutorial/' + ${tutorial.postID}}" th:text="${tutorial.title}">Title</a>
