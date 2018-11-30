@@ -27,7 +27,21 @@ INSERT INTO Posts  (post_id, title, description, creationDay, likes, enable, son
 INSERT INTO Posts  (post_id, title, description, creationDay, likes, enable, son_type) VALUES ('V4kzsJCS9j','Print Input','0',current_timestamp,0,1,'Challenge');
 INSERT INTO Posts  (post_id, title, description, creationDay, likes, enable, son_type) VALUES ('rwKwjNoJXb','Down with the comments!','1',current_timestamp,0,1,'Challenge');
 INSERT INTO Posts  (post_id, title, description, creationDay, likes, enable, son_type) VALUES ('E6rsE0iITV','Lexicographical order','1',current_timestamp,0,1,'Challenge');
+INSERT INTO Posts  (post_id, title, description, creationDay, likes, enable, son_type) VALUES ('uTBdn7mS0X','Application form','4',current_timestamp,0,1,'Challenge');
+INSERT INTO Posts  (post_id, title, description, creationDay, likes, enable, son_type) VALUES ('46FSWQfdbB','Caesar cipher','4',current_timestamp,0,1,'Challenge');
+INSERT INTO Posts  (post_id, title, description, creationDay, likes, enable, son_type) VALUES ('zX22cnW0L2','Collatz conjecture','4',current_timestamp,0,1,'Challenge');
+INSERT INTO Posts  (post_id, title, description, creationDay, likes, enable, son_type) VALUES ('h9hau655NF','Collinear points','4',current_timestamp,0,1,'Challenge');
+INSERT INTO Posts  (post_id, title, description, creationDay, likes, enable, son_type) VALUES ('Jo3aj73aiN','Comparing large numbers','4',current_timestamp,0,1,'Challenge');
+INSERT INTO Posts  (post_id, title, description, creationDay, likes, enable, son_type) VALUES ('rGdcXRQ6lY','Food Shortage in Byteland','4',current_timestamp,0,1,'Challenge');
+INSERT INTO Posts  (post_id, title, description, creationDay, likes, enable, son_type) VALUES ('cad6o30E8z','Longest Connected Subsequence','4',current_timestamp,0,1,'Challenge');
+INSERT INTO Posts  (post_id, title, description, creationDay, likes, enable, son_type) VALUES ('EyGGxBf0z9','Positional systems','4',current_timestamp,0,1,'Challenge');
+INSERT INTO Posts  (post_id, title, description, creationDay, likes, enable, son_type) VALUES ('ZW0LstXJpV','Prefix-suffix balance','4',current_timestamp,0,1,'Challenge');
+INSERT INTO Posts  (post_id, title, description, creationDay, likes, enable, son_type) VALUES ('9iEno2qpHz','Reverse array','4',current_timestamp,0,1,'Challenge');
+INSERT INTO Posts  (post_id, title, description, creationDay, likes, enable, son_type) VALUES ('El0rmYXh5t','Simple Numbers Conversion','4',current_timestamp,0,1,'Challenge');
+INSERT INTO Posts  (post_id, title, description, creationDay, likes, enable, son_type) VALUES ('frMvschVYd','T9 Dictionary','4',current_timestamp,0,1,'Challenge');
+INSERT INTO Posts  (post_id, title, description, creationDay, likes, enable, son_type) VALUES ('X3gXuDWsU1','Various sums','4',current_timestamp,0,1,'Challenge');
 INSERT INTO Posts  (post_id, title, description, creationDay, likes, enable, son_type) VALUES ('GfLgED9u7T','Matrix transposition','4',current_timestamp,0,1,'Challenge');
+
 INSERT INTO Posts (post_id, title, description, creationDay, likes, enable, hasBest,son_type,username) VALUES ('a', 'C++', 'Help for c++', current_timestamp ,0,1,0,'Discussion','erik');
 INSERT INTO Posts (post_id, title, description, creationDay, likes, enable, hasBest,son_type,username) VALUES ('b', 'Java', 'Help for Java', current_timestamp ,0,1,0,'Discussion','erik');
 
