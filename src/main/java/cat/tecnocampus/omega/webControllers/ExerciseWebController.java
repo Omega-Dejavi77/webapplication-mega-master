@@ -98,10 +98,8 @@ public class ExerciseWebController {
             String[] solution = new String[mp.size()];
             int i = 0;
             for (String s : mp.keySet()) {
-                if (!s.equals("id")) {
                     solution[i] = mp.get(s)[0];
                     i++;
-                }
             }
             exerciseController.solve(exercise, solution, principal.getName(), "Test");
         }
@@ -133,7 +131,7 @@ public class ExerciseWebController {
         }
         redirectAttributes.addAttribute("post", post);
         redirectAttributes.addAttribute("exercise", exercise);
-        return "redirect:/exercise/mark/fillTheBlank/{post}/{exercise}";
+        return "redirect:/exercise/mark/fillTheGap/{post}/{exercise}";
     }
 
     @GetMapping("exercise/mark/test/{post}/{exercise}")
@@ -148,8 +146,8 @@ public class ExerciseWebController {
     @PostMapping("exercise/mark/test/{post}/{exercise}")
     public String showMarkQuiz(String chosen, @PathVariable String post, @PathVariable String
             exercise, RedirectAttributes redirectAttributes) {
-        redirectAttributes.addAttribute("id", post);
         if (chosen.equals("Return")) {
+            redirectAttributes.addAttribute("id", post);
             return "redirect:/tutorial/{id}";
         }
         redirectAttributes.addAttribute("post", post);
@@ -173,8 +171,8 @@ public class ExerciseWebController {
     @PostMapping("exercise/mark/fillTheGap/{post}/{exercise}")
     public String showMarkFillTheBlank(String chosen, @PathVariable String post, @PathVariable String
             exercise, RedirectAttributes redirectAttributes) {
-        redirectAttributes.addAttribute("id", post);
         if (chosen.equals("Return")) {
+            redirectAttributes.addAttribute("id", post);
             return "redirect:/tutorial/{id}";
         }
         redirectAttributes.addAttribute("post", post);
