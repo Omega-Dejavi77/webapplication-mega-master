@@ -45,16 +45,16 @@ public class HandlingExceptionController {
         return "error/databaseException";
     }
 
-    @ExceptionHandler(Exception.class)
-    public String ExceptionAll(Model model, HttpServletRequest request, Exception ex){
-        String url = request.getRequestURL().toString();
-
-        logger.error("Request: " + url + " raised " + ex);
-
-        model.addAttribute("where",ex.getMessage());
-        return "error/exceptionAll";
-
-    }
+//    @ExceptionHandler(Exception.class)
+//    public String ExceptionAll(Model model, HttpServletRequest request, Exception ex){
+//        String url = request.getRequestURL().toString();
+//
+//        logger.error("Request: " + url + " raised " + ex);
+//
+//        model.addAttribute("where",ex.getMessage());
+//        return "error/exceptionAll";
+//
+//    }
 }
 
 
