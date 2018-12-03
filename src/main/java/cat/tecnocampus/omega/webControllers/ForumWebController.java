@@ -55,6 +55,8 @@ public class ForumWebController {
     }
     @PostMapping("forum/discussion/{id}")
     public String createComment(@PathVariable String id,String comment, RedirectAttributes redirectAttributes, Principal principal){
+        if(principal==null)
+            return "redirect:/login";
         forumController.addComment(new Comment(comment),principal.getName(),id);
         redirectAttributes.addAttribute("id",id);
         return "redirect:/forum/discussion/{id}";

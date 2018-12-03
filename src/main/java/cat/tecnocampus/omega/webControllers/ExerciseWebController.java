@@ -30,7 +30,6 @@ public class ExerciseWebController {
     @PostMapping("exercise/create/{id}")
     public String createExercise(String exercise, @PathVariable String id, RedirectAttributes redirectAttributes) {
         redirectAttributes.addAttribute("id", id);
-        System.out.println(exercise);
         if (exercise.equals("Test"))
             return "redirect:/exercise/test/create/{id}";
         if(exercise.equals("Fill the Gap (Drag)"))
