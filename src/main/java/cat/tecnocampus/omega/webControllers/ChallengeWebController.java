@@ -18,7 +18,7 @@ public class ChallengeWebController {
     }
     @GetMapping("challenge/all")
     public String listChallenges(Model model) {
-        model.addAttribute("challengesList", challengeController.findAll());
+        model.addAttribute("challengesList", challengeController.getAll());
         return "post/showChallenges";
     }
 
@@ -30,7 +30,7 @@ public class ChallengeWebController {
     }
     @GetMapping("challenge/do/{id}")
     public String showChallenge(Model model, @PathVariable String id) {
-        model.addAttribute("challenge", challengeController.findById(id));
+        model.addAttribute("challenge", challengeController.getById(id));
         return "post/showChallenge";
     }
 
