@@ -10,7 +10,7 @@
 <div th:replace="fragment/header :: header"></div>
 <div>
     <form method="post" th:object="${createUser}">
-        <div align="left" class="error" th:if="${#fields.hasErrors('*')}">
+        <div align="left" class="errors" th:if="${#fields.hasErrors('*')}">
             <ul>
                 <li th:each="err : ${#fields.errors('*')}"
                     th:text="${err}">Input is invalid
