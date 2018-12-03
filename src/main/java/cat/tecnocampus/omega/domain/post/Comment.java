@@ -13,7 +13,19 @@ public class Comment {
     private int likes;
     private boolean enable;
     private boolean bestComment;
+    private Comment father;
 
+
+    public Comment (String ID, String comment, User user, Comment mother){
+        commentID=ID;
+        this.comment=comment;
+        this.user=user;
+        creationDay=new Date();
+        likes=0;
+        enable=true;
+        bestComment=false;
+        father=mother;
+    }
 
     public Comment (String ID, String comment, User user){
         commentID=ID;
@@ -61,6 +73,10 @@ public class Comment {
 
     void setBestComment(boolean stat){
         bestComment=stat;
+    }
+
+    public Comment getFather() {
+        return father;
     }
 
     public User getUser() {
