@@ -9,11 +9,11 @@ import org.springframework.stereotype.Component;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.MissingPathVariableException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.GetMapping;
 import javax.servlet.http.HttpServletRequest;
-import java.io.FileNotFoundException;
 import java.sql.SQLDataException;
 
 @Controller
@@ -96,23 +96,18 @@ public class HandlingExceptionController {
 
     }
 
-    @ExceptionHandler(FileNotFoundException.class)
-    @GetMapping("404Exception")
-    public String NoFound(Model model, HttpServletRequest request, Exception ex){
+
+    @ExceptionHandler(MissingPathVariableException.class)
+    @GetMapping("MissingVariableException")
+    public String MisingVariablePathError(Model model, HttpServletRequest request, Exception ex){
         String url = request.getRequestURL().toString();
 
         logger.error("Request: " + url + " raised " + ex);
 
         model.addAttribute("where",url.substring(url.lastIndexOf("/") + 1));
 
-        return "error/404Exception";
+        return "error/MissingVariableException";
     }
-  /*  @ExceptionHandler(MissingPathVariableException.class)
-    public String MisingVariablePathError(Model model, HttpServletRequest request, Exception ex){
-
-
-        return "error/M";
-    }*/
 }
 
 
