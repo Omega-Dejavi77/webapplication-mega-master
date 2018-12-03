@@ -1,8 +1,7 @@
 package cat.tecnocampus.omega.webControllers;
 
-import org.aspectj.lang.ProceedingJoinPoint;
+
 import org.aspectj.lang.annotation.*;
-import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.core.convert.ConversionFailedException;
 import org.springframework.dao.DataAccessException;
@@ -13,8 +12,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.GetMapping;
-
 import javax.servlet.http.HttpServletRequest;
+import java.io.FileNotFoundException;
 import java.sql.SQLDataException;
 
 @Controller
@@ -92,9 +91,21 @@ public class HandlingExceptionController {
 
         logger.error("Request: " + url + " raised " + ex);
 
-        model.addAttribute("where2",ex.getMessage());
+        model.addAttribute("where2",url.substring(url.lastIndexOf("/") + 1));
         return "error/exceptionAll";
 
+    }
+
+    @ExceptionHandler(FileNotFoundException.class)
+    @GetMapping("404Exception")
+    public String NoFound(Model model, HttpServletRequest request, Exception ex){
+        String url = request.getRequestURL().toString();
+
+        logger.error("Request: " + url + " raised " + ex);
+
+        model.addAttribute("where",url.substring(url.lastIndexOf("/") + 1));
+
+        return "error/404Exception";
     }
   /*  @ExceptionHandler(MissingPathVariableException.class)
     public String MisingVariablePathError(Model model, HttpServletRequest request, Exception ex){
