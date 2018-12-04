@@ -16,6 +16,11 @@ public class BaseSecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .antMatchers("/profile/users/*").permitAll()
                 .antMatchers("/user").authenticated()
                 .antMatchers("/users/{username}").authenticated()
+
+                .antMatchers("/weather").permitAll()
+                .antMatchers("/time").permitAll()
+                .antMatchers("/*").authenticated()
+
                 .antMatchers("/exercise/**").authenticated()
                 .antMatchers("/challenge/all").permitAll()
                 .antMatchers("/challenge/**").authenticated()
@@ -23,6 +28,8 @@ public class BaseSecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .antMatchers("/css/**").permitAll()
                 .and()
                 .formLogin()
+                .loginPage("/login").permitAll()
+//                .defaultSuccessUrl("/users/{username}")
                 .and()
                 .httpBasic()
                 .and()
@@ -31,7 +38,8 @@ public class BaseSecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .and()
                 .logout()
                 .logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
-                .logoutSuccessUrl("/Errors.html");
+                .logoutSuccessUrl("/Errors.html")
+                .permitAll();
         http
                 .csrf().disable()
                 .headers()
