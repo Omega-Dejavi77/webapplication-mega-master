@@ -65,6 +65,7 @@ public class TutorialWebController {
     @GetMapping("tutorial/{id}")
     public String showTutorial(Model model, @PathVariable String id) {
         model.addAttribute("tutorial", tutorialController.findById(id));
+        model.addAttribute("tutorialList",tutorialController.findAll());
         return "post/showTutorial";
     }
 
