@@ -3,8 +3,8 @@
 <head>
 
     <script type="text/javascript">
-        function input(){
-            var text = "IDIDIDID";
+        function input(id){
+            var text = id.toString();
             document.forms.comments.comment.value = text;
         }
     </script>
@@ -30,7 +30,7 @@
                     <tr th:each="comment : ${discussion.getComments()}">
                         <td width=1 valign="top" th:text="${comment.user.username}">Username</td>
                         <td valign="top" th:utext="${comment.comment}">Comment</td>
-                        <td width=1 align="right"> <input class="button" type="button" value="Reply"/></td>
+                        <td width=1 align="right"> <input class="button" type="button" onclick="input();" value="Reply"/></td>
                     </tr>
                 </table>
             </tr>
