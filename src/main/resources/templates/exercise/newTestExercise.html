@@ -3,14 +3,13 @@
       xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8"/>
-    <title>Create Test Exercise</title>
-    <link href="../../fragment/header2.css" rel="stylesheet" type="text/css">
+    <title>Create Quiz Exercise</title>
 </head>
 <body>
 <div th:replace="fragment/header :: header"></div>
 <div align="center">
 
-    <h1>Register Test Exercise</h1>
+    <h1>Register Quiz Exercise</h1>
 
     <form method="POST" th:object="${testExercise}">
         <div align="left" class="errors" th:if="${#fields.hasErrors('*')}">

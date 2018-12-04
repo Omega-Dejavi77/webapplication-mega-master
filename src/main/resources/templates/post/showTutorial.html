@@ -3,9 +3,10 @@
 <head>
     <meta charset="UTF-8"/>
     <title th:text="${tutorial.title}"></title>
-    <link href="../../fragment/header2.css" rel="stylesheet" type="text/css">
 </head>
 <body>
+<br>
+<br>
 <div th:replace="fragment/header :: header"></div>
 <form method="post">
     <div>
@@ -17,7 +18,6 @@
                 <br>
                 <td>Difficulty:</td>
                 <td th:text="${exercise.difficulty}">Difficulty</td>
-                <!--<td th:text="'Completed'" th:unless="${exercise.submission.pass==false}">Difficulty</td>-->
                 <br>
                 <input type="submit" name="chosen" th:value="${exercise.exercise_ID}"><br>
             </tr>
