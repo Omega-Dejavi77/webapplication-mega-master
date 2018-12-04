@@ -3,21 +3,20 @@
 <head>
     <meta charset="UTF-8">
     <title>Forum</title>
-    <link href="../../fragment/header2.css" rel="stylesheet" type="text/css">
 </head>
 <body>
+<br>
+<br>
 <div th:replace="fragment/header :: header"></div>
+<h2 align="center">Forum</h2>
+<div th:replace="fragment/search-Forum :: search-Forum"></div>
 <div>
-    <h2 align="center">Forum</h2>
-    <form method="post">
-        <table>
-            <tr th:each="discussion : ${discussions}">
-                <td th:text="${discussion.title}">Discussion Title</td>
-                <td><input type="Submit" name="chosen" th:value="${discussion.postID}"></td>
-            </tr>
-        </table>
-        <input type="button" value="Create New Discussion" onclick="window.location.href='/createDiscussion' ">
-    </form>
+    <ul id="id01">
+        <li th:each="discussion : ${discussions}">
+            <a  th:href="@{'/forum/discussion/' + ${discussion.postID}}" th:text="${discussion.title}">Title</a>
+        </li>
+    </ul>
+    <input type="button" value="Create New Discussion" onclick="window.location.href='/forum/create/discussion' ">
 </div>
 </body>
 </html>

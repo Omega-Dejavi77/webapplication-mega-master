@@ -3,19 +3,17 @@
 <head>
     <meta charset="UTF-8"/>
     <title>Challenges</title>
-    <link href="../../fragment/header2.css" rel="stylesheet" type="text/css">
 </head>
 <body>
 <div th:replace="fragment/header :: header"></div>
 <h2 align="center">All Challenges</h2>
-<form method="post">
-    <table>
-        <tr th:each="challenge : ${challengesList}">
-            <td th:text="${challenge.title}">Title</td>
-            <td><input type="Submit" name="chosen" th:value="${challenge.postID}"></td>
-        </tr>
-    </table>
-</form>
-<input type="button" value="Create New Challenge" onclick="window.location.href='/createChallenge' ">
+<br>
+<br>
+<div th:replace="fragment/search-Challenge :: search-Challenge"></div>
+<ul id="id01">
+    <li th:each="challenge : ${challengesList}">
+        <a  th:href="@{'/challenge/' + ${challenge.postID}}" th:text="${challenge.title}">Title</a>
+    </li>
+</ul>
 </body>
 </html>
