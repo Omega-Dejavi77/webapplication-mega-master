@@ -10,7 +10,7 @@
 <form method="post">
     <div>
         <h1 align="center" th:text="${tutorial.title}">Title</h1>
-        <p th:text="${tutorial.description}">Description</p>
+        <p th:utext="${tutorial.description}">Description</p>
         <td>
             <tr th:each="exercise : ${tutorial.getExerciseList()}">
                 <td th:text="${exercise.description}">Description</td>

@@ -13,7 +13,7 @@
         <p th:text="${challenge.description}">Description</p>
         <td>
             <tr th:each="exercise : ${challenge.getExerciseList()}">
-                <td th:text="${exercise.description}">Description</td>
+                <td th:utext="${exercise.description}">Description</td>
                 <br>
                 <td>Difficulty:</td>
                 <td th:text="${exercise.difficulty}">Difficulty</td>

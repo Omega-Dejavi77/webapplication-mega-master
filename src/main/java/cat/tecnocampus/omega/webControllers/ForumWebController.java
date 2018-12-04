@@ -29,12 +29,13 @@ public class ForumWebController {
     }
 
     @PostMapping("createDiscussion")
-    public String createDiscussion(@Valid Discussion discussion, Errors errors, Model model, RedirectAttributes redirectAttributes, Principal principal) {
+    public String createDiscussion(@Valid Discussion discussion,String description, Errors errors, Model model, RedirectAttributes redirectAttributes, Principal principal) {
 
         if (errors.hasErrors()) {
             return "post/newDiscussion";
         }
         model.addAttribute("title", discussion.getTitle());
+        discussion.setDescription(Processor.process(description));
         forumController.addDiscussion(discussion,principal.getName());
         redirectAttributes.addAttribute("id",discussion.getPostID());
         return "redirect:/showDiscussion/{id}";

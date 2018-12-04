@@ -23,6 +23,10 @@ public class Discussion extends Post {
         this.user=user;
     }
 
+    public void setDescription(String body){
+        description=body;
+    }
+
     public Discussion(){
         super();
     }

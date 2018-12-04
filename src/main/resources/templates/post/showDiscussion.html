@@ -25,7 +25,7 @@
             <tr>
                 <td width=1 valign="left" th:text="${discussion.user.username}">Username</td>
                 <br>
-                <td valign="left" th:text="${discussion.description}">Description</td>
+                <td valign="left" th:utext="${discussion.description}">Description</td>
                 <table border="1">
                     <tr th:each="comment : ${discussion.getComments()}">
                         <td width=1 valign="top" th:text="${comment.user.username}">Username</td>
