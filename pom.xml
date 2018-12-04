@@ -4,6 +4,7 @@
 https://mvnrepository.com/artifact/org.openweathermap.java-api/api-common ">
     <modelVersion>4.0.0</modelVersion>
 
+
     <groupId>cat.tecnocampus</groupId>
     <artifactId>omega</artifactId>
     <version>0.0.1-SNAPSHOT</version>
@@ -25,7 +26,9 @@ https://mvnrepository.com/artifact/org.openweathermap.java-api/api-common ">
         <java.version>1.8</java.version>
     </properties>
 
+
     <dependencies>
+
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-jdbc</artifactId>
@@ -89,6 +92,7 @@ https://mvnrepository.com/artifact/org.openweathermap.java-api/api-common ">
     </dependencies>
 
     <build>
+
         <plugins>
             <plugin>
                 <groupId>org.springframework.boot</groupId>
@@ -96,6 +100,5 @@ https://mvnrepository.com/artifact/org.openweathermap.java-api/api-common ">
             </plugin>
         </plugins>
     </build>
-
 
 </project>
