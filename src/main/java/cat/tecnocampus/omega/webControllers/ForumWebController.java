@@ -65,9 +65,9 @@ public class ForumWebController {
     }
 
     @GetMapping("forum/discussion/{id}/{reply}")
-    public String showDiscussionReply(Model model, @PathVariable String reply){
-        model.addAttribute("discussion",forumController.getComment(reply));
-        return "post/showDiscussion";
+    public String showDiscussionReply(Model model, @PathVariable String id){
+        model.addAttribute("discussion",forumController.getDiscussion(id));
+        return "post/showDiscussionReply";
     }
     @PostMapping("forum/discussion/{id}/{reply}")
     public String showDiscussionReply(@PathVariable String id,@PathVariable String reply,String comment, RedirectAttributes redirectAttributes, Principal principal){

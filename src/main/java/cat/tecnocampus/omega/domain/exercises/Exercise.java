@@ -129,4 +129,8 @@ public abstract class Exercise {
     protected void setQuestions(String questions) {
 
     }
+
+    public void setType(String type) {
+        this.type = type;
+    }
 }

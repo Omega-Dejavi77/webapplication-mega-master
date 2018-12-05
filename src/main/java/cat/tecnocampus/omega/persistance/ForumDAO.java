@@ -59,7 +59,7 @@ public class ForumDAO {
     }
 
     public int insertCommentReply(Comment comment, String username, String id,String reply) {
-        return jdbcTemplate.update(INSERT_COMMENT,comment.getCommentID(),comment.isBestComment(),comment.getComment(),comment.getCreationDay(),comment.getLikes(),comment.isEnable(),id,username,reply);
+        return jdbcTemplate.update(INSERT_COMMENT_REPLY,comment.getCommentID(),comment.isBestComment(),comment.getComment(),comment.getCreationDay(),comment.getLikes(),comment.isEnable(),id,username,reply);
     }
 
     public List<Comment> findCommentByDiscussion(String id){
