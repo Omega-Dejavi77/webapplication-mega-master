@@ -22,15 +22,14 @@ public class ForumWebController {
         this.forumController=forumController;
     }
 
-    @GetMapping("createDiscussion")
+    @GetMapping("forum/create/discussion")
     public String createDiscussion (Model model){
         model.addAttribute(new Discussion());
         return "post/newDiscussion";
     }
 
-    @PostMapping("createDiscussion")
+    @PostMapping("forum/create/discussion")
     public String createDiscussion(@Valid Discussion discussion,String description, Errors errors, Model model, RedirectAttributes redirectAttributes, Principal principal) {
-
         if (errors.hasErrors()) {
             return "post/newDiscussion";
         }
@@ -38,30 +37,29 @@ public class ForumWebController {
         discussion.setDescription(Processor.process(description));
         forumController.addDiscussion(discussion,principal.getName());
         redirectAttributes.addAttribute("id",discussion.getPostID());
-        return "redirect:/showDiscussion/{id}";
-    }
-
-    @PostMapping("showDiscussion/{id}")
-    public String createComment(@PathVariable String id,String comment, RedirectAttributes redirectAttributes, Principal principal){
-        System.out.println(comment);
-        forumController.addComment(new Comment(Processor.process(comment)),principal.getName(),id);
-        redirectAttributes.addAttribute("id",id);
-        return "redirect:/showDiscussion/{id}";
+        return "redirect:/forum/discussion/{id}";
     }
 
     @GetMapping("forum")
+    @GetMapping("forum/all")
     public String showForum(Model model){
         model.addAttribute("discussions",forumController.getDiscussions());
         return "post/showForum";
     }
-    @PostMapping("forum")
+    @PostMapping("forum/all")
     public String showForum(String chosen,RedirectAttributes redirectAttributes){
         redirectAttributes.addAttribute("id",chosen);
-        return "redirect:/showDiscussion/{id}";
+        return "redirect:/forum/discussion/{id}";
     }
-    @GetMapping("showDiscussion/{id}")
+    @GetMapping("forum/discussion/{id}")
     public String showDiscussion(Model model, @PathVariable String id){
         model.addAttribute("discussion",forumController.getDiscussion(id));
         return "post/showDiscussion";
+    }
+    @PostMapping("forum/discussion/{id}")
+    public String createComment(@PathVariable String id,String comment, RedirectAttributes redirectAttributes, Principal principal){
+                forumController.addComment(new Comment(Processor.process(comment)),principal.getName(),id);
+        redirectAttributes.addAttribute("id",id);
+        return "redirect:/forum/discussion/{id}";
     }
 }

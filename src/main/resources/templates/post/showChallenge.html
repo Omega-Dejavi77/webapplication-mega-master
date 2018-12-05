@@ -1,30 +1,29 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta charset="UTF-8"/>
-    <title th:text="${challenge.title}"></title>
-    <link href="../../fragment/header2.css" rel="stylesheet" type="text/css">
+    <meta charset="utf-8">
+    <title th:name="${challenge.title}"></title>
+    <style>
+        html, body {height: 100%; width: 100%; padding: 0; margin: 0; overflow: hidden;}
+        #widget {width: calc(100% - 30px); height: calc(100% - 60px - 30px); padding: 15px; }
+    </style>
+    <script>
+        (function(d, s, id){
+            SE_BASE = "67c28f8d.widgets.sphere-engine.com";
+            SE_HTTPS = true;
+            SE = window.SE || (window.SE = []);
+            var js, fjs = d.getElementsByTagName(s)[0];
+            if (d.getElementById(id)) return;
+            js = d.createElement(s); js.id = id;
+            js.src = (SE_HTTPS ? "https" : "http") + "://" + SE_BASE + "/static/sdk/sdk.min.js";
+            fjs.parentNode.insertBefore(js, fjs);
+        }(document, "script", "sphere-engine-jssdk"));</script>
 </head>
 <body>
 <div th:replace="fragment/header :: header"></div>
-<form method="post">
-    <div>
-        <h1 align="center" th:text="${challenge.title}">Title</h1>
-        <p th:text="${challenge.description}">Description</p>
-        <td>
-            <tr th:each="exercise : ${challenge.getExerciseList()}">
-                <td th:utext="${exercise.description}">Description</td>
-                <br>
-                <td>Difficulty:</td>
-                <td th:text="${exercise.difficulty}">Difficulty</td>
-                <!--<td th:text="'Completed'" th:unless="${exercise.submission.pass==false}">Difficulty</td>-->
-                <br>
-                <input type="submit" name="chosen" th:value="${exercise.exercise_ID}"><br>
-            </tr>
-        </td>
-        <input type="submit" name="chosen" value="Return">
-    </div>
-    </table>
-</form>
+<div id="widget">
+    <div class="se-widget" th:data-widget="${challenge.postID}"></div>
+</div>
 </body>
 </html>

@@ -3,14 +3,13 @@
       xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8"/>
-    <title>Create Fill The Gap Exercise</title>
-    <link href="../../fragment/header2.css" rel="stylesheet" type="text/css">
+    <title>Create Fill The Blank Exercise</title>
 </head>
 <body>
 <div th:replace="fragment/header :: header"></div>
 <div align="center">
 
-    <h1>Register Fill The Gap Exercise</h1>
+    <h1>Register Fill The Blank Exercise</h1>
 
     <form method="POST" th:object="${fillTheGapExercise}">
         <div align="left" class="errors" th:if="${#fields.hasErrors('*')}">
@@ -42,15 +41,11 @@
                                                        th:field="*{experience_points}"
                                                        th:class="${#fields.hasErrors('experience_points')}? 'error'"/>
                 </td>
-                <td align="center" valign="top"><input type="checkbox"
-                                                       th:field="*{drag}"
-                                                       th:class="${#fields.hasErrors('drag')}? 'error'"/>
-                </td>
             </tr>
         </table>
         <table>
             <tr>
-                <th align="left">In order to create a "Fill the gap" exercise type, you should enter all the text(with the solution included) and surround the solution by a #R #/R block.<br />
+                <th align="left">In order to create a "Fill the blank" exercise type, you should enter all the text(with the solution included) and surround the solution by a #R #/R block.<br />
                     Example: In Java, the variable type that only has two possible values is a #Rboolean#/R.<br />
                     Being "boolean" the word that the users must put on the gap to complete the exercise.<br />
                     </th>

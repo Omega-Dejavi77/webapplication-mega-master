@@ -2,10 +2,8 @@ package cat.tecnocampus.omega.webControllers;
 
 import cat.tecnocampus.omega.domain.exercises.Exercise;
 import cat.tecnocampus.omega.domain.post.Challenge;
-import cat.tecnocampus.omega.domain.post.Tutorial;
 import cat.tecnocampus.omega.persistanceController.ChallengeController;
 import cat.tecnocampus.omega.persistanceController.ExerciseController;
-import cat.tecnocampus.omega.persistanceController.TutorialController;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import com.github.rjeschke.txtmark.Processor;
@@ -27,48 +25,41 @@ public class ChallengeWebController {
         this.challengeController = challengeController;
         this.exerciseController = exerciseController;
     }
-
-    @GetMapping("challenges/{category}")
-    public String listChallenges(@PathVariable String category, Model model) {
-        model.addAttribute("challengesList", challengeController.findByCategory(category));
-        return "post/showChallenges";
-    }
-
-    @GetMapping("challenges")
+    @GetMapping("challenge/all")
     public String listChallenges(Model model) {
         model.addAttribute("challengesList", challengeController.findAll());
         return "post/showChallenges";
     }
 
-    @PostMapping("challenges")
+    @PostMapping("challenge/all")
     public String listChallenges(String chosen, RedirectAttributes redirectAttributes) {
         System.out.println(chosen);
         redirectAttributes.addAttribute("id", chosen);
         return "redirect:/challenge/{id}";
     }
-
     @GetMapping("challenge/{id}")
     public String showChallenge(Model model, @PathVariable String id) {
+
         model.addAttribute("challenge", challengeController.findById(id));
         return "post/showChallenge";
     }
 
-    @PostMapping("challenge/{id}")
-    public String showChallenge(String chosen, @PathVariable String id, RedirectAttributes redirectAttributes) {
-        if (chosen.equals("Return"))
-            return "redirect:/challenges";
-
-        Exercise exercise = exerciseController.getExercise(chosen);
-        redirectAttributes.addAttribute("post", id);
-        redirectAttributes.addAttribute("exercise", exercise.getExercise_ID());
-        redirectAttributes.addAttribute("type", "do");
-        if (exercise.getType().equals("Test"))
-            return "redirect:/exercise/doTest/{type}/{post}/{exercise}";
-        if (exercise.isDrag())
-            redirectAttributes.addAttribute("drag", "2");
-        else redirectAttributes.addAttribute("drag", "1");
-        return "redirect:/exercise/doFill/{type}/{post}/{exercise}/{drag}";
-    }
+//    @PostMapping("challenge/{id}")
+//    public String showChallenge(String chosen, @PathVariable String id, RedirectAttributes redirectAttributes) {
+//        if (chosen.equals("Return"))
+//            return "redirect:/challenge/all";
+//
+//        Exercise exercise = exerciseController.getExercise(chosen);
+//        redirectAttributes.addAttribute("post", id);
+//        redirectAttributes.addAttribute("exercise", exercise.getExercise_ID());
+//        redirectAttributes.addAttribute("type", "do");
+//        if (exercise.getType().equals("Test"))
+//            return "redirect:/exercise/doTest/{type}/{post}/{exercise}";
+//        if (exercise.isDrag())
+//            redirectAttributes.addAttribute("drag", "2");
+//        else redirectAttributes.addAttribute("drag", "1");
+//        return "redirect:/exercise/doFill/{type}/{post}/{exercise}/{drag}";
+//    }
 
     @GetMapping("createChallenge")
     public String createChallenge(Model model) {

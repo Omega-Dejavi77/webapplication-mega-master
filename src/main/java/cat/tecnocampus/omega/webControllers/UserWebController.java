@@ -8,6 +8,7 @@ import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.validation.Valid;
@@ -22,9 +23,15 @@ public class UserWebController {
         this.userController = userController;
     }
 
+
     @GetMapping("mainPage")
     public String mainPage() {
         return "MainPage";
+    }
+
+    @GetMapping("/login")
+    public String login() {
+        return "login";
     }
 
     @GetMapping("allUsers")
@@ -37,14 +44,15 @@ public class UserWebController {
     @GetMapping("createUser")
     public String getCreateUser(Model model) {
         model.addAttribute("createUser", new User());
-        return "RegisterUser";
+        //return "RegisterUser";
+        return "signup";
     }
 
     @PostMapping("createUser")
     public String postCreateUser(@Valid User user, Errors errors, Model model, RedirectAttributes redirectAttributes) {
         if (errors.hasErrors()) {
-            model.addAttribute("error", errors);
-            return "Errors";
+            model.addAttribute("errors", errors);
+            return "RegisterUser";
         }
 
         model.addAttribute("username", user.getUsername());
