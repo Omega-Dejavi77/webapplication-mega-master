@@ -25,8 +25,7 @@
                             <td>Difficulty:</td>
                             <td th:text="${exercise.difficulty}">Difficulty</td>
                             <br>
-                            <td th:if="${#exercise.type=='Test'}"><input type="submit" name="chosen" value="Try it" th:href="@{'exercise/test/do'+'/'+${tutorial.postID}+'/'+${exercise.exercise_ID}}" th:value="${exercise.exercise_ID}"></td>
-                            <td th:if="${#exercise.type=='Fill'}"><input type="submit" name="chosen" value="Try it" th:href="@{'exercise/fillTheGap/do'+'/'+${tutorial.postID}+'/'+${exercise.exercise_ID}}" th:value="${exercise.exercise_ID}"></td>
+                            <td><input type="submit" name="chosen" th:value="${exercise.exercise_ID}"></td>
                         </tr>
                     </td>
                 </table>
