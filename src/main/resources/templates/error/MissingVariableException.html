@@ -3,17 +3,15 @@
       xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Exception has been ocurret</title>
-    <link href="../../fragment/header2.css" rel="stylesheet" type="text/css">
+    <title>Error: The path to go to the next page has been missing</title>
 </head>
 <body>
 <br>
 <br>
 <div th:replace="fragment/header :: header"></div>
-<div th:text="${where2}">
-<h1> <br> <br>Error: where has ben ocrruetn on: <span th:text="${where2}">where</span></h1>
+<div>
+    <h1>Error: SQL ocurred on: <span th:text="${where}">where</span></h1>
     <h1>Please conctat whit support to fix this problem</span></h1>
-    <img src="Recursos/Jose1.jpeg">
 </div>
 </body>
 </html>

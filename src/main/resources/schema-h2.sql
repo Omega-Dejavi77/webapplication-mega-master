@@ -61,6 +61,8 @@ CREATE TABLE Comments(
     enable BIT  NOT NULL,
     post_id VARCHAR (36),
     username VARCHAR(64) NOT NULL,
+    father VARCHAR(36),
+    FOREIGN KEY (father) REFERENCES Comments(comment_id),
     FOREIGN KEY (username) REFERENCES Users(username),
     FOREIGN KEY (post_id) REFERENCES Posts(post_id)
 );

@@ -4,6 +4,7 @@ import cat.tecnocampus.omega.domain.exercises.Exercise;
 import cat.tecnocampus.omega.domain.post.Tutorial;
 import cat.tecnocampus.omega.persistanceController.ExerciseController;
 import cat.tecnocampus.omega.persistanceController.TutorialController;
+import com.github.rjeschke.txtmark.Processor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.Errors;
@@ -32,13 +33,13 @@ public class TutorialWebController {
     }
 
     @PostMapping("tutorial/create")
-    public String createTutorial(@Valid Tutorial tutorial, Errors errors, RedirectAttributes redirectAttributes) {
+    public String createTutorial(@Valid Tutorial tutorial,String description, Errors errors, RedirectAttributes redirectAttributes) {
 
         if (errors.hasErrors()) {
             return "post/newTutorial";
         }
+        tutorial.setDescription(Processor.process(description));
         tutorialController.addTutorial(tutorial);
-
         redirectAttributes.addAttribute("id", tutorial.getPostID());
         return "redirect:/exercise/create/{id}";
     }
@@ -65,7 +66,8 @@ public class TutorialWebController {
 
     @GetMapping("tutorial/{id}")
     public String showTutorial(Model model, @PathVariable String id) {
-        model.addAttribute("tutorial", tutorialController.getById(id));
+        model.addAttribute("tutorial", tutorialController.findById(id));
+        model.addAttribute("tutorialList",tutorialController.findAll());
         return "post/showTutorial";
     }
 
