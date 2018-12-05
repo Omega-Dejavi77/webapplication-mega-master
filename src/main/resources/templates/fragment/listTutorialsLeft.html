@@ -10,11 +10,10 @@
     <title>Others Tutorials</title>
 </head>
 <body>
-<div class="float-left"align="left"  th:fragment="Left">
+<td valign="top" align="left"  th:fragment="Left">
 
     <a th:each="tutorial : ${tutorialList}"class="list-group-item list-group-item-action" th:href="@{'/tutorial/' + ${tutorial.postID}}" th:id="${tutorial.title}" th:text="${tutorial.title}">Title</a>
-
-</div>
+</td>
 
 
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>

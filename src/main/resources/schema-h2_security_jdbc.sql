@@ -79,8 +79,10 @@ CREATE TABLE Comments(
     enable BIT  NOT NULL,
     post_id VARCHAR (36),
     username VARCHAR(64) NOT NULL,
+    comment_id_fk VARCHAR (36),
     FOREIGN KEY (username) REFERENCES Users(username),
-    FOREIGN KEY (post_id) REFERENCES Posts(post_id)
+    FOREIGN KEY (post_id) REFERENCES Posts(post_id),
+    FOREIGN KEY (comment_id_fk) REFERENCES Comments(comment_id)
 );
 DROP TABLE IF EXISTS UserCategory;
 CREATE TABLE UserCategory(

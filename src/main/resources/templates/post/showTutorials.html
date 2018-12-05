@@ -8,8 +8,14 @@
 <br>
 <br>
 <div th:replace="fragment/header :: header"></div>
+<br>
+<br>
 <h2 align="center">All Tutorials</h2>
 <div th:replace="fragment/search-Tutorial :: search-Tutorial"></div>
+<br>
+<br>
+<br>
+<br>
     <ul id="id01">
         <li th:each="tutorial : ${tutorialList}">
             <a  th:href="@{'/tutorial/' + ${tutorial.postID}}" th:id="${tutorial.title}" th:text="${tutorial.title}">Title</a>

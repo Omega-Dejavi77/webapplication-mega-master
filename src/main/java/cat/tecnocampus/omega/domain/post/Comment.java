@@ -1,6 +1,8 @@
 package cat.tecnocampus.omega.domain.post;
 
 import cat.tecnocampus.omega.domain.*;
+
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.UUID;
@@ -16,18 +18,6 @@ public class Comment {
     private boolean bestComment;
     private List<Comment> sons;
 
-
-    public Comment (String ID, String comment, User user, List<Comment>sons){
-        commentID=ID;
-        this.comment=comment;
-        this.user=user;
-        creationDay=new Date();
-        likes=0;
-        enable=true;
-        bestComment=false;
-        this.sons=sons;
-    }
-
     public Comment (String ID, String comment, User user){
         commentID=ID;
         this.comment=comment;
@@ -36,6 +26,7 @@ public class Comment {
         likes=0;
         enable=true;
         bestComment=false;
+        this.sons=new ArrayList<Comment>();
     }
 
     public Comment (String comment, User user){
@@ -78,6 +69,9 @@ public class Comment {
 
     public List<Comment> getSons() {
         return sons;
+    }
+    public void setSons(List<Comment> sons) {
+        this.sons=sons;
     }
 
     public User getUser() {
