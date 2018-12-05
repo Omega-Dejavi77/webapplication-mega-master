@@ -40,7 +40,6 @@ public class ForumWebController {
         return "redirect:/forum/discussion/{id}";
     }
 
-    @GetMapping("forum")
     @GetMapping("forum/all")
     public String showForum(Model model){
         model.addAttribute("discussions",forumController.getDiscussions());
@@ -57,10 +56,24 @@ public class ForumWebController {
         return "post/showDiscussion";
     }
     @PostMapping("forum/discussion/{id}")
-    public String createComment(@PathVariable String id,String comment, RedirectAttributes redirectAttributes, Principal principal){
+    public String showDiscussion(@PathVariable String id,String comment, RedirectAttributes redirectAttributes, Principal principal){
         if(principal==null)
             return "redirect:/login";
         forumController.addComment(new Comment(Processor.process(comment)),principal.getName(),id);
+        redirectAttributes.addAttribute("id",id);
+        return "redirect:/forum/discussion/{id}";
+    }
+
+    @GetMapping("forum/discussion/{id}/{reply}")
+    public String showDiscussionReply(Model model, @PathVariable String id){
+        model.addAttribute("discussion",forumController.getDiscussion(id));
+        return "post/showDiscussionReply";
+    }
+    @PostMapping("forum/discussion/{id}/{reply}")
+    public String showDiscussionReply(@PathVariable String id,@PathVariable String reply,String comment, RedirectAttributes redirectAttributes, Principal principal){
+        if(principal==null)
+            return "redirect:/login";
+        forumController.addCommentReply(new Comment(Processor.process(comment)),principal.getName(),id,reply);
         redirectAttributes.addAttribute("id",id);
         return "redirect:/forum/discussion/{id}";
     }

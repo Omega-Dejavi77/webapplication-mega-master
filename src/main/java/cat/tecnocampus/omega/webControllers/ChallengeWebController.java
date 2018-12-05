@@ -3,8 +3,6 @@ package cat.tecnocampus.omega.webControllers;
 import cat.tecnocampus.omega.persistanceController.ChallengeController;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import com.github.rjeschke.txtmark.Processor;
-import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;

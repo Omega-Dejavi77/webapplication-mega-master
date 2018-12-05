@@ -151,7 +151,7 @@ public class ExerciseWebController {
         }
         redirectAttributes.addAttribute("post", post);
         redirectAttributes.addAttribute("exercise", exercise);
-        if (chosen.equals("See Results"))
+        if (chosen.equals("See Solution"))
             redirectAttributes.addAttribute("type", "result");
         else
             redirectAttributes.addAttribute("type", "do");
@@ -176,7 +176,7 @@ public class ExerciseWebController {
         }
         redirectAttributes.addAttribute("post", post);
         redirectAttributes.addAttribute("exercise", exercise);
-        if (chosen.equals("See Results"))
+        if (chosen.equals("See Solution"))
             redirectAttributes.addAttribute("type", "result");
         else
             redirectAttributes.addAttribute("type", "do");

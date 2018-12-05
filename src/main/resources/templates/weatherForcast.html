@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>Weather API</title>
@@ -9,6 +10,7 @@
         crossorigin="anonymous"></script>
 </head>
 <body>
+<div th:replace="fragment/header :: header"></div>
 <input id ="city">
 <button id ="getWeatherForcast">Get Weather</button>
 <div id ="showWeatherForcast"></div>

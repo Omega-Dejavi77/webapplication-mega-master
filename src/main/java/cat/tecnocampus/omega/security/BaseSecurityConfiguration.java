@@ -16,7 +16,6 @@ public class BaseSecurityConfiguration extends WebSecurityConfigurerAdapter {
 
                 .antMatchers("/weather").permitAll()
                 .antMatchers("/time").permitAll()
-                .antMatchers("/*").authenticated()
 
                 .antMatchers("/exercise/**").authenticated()
                 .antMatchers("/challenge/do/**").authenticated()
