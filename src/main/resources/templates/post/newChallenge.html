@@ -28,8 +28,7 @@
             </tr>
             <tr>
                 <td><label th:class="${#fields.hasErrors('description')}? 'error'">Description</label>:</td>
-                <td><input type="text" th:field="*{description}"
-                           th:class="${#fields.hasErrors('description')}? 'error'"/></td>
+                <td><textarea name="description" rows="8" cols="64" minlength="2" maxlength="2048"/></textarea></td>
             </tr>
         </table>
 

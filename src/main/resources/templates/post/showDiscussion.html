@@ -1,6 +1,14 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
+
+    <script type="text/javascript">
+        function input(id){
+            var text = id.toString();
+            document.forms.comments.comment.value = text;
+        }
+    </script>
+
     <meta charset="UTF-8">
     <title th:text="${discussion.title}"></title>
     <style>table {
@@ -12,16 +20,18 @@
 <br>
 <br>
 <div align= "center">
-    <form method="post">
-        <h2 align="center" th:text="${discussion.title}"></h2>
-        <table border="1">
+    <form name="comments" method="post">
+        <h2 align="center" th:text="${discussion.title}">Title</h2>
+        <table>
             <tr>
-                <td valign="top" th:text="${discussion.user.username}">Username</td>
-                <th valign="top" th:text="${discussion.description}">Description</th>
+                <td width=1 valign="left" th:text="${discussion.user.username}">Username</td>
+                <br>
+                <td valign="left" th:utext="${discussion.description}">Description</td>
                 <table border="1">
                     <tr th:each="comment : ${discussion.getComments()}">
-                        <td valign="top" th:text="${comment.user.username}">Username</td>
-                        <th valign="top" th:text="${comment.comment}">Comment</th>
+                        <td width=1 valign="top" th:text="${comment.user.username}">Username</td>
+                        <td valign="top" th:utext="${comment.comment}">Comment</td>
+                        <td width=1 align="right"> <input class="button" type="button" onclick="input();" value="Reply"/></td>
                     </tr>
                 </table>
             </tr>

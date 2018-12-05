@@ -6,6 +6,7 @@ import cat.tecnocampus.omega.persistanceController.ChallengeController;
 import cat.tecnocampus.omega.persistanceController.ExerciseController;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import com.github.rjeschke.txtmark.Processor;
 import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -67,14 +68,14 @@ public class ChallengeWebController {
     }
 
     @PostMapping("createChallenge")
-    public String createChallenge(@Valid Challenge challenge, Errors errors, Model model, RedirectAttributes redirectAttributes) {
+    public String createChallenge(@Valid Challenge challenge,String description, Errors errors, Model model, RedirectAttributes redirectAttributes) {
 
         if (errors.hasErrors()) {
             return "post/newChallenge";
         }
 
         model.addAttribute("title", challenge.getTitle());
-
+        challenge.setDescription(Processor.process(description));
         challengeController.addChallenge(challenge);
 
         redirectAttributes.addAttribute("id", challenge.getPostID());
