@@ -2,6 +2,7 @@ package cat.tecnocampus.omega.domain.post;
 
 import cat.tecnocampus.omega.domain.*;
 import java.util.Date;
+import java.util.List;
 import java.util.UUID;
 
 public class Comment {
@@ -13,10 +14,10 @@ public class Comment {
     private int likes;
     private boolean enable;
     private boolean bestComment;
-    private Comment father;
+    private List<Comment> sons;
 
 
-    public Comment (String ID, String comment, User user, Comment mother){
+    public Comment (String ID, String comment, User user, List<Comment>sons){
         commentID=ID;
         this.comment=comment;
         this.user=user;
@@ -24,7 +25,7 @@ public class Comment {
         likes=0;
         enable=true;
         bestComment=false;
-        father=mother;
+        this.sons=sons;
     }
 
     public Comment (String ID, String comment, User user){
@@ -75,8 +76,8 @@ public class Comment {
         bestComment=stat;
     }
 
-    public Comment getFather() {
-        return father;
+    public List<Comment> getSons() {
+        return sons;
     }
 
     public User getUser() {
