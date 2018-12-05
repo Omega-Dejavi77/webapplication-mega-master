@@ -12,7 +12,7 @@
 <div th:replace="fragment/search-Challenge :: search-Challenge"></div>
 <ul id="id01">
     <li th:each="challenge : ${challengesList}">
-        <a  th:href="@{'/challenge/' + ${challenge.postID}}" th:text="${challenge.title}">Title</a>
+        <a  th:href="@{'/challenge/do/' + ${challenge.postID}}" th:text="${challenge.title}">Title</a>
     </li>
 </ul>
 </body>

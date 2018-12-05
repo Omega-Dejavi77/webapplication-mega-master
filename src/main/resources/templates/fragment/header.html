@@ -16,6 +16,10 @@
             <a href="/tutorial/all">Tutorials</a>
             <a href="/challenge/all">Challenges</a>
             <a href="/forum/all">Forum</a>
+            <a href="/login"th:if="${#authentication.name=='anonymousUser'}">Log in</a>
+            <a href="/createUser"th:if="${#authentication.name=='anonymousUser'}">Register</a>
+            <a href="/profile"th:text="${#authentication.name}" th:unless="${#authentication.name=='anonymousUser'}">Username</a>
+            <a href="/logout"th:unless="${#authentication.name=='anonymousUser'}">Exit</a>
             <a href="/profile"sec:authentication="name">Username</a>
             <span th:object="${time.getMainData().getTempMax().toString()}"></span>
             <span th:object="${time.getMainData().getTempMin().toString()}"></span>

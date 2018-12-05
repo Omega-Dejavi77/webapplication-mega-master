@@ -46,14 +46,15 @@ public class TutorialWebController {
 
     @GetMapping("tutorial/all/{category}")
     public String listTutorials(@PathVariable String category, Model model) {
-        model.addAttribute("tutorialList", tutorialController.findByCategory(category));
+        model.addAttribute("tutorialList", tutorialController.getByCategory(category));
+        model.addAttribute("categoryList", tutorialController.getCategories());
         return "post/showTutorials";
     }
 
     @GetMapping("tutorial/all")
     public String listTutorials(Model model) {
-        model.addAttribute("tutorialList", tutorialController.findAll());
-        model.addAttribute("categoryList", tutorialController);
+        model.addAttribute("tutorialList", tutorialController.getAll());
+        model.addAttribute("categoryList", tutorialController.getCategories());
         return "post/showTutorials";
     }
 

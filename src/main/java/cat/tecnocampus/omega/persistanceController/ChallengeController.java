@@ -22,16 +22,12 @@ public class ChallengeController {
         return challengeDAO.insertChallenge(challenge, "Java");
     }
 
-    public List<Challenge> findAll() {
+    public List<Challenge> getAll() {
 
         return challengeDAO.findAll();
     }
-    public Challenge findById(String id){
+    public Challenge getById(String id){
         return challengeDAO.findById(id);
-    }
-
-    public List<Challenge> findByCategory(String category) {
-        return challengeDAO.findByCategory(category);
     }
 
 }

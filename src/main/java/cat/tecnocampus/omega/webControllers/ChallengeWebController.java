@@ -1,9 +1,6 @@
 package cat.tecnocampus.omega.webControllers;
 
-import cat.tecnocampus.omega.domain.exercises.Exercise;
-import cat.tecnocampus.omega.domain.post.Challenge;
 import cat.tecnocampus.omega.persistanceController.ChallengeController;
-import cat.tecnocampus.omega.persistanceController.ExerciseController;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import com.github.rjeschke.txtmark.Processor;
@@ -13,21 +10,17 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import javax.validation.Valid;
-
 @Controller
 public class ChallengeWebController {
 
     private ChallengeController challengeController;
-    private ExerciseController exerciseController;
 
-    public ChallengeWebController(ChallengeController challengeController, ExerciseController exerciseController) {
+    public ChallengeWebController(ChallengeController challengeController) {
         this.challengeController = challengeController;
-        this.exerciseController = exerciseController;
     }
     @GetMapping("challenge/all")
     public String listChallenges(Model model) {
-        model.addAttribute("challengesList", challengeController.findAll());
+        model.addAttribute("challengesList", challengeController.getAll());
         return "post/showChallenges";
     }
 
@@ -35,12 +28,11 @@ public class ChallengeWebController {
     public String listChallenges(String chosen, RedirectAttributes redirectAttributes) {
         System.out.println(chosen);
         redirectAttributes.addAttribute("id", chosen);
-        return "redirect:/challenge/{id}";
+        return "redirect:/challenge/do/{id}";
     }
-    @GetMapping("challenge/{id}")
+    @GetMapping("challenge/do/{id}")
     public String showChallenge(Model model, @PathVariable String id) {
-
-        model.addAttribute("challenge", challengeController.findById(id));
+        model.addAttribute("challenge", challengeController.getById(id));
         return "post/showChallenge";
     }
 
@@ -61,6 +53,7 @@ public class ChallengeWebController {
 //        return "redirect:/exercise/doFill/{type}/{post}/{exercise}/{drag}";
 //    }
 
+/*
     @GetMapping("createChallenge")
     public String createChallenge(Model model) {
         model.addAttribute(new Challenge());
@@ -82,4 +75,5 @@ public class ChallengeWebController {
         redirectAttributes.addAttribute("type", "Cha");
         return "redirect:/createExercise/{id}/{type}";
     }
+*/
 }
