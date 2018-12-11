@@ -1,4 +1,4 @@
-package cat.tecnocampus.omega.security;
+package cat.tecnocampus.omega.configuration.security;
 
 import org.springframework.dao.IncorrectResultSizeDataAccessException;
 import org.springframework.security.core.GrantedAuthority;
