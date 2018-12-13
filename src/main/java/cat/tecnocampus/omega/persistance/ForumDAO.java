@@ -37,7 +37,7 @@ public class ForumDAO {
 
     private RowMapper<Comment> commentMapper = (resultSet, i) -> {
         Comment comment = new Comment(resultSet.getString("comment_id"),resultSet.getString("comment"), userDAO.findByUsername(resultSet.getString("username")));
-        if(resultSet.getString("comment_id_fk")==null)
+        if(resultSet.getString("comment_id_fk")!=null)
             comment.setSons(findCommentByComment(resultSet.getString("post_id"),resultSet.getString("comment_id_fk")));
         return comment;
     };

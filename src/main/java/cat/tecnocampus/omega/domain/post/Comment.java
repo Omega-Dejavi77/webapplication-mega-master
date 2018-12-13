@@ -26,7 +26,6 @@ public class Comment {
         likes=0;
         enable=true;
         bestComment=false;
-        this.sons=new ArrayList<Comment>();
     }
 
     public Comment (String comment, User user){
@@ -71,6 +70,8 @@ public class Comment {
         return sons;
     }
     public void setSons(List<Comment> sons) {
+        if(sons==null)
+            this.sons=new ArrayList<Comment>();
         this.sons=sons;
     }
 

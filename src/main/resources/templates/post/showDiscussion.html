@@ -3,31 +3,80 @@
 <head>
     <meta charset="UTF-8">
     <title th:text="${discussion.title}"></title>
-    <style>table {
-        width: 100%;
-    }</style>
 </head>
 <body>
-<br>
-<br>
 <div th:replace="fragment/header :: header">HEADER</div>
-<br>
-<br>
-<div align= "center">
+<div class="container-fluid" style="padding-left: 2%; padding-right: 2%; padding-top: 100px">
+        <div class="row">
+        <div class="col-md-1" align="center" style="background-color:lightgreen;">User</div>
+        <div class="col-md-1" style="background-color:lightcyan;">Date</div>
+        <div class="col-md-10" style="background-color:lightgreen;">Text<br>
+            <div class="row">
+                <div class="col-md-4" style="background-color:lightgreen;">EMPTY</div>
+                <div class="col-md-1" style="background-color:lightcyan;">User</div>
+                <div class="col-md-1" style="background-color:lightgreen;">Date</div>
+                <div class="col-md-6" style="background-color:lightcyan;">Text</div>
+            </div>
+            <div class="row">
+                <div class="col-md-4" style="background-color:lightgreen;">EMPTY</div>
+                <div class="col-md-1" style="background-color:lightcyan;">User</div>
+                <div class="col-md-1" style="background-color:lightgreen;">Date</div>
+                <div class="col-md-6" style="background-color:lightcyan;">Text</div>
+            </div>
+        </div>
+    </div>
+</div>
+<div align="center">
     <form name="comments" method="post">
         <h2 align="center" th:text="${discussion.title}">Title</h2>
         <table>
-            <tr>
-                <td width=1 valign="left" th:text="${discussion.user.username}">Username</td>
-                <br>
-                <td valign="left" th:utext="${discussion.description}">Description</td>
-                <table border="1">
-                    <tr th:each="comment : ${discussion.getComments()}">
-                        <td style="width: 10%" valign="top" th:text="${comment.user.username}">Username</td>
-                        <td style="width: 80%" valign="top" th:utext="${comment.comment}">Comment</td>
-                        <td style="width: 10%" align="right"> <a class="list-group-item list-group-item-action"  th:href="@{'/forum/discussion/'+${discussion.postID}+'/'+${comment.commentID}}" th:text="Reply"/></td>
-                    </tr>
-                </table>
+            <td style="width: 8%" class="small" align="right" th:text="${discussion.user.username}">Username</td>
+            <td style="width: 10%" class="small" align="left" th:text="${discussion.creationDay}">Username</td>
+            <td style="width: 70%"></td>
+            <tr></tr>
+            <td style="width: 8%"></td>
+            <td style="width: 10%"></td>
+            <td style="width: 70%" th:utext="${discussion.description}">Description</td>
+            <tr></tr>
+            <td class="lead" align="right" th:text="${discussion.getComments().size()}+' Answer(s)'"></td>
+
+            <table border="2" th:each="comment : ${discussion.getComments()}">
+                <td style="width: 5%" class="small" align="right" valign="top" th:text="${comment.user.username}">
+                    Username
+                </td>
+                <td style="width: 10%" class="small" align="left" valign="top" th:text="${comment.creationDay}">
+                    Username
+                </td>
+                <td style="width: 80%"></td>
+                <td style="width: 5%"></td>
+                <tr>
+                    <td style="width: 5%"></td>
+                    <td style="width: 10%"></td>
+                    <td style="width: 80%" valign="top" th:utext="${comment.comment}">Comment</td>
+                    <td style="width: 10%" align="right"><a class="list-group-item list-group-item-action"
+                                                            th:href="@{'/forum/discussion/'+${discussion.postID}+'/'+${comment.commentID}}"
+                                                            th:text="Reply"/></td>
+                </tr>
+                <tr>
+                    <td style="width: 5%"></td>
+                    <td style="width: 10%"></td>
+                    <div  th:if="${comment.getSons() != null}">
+                        <table th:each="reply : ${comment.getSons()}">
+                            <td style="width: 35%" th:utext="${reply.comment}">Comment</td>
+                            <td style="width: 5%" class="small" align="right" valign="top"
+                                th:text="${reply.user.username}">Username
+                            </td>
+                            <td style="width: 10%" class="small" align="left" valign="top"
+                                th:text="${reply.creationDay}">Username
+                            </td>
+                            <td style="width: 35%"></td>
+                        </table>
+                    </div>
+                    <td style="width: 80%" valign="top">
+                    </td>
+                </tr>
+                <hr/>
+            </table>
             </tr>
             <td align="center"><textarea name="comment" rows="8" cols="64" minlength="2" maxlength="2048"/></textarea>
                 <input type="submit" value="Send comment"/>
