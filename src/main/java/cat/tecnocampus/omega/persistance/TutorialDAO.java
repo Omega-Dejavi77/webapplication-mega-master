@@ -18,11 +18,11 @@ public class TutorialDAO {
     private JdbcTemplate jdbcTemplate;
     private ExerciseDAO exerciseDAO;
 
-    private final String FIND_ALL = "select * from Posts where son_type=?";
-    private final String FIND_BY_ID = "select * from Posts where post_id = ? AND son_type = ?";
+    private final String FIND_ALL = "SELECT * FROM Posts WHERE son_type=?";
+    private final String FIND_BY_ID = "SELECT * from Posts WHERE post_id = ? AND son_type = ?";
     private final String INSERT_TUTORIAL = "INSERT INTO Posts (post_id, title, description, creationDay, likes, enable, son_type, category) VALUES (?, ?, ?, ?, ?,?,?,?)";
-    private final String FIND_BY_CATEGORY= "select * from Posts where category=? AND son_type=?";
-    private final String FIND_CATEGORIES= "select * from Category";
+    private final String FIND_BY_CATEGORY= "SELECT * from Posts WHERE category=? AND son_type=?";
+    private final String FIND_CATEGORIES= "SELECT * from Category";
 
 
     public TutorialDAO(JdbcTemplate jdbcTemplate, ExerciseDAO exerciseDAO) {
