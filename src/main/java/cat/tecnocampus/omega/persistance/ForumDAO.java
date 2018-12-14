@@ -8,14 +8,16 @@ import org.springframework.stereotype.Repository;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Repository
 public class ForumDAO {
 
     private JdbcTemplate jdbcTemplate;
     private UserDAO userDAO;
-
+    private Map<String,Comment> commentMap;
     private final String INSERT_DISCUSSION = "INSERT INTO Posts (post_id, title, description, creationDay, likes, enable, hasBest,son_type,username) VALUES (?, ?, ?, ?,?,?,?,?,?)";
     private final String INSERT_COMMENT = "INSERT INTO Comments (comment_id, best, comment, creation_day, likes, enable, post_id,username) VALUES (?, ?, ?, ?, ?,?,?,?)";
     private final String INSERT_COMMENT_REPLY = "INSERT INTO Comments (comment_id, best, comment, creation_day, likes, enable, post_id,username,comment_id_fk) VALUES (?, ?, ?, ?, ?,?,?,?,?)";
@@ -28,6 +30,7 @@ public class ForumDAO {
     public ForumDAO (JdbcTemplate jdbcTemplate, UserDAO userDAO) {
         this.jdbcTemplate = jdbcTemplate;
         this.userDAO=userDAO;
+        commentMap=new HashMap<>();
     }
 
     private Discussion discussionMapper(ResultSet resultSet) throws SQLException {
@@ -37,8 +40,9 @@ public class ForumDAO {
 
     private RowMapper<Comment> commentMapper = (resultSet, i) -> {
         Comment comment = new Comment(resultSet.getString("comment_id"),resultSet.getString("comment"), userDAO.findByUsername(resultSet.getString("username")));
+        commentMap.put(comment.getCommentID(),comment);
         if(resultSet.getString("comment_id_fk")!=null)
-            comment.setSons(findCommentByComment(resultSet.getString("post_id"),resultSet.getString("comment_id_fk")));
+            commentMap.get(resultSet.getString("comment_id_fk")).setSons(comment);
         return comment;
     };
 

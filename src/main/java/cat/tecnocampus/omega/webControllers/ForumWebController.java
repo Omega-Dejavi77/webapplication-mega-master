@@ -10,8 +10,10 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import com.github.rjeschke.txtmark.*;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 import java.security.Principal;
+import java.util.Map;
 
 @Controller
 public class ForumWebController {
@@ -56,24 +58,16 @@ public class ForumWebController {
         return "post/showDiscussion";
     }
     @PostMapping("forum/discussion/{id}")
-    public String showDiscussion(@PathVariable String id,String comment, RedirectAttributes redirectAttributes, Principal principal){
+    public String showDiscussion(@PathVariable String id, HttpServletRequest request, RedirectAttributes redirectAttributes, Principal principal){
         if(principal==null)
             return "redirect:/login";
-        forumController.addComment(new Comment(Processor.process(comment)),principal.getName(),id);
-        redirectAttributes.addAttribute("id",id);
-        return "redirect:/forum/discussion/{id}";
-    }
-
-    @GetMapping("forum/discussion/{id}/{reply}")
-    public String showDiscussionReply(Model model, @PathVariable String id){
-        model.addAttribute("discussion",forumController.getDiscussion(id));
-        return "post/showDiscussionReply";
-    }
-    @PostMapping("forum/discussion/{id}/{reply}")
-    public String showDiscussionReply(@PathVariable String id,@PathVariable String reply,String comment, RedirectAttributes redirectAttributes, Principal principal){
-        if(principal==null)
-            return "redirect:/login";
-        forumController.addCommentReply(new Comment(Processor.process(comment)),principal.getName(),id,reply);
+        Map<String, String[]> mp = request.getParameterMap();
+        String solutionID=(String)mp.keySet().toArray()[0];
+        String comment=mp.get(solutionID)[0];
+        if(solutionID.equals("answer"))
+            forumController.addComment(new Comment(Processor.process(comment)),principal.getName(),id);
+        else
+            forumController.addCommentReply(new Comment(Processor.process(comment)),principal.getName(),id,solutionID);
         redirectAttributes.addAttribute("id",id);
         return "redirect:/forum/discussion/{id}";
     }

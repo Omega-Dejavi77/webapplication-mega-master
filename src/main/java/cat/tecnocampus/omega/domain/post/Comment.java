@@ -69,10 +69,10 @@ public class Comment {
     public List<Comment> getSons() {
         return sons;
     }
-    public void setSons(List<Comment> sons) {
+    public void setSons(Comment sons) {
         if(sons==null)
             this.sons=new ArrayList<Comment>();
-        this.sons=sons;
+        this.sons.add(sons);
     }
 
     public User getUser() {
