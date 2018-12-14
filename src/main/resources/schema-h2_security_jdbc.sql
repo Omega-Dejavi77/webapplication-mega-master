@@ -84,6 +84,19 @@ CREATE TABLE Comments(
     FOREIGN KEY (post_id) REFERENCES Posts(post_id),
     FOREIGN KEY (comment_id_fk) REFERENCES Comments(comment_id)
 );
+DROP TABLE IF EXISTS Reply;
+CREATE TABLE Reply(
+    comment_id VARCHAR (36) PRIMARY KEY,
+    comment VARCHAR (2048) NOT NULL,
+    creation_day DATE NOT NULL,
+    likes INTEGER,
+    best BIT,
+    enable BIT  NOT NULL,
+    username VARCHAR(64) NOT NULL,
+    comment_id_fk VARCHAR (36),
+    FOREIGN KEY (username) REFERENCES Users(username),
+    FOREIGN KEY (comment_id_fk) REFERENCES Comments(comment_id)
+);
 DROP TABLE IF EXISTS UserCategory;
 CREATE TABLE UserCategory(
   category VARCHAR (32),

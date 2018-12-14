@@ -58,16 +58,14 @@ public class ForumWebController {
         return "post/showDiscussion";
     }
     @PostMapping("forum/discussion/{id}")
-    public String showDiscussion(@PathVariable String id, HttpServletRequest request, RedirectAttributes redirectAttributes, Principal principal){
+    public String showDiscussion(@PathVariable String id, String answer,String reply, RedirectAttributes redirectAttributes, Principal principal){
         if(principal==null)
             return "redirect:/login";
-        Map<String, String[]> mp = request.getParameterMap();
-        String solutionID=(String)mp.keySet().toArray()[0];
-        String comment=mp.get(solutionID)[0];
-        if(solutionID.equals("answer"))
-            forumController.addComment(new Comment(Processor.process(comment)),principal.getName(),id);
+        System.out.println(reply);
+        if(reply==null)
+            forumController.addComment(new Comment(Processor.process(answer)),principal.getName(),id);
         else
-            forumController.addCommentReply(new Comment(Processor.process(comment)),principal.getName(),id,solutionID);
+            forumController.addCommentReply(new Comment(Processor.process(answer)),principal.getName(),id,reply);
         redirectAttributes.addAttribute("id",id);
         return "redirect:/forum/discussion/{id}";
     }

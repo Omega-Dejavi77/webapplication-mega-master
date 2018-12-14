@@ -17,7 +17,7 @@ public class Comment {
     private boolean enable;
     private boolean bestComment;
     private List<Comment> sons;
-
+    private boolean reply;
     public Comment (String ID, String comment, User user){
         commentID=ID;
         this.comment=comment;
@@ -70,7 +70,7 @@ public class Comment {
         return sons;
     }
     public void setSons(Comment sons) {
-        if(sons==null)
+        if(this.sons==null)
             this.sons=new ArrayList<Comment>();
         this.sons.add(sons);
     }
@@ -101,5 +101,11 @@ public class Comment {
 
     public boolean isBestComment() {
         return bestComment;
+    }
+    public boolean isReply(){
+        return reply;
+    }
+    public void setReply(){
+        reply=true;
     }
 }

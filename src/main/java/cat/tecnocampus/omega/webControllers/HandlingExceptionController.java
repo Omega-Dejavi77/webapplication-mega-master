@@ -50,7 +50,7 @@ public class HandlingExceptionController {
         return "error/databaseException";
     }
 
-    @ExceptionHandler(NullPointerException.class)
+    /*@ExceptionHandler(NullPointerException.class)
     @GetMapping("exceptionNullPointer")
     public String ExceptionNullPointer(Model model, HttpServletRequest request, Exception ex){
         String url = request.getRequestURL().toString();
@@ -59,7 +59,7 @@ public class HandlingExceptionController {
 
         model.addAttribute("where",url.substring(url.lastIndexOf("/") + 1));
         return "error/exceptionNullPointer";
-    }
+    }*/
 
     @ExceptionHandler(IllegalArgumentException.class)
     @GetMapping("ilegalArgumentError")
@@ -83,7 +83,7 @@ public class HandlingExceptionController {
 
         return"error/conversionException";
     }
-
+    /*
     @ExceptionHandler(Exception.class)
     @GetMapping("errorAll")
     public String ExceptionAll(Model model, HttpServletRequest request, Exception ex){
@@ -94,7 +94,7 @@ public class HandlingExceptionController {
         model.addAttribute("where2",url.substring(url.lastIndexOf("/") + 1));
         return "error/exceptionAll";
 
-    }
+    }*/
 
 
     @ExceptionHandler(MissingPathVariableException.class)
