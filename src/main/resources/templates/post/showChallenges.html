@@ -26,17 +26,17 @@
                 <div class="col-md-2">
                     <a th:if="${#authentication.name=='anonymousUser'}" href="/login"
                        class="btn btn-info">LOGIN</a>
-                    <a th:unless="${#authentication.name=='anonymousUser'}" class="btn btn-success" th:href="@{'/challenge/do/' + ${challenge.postID}}" th:id="${challenge.title}">Try It</a>
+                    <a th:unless="${#authentication.name=='anonymousUser'}" class="btn btn-outline-success" th:href="@{'/challenge/do/' + ${challenge.postID}}" th:id="${challenge.title}">Try It</a>
                 </div>
                 <div class="col-md-2" align="right" style="border-left: 2px solid #e3f2fd">
-                    <span class="text-danger">★</span>
-                    <span th:if="${challenge.description=='2' or challenge.description=='3' or challenge.description=='4' or challenge.description=='5'}" class="text-danger">★</span>
+                    <span class="text-info">★</span>
+                    <span th:if="${challenge.description=='2' or challenge.description=='3' or challenge.description=='4' or challenge.description=='5'}" class="text-info">★</span>
                     <span th:unless="${challenge.description=='2' or challenge.description=='3' or challenge.description=='4' or challenge.description=='5'}">☆</span>
-                    <span th:if="${challenge.description=='3' or challenge.description=='4' or challenge.description=='5'}" class="text-danger">★</span>
+                    <span th:if="${challenge.description=='3' or challenge.description=='4' or challenge.description=='5'}" class="text-info">★</span>
                     <span th:unless="${challenge.description=='3' or challenge.description=='4' or challenge.description=='5'}">☆</span>
-                    <span th:if="${challenge.description=='4' or challenge.description=='5'}" class="text-danger">★</span>
+                    <span th:if="${challenge.description=='4' or challenge.description=='5'}" class="text-info">★</span>
                     <span th:unless="${challenge.description=='4' or challenge.description=='5'}">☆</span>
-                    <span th:if="${challenge.description=='5'}" class="text-danger">★</span>
+                    <span th:if="${challenge.description=='5'}" class="text-info">★</span>
                     <span th:unless="${challenge.description=='5'}">☆</span>
                 </div>
             </li>

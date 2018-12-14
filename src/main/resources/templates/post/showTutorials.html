@@ -17,11 +17,14 @@
             <div th:replace="fragment/search-Tutorial :: search-Tutorial"></div>
         </div>
         <ul class="col-md-8" id="tutorials">
+            <h3 th:if="${tutorialList.size()==0}">No Tutorials Found</h3>
             <li class="row jumbotron shadow p-3 mb-5" style=" background-color: #ffffff"
                  th:each="tutorial : ${tutorialList}">
-                <div class="col-md-10">
-                    <a class="h4" th:href="@{'/tutorial/' + ${tutorial.postID}}" th:id="${tutorial.title}"
-                       th:text="${tutorial.title}">Title</a>
+                <div class="col-md-8">
+                    <h4 th:text="${tutorial.title}" th:id="${tutorial.title}">Title</h4>
+                </div>
+                <div class="col-md-2">
+                    <a class="btn btn-outline-success" th:href="@{'/tutorial/' + ${tutorial.postID}}">GO</a>
                 </div>
                 <div class="col-md-2" align="right" style="border-left: 2px solid #e3f2fd">
                     <p class="lead" th:text="${tutorial.category}"></p>
@@ -29,7 +32,10 @@
             </li>
         </ul>
         <div class="col-md-2" align="center">
-            <input class="btn btn-warning shadow p-1 mb-5" type="button" value="Create New Tutorial"
+            <p th:if="${#authentication.name=='anonymousUser'}">If you want to create a tutorial, please</p>
+            <a th:if="${#authentication.name=='anonymousUser'}" href="/login"
+               class="btn btn-info">LOGIN</a>
+            <input th:unless="${#authentication.name=='anonymousUser'}" class="btn btn-warning shadow p-1 mb-5" type="button" value="Create New Tutorial"
                    onclick="window.location.href='/tutorial/create' ">
         </div>
     </div>

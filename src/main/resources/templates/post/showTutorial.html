@@ -17,16 +17,20 @@
             <p th:replace="fragment/listTutorialsLeft :: Left"></p>
         </div>
         <div class="col-md-10 jumbotron shadow p-3 mb-5" style=" background-color: #ffffff">
+            <div class="row" style="border-bottom: 2px solid #e3f2fd">
+                <div align="left">
+                    <h6 class="small" th:text="${tutorial.category}">Date</h6>
+                </div>
+                <div class="col-md-2" align="left">
+                    <h6 class="small" th:text="${tutorial.creationDay}">Date</h6>
+                </div>
+            </div>
             <div class="row">
                 <div class="col-md-12" align="center">
                     <h1 th:text="${tutorial.title}">Title</h1>
                 </div>
             </div>
-            <div class="row">
-                <div class="col-md-2" align="left">
-                    <h6 class="small" th:text="${tutorial.creationDay}">Date</h6>
-                </div>
-            </div>
+
             <div class="row">
                 <div class="col-md-2"></div>
                 <div class="col-md-10">
@@ -51,14 +55,14 @@
                             <a th:if="${#authentication.name=='anonymousUser'}" href="/login"
                                class="btn btn-info">LOGIN</a>
                             <div th:unless="${#authentication.name=='anonymousUser'}">
-                                <span class="text-danger">★</span>
-                                <span th:if="${exercise.difficulty>=2}" class="text-danger">★</span>
+                                <span class="text-info">★</span>
+                                <span th:if="${exercise.difficulty>=2}" class="text-info">★</span>
                                 <span th:unless="${exercise.difficulty>=2}">☆</span>
-                                <span th:if="${exercise.difficulty>=3}" class="text-danger">★</span>
+                                <span th:if="${exercise.difficulty>=3}" class="text-info">★</span>
                                 <span th:unless="${exercise.difficulty>=3}">☆</span>
-                                <span th:if="${exercise.difficulty>=4}" class="text-danger">★</span>
+                                <span th:if="${exercise.difficulty>=4}" class="text-info">★</span>
                                 <span th:unless="${exercise.difficulty>=4}">☆</span>
-                                <span th:if="${exercise.difficulty>=5}" class="text-danger">★</span>
+                                <span th:if="${exercise.difficulty>=5}" class="text-info">★</span>
                                 <span th:unless="${exercise.difficulty>=5}">☆</span>
                                 <br>
                                 <a th:if="${exercise.getType()=='Test'}"

@@ -45,12 +45,14 @@ public class ForumWebController {
     @GetMapping("forum/all")
     public String showForum(Model model){
         model.addAttribute("discussions",forumController.getDiscussions());
+        model.addAttribute("categoryList", forumController.getCategories());
         return "post/showForum";
     }
-    @PostMapping("forum/all")
-    public String showForum(String chosen,RedirectAttributes redirectAttributes){
-        redirectAttributes.addAttribute("id",chosen);
-        return "redirect:/forum/discussion/{id}";
+    @GetMapping("forum/all/{category}")
+    public String showForum(Model model,@PathVariable String category){
+        model.addAttribute("discussions",forumController.getByCategory(category));
+        model.addAttribute("categoryList", forumController.getCategories());
+        return "post/showForum";
     }
     @GetMapping("forum/discussion/{id}")
     public String showDiscussion(Model model, @PathVariable String id){

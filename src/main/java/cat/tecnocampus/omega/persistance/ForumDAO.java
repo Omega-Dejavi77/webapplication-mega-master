@@ -1,5 +1,6 @@
 package cat.tecnocampus.omega.persistance;
 
+import cat.tecnocampus.omega.domain.Category;
 import org.springframework.jdbc.core.JdbcTemplate;
 import cat.tecnocampus.omega.domain.post.Discussion;
 import cat.tecnocampus.omega.domain.post.Comment;
@@ -25,7 +26,8 @@ public class ForumDAO {
     private final String SELECT_DISCUSSIONS = "SELECT * FROM Posts WHERE son_type = 'Discussion'";
     private final String SELECT_COMMENTS = "SELECT * FROM Comments WHERE post_id = ?";
     private final String SELECT_COMMENTS_BY_COMMENT = "SELECT * FROM Comments WHERE post_id = ? AND comment_id=?";
-
+    private final String FIND_CATEGORIES= "select * from Category";
+    private final String FIND_BY_CATEGORY= "select * from Posts where category=? AND son_type=?";
 
     public ForumDAO(JdbcTemplate jdbcTemplate, UserDAO userDAO) {
         this.jdbcTemplate = jdbcTemplate;
@@ -48,6 +50,11 @@ public class ForumDAO {
         return comment;
     };
 
+    private Category categoryMapper(ResultSet resultSet) throws SQLException {
+        Category category = new Category(resultSet.getString("category"));
+        return category;
+    }
+
     private RowMapper<Discussion> mapperEager = (resultSet, i) -> {
         Discussion discussion = discussionMapper(resultSet);
         for (Comment c : findCommentByDiscussion(discussion.getPostID())) {
@@ -55,6 +62,10 @@ public class ForumDAO {
                 discussion.addComment(c);
         }
         return discussion;
+    };
+    private RowMapper<Category> categoryMapperEager = (resultSet, i) -> {
+        Category category = categoryMapper(resultSet);
+        return category;
     };
 
     public int insertDiscussion(Discussion discussion, String username) {
@@ -83,5 +94,12 @@ public class ForumDAO {
 
     public List<Comment> findCommentByComment(String id, String comment_id) {
         return jdbcTemplate.query(SELECT_COMMENTS_BY_COMMENT, new Object[]{id, comment_id}, commentMapper);
+    }
+
+    public List<Category> findCategories() {
+        return jdbcTemplate.query(FIND_CATEGORIES, new Object[]{}, categoryMapperEager);
+    }
+    public List<Discussion> findByCategory(String category){
+        return jdbcTemplate.query(FIND_BY_CATEGORY,new Object[]{category,"Discussion"}, mapperEager);
     }
 }

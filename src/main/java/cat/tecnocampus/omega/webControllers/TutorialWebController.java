@@ -58,12 +58,6 @@ public class TutorialWebController {
         return "post/showTutorials";
     }
 
-    @PostMapping("tutorial/all")
-    public String listTutorials(String chosen, RedirectAttributes redirectAttributes) {
-        redirectAttributes.addAttribute("id", chosen);
-        return "redirect:/tutorial/{id}";
-    }
-
     @GetMapping("tutorial/{id}")
     public String showTutorial(Model model, @PathVariable String id) {
         Tutorial tutorial=tutorialController.getById(id);
