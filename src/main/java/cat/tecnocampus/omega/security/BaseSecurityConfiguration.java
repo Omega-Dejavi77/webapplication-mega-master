@@ -34,7 +34,7 @@ public class BaseSecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .and()
                 .logout()
                 .logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
-                .logoutSuccessUrl("/Errors.html")
+                .logoutSuccessUrl("/")
                 .permitAll();
         http
                 .csrf().disable()
