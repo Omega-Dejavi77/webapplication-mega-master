@@ -10,10 +10,9 @@ public class BaseSecurityConfiguration extends WebSecurityConfigurerAdapter {
     @Override
     public void configure(HttpSecurity http) throws Exception {
         http.authorizeRequests()
-                .antMatchers("/").permitAll()
                 .antMatchers("/createUser").permitAll()
                 .antMatchers("/allUsers").hasRole("ADMIN")
-                .antMatchers("/profile/users/*").permitAll()
+                //.antMatchers("/profile/users/*").permitAll()
                 .antMatchers("/user").authenticated()
                 .antMatchers("/users/{username}").authenticated()
 
@@ -26,25 +25,31 @@ public class BaseSecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .antMatchers("/challenge/**").authenticated()
                 .antMatchers("/tutorial/**").permitAll()
                 .antMatchers("/css/**").permitAll()
+                .antMatchers("/**").permitAll()
+
                 .and()
                 .formLogin()
                 .loginPage("/login").permitAll()
 //                .defaultSuccessUrl("/users/{username}")
+
                 .and()
                 .httpBasic()
                 .and()
+
                 .rememberMe()
                 .tokenValiditySeconds(241920)
+
                 .and()
                 .logout()
                 .logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
-                .logoutSuccessUrl("/Errors.html")
+                .logoutSuccessUrl("/")
                 .permitAll();
+
         http
                 .csrf().disable()
                 .headers()
-                .frameOptions().disable()
-                .and()
-                .cors();
+                .frameOptions().disable();
+                /*.and()
+                .cors();*/
     }
 }

@@ -66,17 +66,6 @@ https://mvnrepository.com/artifact/org.openweathermap.java-api/api-common ">
             <artifactId>thymeleaf-extras-springsecurity4</artifactId>
         </dependency>
         <dependency>
-            <groupId>com.vaadin.external.google</groupId>
-            <artifactId>android-json</artifactId>
-            <version>RELEASE</version>
-            <scope>compile</scope>
-        </dependency>
-        <dependency>
-            <groupId>com.github.prominence</groupId>
-            <artifactId>openweathermap-api</artifactId>
-            <version>1.1</version>
-        </dependency>
-        <dependency>
             <groupId>net.aksingh</groupId>
             <artifactId>owm-japis</artifactId>
             <version>2.5.2.3</version>
