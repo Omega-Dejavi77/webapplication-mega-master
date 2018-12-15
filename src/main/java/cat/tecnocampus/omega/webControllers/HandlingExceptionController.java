@@ -83,7 +83,6 @@ public class HandlingExceptionController {
 
         return"error/conversionException";
     }
-
     @ExceptionHandler(Exception.class)
     @GetMapping("errorAll")
     public String ExceptionAll(Model model, HttpServletRequest request, Exception ex){

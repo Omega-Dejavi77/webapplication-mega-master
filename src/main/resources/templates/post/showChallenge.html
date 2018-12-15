@@ -5,29 +5,38 @@
     <meta charset="utf-8">
     <title th:name="${challenge.title}"></title>
     <style>
-        html, body {height: 100%; width: 100%; padding: 0; margin: 0; overflow: hidden;}
-        #widget {width: calc(100% - 30px); height: calc(100% - 60px - 30px); padding: 15px; }
+        html, body {
+            height: 100%;
+            width: 100%;
+            padding: 0;
+            margin: 0;
+            overflow: hidden;
+        }
+
+        #widget {
+            width: calc(100% - 30px);
+            height: calc(100% - 60px - 30px);
+            padding: 15px;
+        }
     </style>
     <script>
-        (function(d, s, id){
+        (function (d, s, id) {
             SE_BASE = "67c28f8d.widgets.sphere-engine.com";
             SE_HTTPS = true;
             SE = window.SE || (window.SE = []);
             var js, fjs = d.getElementsByTagName(s)[0];
             if (d.getElementById(id)) return;
-            js = d.createElement(s); js.id = id;
+            js = d.createElement(s);
+            js.id = id;
             js.src = (SE_HTTPS ? "https" : "http") + "://" + SE_BASE + "/static/sdk/sdk.min.js";
             fjs.parentNode.insertBefore(js, fjs);
         }(document, "script", "sphere-engine-jssdk"));</script>
 </head>
-<body>
-<br>
-<br>
+<body style="background-color: #e3f2fd">
 <div th:replace="fragment/header :: header"></div>
-<br>
-<br>
-<div id="widget">
-    <div class="se-widget" th:data-widget="${challenge.postID}"></div>
+<div id="widget" style="padding-right: 2%; padding-top: 100px;">
+    <h1 align="center"th:text="${challenge.title}"></h1>
+    <div class="se-widget jumbotron shadow p-3 mb-5" th:data-widget="${challenge.postID}"></div>
 </div>
 </body>
 </html>
