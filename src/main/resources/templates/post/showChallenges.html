@@ -5,14 +5,20 @@
     <title>Challenges</title>
 </head>
 <body>
+<br>
+<br>
 <div th:replace="fragment/header :: header"></div>
+<br>
+<br>
 <h2 align="center">All Challenges</h2>
-<br>
-<br>
 <div th:replace="fragment/search-Challenge :: search-Challenge"></div>
+<br>
+<br>
+<br>
+<br>
 <ul id="id01">
     <li th:each="challenge : ${challengesList}">
-        <a  th:href="@{'/challenge/' + ${challenge.postID}}" th:text="${challenge.title}">Title</a>
+        <a  th:href="@{'/challenge/do/' + ${challenge.postID}}" th:text="${challenge.title}">Title</a>
     </li>
 </ul>
 </body>

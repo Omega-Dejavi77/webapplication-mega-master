@@ -1,4 +1,4 @@
-# Web Ωmega
+﻿# Web Ωmega
 ### Team Ωmega:
 - Sofian Ben Ayata [Scrum Manager]
 - Javier de la Serna 
@@ -14,6 +14,7 @@ tutorials are available and need to be completed for increase level
 user. Not only that, our user can increase it's level by different
 ways: challenges, participate in the forum and comment for help the
 rest od the users
+
 
 At the moment our available tutorials are learning to code with
 Java, SQL and Phyton programming languages.

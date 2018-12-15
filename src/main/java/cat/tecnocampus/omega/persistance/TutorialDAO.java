@@ -1,5 +1,6 @@
 package cat.tecnocampus.omega.persistance;
 
+import cat.tecnocampus.omega.domain.Category;
 import cat.tecnocampus.omega.domain.exercises.Exercise;
 import cat.tecnocampus.omega.domain.post.Tutorial;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -21,6 +22,7 @@ public class TutorialDAO {
     private final String FIND_BY_ID = "select * from Posts where post_id = ? AND son_type = ?";
     private final String INSERT_TUTORIAL = "INSERT INTO Posts (post_id, title, description, creationDay, likes, enable, son_type, category) VALUES (?, ?, ?, ?, ?,?,?,?)";
     private final String FIND_BY_CATEGORY= "select * from Posts where category=? AND son_type=?";
+    private final String FIND_CATEGORIES= "select * from Category";
 
 
     public TutorialDAO(JdbcTemplate jdbcTemplate, ExerciseDAO exerciseDAO) {
@@ -32,6 +34,10 @@ public class TutorialDAO {
         Tutorial tutorial = new Tutorial(resultSet.getString("post_id"), resultSet.getString("description"), resultSet.getString("title"), resultSet.getString("category"));
         return tutorial;
     }
+    private Category categoryMapper(ResultSet resultSet) throws SQLException {
+        Category category = new Category(resultSet.getString("category"));
+        return category;
+    }
 
     public List<Tutorial> findByCategory(String category){
         return jdbcTemplate.query(FIND_BY_CATEGORY,new Object[]{category,"Tutorial"}, mapperEager);
@@ -42,6 +48,10 @@ public class TutorialDAO {
         List<Exercise> exercises = exerciseDAO.findExercisesByPost(tutorial.getPostID());
         tutorial.addExercises(exercises);
         return tutorial;
+    };
+    private RowMapper<Category> categoryMapperEager = (resultSet, i) -> {
+        Category category = categoryMapper(resultSet);
+        return category;
     };
 
     public List<Tutorial> findAll() {
@@ -55,5 +65,7 @@ public class TutorialDAO {
     public int insertTutorial(Tutorial tutorial, String category) {
         return jdbcTemplate.update(INSERT_TUTORIAL, tutorial.getPostID(),tutorial.getTitle(),tutorial.getDescription(),tutorial.getCreationDay(), tutorial.getLikes(),tutorial.isEnable(),"Tutorial",category);
     }
-
+    public List<Category> findCategories(){
+        return jdbcTemplate.query(FIND_CATEGORIES,new Object[]{},categoryMapperEager);
+    }
 }

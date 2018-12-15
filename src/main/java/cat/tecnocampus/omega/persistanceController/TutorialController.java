@@ -1,5 +1,6 @@
 package cat.tecnocampus.omega.persistanceController;
 
+import cat.tecnocampus.omega.domain.Category;
 import cat.tecnocampus.omega.domain.post.Tutorial;
 import cat.tecnocampus.omega.persistance.TutorialDAO;
 import org.springframework.stereotype.Service;
@@ -21,12 +22,13 @@ public class TutorialController {
         return  tutorialDAO.insertTutorial(tutorial,"Java");
     }
 
-    public List<Tutorial> findAll(){
+    public List<Tutorial> getAll(){
         return tutorialDAO.findAll();
     }
-    public Tutorial findById(String id){
+    public Tutorial getById(String id){
         return tutorialDAO.findById(id);
     }
-    public  List<Tutorial> findByCategory(String category){ return tutorialDAO.findByCategory(category);}
+    public  List<Tutorial> getByCategory(String category){ return tutorialDAO.findByCategory(category);}
+    public List<Category> getCategories(){return tutorialDAO.findCategories();}
 
 }

@@ -30,7 +30,6 @@ public class ExerciseWebController {
     @PostMapping("exercise/create/{id}")
     public String createExercise(String exercise, @PathVariable String id, RedirectAttributes redirectAttributes) {
         redirectAttributes.addAttribute("id", id);
-        System.out.println(exercise);
         if (exercise.equals("Test"))
             return "redirect:/exercise/test/create/{id}";
         if(exercise.equals("Fill the Gap (Drag)"))
@@ -152,7 +151,7 @@ public class ExerciseWebController {
         }
         redirectAttributes.addAttribute("post", post);
         redirectAttributes.addAttribute("exercise", exercise);
-        if (chosen.equals("See Results"))
+        if (chosen.equals("See Solution"))
             redirectAttributes.addAttribute("type", "result");
         else
             redirectAttributes.addAttribute("type", "do");
@@ -177,7 +176,7 @@ public class ExerciseWebController {
         }
         redirectAttributes.addAttribute("post", post);
         redirectAttributes.addAttribute("exercise", exercise);
-        if (chosen.equals("See Results"))
+        if (chosen.equals("See Solution"))
             redirectAttributes.addAttribute("type", "result");
         else
             redirectAttributes.addAttribute("type", "do");

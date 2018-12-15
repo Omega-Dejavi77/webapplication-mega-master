@@ -3,11 +3,13 @@
 <head>
     <meta charset="UTF-8"/>
     <title>User Profile</title>
-    <link href="RegisterUser.css" rel="stylesheet" type="text/css">
-    <link href="../../fragment/header2.css" rel="stylesheet" type="text/css">
 </head>
 <body>
+<br>
+<br>
 <div th:replace="fragment/header :: header"></div>
+<br>
+<br>
     <h1><span th:text="${user.username}"></span></h1>
     <h2><span th:text="${user.firstName.toUpperCase()+' '+user.lastName.toUpperCase()}"></span></h2>
     <div>email: <span th:text="${user.email}"></span></div>

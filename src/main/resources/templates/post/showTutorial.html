@@ -8,23 +8,31 @@
 <br>
 <br>
 <div th:replace="fragment/header :: header"></div>
-<form method="post">
-    <div>
-        <h1 align="center" th:text="${tutorial.title}">Title</h1>
-        <p th:text="${tutorial.description}">Description</p>
-        <td>
-            <tr th:each="exercise : ${tutorial.getExerciseList()}">
-                <td th:text="${exercise.description}">Description</td>
-                <br>
-                <td>Difficulty:</td>
-                <td th:text="${exercise.difficulty}">Difficulty</td>
-                <br>
-                <input type="submit" name="chosen" th:value="${exercise.exercise_ID}"><br>
-            </tr>
-        </td>
-        <input type="submit" name="chosen" value="Return">
-    </div>
-    </table>
-</form>
+<br>
+<br>
+<table width="100%">
+    <td style="width: 25%" th:replace="fragment/listTutorialsLeft :: Left"></td>
+    <td style="width: 75%">
+        <form method="post">
+            <div>
+                <h1 align="center" th:text="${tutorial.title}">Title</h1>
+                <p th:utext="${tutorial.description}">Description</p>
+                <table>
+                    <td>
+                        <tr th:each="exercise : ${tutorial.getExerciseList()}">
+                            <td th:text="${exercise.description}">Description</td>
+                            <br>
+                            <td>Difficulty:</td>
+                            <td th:text="${exercise.difficulty}">Difficulty</td>
+                            <br>
+                            <td><input type="submit" name="chosen" th:value="${exercise.exercise_ID}"></td>
+                        </tr>
+                    </td>
+                </table>
+                <input type="submit" name="chosen" value="Return">
+            </div>
+        </form>
+    </td>
+</table>
 </body>
 </html>

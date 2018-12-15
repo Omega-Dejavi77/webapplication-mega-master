@@ -26,6 +26,10 @@ public class ForumController {
         return forumDAO.insertComment(comment, username,id);
     }
 
+    @Transactional
+    public int addCommentReply(Comment comment, String username, String id,String reply){
+        return forumDAO.insertCommentReply(comment, username,id,reply);
+    }
     public List<Comment> getComment (String id){
         return forumDAO.findCommentByDiscussion(id);
     }

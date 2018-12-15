@@ -1,7 +1,10 @@
 package cat.tecnocampus.omega.domain.post;
 
 import cat.tecnocampus.omega.domain.*;
+
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 import java.util.UUID;
 
 public class Comment {
@@ -13,7 +16,7 @@ public class Comment {
     private int likes;
     private boolean enable;
     private boolean bestComment;
-
+    private List<Comment> sons;
 
     public Comment (String ID, String comment, User user){
         commentID=ID;
@@ -23,6 +26,7 @@ public class Comment {
         likes=0;
         enable=true;
         bestComment=false;
+        this.sons=new ArrayList<Comment>();
     }
 
     public Comment (String comment, User user){
@@ -61,6 +65,13 @@ public class Comment {
 
     void setBestComment(boolean stat){
         bestComment=stat;
+    }
+
+    public List<Comment> getSons() {
+        return sons;
+    }
+    public void setSons(List<Comment> sons) {
+        this.sons=sons;
     }
 
     public User getUser() {

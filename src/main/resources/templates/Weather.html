@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <link rel="stylesheet" type="text/css" th:href="@{../table.css}"/>
@@ -7,7 +8,7 @@
     <title>Weather Api</title>
 </head>
 <body>
-    <div id="openweathermap-widget-15"></div>
+    <div class="float-md-left" id="openweathermap-widget-15"></div>
     <script>
         window.myWidgetParam ? window.myWidgetParam : window.myWidgetParam = [];
         window.myWidgetParam.push({

@@ -18,15 +18,17 @@ public class BaseSecurityConfiguration extends WebSecurityConfigurerAdapter {
 
                 .antMatchers("/weather").permitAll()
                 .antMatchers("/time").permitAll()
-                .antMatchers("/*").authenticated()
 
                 .antMatchers("/exercise/**").authenticated()
                 .antMatchers("/challenge/all").permitAll()
+                .antMatchers("/challenge/do/**").authenticated()
+                .antMatchers("/tutorial/create/**").authenticated()
+                .antMatchers("/forum/create/**").authenticated()
+                .antMatchers("/**").permitAll()
                 .antMatchers("/challenge/**").authenticated()
                 .antMatchers("/tutorial/**").permitAll()
                 .antMatchers("/css/**").permitAll()
                 .antMatchers("/**").permitAll()
-
                 .and()
                 .formLogin()
                 .loginPage("/login").permitAll()

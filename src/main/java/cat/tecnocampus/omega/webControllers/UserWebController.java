@@ -51,8 +51,8 @@ public class UserWebController {
     @PostMapping("createUser")
     public String postCreateUser(@Valid User user, Errors errors, Model model, RedirectAttributes redirectAttributes) {
         if (errors.hasErrors()) {
-            model.addAttribute("error", errors);
-            return "Errors";
+            model.addAttribute("errors", errors);
+            return "RegisterUser";
         }
 
         model.addAttribute("username", user.getUsername());
