@@ -17,7 +17,7 @@ public class UserDAO {
     private final String INSERT_USER = "INSERT INTO Users (username, password, first_name, last_name, email, birthday, experience_points, level, enable) VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?)";
     private final String FIND_ALL = "SELECT * FROM Users";
     private final String FIND_BY_USERNAME = "SELECT * FROM Users WHERE username = ?";
-    private final String DELETE_USER = "update Users set enable=false where username=?";
+    private final String DELETE_USER = "UPDATE Users SET enable=false WHERE username=?";
 
     private final RowMapper<User> mapper = (resultSet, i) -> {
         return new User.UserBuilder()
@@ -38,7 +38,7 @@ public class UserDAO {
     }
 
     public int insertUser(User user) {
-        return jdbcTemplate.update(INSERT_USER, user.getUsername(), user.getPassword(), user.getFirstName(), user.getLastName(), user.getEmail(), user.getBirthday(), 0, 0, 1);
+        return jdbcTemplate.update(INSERT_USER, user.getUsername(), user.getPassword(), user.getFirstName(), user.getLastName(), user.getEmail(), user.getBirthday(), 0, 0, true);
     }
 
     public List<User> findAll() {

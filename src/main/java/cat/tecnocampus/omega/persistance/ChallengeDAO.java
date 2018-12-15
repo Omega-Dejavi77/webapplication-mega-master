@@ -16,10 +16,10 @@ public class ChallengeDAO {
 
     private JdbcTemplate jdbcTemplate;
     private ExerciseDAO exerciseDAO;
-    private final String FIND_ALL = "select * from Posts where son_type=?";
-    private final String FIND_BY_ID = "select * from Posts where post_id = ? AND son_type = ?";
+    private final String FIND_ALL = "SELECT * FROM Posts WHERE son_type=?";
+    private final String FIND_BY_ID = "SELECT * FROM Posts WHERE post_id = ? AND son_type = ?";
     private final String INSERT_CHALLENGE = "INSERT INTO posts (post_ID, title, description, creationDay, likes, enable, son_TYPE,category) VALUES(?, ?, ?, ?, ?,?,?,?)";
-    private final String FIND_BY_CATEGORY= "select * from Posts where category=? AND son_type=?";
+    private final String FIND_BY_CATEGORY= "SELECT * FROM Posts WHERE category=? AND son_type=?";
 
 
     public ChallengeDAO(JdbcTemplate jdbcTemplate, ExerciseDAO exerciseDAO) {
