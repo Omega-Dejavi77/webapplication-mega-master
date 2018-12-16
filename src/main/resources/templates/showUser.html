@@ -18,6 +18,8 @@
         <img class="card-img-top" src="/img_avatar1%20-%20copia.jpeg" alt="Card image" style="width:50%"/>
         <div class="card-body">
             <h4 class="card-title" th:text="'Name: '+${user.firstName+' '+user.lastName}">Username</h4>
+            <span class="card-text" th:text="'Email: '+${user.email}"></span><br>
+            <span class="card-text" th:text="'Birthday: '+${user.birthday}"></span><br>
             <span class="card-text" th:text="'Level: '+${user.level}"></span>
             <br>
             <span class="card-text" th:text="'Exp: '+${user.experiencePoints}"></span>

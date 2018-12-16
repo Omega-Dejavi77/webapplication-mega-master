@@ -64,29 +64,3 @@
         integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
         crossorigin="anonymous"></script>
 </html>
-<!DOCTYPE html>
-<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:th="http://www.thymeleaf.org">
-<head>
-    <meta charset="UTF-8"/>
-    <title>Mark</title>
-</head>
-<body>
-<br>
-<br>
-<div th:replace="fragment/header :: header"></div>
-<br>
-<br>
-<div align="center">
-    <form method="post">
-        <h4>Your mark is:</h4><br>
-        <h2 valign="top" th:text="${pass}"></h2>
-        <h1 valign="top" th:text="${mark}">A+</h1>
-        <h2 valign="top" th:text="${submission.mark}">Mark</h2>
-        <input type="submit" name="chosen" value="See Solution">
-        <input type="submit" name="chosen" value="Retry">
-        <input type="submit" name="chosen" value="Return">
-    </form>
-</div>
-</body>
-</html>

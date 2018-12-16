@@ -30,33 +30,33 @@ public class HandlingExceptionController {
     }
 
     private static final org.slf4j.Logger logger = LoggerFactory.getLogger(publicLoggerAdvice.class);
-    @ExceptionHandler(Exception.class)
-    @GetMapping("errorAll")
-    public String handleError(HttpServletRequest request, Model model) {
-        Object status = request.getAttribute(RequestDispatcher.ERROR_STATUS_CODE);
-        String errorMsg = "Error";
-
-        if (status != null) {
-            Integer statusCode = Integer.valueOf(status.toString());
-
-            if (statusCode == HttpStatus.NOT_FOUND.value()) {
-                errorMsg = "Http Error Code: 400. Bad Request";
-            } else if (statusCode == HttpStatus.UNAUTHORIZED.value()) {
-                errorMsg = "Http Error Code: 401. Unauthorized";
-            } else if (statusCode == HttpStatus.FORBIDDEN.value()) {
-                errorMsg = "Http Error Code: 403. Unauthorized";
-            } else if (statusCode == HttpStatus.NOT_FOUND.value()) {
-                errorMsg = "Http Error Code: 404. Resource not found";
-            } else if (statusCode == HttpStatus.INTERNAL_SERVER_ERROR.value()) {
-                errorMsg = "Http Error Code: 500. Internal Server Error";
-            } else errorMsg = "Error number: " + status.toString();
-        } else
-            errorMsg = "Undefined error";
-
-        model.addAttribute("errorMsg", errorMsg);
-        return "error/exceptionAll";
-
-    }
+//    @ExceptionHandler(Exception.class)
+//    @GetMapping("errorAll")
+//    public String handleError(HttpServletRequest request, Model model) {
+//        Object status = request.getAttribute(RequestDispatcher.ERROR_STATUS_CODE);
+//        String errorMsg = "Error";
+//
+//        if (status != null) {
+//            Integer statusCode = Integer.valueOf(status.toString());
+//
+//            if (statusCode == HttpStatus.NOT_FOUND.value()) {
+//                errorMsg = "Http Error Code: 400. Bad Request";
+//            } else if (statusCode == HttpStatus.UNAUTHORIZED.value()) {
+//                errorMsg = "Http Error Code: 401. Unauthorized";
+//            } else if (statusCode == HttpStatus.FORBIDDEN.value()) {
+//                errorMsg = "Http Error Code: 403. Unauthorized";
+//            } else if (statusCode == HttpStatus.NOT_FOUND.value()) {
+//                errorMsg = "Http Error Code: 404. Resource not found";
+//            } else if (statusCode == HttpStatus.INTERNAL_SERVER_ERROR.value()) {
+//                errorMsg = "Http Error Code: 500. Internal Server Error";
+//            } else errorMsg = "Error number: " + status.toString();
+//        } else
+//            errorMsg = "Undefined error";
+//
+//        model.addAttribute("errorMsg", errorMsg);
+//        return "error/exceptionAll";
+//
+//    }
     @ExceptionHandler(EmptyResultDataAccessException.class)
     @GetMapping("usernameDoesNotExist")
     public String handleUsernameDoesNotExist(Model model, HttpServletRequest request, Exception ex) {

@@ -52,7 +52,7 @@ public class UserWebController {
     public String postCreateUser(@Valid User user, Errors errors, Model model, RedirectAttributes redirectAttributes) {
         if (errors.hasErrors()) {
             model.addAttribute("errors", errors);
-            return "RegisterUser";
+            return "signup";
         }
 
         model.addAttribute("username", user.getUsername());

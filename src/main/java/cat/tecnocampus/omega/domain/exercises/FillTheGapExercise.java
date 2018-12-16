@@ -14,6 +14,8 @@ public class FillTheGapExercise extends Exercise {
 
     public void setQuestions(String questions) {
         String[] before = questions.split("#R");
+        boolean added = false;
+        Question question = null;
         if (before.length > 1) {
             int counter = 0;
             String questionText = "";
@@ -24,17 +26,17 @@ public class FillTheGapExercise extends Exercise {
                     continue;
                 }
                 String[] after = s.split("#/R");
-                Question question = new Question(questionText);
+                if (!added)
+                    question = new Question(questionText);
                 question.validation();
                 Solution solution = new Solution(after[0], true);
                 solution.validation();
                 addQuestion(question);
                 question.addSolution(solution);
+                added = false;
                 if (after.length > 1) {
-                    for (int i=1;i<after.length;i++) {
-                        question = new Question(after[i]);
-                        addQuestion(question);
-                    }
+                    added = true;
+                    question = new Question(after[1]);
                 }
                 counter++;
             }

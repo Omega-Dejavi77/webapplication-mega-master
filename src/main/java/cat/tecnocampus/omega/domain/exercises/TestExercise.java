@@ -45,9 +45,9 @@ public class TestExercise extends Exercise {
                             String last = "";
                             for (String end : solution[0].split("#C"))
                                 last += end;
-                            solutionobj = new Solution(intToABC(counterSolutions) + ") " + last, true);
+                            solutionobj = new Solution(last, true);
                         } else
-                            solutionobj = new Solution(intToABC(counterSolutions) + ") " + solution[0], false);
+                            solutionobj = new Solution(solution[0], false);
                         solutionobj.validation();
                         listSolution.add(solutionobj);
                         counterSolutions++;
@@ -58,10 +58,6 @@ public class TestExercise extends Exercise {
                 counter++;
             }
         }
-    }
-
-    private String intToABC(int i) {
-        return i > 0 && i < 27 ? String.valueOf((char) (i + 64)) : null;
     }
 
     private void solutionListValidation(List<Solution> solutions, int i) {

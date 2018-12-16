@@ -30,19 +30,20 @@
                     <a class="nav-link" href="/time" style="color: white">Time</a>
                 </li>
 
+                <li class="nav-item">
+                    <a th:if="${#authentication.name=='anonymousUser'}" class="nav-link" href="/login" style="color: white">Login</a>
+                </li>
+                <li class="nav-item">
+                    <a th:if="${#authentication.name=='anonymousUser'}" class="nav-link" href="/createUser" style="color: white">Register</a>
+                </li>
                 <!-- Dropdown -->
-                <li class="nav-item dropdown">
-                    <a th:if="${#authentication.name=='anonymousUser'}" class="nav-link dropdown-toggle" href="#" style="color: white" id="navbardrop1" data-toggle="dropdown">
-                        User
-                    </a>
-                    <a th:unless="${#authentication.name=='anonymousUser'}" class="nav-link dropdown-toggle" href="#" style="color: white" id="navbardrop2" data-toggle="dropdown" sec:authentication="name">
+                <li th:unless="${#authentication.name=='anonymousUser'}" class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" style="color: white" id="navbardrop2" data-toggle="dropdown" sec:authentication="name">
                         User
                     </a>
                     <div class="dropdown-menu" style="background-color: #41d6f2">
                         <a th:unless="${#authentication.name=='anonymousUser'}" class="dropdown-item" href="/profile" style="color: white">Profile</a>
-                        <a th:if="${#authentication.name=='anonymousUser'}" class="dropdown-item" href="/login" style="color: white">Login</a>
                         <a th:unless="${#authentication.name=='anonymousUser'}" class="dropdown-item" data-toggle="modal" data-target="#myModal" style="color: white">Logout</a>
-                        <a th:if="${#authentication.name=='anonymousUser'}" class="dropdown-item" href="/createUser" style="color: white">Register</a>
                     </div>
                 </li>
             </ul>
