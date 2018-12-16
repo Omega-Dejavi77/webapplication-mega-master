@@ -1,7 +1,9 @@
 package cat.tecnocampus.omega.webControllers;
 
+import cat.tecnocampus.omega.domain.Category;
 import cat.tecnocampus.omega.domain.exercises.Exercise;
 import cat.tecnocampus.omega.domain.post.Tutorial;
+import cat.tecnocampus.omega.persistance.TutorialDAO;
 import cat.tecnocampus.omega.persistanceController.ExerciseController;
 import cat.tecnocampus.omega.persistanceController.TutorialController;
 import com.github.rjeschke.txtmark.Processor;
@@ -29,17 +31,21 @@ public class TutorialWebController {
     @GetMapping("tutorial/create")
     public String createTutorial(Model model) {
         model.addAttribute(new Tutorial());
+        model.addAttribute("categoryList",tutorialController.getCategories());
         return "post/newTutorial";
     }
 
     @PostMapping("tutorial/create")
-    public String createTutorial(@Valid Tutorial tutorial,String description, Errors errors, RedirectAttributes redirectAttributes) {
+    public String createTutorial(@Valid Tutorial tutorial, @Valid Category category,String description, Errors errors, RedirectAttributes redirectAttributes, String Scategory) {
 
         if (errors.hasErrors()) {
             return "post/newTutorial";
         }
+
+        if(category!=null) tutorialController.addCategory( category);
         tutorial.setDescription(Processor.process(description));
-        tutorialController.addTutorial(tutorial);
+        if(category!=null)tutorialController.addTutorial(tutorial, category.getName());
+        else tutorialController.addTutorial(tutorial, Scategory);
         redirectAttributes.addAttribute("id", tutorial.getPostID());
         return "redirect:/exercise/create/{id}";
     }

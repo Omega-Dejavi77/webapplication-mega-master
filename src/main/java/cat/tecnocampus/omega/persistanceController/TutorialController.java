@@ -18,8 +18,8 @@ public class TutorialController {
     }
 
     @Transactional
-    public int addTutorial(Tutorial tutorial){
-        return  tutorialDAO.insertTutorial(tutorial,"Java");
+    public int addTutorial(Tutorial tutorial, String category){
+        return  tutorialDAO.insertTutorial(tutorial,category);
     }
 
     public List<Tutorial> getAll(){
@@ -30,5 +30,7 @@ public class TutorialController {
     }
     public  List<Tutorial> getByCategory(String category){ return tutorialDAO.findByCategory(category);}
     public List<Category> getCategories(){return tutorialDAO.findCategories();}
+    @Transactional
+    public int addCategory(Category category) { return tutorialDAO.insertCategory(category); }
 
 }
