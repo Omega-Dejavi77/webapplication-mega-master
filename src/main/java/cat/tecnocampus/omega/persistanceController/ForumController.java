@@ -1,5 +1,6 @@
 package cat.tecnocampus.omega.persistanceController;
 
+import cat.tecnocampus.omega.domain.Category;
 import cat.tecnocampus.omega.persistance.ForumDAO;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -41,4 +42,6 @@ public class ForumController {
     public List<Discussion> getDiscussions (){
         return forumDAO.getAllDiscussions();
     }
+    public List<Category> getCategories(){return forumDAO.findCategories();}
+    public  List<Discussion> getByCategory(String category){ return forumDAO.findByCategory(category);}
 }

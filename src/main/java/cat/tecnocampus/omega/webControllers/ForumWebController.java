@@ -10,8 +10,10 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import com.github.rjeschke.txtmark.*;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 import java.security.Principal;
+import java.util.Map;
 
 @Controller
 public class ForumWebController {
@@ -43,12 +45,14 @@ public class ForumWebController {
     @GetMapping("forum/all")
     public String showForum(Model model){
         model.addAttribute("discussions",forumController.getDiscussions());
+        model.addAttribute("categoryList", forumController.getCategories());
         return "post/showForum";
     }
-    @PostMapping("forum/all")
-    public String showForum(String chosen,RedirectAttributes redirectAttributes){
-        redirectAttributes.addAttribute("id",chosen);
-        return "redirect:/forum/discussion/{id}";
+    @GetMapping("forum/all/{category}")
+    public String showForum(Model model,@PathVariable String category){
+        model.addAttribute("discussions",forumController.getByCategory(category));
+        model.addAttribute("categoryList", forumController.getCategories());
+        return "post/showForum";
     }
     @GetMapping("forum/discussion/{id}")
     public String showDiscussion(Model model, @PathVariable String id){
@@ -56,24 +60,14 @@ public class ForumWebController {
         return "post/showDiscussion";
     }
     @PostMapping("forum/discussion/{id}")
-    public String showDiscussion(@PathVariable String id,String comment, RedirectAttributes redirectAttributes, Principal principal){
+    public String showDiscussion(@PathVariable String id, String answer,String reply, RedirectAttributes redirectAttributes, Principal principal){
         if(principal==null)
             return "redirect:/login";
-        forumController.addComment(new Comment(Processor.process(comment)),principal.getName(),id);
-        redirectAttributes.addAttribute("id",id);
-        return "redirect:/forum/discussion/{id}";
-    }
-
-    @GetMapping("forum/discussion/{id}/{reply}")
-    public String showDiscussionReply(Model model, @PathVariable String id){
-        model.addAttribute("discussion",forumController.getDiscussion(id));
-        return "post/showDiscussionReply";
-    }
-    @PostMapping("forum/discussion/{id}/{reply}")
-    public String showDiscussionReply(@PathVariable String id,@PathVariable String reply,String comment, RedirectAttributes redirectAttributes, Principal principal){
-        if(principal==null)
-            return "redirect:/login";
-        forumController.addCommentReply(new Comment(Processor.process(comment)),principal.getName(),id,reply);
+        System.out.println(reply);
+        if(reply==null)
+            forumController.addComment(new Comment(Processor.process(answer)),principal.getName(),id);
+        else
+            forumController.addCommentReply(new Comment(Processor.process(answer)),principal.getName(),id,reply);
         redirectAttributes.addAttribute("id",id);
         return "redirect:/forum/discussion/{id}";
     }
