@@ -18,8 +18,8 @@ public class ForumController {
     }
 
     @Transactional
-    public int addDiscussion(Discussion discussion, String username){
-        return forumDAO.insertDiscussion(discussion,username);
+    public int addDiscussion(Discussion discussion, String username, String category){
+        return forumDAO.insertDiscussion(discussion,username,category);
     }
 
     @Transactional
@@ -44,4 +44,6 @@ public class ForumController {
     }
     public List<Category> getCategories(){return forumDAO.findCategories();}
     public  List<Discussion> getByCategory(String category){ return forumDAO.findByCategory(category);}
+    @Transactional
+    public int addCategory(Category category) { return forumDAO.insertCategory(category); }
 }

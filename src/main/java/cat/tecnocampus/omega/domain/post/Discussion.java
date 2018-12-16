@@ -11,8 +11,8 @@ public class Discussion extends Post {
 
     private List<Comment> comments= new ArrayList<Comment>();
 
-    public Discussion(String postID, String description, String title,User user) {
-        super(postID, description, title,"Java");
+    public Discussion(String postID, String description, String title,User user,String category) {
+        super(postID, description, title,category);
         hasBestComment=false;
         this.user=user;
     }

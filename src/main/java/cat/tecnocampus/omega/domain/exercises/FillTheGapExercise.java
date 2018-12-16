@@ -14,36 +14,31 @@ public class FillTheGapExercise extends Exercise {
 
     public void setQuestions(String questions) {
         String[] before = questions.split("#R");
+        boolean added = false;
+        Question question = null;
         if (before.length > 1) {
             int counter = 0;
             String questionText = "";
             for (String s : before) {
                 if (counter == 0) {
                     questionText = s;
-                    System.out.println(s);
                     counter++;
                     continue;
                 }
                 String[] after = s.split("#/R");
-                Question question = new Question(questionText);
+                if (!added)
+                    question = new Question(questionText);
                 question.validation();
                 Solution solution = new Solution(after[0], true);
                 solution.validation();
                 addQuestion(question);
                 question.addSolution(solution);
+                added = false;
                 if (after.length > 1) {
-                    for (String str : after) {
-                        question = new Question(str);
-                        addQuestion(question);
-                    }
+                    added = true;
+                    question = new Question(after[1]);
                 }
                 counter++;
-            }
-        }
-        for (Question q : getQuestions()) {
-            System.out.println(q.getText());
-            for (Solution s : q.getSolutions()) {
-                System.out.println("\t" + s.getText());
             }
         }
     }

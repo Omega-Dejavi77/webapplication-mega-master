@@ -64,8 +64,9 @@ public class Question {
 
     public int solve(String srtSolution) {
         for (Solution solution : solutions) {
-            if (solution.getCorrect())
+            if (solution.getCorrect()) {
                 return (solution.getText().equals(srtSolution)) ? 1 : 0;
+            }
         }
         return 0;
     }

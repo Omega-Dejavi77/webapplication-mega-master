@@ -39,7 +39,7 @@
             <a th:if="${#authentication.name=='anonymousUser'}" href="/login"
                class="btn btn-info">LOGIN</a>
             <input th:unless="${#authentication.name=='anonymousUser'}" class="btn btn-warning shadow p-1 mb-5" type="button" value="Create New Question"
-                   onclick="window.location.href='/forum/create' ">
+                   onclick="window.location.href='create/discussion' ">
         </div>
     </div>
 </div>

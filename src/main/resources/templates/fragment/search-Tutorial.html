@@ -31,32 +31,25 @@
 <body>
 <div th:fragment="search-Tutorial">
     <div style="padding-left: 10%">
-        <div class="row" align="center">
-            <h5>Filter</h5>
-        </div>
         <div class="row " align="left">
             <div id="custom-search-input">
                 <div class="input-group col-md-12">
-                    <input type="search" class="form-control input-lg shadow p-3 mb-5" id="search" onkeyup="myFunction()"
-                           placeholder="Search" aria-label="Search" />
+                    <input type="search" class="form-control input-lg shadow p-3 mb-5" id="search"
+                           onkeyup="myFunction()"
+                           placeholder="Search" aria-label="Search"/>
                 </div>
             </div>
         </div>
-        <div class="row">
-            <ul class="navbar-nav mr-auto">
-                <li class="nav-item dropdown" >
-                    <a class="nav-link dropdown-toggle" id="navbarDropdown" role="button" data-toggle="dropdown"
-                       aria-haspopup="true" aria-expanded="false">
-                        Categories
-                    </a>
-                    <div class="dropdown-menu shadow p-3 mb-5" style=" background-color: #ffffff" aria-labelledby="navbarDropdown">
-                        <a th:each="category : ${categoryList}" class="dropdown-item"
-                           th:href="@{'/tutorial/all/' + ${category.name}}" th:text="${category.name}"/>
-                        <div class="dropdown-divider"></div>
-                        <a class="dropdown-item" th:href="'/tutorial/all'">Select All</a>
-                    </div>
-                </li>
-            </ul>
+        <div class="row" align="center">
+            <h5>Filter by categories</h5>
+        </div>
+        <div class="row" align="center">
+            <div class="jumbotron shadow p-3 mb-5" style=" background-color: #ffffff" aria-labelledby="navbarDropdown">
+                <a th:each="category : ${categoryList}" class="dropdown-item"
+                   th:href="@{'/tutorial/all/' + ${category.name}}" th:text="${category.name}"/>
+                <div class="dropdown-divider"></div>
+                <a class="dropdown-item" th:href="'/tutorial/all'">Select All</a>
+            </div>
         </div>
     </div>
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"

@@ -1,5 +1,6 @@
 package cat.tecnocampus.omega.webControllers;
 
+import cat.tecnocampus.omega.domain.Category;
 import cat.tecnocampus.omega.domain.post.Discussion;
 import cat.tecnocampus.omega.domain.post.Comment;
 import cat.tecnocampus.omega.persistanceController.ForumController;
@@ -27,17 +28,18 @@ public class ForumWebController {
     @GetMapping("forum/create/discussion")
     public String createDiscussion (Model model){
         model.addAttribute(new Discussion());
+        model.addAttribute("categoryList",forumController.getCategories());
         return "post/newDiscussion";
     }
 
     @PostMapping("forum/create/discussion")
-    public String createDiscussion(@Valid Discussion discussion,String description, Errors errors, Model model, RedirectAttributes redirectAttributes, Principal principal) {
+    public String createDiscussion(@Valid Discussion discussion, @Valid Category category,String description, Errors errors, Model model, RedirectAttributes redirectAttributes, Principal principal) {
         if (errors.hasErrors()) {
             return "post/newDiscussion";
         }
-        model.addAttribute("title", discussion.getTitle());
+        forumController.addCategory( category);
         discussion.setDescription(Processor.process(description));
-        forumController.addDiscussion(discussion,principal.getName());
+        forumController.addDiscussion(discussion,principal.getName(),category.getName());
         redirectAttributes.addAttribute("id",discussion.getPostID());
         return "redirect:/forum/discussion/{id}";
     }
