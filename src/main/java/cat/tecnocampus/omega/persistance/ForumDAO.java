@@ -19,7 +19,7 @@ public class ForumDAO {
     private JdbcTemplate jdbcTemplate;
     private UserDAO userDAO;
     private Map<String, Comment> commentMap;
-    private final String INSERT_DISCUSSION = "INSERT INTO Posts (post_id, title, description, creationDay, likes, enable, hasBest,son_type,username) VALUES (?, ?, ?, ?,?,?,?,?,?)";
+    private final String INSERT_DISCUSSION = "INSERT INTO Posts (post_id, title, description, creationDay, likes, enable, hasBest,son_type,username,category) VALUES (?, ?, ?, ?,?,?,?,?,?,?)";
     private final String INSERT_COMMENT = "INSERT INTO Comments (comment_id, best, comment, creation_day, likes, enable, post_id,username) VALUES (?, ?, ?, ?, ?,?,?,?)";
     private final String INSERT_COMMENT_REPLY = "INSERT INTO Comments (comment_id, best, comment, creation_day, likes, enable, post_id,username,comment_id_fk) VALUES (?, ?, ?, ?, ?,?,?,?,?)";
     private final String SELECT_DISCUSSION = "SELECT * FROM Posts WHERE post_id = ?";
@@ -28,6 +28,7 @@ public class ForumDAO {
     private final String SELECT_COMMENTS_BY_COMMENT = "SELECT * FROM Comments WHERE post_id = ? AND comment_id=?";
     private final String FIND_CATEGORIES= "select * from Category";
     private final String FIND_BY_CATEGORY= "select * from Posts where category=? AND son_type=?";
+    private final String INSERT_CATEGORY = "INSERT INTO Category (category) VALUES (?)";
 
     public ForumDAO(JdbcTemplate jdbcTemplate, UserDAO userDAO) {
         this.jdbcTemplate = jdbcTemplate;
@@ -36,7 +37,7 @@ public class ForumDAO {
     }
 
     private Discussion discussionMapper(ResultSet resultSet) throws SQLException {
-        Discussion discussion = new Discussion(resultSet.getString("post_id"), resultSet.getString("description"), resultSet.getString("title"), userDAO.findByUsername(resultSet.getString("username")));
+        Discussion discussion = new Discussion(resultSet.getString("post_id"), resultSet.getString("description"), resultSet.getString("title"), userDAO.findByUsername(resultSet.getString("username")),resultSet.getString("category"));
         return discussion;
     }
 
@@ -57,6 +58,7 @@ public class ForumDAO {
 
     private RowMapper<Discussion> mapperEager = (resultSet, i) -> {
         Discussion discussion = discussionMapper(resultSet);
+        System.out.println(discussion.getCategory());
         for (Comment c : findCommentByDiscussion(discussion.getPostID())) {
             if (!c.isReply())
                 discussion.addComment(c);
@@ -68,8 +70,8 @@ public class ForumDAO {
         return category;
     };
 
-    public int insertDiscussion(Discussion discussion, String username) {
-        return jdbcTemplate.update(INSERT_DISCUSSION, discussion.getPostID(), discussion.getTitle(), discussion.getDescription(), discussion.getCreationDay(), discussion.getLikes(), discussion.isEnable(), discussion.hasBest(), "Discussion", username);
+    public int insertDiscussion(Discussion discussion, String username, String category) {
+        return jdbcTemplate.update(INSERT_DISCUSSION, discussion.getPostID(), discussion.getTitle(), discussion.getDescription(), discussion.getCreationDay(), discussion.getLikes(), discussion.isEnable(), discussion.hasBest(), "Discussion", username,category);
     }
 
     public int insertComment(Comment comment, String username, String id) {
@@ -101,5 +103,10 @@ public class ForumDAO {
     }
     public List<Discussion> findByCategory(String category){
         return jdbcTemplate.query(FIND_BY_CATEGORY,new Object[]{category,"Discussion"}, mapperEager);
+    }
+    public int insertCategory(Category category) {
+        if (!findCategories().contains(category))
+            return jdbcTemplate.update(INSERT_CATEGORY, category.getName());
+        else return 1;
     }
 }

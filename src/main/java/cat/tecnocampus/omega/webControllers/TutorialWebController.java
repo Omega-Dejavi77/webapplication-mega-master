@@ -42,10 +42,9 @@ public class TutorialWebController {
             return "post/newTutorial";
         }
 
-        if(category!=null) tutorialController.addCategory( category);
+        tutorialController.addCategory( category);
         tutorial.setDescription(Processor.process(description));
-        if(category!=null)tutorialController.addTutorial(tutorial, category.getName());
-        else tutorialController.addTutorial(tutorial, Scategory);
+        tutorialController.addTutorial(tutorial, category.getName());
         redirectAttributes.addAttribute("id", tutorial.getPostID());
         return "redirect:/exercise/create/{id}";
     }

@@ -10,4 +10,13 @@ public class Category {
     public String getName() {
         return name;
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if(o instanceof Category) {
+            Category category = (Category) o;
+            return name.equals(category.getName());
+        }
+        return true;
+    }
 }

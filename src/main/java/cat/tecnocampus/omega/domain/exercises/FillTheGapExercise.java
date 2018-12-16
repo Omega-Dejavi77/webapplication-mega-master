@@ -20,7 +20,6 @@ public class FillTheGapExercise extends Exercise {
             for (String s : before) {
                 if (counter == 0) {
                     questionText = s;
-                    System.out.println(s);
                     counter++;
                     continue;
                 }
@@ -32,18 +31,12 @@ public class FillTheGapExercise extends Exercise {
                 addQuestion(question);
                 question.addSolution(solution);
                 if (after.length > 1) {
-                    for (String str : after) {
-                        question = new Question(str);
+                    for (int i=1;i<after.length;i++) {
+                        question = new Question(after[i]);
                         addQuestion(question);
                     }
                 }
                 counter++;
-            }
-        }
-        for (Question q : getQuestions()) {
-            System.out.println(q.getText());
-            for (Solution s : q.getSolutions()) {
-                System.out.println("\t" + s.getText());
             }
         }
     }

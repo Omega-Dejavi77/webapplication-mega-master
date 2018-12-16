@@ -85,6 +85,6 @@ public class UserWebController {
     @GetMapping("profile/users/{username}")
     public String profileUser(@PathVariable String username, Model model) {
         model.addAttribute("user", userController.getUser(username));
-        return "userProfile";
+        return "showUser";
     }
 }

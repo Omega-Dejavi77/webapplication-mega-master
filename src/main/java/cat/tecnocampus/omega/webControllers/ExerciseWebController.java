@@ -74,7 +74,7 @@ public class ExerciseWebController {
             redirectAttributes.addAttribute("id", id);
             return "exercise/newFillTheGapExercise";
         }
-        fillTheGapExercise.setDrag(drag.equals(1));
+        fillTheGapExercise.setDrag(drag.equals("1"));
         exerciseController.addExercise(fillTheGapExercise, id, "Fill");
         redirectAttributes.addAttribute("id", id);
         if (end.equals("Finish"))
