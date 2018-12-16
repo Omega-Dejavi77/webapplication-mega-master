@@ -44,9 +44,9 @@
         <div class="row" align="center">
             <div class="jumbotron shadow p-3 mb-5" style=" background-color: #ffffff" aria-labelledby="navbarDropdown">
                 <a th:each="category : ${categoryList}" class="dropdown-item"
-                   th:href="@{'/tutorial/all/' + ${category.name}}" th:text="${category.name}"/>
+                   th:href="@{'/forum/all/' + ${category.name}}" th:text="${category.name}"/>
                 <div class="dropdown-divider"></div>
-                <a class="dropdown-item" th:href="'/tutorial/all'">Select All</a>
+                <a class="dropdown-item" th:href="'/forum/all'">Select All</a>
             </div>
         </div>
     </div>
