@@ -87,18 +87,6 @@ public class HandlingExceptionController {
         return "error/conversionException";
     }
 
-    @ExceptionHandler(Exception.class)
-    @GetMapping("errorAll")
-    public String ExceptionAll(Model model, HttpServletRequest request, Exception ex) {
-        String url = request.getRequestURL().toString();
-
-        logger.error("Request: " + url + " raised " + ex);
-
-        model.addAttribute("where2", url.substring(url.lastIndexOf("/") + 1));
-        return "error/exceptionAll";
-
-    }
-
 
     @ExceptionHandler(MissingPathVariableException.class)
     @GetMapping("MissingVariableException")
@@ -112,10 +100,11 @@ public class HandlingExceptionController {
         return "error/MissingVariableException";
     }
 
-    @GetMapping({"/error"})
+    @ExceptionHandler(Exception.class)
+    @GetMapping("errorAll")
     public String handleError(HttpServletRequest request, Model model) {
         Object status = request.getAttribute(RequestDispatcher.ERROR_STATUS_CODE);
-        String errorMsg = "";
+        String errorMsg = "Error";
 
         if (status != null) {
             Integer statusCode = Integer.valueOf(status.toString());
