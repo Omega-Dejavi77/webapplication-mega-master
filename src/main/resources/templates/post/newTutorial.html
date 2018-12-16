@@ -2,46 +2,58 @@
 <html lang="en" xmlns="http://www.w3.org/1999/xhtml"
       xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta charset="UTF-8"/>
-    <title>Create Tutorial</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
+          integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+
+    <title>Creator Tutorial</title>
 </head>
+
 <body>
-<br>
-<br>
 <div th:replace="fragment/header :: header"></div>
-<br>
-<br>
-<div align="center">
-
-    <h1>Tutorial creator</h1>
-
-    <form method="POST" th:object="${tutorial}">
-        <div align="left" class="errors" th:if="${#fields.hasErrors('*')}">
-            <ul>
-                <li th:each="err : ${#fields.errors('*')}"
-                    th:text="${err}">Input is incorrect
+<form class="needs-validation" novalidate method="post" th:object="${tutorial}">
+    <div class="container" align="center">
+        <div class="jumbotron" style="margin-top: 170px">
+            <h3>Tutorial Creator</h3>
+            <br/>
+            <div class="form-row">
+                <div class="col-md-4 mb-3">
+                    <label for="validationDefault01">Title</label>
+                    <input type="text" class="form-control" id="validationDefault01" placeholder="Title" required
+                           th:field="*{title}">
+                    <div class="valid-tooltip">
+                        Looks good!
+                    </div>
+                </div>
+                <div class="col-md-4 mb-3">
+                    <tr>
+                        <td><label th:class="${#fields.hasErrors('description')}? 'error'">Description</label>:</td>
+                        <td><textarea name="description" rows="8" cols="64" minlength="2" maxlength="2048"/></textarea></td>
+                    </tr>
+                </div>
+            </div>
+            <div class="form-row">
+                <li th:each="category : ${categoryList}">
+                    <label class="form-check-label">
+                        <input type="checkbox" class="form-check-input" value="Scategory">category.getName()
+                    </label>
                 </li>
-            </ul>
+
+            </div>
+
+            <div class="form-row">
+                <div class="col-md-4 mb-3">
+                    <label for="validationDefault01">New category</label>
+                    <input type="text" class="form-control" id="validationDefault01" placeholder="Title" required
+                           th:field="*{category}">
+                </div>
+            </div>
+
+            <button class="btn btn-primary" type="submit" value="Create tutorial"/>Next</button>
         </div>
+    </div>
+</form>
 
-        <table>
-            <tr>
-                <td><label th:class="${#fields.hasErrors('title')}? 'error'">Title</label>:</td>
-                <td><input type="text" th:field="*{title}"
-                           th:class="${#fields.hasErrors('title')}? 'error'"/></td>
-            </tr>
-            <tr>
-                <td><label th:class="${#fields.hasErrors('description')}? 'error'">Description</label>:</td>
-                <td><textarea name="description" rows="8" cols="64" minlength="2" maxlength="2048"/></textarea></td>
-            </tr>
-        </table>
-
-
-
-        <input type="submit" value="Create tutorial"/>
-
-
-    </form>
-</div>
 </body>
 </html>

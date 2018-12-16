@@ -3,10 +3,12 @@ package cat.tecnocampus.omega.persistance;
 import cat.tecnocampus.omega.domain.Category;
 import cat.tecnocampus.omega.domain.exercises.Exercise;
 import cat.tecnocampus.omega.domain.post.Tutorial;
+import com.sun.corba.se.impl.interceptors.PICurrent;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
 
+import javax.swing.plaf.PanelUI;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Date;
@@ -21,6 +23,7 @@ public class TutorialDAO {
     private final String FIND_ALL = "SELECT * FROM Posts WHERE son_type=?";
     private final String FIND_BY_ID = "SELECT * from Posts WHERE post_id = ? AND son_type = ?";
     private final String INSERT_TUTORIAL = "INSERT INTO Posts (post_id, title, description, creationDay, likes, enable, son_type, category) VALUES (?, ?, ?, ?, ?,?,?,?)";
+    private final String INSERT_CATEGORY= "INSERT INTO Category (category) VALUES (?)";
     private final String FIND_BY_CATEGORY= "SELECT * from Posts WHERE category=? AND son_type=?";
     private final String FIND_CATEGORIES= "SELECT * from Category";
 
@@ -67,5 +70,9 @@ public class TutorialDAO {
     }
     public List<Category> findCategories(){
         return jdbcTemplate.query(FIND_CATEGORIES,new Object[]{},categoryMapperEager);
+    }
+
+    public  int insertCategory(Category category){
+        return jdbcTemplate.update(INSERT_CATEGORY,category.getName());
     }
 }
