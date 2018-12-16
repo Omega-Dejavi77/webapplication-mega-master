@@ -32,10 +32,10 @@ public class ExerciseWebController {
         redirectAttributes.addAttribute("id", id);
         if (exercise.equals("Test"))
             return "redirect:/exercise/test/create/{id}";
-        if(exercise.equals("Fill the Gap (Drag)"))
-            redirectAttributes.addAttribute("drag",1);
+        if (exercise.equals("Fill the Gap (Drag)"))
+            redirectAttributes.addAttribute("drag", 1);
         else
-            redirectAttributes.addAttribute("drag",0);
+            redirectAttributes.addAttribute("drag", 0);
         return "redirect:/exercise/fillTheGap/create/{id}/{drag}";
     }
 
@@ -69,7 +69,7 @@ public class ExerciseWebController {
     }
 
     @PostMapping("exercise/fillTheGap/create/{id}/{drag}")
-    public String createFillTheGapExercise(@Valid FillTheGapExercise fillTheGapExercise, Errors errors, @PathVariable String id,@PathVariable String drag, String end, RedirectAttributes redirectAttributes) {
+    public String createFillTheGapExercise(@Valid FillTheGapExercise fillTheGapExercise, Errors errors, @PathVariable String id, @PathVariable String drag, String end, RedirectAttributes redirectAttributes) {
         if (errors.hasErrors()) {
             redirectAttributes.addAttribute("id", id);
             return "exercise/newFillTheGapExercise";
@@ -97,14 +97,17 @@ public class ExerciseWebController {
             String[] solution = new String[mp.size()];
             int i = 0;
             for (String s : mp.keySet()) {
-                    solution[i] = mp.get(s)[0];
-                    i++;
+                solution[i] = mp.get(s)[0];
+                i++;
             }
             exerciseController.solve(exercise, solution, principal.getName(), "Test");
+            redirectAttributes.addAttribute("post", post);
+            redirectAttributes.addAttribute("exercise", exercise);
+            return "redirect:/exercise/mark/test/{post}/{exercise}";
+        } else {
+            redirectAttributes.addAttribute("id", post);
+            return "redirect:/tutorial/{id}";
         }
-        redirectAttributes.addAttribute("post", post);
-        redirectAttributes.addAttribute("exercise", exercise);
-        return "redirect:/exercise/mark/test/{post}/{exercise}";
     }
 
     @GetMapping("exercise/fillTheGap/{type}/{post}/{exercise}")
@@ -112,8 +115,10 @@ public class ExerciseWebController {
         Exercise fillTheGapExercise = exerciseController.getExerciseByType(exercise, "Fill");
         model.addAttribute("exercise", fillTheGapExercise);
         String html;
-        if (fillTheGapExercise.isDrag())
+        if (fillTheGapExercise.isDrag()) {
+            //model.addAttribute("solutions", orderSolutions());
             html = "doFillTheGapExercise2";
+        }
         else
             html = "doFillTheGapExercise1";
         if (type.equals("result"))
@@ -127,10 +132,13 @@ public class ExerciseWebController {
                                  redirectAttributes, Principal principal) {
         if (type.equals("do")) {
             exerciseController.solve(exercise, solution, principal.getName(), "Fill");
+            redirectAttributes.addAttribute("exercise", exercise);
+            redirectAttributes.addAttribute("post", post);
+            return "redirect:/exercise/mark/fillTheGap/{post}/{exercise}";
+        } else {
+            redirectAttributes.addAttribute("id", post);
+            return "redirect:/tutorial/{id}";
         }
-        redirectAttributes.addAttribute("post", post);
-        redirectAttributes.addAttribute("exercise", exercise);
-        return "redirect:/exercise/mark/fillTheGap/{post}/{exercise}";
     }
 
     @GetMapping("exercise/mark/test/{post}/{exercise}")
